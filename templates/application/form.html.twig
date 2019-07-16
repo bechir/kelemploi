@@ -1,0 +1,149 @@
+<div class="card-block">
+    <h4 class="sub-title">
+        <span class="text-danger">*</span>
+        Champs obligatoires</h4>
+    {{ form_start(form) }}
+    {% if not form.vars.valid %}
+        {% for children in form.children %}
+            {% if not children.vars.valid %}
+                <div class="alert alert-danger">
+                    {% if children.first is defined %}
+                        {{ form_errors(children.first) }}
+                    {% else %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Société
+            <span class="text-danger f-16">*</span>
+        </label>
+        <div class="col-sm-9">
+            {{ form_widget(form.company, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    {# <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Interlocuteur</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.interlocutor, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div> #}
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Catégorie</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.postCategory, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Nombre de candidats &agrave; recruter</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.nbCandidatesToRecruit, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Intitulé du poste
+            <span class="text-danger f-16">*</span>
+        </label>
+        <div class="col-sm-9">
+            {{ form_widget(form.jobTitle, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Description de la société</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.companyDescription, {'attr': {'cols': '5', 'rows': '3', 'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Description du poste
+            <span class="text-danger f-16">*</span>
+        </label>
+        <div class="col-sm-9">
+            {{ form_widget(form.jobDescription, {'attr': {'cols': '5', 'rows': '5', 'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Profil recherché
+            <span class="text-danger f-16">*</span>
+        </label>
+        <div class="col-sm-9">
+            {{ form_widget(form.profile, {'attr': {'cols': '5', 'rows': '5', 'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Commentaire</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.comment, {'attr': {'cols': '5', 'rows': '2', 'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Type de contrat</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.contractType, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Temps de travail (semaine)</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.workTime, {'attr': {'class': 'form-control rounded', 'value': '35 h'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Salaire</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.salary, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    {# <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Variable</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.variable, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div> #}
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Niveau d'étude minimum réquis</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.minStudyLevel, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    {# <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Regions</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.region, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Langue(s) réquise(s)</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.requiredLanguages, {'attr': {'class': 'form-control rounded'}}) }}
+        </div>
+    </div> #}
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Dates</label>
+        <div class="col-sm-3">
+            {{ form_widget(form.dates.start, {'attr': {
+                    'id'            : 'dropper-default',
+                    'placeholder'   : 'Date de debut',
+                    'class'         : 'form-control fill'
+                }})
+            }}
+        </div>
+        <div class="col-sm-3">
+            {{ form_widget(form.dates.end, {'attr': {
+                    'id'            : 'dropper-max-year',
+                    'placeholder'   : 'Date de fin',
+                    'class'         : 'form-control fill'
+                }})
+            }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3"></label>
+        <div class="col-sm-9">
+            <button class="btn btn-primary m-b-0" type="submit">Submit</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>

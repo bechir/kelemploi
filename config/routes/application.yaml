@@ -1,0 +1,74 @@
+# =======================================================
+# |   Application module
+# =======================================================
+application_create:
+  path: /{_locale}/offre/creer
+  controller: App\Controller\ApplicationController::create
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+applications_list:
+  path: /{_locale}/offres
+  controller: App\Controller\ApplicationController::list
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_show:
+  path: /{_locale}/offre/{slug}
+  controller: App\Controller\ApplicationController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_edit:
+  path: /{_locale}/offre/{slug}/modifier
+  controller: App\Controller\ApplicationController::edit
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_delete:
+  path: /{_locale}/offre/{slug}/supprimer
+  controller: App\Controller\ApplicationController::delete
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_traineeship:
+  path: /{_locale}/offres/stage
+  controller: App\Controller\ApplicationController::traineeship
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_alternance:
+  path: /{_locale}/offres/alternance
+  controller: App\Controller\ApplicationController::alternance
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_ftc:
+  path: /{_locale}/offres/CDD
+  controller: App\Controller\ApplicationController::ftc
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+application_oec:
+  path: /{_locale}/offres/CDI
+  controller: App\Controller\ApplicationController::oec
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

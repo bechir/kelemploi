@@ -1,0 +1,65 @@
+<!-- LEFT SIDEBAR -->
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <nav>
+            <ul class="nav">
+                <li><a href="{{ path('admin_index') }}" {% if active == 'index' %} class="active" {% endif %}>
+                    <i class="lnr lnr-home"></i> <span>Tableau de bord</span></a>
+                </li>
+                <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
+                    <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
+                </li>
+                <li><a href="{{ path('admin_purchases') }}" {% if active == 'purchases' %} class="active" {% endif %}>
+                    <i class="lnr lnr-select"></i> <span>Réservations</span></a>
+                </li>
+                <li>
+                    <a class="collapsed" data-toggle="collapse" href="#estabPages">
+                        <i class="lnr lnr-apartment"></i>
+                        <span>&Eacute;tablissements</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
+                    </a>
+                    <div class="collapse" id="estabPages">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_hotels') }}" {% if active == 'hotels' %} class="active" {% endif %}>
+                                <span>H&ocirc;tels</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_apartments') }}" {% if active == 'apartments' %} class="active" {% endif %}>
+                                <span>Appartements</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_restaurants') }}" {% if active == 'restaurants' %} class="active" {% endif %}>
+                                <span>Restaurants</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_immovables_sale') }}" {% if active == 'immovables_sale' %} class="active" {% endif %}>
+                                <span>&Agrave; vendre</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_immovables_rental') }}" {% if active == 'immovables_rental' %} class="active" {% endif %}>
+                                <span>&Agrave; louer</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="{{ path('admin_stats') }}" {% if active == 'stats' %} class="active" {% endif %}>
+                    <i class="lnr lnr-chart-bars"></i> <span>Statistiques</span></a>
+                </li>
+                {# <li>
+                    <a href="{{ path('admin_inbox') }}" {% if active == 'inbox' %} class="active" {% endif %}>
+                        <i class="lnr lnr-inbox"></i>
+                        <span>Boîte de réception
+                            <span class="badge mt-1">
+                                {{ render(controller('App\\Controller\\Admin\\InboxController::getMessagesCount')) }}
+                            </span>
+                        </span>
+                    </a>
+                </li> #}
+                {# <li><a href="{{ path('admin_notifications') }}" {% if active == 'notifs' %} class="active" {% endif %}>
+                    <i class="lnr lnr-alarm"></i> <span>Notifications</span></a>
+                </li> #}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    {% include 'admin/common/super-admin-sidebar-addon.html.twig' with {active: active} %}
+                {% endif %}
+                <li><a href="{{ path('admin_settings') }}" {% if active == 'settings' %}class="active"{% endif %}><i class="lnr lnr-cog"></i> <span>Param&egrave;tres</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- END LEFT SIDEBAR -->

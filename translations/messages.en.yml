@@ -1,0 +1,18 @@
+app:
+  locale:
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: About
+  home: Home
+  contact_us: Contact-us
+  help_faq: Help / FAQ
+  help: Help
+  applications_list: Jobs
+  profile: Profile
+  settings: Settings
+  logout: Logout
+  login: Sign up
+  register: Sign in

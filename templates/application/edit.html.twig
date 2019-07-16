@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le dossier &ndash; {{ parent() }}{% endblock %}
+
+{% block main %}
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="feather icon-file-plus bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Modifier le dossier</h5>
+                        <span>Recrutement {{ _app.jobTitle }} <label class="badge badge-inverse-primary mb-0">{{ _app.contractType }}</label></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Renseigner les informations du poste</h5>
+                                </div>
+                                {% include 'application/form.html.twig' with {form: form} %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# {% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $('textarea#application_companyDescription').val('{{ company.description }}')
+    </script>
+{% endblock %} #}

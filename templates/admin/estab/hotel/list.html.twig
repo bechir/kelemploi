@@ -1,0 +1,154 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'hotels' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info">Hôtels <span class="badge badge-info mb-1">{{ hotels|length }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des hôtels</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom de l'hôtel</th>
+                                <th>Etoiles</th>
+                                <th>Date d'ajout</th>
+                                <th>État</th>
+                                <th>Nb. reservations</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hotel in hotels %}
+                                <tr>
+                                    <td>
+                                        {{ loop.index }}</td>
+                                    <td>
+                                        <a href="{{ path('admin_hotel_show', {hotel: hotel.id}) }}">{{ hotel.name }}</a>
+                                    </td>
+                                    <td>
+                                        <div class="rating" data-toggle="tooltip" title="{{ 'hotels.xstars'|transchoice(hotel.stars) }}">
+                                        {% set stars = hotel.stars %}
+                                        {% if stars > 0 %}
+                                            {% for i in 1 .. stars %}
+                                                <i aria-hidden="true" class="fa fa-star fill"></i>
+                                            {% endfor %}
+                                            {% for i in (stars + 1) .. 5 %}
+                                                <i aria-hidden="true" class="fa fa-star-o"></i>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="text-center">&mdash;</div>
+                                        {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ hotel.createdAt|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                        {% if hotel.enabled %}
+                                            <span class="label label-success">VISIBLE</span>
+                                        {% else %}
+                                            <span class="label label-warning">DÉSACTIVÉ</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ hotel.purchases|length }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="edit-item" href="{{ path('admin_hotel_show', {hotel: hotel.id}) }}" data-toggle="tooltip" data-placement="top" title="Afficher les details">
+                                                <i class="lnr lnr-eye fa-lg"></i>
+                                            </a>
+                                            &nbsp;&nbsp;
+                                            <a class="delete-item" data-placement="top" data-target="#confirmDeleteModal" data-hotel-name="{{ hotel.name }}" data-hotel-id="{{ hotel.id }}" data-toggle="modal" style="cursor:pointer;" title="Supprimer {{ hotel.name }}">
+                                                <i class="lnr lnr-trash text-danger"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <p>Pas d'hôtels</p>
+                                {% endfor %}
+                        </tbody>
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-danger">Voulez-vous vraiment supprimer <strong class="hotel-name"></strong> de la base de données ?</p>
+                                        <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                                        <form action="" method="POST" data-confirmation="true" id="delete-form">
+                                            <input type="hidden" name="hotel[delete_token]" value="{{ csrf_token('hotel.delete_token') }}" />
+                                            <button type="submit" id="btn-hotel-delete" class="btn btn-danger btn-lg">
+                                                <span class="lnr lnr-trash"></span> Supprimer
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                 <!-- Page navigation start -->
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                      {% if hotels.haveToPaginate %}
+                          {{ pagerfanta(
+                                    hotels,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_hotels',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+            </div>
+        </div>
+        <!-- END TABLE STRIPED -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $("#confirmDeleteModal").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var hotelId = button.data('hotel-id')
+            var hotelName = button.data('hotel-name')
+
+            modal.find('.hotel-name').text(hotelName)
+            modal.find('form').attr('action', '/fr/admin/hotels/delete/' + hotelId)
+        });
+    </script>
+{% endblock %}
+

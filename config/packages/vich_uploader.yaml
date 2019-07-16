@@ -1,0 +1,45 @@
+vich_uploader:
+  db_driver: orm
+
+  mappings:
+    users:
+      uri_prefix: '%uploads_prefix%/users'
+      upload_destination: '%uploads_dir%/users'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    hotels:
+      uri_prefix: '%uploads_prefix%/hotels'
+      upload_destination: '%uploads_dir%/hotels'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    apartments:
+      uri_prefix: '%uploads_prefix%/apartments'
+      upload_destination: '%uploads_dir%/apartments'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    restaurants:
+      uri_prefix: '%uploads_prefix%/restaurants'
+      upload_destination: '%uploads_dir%/restaurants'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    dishs:
+      uri_prefix: '%uploads_prefix%/restaurants/dish'
+      upload_destination: '%uploads_dir%/restaurants/dish'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    immovables:
+      uri_prefix: '%uploads_prefix%/immovables'
+      upload_destination: '%uploads_dir%/immovables'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true

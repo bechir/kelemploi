@@ -1,0 +1,61 @@
+<div class="purchase-details container-fluid">
+    <fieldset class="col-md-12 mb-3">    	
+        <legend><i class="lnr lnr-user"></i> Informations sur le client</legend>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-unstyled list-justify">
+                    <li>Nom complet <span>{{ purchase.fullname }}</span></li>
+                    <li>Adresse email <span>{{ purchase.email }}</span></li>
+                    <li>Telephone <span>{{ purchase.phoneNumber }}</span></li>
+                    <li>Pays <span>{{ purchase.country|country }}</span></li>
+                </ul> 
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="col-md-12 mb-3">    	
+        <legend><i class="lnr lnr-select"></i> Informations sur la réservation
+            <span class="statut">
+                {% if purchase.state == purchase.CONFIRMED %}
+                    <span class="label label-success">{{ purchase.state|trans }}</span>
+                {% elseif purchase.state == purchase.PENDING %}
+                    <span class="label label-warning">{{ purchase.state|trans }}</span>
+                {% else %}
+                    <span class="label label-default">{{ purchase.state|trans }}</span>
+                {% endif %}
+            </span>
+        </legend>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-unstyled list-justify">
+                    <li>Établissement <span> {{ purchase.estab.name }}</span></li>
+                    <li>Date d'arrivée <span>{{ purchase.dates.checkIn|localizeddate('full', 'none', app.request.locale )|capitalize }}</span></li>
+                    <li>Date départ <span>{{ purchase.dates.checkOut|localizeddate('full', 'none', app.request.locale )|capitalize }}</span></li>
+                    <li>Nombre de personnes <span>{{ purchase.persons }}</span></li>
+                    <li>Heure d'arrivée <span>&mdash; {{ purchase.checkInHours }}</span></li>
+                    {% if purchase.message is not empty %}
+                    <li>Message:<br>
+                        <div class="alert alert-info"><p>{{ purchase.message }}</p></div>
+                    </li>
+                    {% endif %}
+                    <hr>
+                    <li>Référence <span>#{{ purchase.id }}</span></li>
+                </ul> 
+            </div>
+        </div>
+        {% if purchase.state == purchase.PENDING %}
+            <ul class="list-unstyled list-justify">
+                <li id="purchase-actions">
+                    <a class="btn btn-success bold-font confirm" href="#">
+                        <i class="lnr lnr-checkmark-circle fa-lg"></i> Confirmer
+                    </a>
+                    <span>
+                        <a class="btn btn-warning bold-font cancel" href="#">
+                            <i class="lnr lnr-circle-minus fa-lg"></i> Annuler
+                        </a>
+                    </span>
+                </li>
+            </ul>
+        {% endif %}
+    </fieldset>
+</div>

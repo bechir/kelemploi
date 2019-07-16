@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une offre d'emploi ou de stage &ndash; {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block main %}
+<h5>Renseigner les informations du poste</h5>
+    {% include 'application/form.html.twig' with {form: form} %}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+

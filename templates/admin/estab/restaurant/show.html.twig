@@ -1,0 +1,191 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'restaurants' } %}
+
+{% endblock %}
+
+{% set purchaseCount = purchases|length %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <!-- LEFT COLUMN -->
+      <div class="col-md-4 package profile-left">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if restaurant.enabled %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main">
+            <h3 class="name">{{ restaurant.name }}</h3>
+            <div class="user-state">
+              {% if restaurant.enabled %}
+                  <span class="lnr lnr-checkmark-circle"></span> Activé
+              {% else %}
+                <span class="lnr lnr-cross-circle"></span> Desactivé
+              {% endif %}
+            </div>
+            <hr>
+            <i class="lnr lnr-map-marker"></i> {{ restaurant.info.address }}
+          </div>
+          <div class="profile-stat">
+            <div class="row">
+              <div class="col-md-12 stat-item">
+                {{ purchaseCount }} <span>Réservation·s</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if restaurant.note %}
+            <hr>
+            <div class="row">
+                <div class="col-md-12 stat-item package-price">
+                    <div id="rating" class="text-center">
+                      <span class="note {{ restaurant.note.title }}">{{ restaurant.note.rate }}</span> &mdash;
+                      <span class="title upper {{ restaurant.note.title }}">{{ ('rate_title.' ~ restaurant.note.title)|trans }}</span><br>
+                      <span class="number-reviews">Selon l'avis de {{ restaurant.note.numberReviews }} personnes</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info">
+            <h4 class="heading">Informations de base</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Date d'ajout <span>{{ restaurant.createdAt|date('d M, Y') }}</span></li>
+              <li>Tel <span>{{ restaurant.info.phone }}</span></li>
+              <li>Email <span>{{ restaurant.info.email }}</span></li>
+            </ul>
+          </div>
+          <div class="profile-info">
+            <h4 class="heading">Actions sur le restaurant</h4>
+            <div class="text-center">
+              <div class="btn-group">
+                    <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not restaurant.enabled %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                    <a href="#" class="btn btn-info m-1 px-4 my-3 {% if restaurant.enabled %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                    <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+              </div>
+              <a href="{{ path('restaurants_edit', {slug: restaurant.slug}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier cet établissement</a>
+            </div>
+          </div>
+          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-danger">Voulez-vous vraiment supprimer <strong>{{ restaurant.name }}</strong> de la base de données ?</p>
+                            <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                            <form action="{{ path('admin_restaurant_delete', {id: restaurant.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                              <input type="hidden" name="user[delete_token]" value="{{ csrf_token('restaurant.delete_token') }}" />
+                              <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                                  <span class="lnr lnr-trash"></span> Supprimer
+                              </button>
+                            </form>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+      <!-- END LEFT COLUMN -->
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-8 package profile-right">
+        <h4 class="heading">
+          {{ restaurant.name }}
+          <span class="pull-right"><i class="fa fa-eye"></i>&nbsp;<a href="{{ path('restaurants_show', {slug: restaurant.slug}) }}" target="_blank">Visiter le restaurant</a></span></h4>
+        <!-- AWARDS -->
+        <div class="awards">
+          <div class="row">
+            <div class="col-12">
+            <img src="{{ vich_uploader_asset(restaurant.images.0, 'restaurantFile')}}" class="img-responsive" alt="Image {{ restaurant.name }}">
+            </div>
+          </div>
+        </div>
+        <!-- END AWARDS -->
+        <!-- TABBED CONTENT -->
+        <div class="custom-tabs-line tabs-line-bottom left-aligned">
+          <ul class="nav" role="tablist">
+            <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Réservation·s</a></li>
+            <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Réservation·s en attente·s <span class="badge">{{ pendings_ps|length }}</span></a></li>
+          </ul>
+        </div>
+        <div class="tab-content pb-5">
+          <div class="tab-pane fade in active" id="tab-bottom-left1">
+            {% include 'admin/estab/purchases-list-table.html.twig' with {purchases: purchases} %}
+          </div>
+          <div class="tab-pane fade" id="tab-bottom-left2">
+            {% include 'admin/estab/purchases-list-table.html.twig' with {purchases: pendings_ps} %}
+          </div>
+        </div>
+        <!-- END TABBED CONTENT -->
+      </div>
+      <!-- END RIGHT COLUMN -->
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+
+  <script>
+    // Disable user when we click on the disable user button
+    $("#disable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_restaurant_disable') }}",
+        data: "id=" + {{ restaurant.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#enable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+
+    // Enable user when we click on the enable user button
+    $("#enable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_restaurant_enable') }}",
+        data: "id=" + {{ restaurant.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#disable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+  </script>
+
+
+{% endblock %}

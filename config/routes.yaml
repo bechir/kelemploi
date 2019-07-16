@@ -1,0 +1,79 @@
+# Page d'accueil du site.
+# Dans cette page on recupere directement le type d'etablissement que le visiteur cherche.
+# La liste des categories est disponible dans parameters.
+index:
+  path: /{_locale}
+  controller: App\Controller\DefaultController::index
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+register_newsletter:
+  path: /{_locale}/newsletter
+  controller: App\Controller\UserController::newsletter
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+  methods: [GET, POST]
+
+dashboard:
+  path: /{_locale}/tableau-de-bord
+  controller: App\Controller\UserController::dashboard
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+#  schemes: [https]
+# ============================================================================
+# END  USERS MODULE
+# ============================================================================
+
+
+# ============================================================================
+#
+# OTHERS MODULE
+#
+# ============================================================================
+about:
+  path: /{_locale}/about-us
+  controller: App\Controller\DefaultController::about
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+contact:
+  path: /{_locale}/contact
+  controller: App\Controller\DefaultController::contact
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+  methods: [GET, POST]
+  # schemes: [https]
+
+help_faq:
+  path: /{_locale}/help-faq
+  controller: App\Controller\DefaultController::helpFAQ
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+terms_conditions:
+  path: /{_locale}/terms-conditions
+  controller: App\Controller\DefaultController::termsCondtions
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+privacy:
+  path: /{_locale}/privacy-policy
+  controller: App\Controller\DefaultController::privacy
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

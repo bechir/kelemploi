@@ -1,0 +1,92 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'index' } %}
+
+{% endblock %}
+
+{% block main %}
+<!-- OVERVIEW -->
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h3 class="panel-title">Vue d'ensemble</h3>
+        <p class="panel-subtitle">Période: Tous les temps</p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-users"></i></span>
+                    <p>
+                        <span class="number">{{ data.activeUsers }}</span>
+                        <span class="title">
+                            {% if data.activeUsers > 1 %}
+                                Utilisateurs actifs
+                            {% else %}
+                                Utilisateur actif
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-select"></i></span>
+                    <p>
+                        <span class="number">{{ data.purchasesCount }}</span>
+                        <span class="title">
+                            {% if data.purchasesCount %}
+                                Réservation effectuée
+                            {% else %}
+                                Réservations effectuées
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OVERVIEW -->
+<div class="row">
+    <div class="col-sm-12">
+        {#{ render(controller('App\\Controller\\Admin\\SubscriptionController::recents')) }#}
+    </div>
+    <div class="col-md-12">
+        <!-- MULTI CHARTS -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Statistiques des achats</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="visits-trends-chart" class="ct-chart"></div>
+                Indisponible
+            </div>
+        </div>
+        <!-- END MULTI CHARTS -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+            <!-- VISIT CHART -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Visites sur le site</h3>
+                    <div class="right">
+                        <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                        <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {% include 'admin/common/service-not-available.html.twig' %}
+                </div>
+            </div>
+            <!-- END VISIT CHART -->
+    </div>
+</div>
+{% endblock %}

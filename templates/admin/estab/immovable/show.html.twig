@@ -1,0 +1,177 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set type = 'rental' %}  
+
+{% if immovable.category == 'a-vendre' %}
+  {% set type = 'sale' %}
+{% endif %}
+
+{% set title = immovable.type|capitalize ~ ' ' ~ ('template.immovable_' ~ type)|trans|lower %}
+
+{% block left_sidebar %}
+{% include 'admin/common/left-sidebar.twig' with { active: ('admin_immovables_' ~ type) } %}
+{% endblock %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <!-- LEFT COLUMN -->
+      <div class="col-md-4 package profile-left">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if immovable.enabled %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main">
+            <h3 class="name">{{ title }}</h3>
+            <div class="user-state">
+              {% if immovable.enabled %}
+                  <span class="lnr lnr-checkmark-circle"></span> Activé
+              {% else %}
+                <span class="lnr lnr-cross-circle"></span> Desactivé
+              {% endif %}
+            </div>
+          </div>
+          <div class="profile-stat">
+              <div class="row">
+                <div class="col-md-12 stat-item">
+                  <ul class="list-unstyled list-justify" style="text-align: justify;">
+                    <li>Prix 
+                      <span>
+                        {% if type == 'sale' %}
+                          {{ immovable.price }} MRU
+                        {% else %}
+                          {{ immovable.monthlyPrice }} MRU /mois    
+                        {% endif %}
+                      </span>
+                    </li>
+                    <li>Quartier <span>{{ immovable.district }}</span></li>
+                    <li>Surface <span>{{ immovable.area }}m<sup>2</sup></span></li>
+                    <li>Date d'ajout <span>{{ immovable.createdAt|date('d M, Y') }}</span></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info">
+            <h4 class="heading">Informations sur l'utilisateur</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Nom <span>{{ immovable.user.username }}</span></li>
+              <li>Email <span>{{ immovable.user.email }}</span></li>
+              <li>Tel <span>{{ immovable.user.phoneNumber }}</span></li>
+            </ul>
+          </div>
+          <div class="profile-info">
+            <h4 class="heading">Actions sur cette annonce</h4>
+            <div class="text-center">
+              <div class="btn-group">
+                    <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not immovable.enabled %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                    <a href="#" class="btn btn-info m-1 px-4 my-3 {% if immovable.enabled %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                    <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+              </div>
+              <a href="{{ path('immovable_edit', {slug: immovable.slug, category: immovable.category}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier cette annonce</a>
+            </div>
+          </div>
+          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-danger">Voulez-vous vraiment supprimer cette annonce de la base de données ?</p>
+                            <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                            <form action="{{ path('admin_immovable_delete', {id: immovable.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                              <input type="hidden" name="user[delete_token]" value="{{ csrf_token('immovable.delete_token') }}" />
+                              <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                                  <span class="lnr lnr-trash"></span> Supprimer
+                              </button>
+                            </form>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+      <!-- END LEFT COLUMN -->
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-8 package profile-right">
+        <h4 class="heading">
+          {{ title }}
+          <span class="pull-right"><i class="fa fa-eye"></i>&nbsp;<a href="{{ path('immovable_show', {category: immovable.category, slug: immovable.slug}) }}" target="_blank">Voir l'annonce</a></span></h4>
+        <!-- AWARDS -->
+        <div class="awards">
+          <div class="row">
+            <div class="col-12">
+            <img src="{{ vich_uploader_asset(immovable.images.0, 'immovableFile')}}" class="img-responsive" alt="Image {{ immovable.title }}">
+            </div>
+          </div>
+        </div>
+        <!-- END AWARDS -->
+      </div>
+      <!-- END RIGHT COLUMN -->
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+
+  <script>
+    // Disable user when we click on the disable user button
+    $("#disable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_immovable_disable') }}",
+        data: "id=" + {{ immovable.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#enable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+
+    // Enable user when we click on the enable user button
+    $("#enable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_immovable_enable') }}",
+        data: "id=" + {{ immovable.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#disable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+  </script>
+
+
+{% endblock %}
