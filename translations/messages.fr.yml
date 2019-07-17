@@ -43,3 +43,16 @@ notification:
   title: Notifications
   mark_all_as_read: Marquer tous comme lus # Mark all as read
   see_all: Voir toutes les notifications # SEE ALL NOTIFICATION
+
+contact:
+  infos: Informations
+  keep_in_touch: Restez en contact avec nous
+  success: Votre message a été envoyé. Merci! # Your message has been sent. Thanks for contact.
+  error: Echec d'envoi. merci réessayer # Something went wrong while sending. Please try leter.
+
+form:
+  name: Nom
+  email: Adresse email
+  subject: Sujet
+  message: Message
+  submit: Envoyer

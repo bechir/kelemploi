@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
-{% block title %} {{ 'contact.title'|trans }} &ndash; {{ website.name }}{% endblock %}
+{% block title %} {{ 'layout.contact_us'|trans }} &ndash; {{ website.name }}{% endblock %}
 
 {% block main %}
 
@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="contact-address">
-                    <h4>Contact Info</h4>
+                    <h4>{{ 'contact.infos'|trans }}</h4>
                     <ul>
                       <li><i data-feather="map-pin"></i>{{ website.address }}</li>
                       <li><i data-feather="mail"></i>{{ website.email }}</li>
@@ -25,34 +25,34 @@
                 </div>
                 <div class="col-lg-7 offset-lg-1">
                   <div class="contact-form">
-                    <h4>Keep In Touch</h4>
+                    <h4>{{ 'contact.keep_in_touch'|trans }}</h4>
                     <form action="{{ path('contact') }}" id="contactForm">
                     {{ form_start(form, {'id': 'contactForm'}) }}
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group">
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Name'} }) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'form.name'} }) }}
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email'} }) }}
                           </div>
                         </div>
                         <div class="col-sm-12">
                           <div class="form-group">
-                            {{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Subject'} }) }}
+                            {{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'form.subject'} }) }}
                           </div>
                         </div>
                         <div class="col-sm-12">
                           <div class="form-group">
-                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'} }) }}
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'form.message'} }) }}
                           </div>
                         </div>
                       </div>
-                      <button class="button">Submit</button>
-                      <p class="input-success">Your message has been sent. Thanks for contact.</p>
-                      <p class="input-error">Something went wrong while sending. Please try leter.</p>
+                      <button class="button">{{ 'form.submit'|trans }}</button>
+                      <p class="input-success">{{ 'contact.success'|trans }}</p>
+                      <p class="input-error">{{ 'contact.error'|trans }}</p>
                     {{ form_end(form) }}
                   </div>
                 </div>
