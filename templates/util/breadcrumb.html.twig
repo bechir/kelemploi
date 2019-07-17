@@ -1,0 +1,24 @@
+{% macro level_1(title) %}
+    <!-- Breadcrumb -->
+    <div class="alice-bg padding-top-70 padding-bottom-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="breadcrumb-area">
+                        <h1>{{ title|trans }}</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ path('index') }}">{{ 'layout.home'|trans }}</a>
+                                </li>
+                                <li aria-current="page" class="breadcrumb-item active">{{ title|trans }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+{% endmacro %}
+

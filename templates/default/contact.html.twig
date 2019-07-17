@@ -1,26 +1,11 @@
 {% extends 'base.html.twig' %}
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
 {% block title %} {{ 'contact.title'|trans }} &ndash; {{ website.name }}{% endblock %}
 
 {% block main %}
-    <!-- Breadcrumb -->
-    <div class="alice-bg padding-top-70 padding-bottom-70">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="breadcrumb-area">
-              <h1>Contact Us</h1>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="contact.html#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Breadcrumb End -->
+
+    {{ breadcrumb.level_1('layout.contact_us') }}
 
     <div class="alice-bg section-padding-bottom">
       <div class="container">

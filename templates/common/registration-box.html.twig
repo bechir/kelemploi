@@ -1,90 +1,32 @@
-<!-- Registration Box -->
-<div class="section-padding-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="call-to-action-box candidate-box">
-                    <div class="icon">
-                        <img alt="" src="images/register-box/1.png">
+{% if not is_granted('ROLE_ADMIN') %}
+    <div class="padding-top-90 padding-bottom-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="call-to-action-box candidate-box">
+                        <div class="icon">
+                            <img alt="" src="{{ asset('images/register-box/1.png') }}">
+                        </div>
+                        <span>Are You</span>
+                        <h3>Candidate?</h3>
+                        <a data-target="#exampleModalLong2" data-toggle="modal" href="about-us.html#">Register Now
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                    <span>Are You</span>
-                    <h3>Candidate?</h3>
-                    <a data-target="#exampleModalLong2" data-toggle="modal" href="home-3.html#">Register Now
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="call-to-action-box employer-register">
-                    <div class="icon">
-                        <img alt="" src="images/register-box/2.png">
-                    </div>
-                    <span>Are You</span>
-                    <h3>Employer?</h3>
-                    <a data-target="#exampleModalLong3" data-toggle="modal" href="home-3.html#">Register Now
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Registration Box End -->
-
-<!-- Modal -->
-<div class="account-entry">
-    <div aria-hidden="true" class="modal fade" id="exampleModalLong3" role="dialog" tabindex="-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i data-feather="edit"></i>Registration</h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="account-type">
-                        <a class="candidate-acc" href="home-3.html#">
-                            <i data-feather="user"></i>Candidate</a>
-                        <a class="employer-acc active" href="home-3.html#">
-                            <i data-feather="briefcase"></i>Employer</a>
-                    </div>
-                    <form action="home-3.html#">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Username" type="text">
+                <div class="col-lg-6">
+                    <div class="call-to-action-box employer-register">
+                        <div class="icon">
+                            <img src="{{ asset('images/register-box/2.png') }}" alt="">
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Email Address" type="email">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Password" type="password">
-                        </div>
-                        <div class="more-option terms">
-                            <div class="form-check">
-                                <input class="form-check-input" id="defaultCheck3" type="checkbox" value="">
-                                <label class="form-check-label" for="defaultCheck3">
-                                    I accept the
-                                    <a href="home-3.html#">terms & conditions</a>
-                                </label>
-                            </div>
-                        </div>
-                        <button class="button primary-bg btn-block">Register</button>
-                    </form>
-                    <div class="shortcut-login">
-                        <span>Or connect with</span>
-                        <div class="buttons">
-                            <a class="facebook" href="home-3.html#">
-                                <i class="fab fa-facebook-f"></i>Facebook</a>
-                            <a class="google" href="home-3.html#">
-                                <i class="fab fa-google"></i>Google</a>
-                        </div>
-                        <p>Already have an account?
-                            <a href="home-3.html#">Login</a>
-                        </p>
+                        <span>Are You</span>
+                        <h3>Employer?</h3>
+                        <a data-target="#exampleModalLong2" data-toggle="modal" href="about-us.html#">Register Now
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% endif %}
