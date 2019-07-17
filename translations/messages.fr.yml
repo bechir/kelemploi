@@ -6,9 +6,12 @@ app:
 
 layout:
   about: À propos
+  about_us: À propos de nous
   home: Accueil # Home
-  contact_us: Contactez-nous # Contact-us
+  contact_us: Contactez nous # Contact us
   help_faq: Aide / FAQ # Help / FAQ
+  privacy: Politique de confidentialité
+  terms_conditions: Conditions générales d'utilisation
   help: Aide # Help
   applications_list: Offres # Browse
   application_create: Créer une offre
@@ -17,5 +20,10 @@ layout:
   logout:  Déconnexion # Logout
   login: Connexion # Sign up
   register: Inscription # Sign in
-  how_it_work: How it works
-  post_job: Post a Job
+  how_it_work: Comment ça marche ? # How it works ?
+  post_job: Publier une offre # Post a Job
+  footer_employes: Employés # Employers
+  footer_infos: Information
+  footer_back_top: Retourner en haut
+  create_account: Créer un compte
+  copyright: Copyright %name% %date%, tout droit réservé # Copyright %name% %date%, All right reserved
