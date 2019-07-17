@@ -5504,7 +5504,7 @@ header .absolute-nav {
   width: 45%;
 }
 
-.account-entry .modal-body .account-type label span {
+.account-type label span {
   padding: 15px 10px;
   background: #f7f9fc;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -5518,13 +5518,13 @@ header .absolute-nav {
   display: block;
 }
 
-.account-entry .modal-body .account-type label input[type="radio"]:checked + span {
+.account-type label input[type="radio"]:checked + span {
   color: #246df8;
   background: rgba(36, 109, 248, 0.2);
   border-color: transparent;
 }
 
-.account-entry .modal-body .account-type label input {
+.account-type label input {
   display: none;
 }
 

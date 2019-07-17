@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
+{% endblock stylesheets %}
+
 {% block main %}
 
     <!-- Banner -->
@@ -100,9 +109,27 @@
     <!-- Pricing -->
 
     <!-- Registration Box -->
+    {% include "common/registration-box.html.twig" %}
 
     <!-- Testimonial -->
 
     <!-- NewsLetter -->
+    {% include "common/newsletter.html.twig" %}
 
 {% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/visible.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <script src="{{ asset('assets/js/plyr.js') }}"></script>
+    <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+{% endblock javascript %}
