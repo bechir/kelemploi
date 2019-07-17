@@ -10,16 +10,15 @@ layout:
   home: Accueil # Home
   contact_us: Contactez nous # Contact us
   help_faq: Aide / FAQ # Help / FAQ
-  privacy: Politique de confidentialité
-  terms_conditions: Conditions générales d'utilisation
+  privacy: Politique de confidentialité # Privacy Policy
+  terms_conditions: Conditions générales d'utilisation # Terms And Condition
   help: Aide # Help
   applications_list: Offres # Browse
+  candidates_list: Candidats
+  entreprises_list: Entreprises
+  pages: Pages
+  blog: Blog
   application_create: Créer une offre
-  profile: Profil # Profile
-  settings:  Paramètres # Settings
-  logout:  Déconnexion # Logout
-  login: Connexion # Sign up
-  register: Inscription # Sign in
   how_it_work: Comment ça marche ? # How it works ?
   post_job: Publier une offre # Post a Job
   footer_employes: Employés # Employers
@@ -27,3 +26,20 @@ layout:
   footer_back_top: Retourner en haut
   create_account: Créer un compte
   copyright: Copyright %name% %date%, tout droit réservé # Copyright %name% %date%, All right reserved
+
+
+# User account
+user:
+  account: Compte
+  my_account: Mon compte
+  settings: Paramètres # Settings
+  profile: Profil # Profile
+  logout:  Déconnexion # Log Out
+  login: Connexion # Sign up
+  register: Inscription # Sign in
+
+# Notifications
+notification:
+  title: Notifications
+  mark_all_as_read: Marquer tous comme lus # Mark all as read
+  see_all: Voir toutes les notifications # SEE ALL NOTIFICATION

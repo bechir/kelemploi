@@ -1,11 +1,11 @@
-a.notification-button.unread::after {
+/* a.notification-button.unread::after {
     content: ".";
     position: absolute;
     left: -3px;
     top: -27px;
     color: red;
     font-size: 25px;
-}
+} */
 
 .newsletter-form .form-group {
     width: calc(100% - 157px);
