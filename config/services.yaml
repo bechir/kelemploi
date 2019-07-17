@@ -8,13 +8,13 @@ parameters:
     app.route_prefix: '%app_locales%'
     locale: fr
     website:
-        name: "Galsen Work"
-        email: 'contact@galsen-work.com'
+        name: "Galsen Jobs"
+        email: 'contact@galsen-jobs.com'
         phoneNumber: '+221 78 374 26 71'
         authors: "Exatech"
         address: "44 Rue 12, alpha Gamma"
-    website.name: 'Galsen Work'
-    website.email: 'contact@galsen-work.com' #'contact@galsen-work.com
+    website.name: 'Galsen Jobs'
+    website.email: 'contact@galsen-jobs.com' #'contact@galsen-jobs.com
     app.notifications.email_sender: '%website.email%'
     uploads_dir: '%kernel.project_dir%/public/images/uploads'
     uploads_prefix: '/images/uploads'
