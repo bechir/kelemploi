@@ -18,3 +18,4 @@ layout:
   login: Connexion # Sign up
   register: Inscription # Sign in
   how_it_work: How it works
+  post_job: Post a Job
