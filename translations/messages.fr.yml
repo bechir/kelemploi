@@ -38,21 +38,36 @@ user:
   login: Connexion # Sign up
   register: Inscription # Sign in
 
+
 # Notifications
 notification:
   title: Notifications
   mark_all_as_read: Marquer tous comme lus # Mark all as read
   see_all: Voir toutes les notifications # SEE ALL NOTIFICATION
 
+
+# Contact page
 contact:
   infos: Informations
   keep_in_touch: Restez en contact avec nous
   success: Votre message a été envoyé. Merci! # Your message has been sent. Thanks for contact.
-  error: Echec d'envoi. merci réessayer # Something went wrong while sending. Please try leter.
+  error: Echec d'envoi. merci de réessayer # Something went wrong while sending. Please try leter.
 
+
+# Form
 form:
   name: Nom
   email: Adresse email
   subject: Sujet
   message: Message
   submit: Envoyer
+
+faq:
+  candidate: Candidat
+  employer: Employeur
+  answer_here: Votre réponse ici # Your answer here
+  faq: Questions Fréquements Posées # Frequently Asked Questions
+  ask_record: Nous répondons vite, en moins d'une heure ! # We have a record of answering everything in 3 hours of less.
+  dont_get_answer: Pas de réponse satisfaisante ? # Don’t get Answer?
+  email_us: Envoyez nous un e-mail # Email Us
+  call_us: Ou passez un appel au <span>%number%</span> # Or maybe you’d like to call us: <span>%number%</span>
