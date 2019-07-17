@@ -4,3 +4,4 @@ form:
   submit: S'inscrire
   error: Entrez une adresse e-mail valide # 0 - Please enter a value
   success: Merci pour votre inscription! # Thank you for subscribing!
+  email: Adresse e-mail...

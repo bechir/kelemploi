@@ -6,3 +6,8 @@ a.notification-button.unread::after {
     color: red;
     font-size: 25px;
 }
+
+.newsletter-form .form-group {
+    width: calc(100% - 157px);
+    margin-right: 10px;
+}

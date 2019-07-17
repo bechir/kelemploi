@@ -8,7 +8,7 @@
                     <p>{{ 'form.body'|trans({}, 'newsletter') }}</p>
                     <form action="" class="newsletter-form form-inline">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Email address..." type="text">
+                            <input class="form-control" placeholder="{% trans from 'newsletter' %}form.email{% endtrans %}" type="text">
                         </div>
                         <button class="btn button">{{ 'form.submit'|trans({}, 'newsletter') }}<i class="fas fa-caret-right"></i>
                         </button>
