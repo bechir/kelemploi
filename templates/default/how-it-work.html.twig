@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% block title %} {{ 'layout.how_it_work'|trans }} &ndash; {{ website.name }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('layout.how_it_work') }}
+
+    <!-- How It Work -->
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="white-bg others-block">
+              <div class="how-it-work">
+                <div class="row">
+                  <div class="col-lg-6 order-lg-2">
+                    <div class="working-process-thumb">
+                      <img src="{{ asset('images/feature/thumb-2.jpg') }}" class="img-fluid" alt="">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 order-lg-1">
+                    <div class="working-process">
+                      <h3><span>#01.</span>Create Account</h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                    <div class="working-process">
+                      <h3><span>#02.</span>Search Your Job</h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                    <div class="working-process">
+                      <h3><span>#03.</span>Apply For Job</h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% include 'common/testimonial.html.twig' %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- How It Work End -->
+
+    {% include 'common/call-to-action.html.twig' %}
+
+{% endblock %}

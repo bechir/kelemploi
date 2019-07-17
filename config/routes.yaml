@@ -50,3 +50,11 @@ privacy:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+how_it_work:
+  path: /{_locale}/how-it-work
+  controller: App\Controller\DefaultController::howItWork
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

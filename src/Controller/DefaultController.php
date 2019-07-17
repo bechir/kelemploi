@@ -92,6 +92,11 @@ class DefaultController extends Controller
         return $this->render('default/termsCondtions.html.twig');
     }
 
+    public function howItWork(): Response
+    {
+        return $this->render('default/how-it-work.html.twig');
+    }
+
     public function getStats()
     {
 
