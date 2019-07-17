@@ -7752,5 +7752,3 @@ typeof navigator === "object" && (function (global, factory) {
   return Plyr;
 
 })));
-
-//# sourceMappingURL=plyr.js.map

@@ -1,26 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ 'user.create_account'|trans }}{% endblock %}
 
-{% block header %}
+{% block body %}
     <header class="header-2 access-page-nav">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="header-top">
-                        <div class="logo-area">
-                            <a href="{{ path('index') }}"><img alt="" src="{{ asset('images/logo-2.png') }}"></a>
-                        </div>
-                        <div class="top-nav" style="display: flex;">
-                            <a class="account-page-link" href="{{ path('fos_user_security_login') }}">Login</a>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="header-top">
+              <div class="logo-area">
+                <a href="{{ path('index') }}"><img src="{{ asset('images/logo-2.png') }}" alt=""></a>
+              </div>
+              <div class="top-nav">
+                <a href="{{ path('fos_user_security_login') }}" class="account-page-link">Login</a>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </header>
-{% endblock header %}
-
-{% block main %}
+ 
     <div class="padding-top-90 padding-bottom-90 access-page-bg">
         <div class="container">
             <div class="row">
@@ -28,10 +26,7 @@
                     <div class="access-form">
                         <div class="form-header">
                             <h5>
-                                <svg class="feather feather-edit" fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
-                                    <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
-                                </svg>Register Account</h5>
+                                <i data-feather="edit"></i>Register Account</h5>
                         </div>
                         <div class="account-type">
                             <label for="idRegisterCan">
@@ -44,43 +39,43 @@
                             </label>
                         </div>
                         {{ form_start(form) }}
-                            {% if not form.vars.valid %}
-                                {% for children in form.children %}
-                                    {% if not children.vars.valid %}
-                                        <div class="alert alert-danger">
-                                            {% if children.first is defined %}
-                                                {{ form_errors(children.first) }}
-                                            {% else %}
-                                                {{ form_errors(children) }}
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <div class="form-group">
-                                {{ form_widget(form.username, {'attr': {'placeholder': 'form.username', 'class': 'form-control'}}) }}
+                        {% if not form.vars.valid %}
+                            {% for children in form.children %}
+                                {% if not children.vars.valid %}
+                                    <div class="alert alert-danger">
+                                        {% if children.first is defined %}
+                                            {{ form_errors(children.first) }}
+                                        {% else %}
+                                            {{ form_errors(children) }}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form_widget(form.username, {'attr': {'placeholder': 'form.username', 'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.email, {'attr': {'placeholder': 'form.email', 'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.password', 'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.password_confirmation', 'class': 'form-control'}}) }}
+                        </div>
+                        <div class="more-option terms">
+                            <div class="mt-0 terms">
+                                <input checked="" class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox">
+                                <label for="radio-4">
+                                    <span class="dot"></span>
+                                    I accept the
+                                    <a href="#">terms &amp; conditions</a>
+                                </label>
                             </div>
-                            <div class="form-group">
-                                {{ form_widget(form.email, {'attr': {'placeholder': 'form.email', 'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.password', 'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.password_confirmation', 'class': 'form-control'}}) }}
-                            </div>
-                            <div class="more-option terms">
-                                <div class="mt-0 terms">
-                                    <input checked="" class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox">
-                                    <label for="radio-4">
-                                        <span class="dot"></span>
-                                        I accept the
-                                        <a href="#">terms &amp; conditions</a>
-                                    </label>
-                                </div>
-                            </div>
-                            <button class="button primary-bg btn-block">Register</button>
-                        </form>
+                        </div>
+                        <button class="button primary-bg btn-block">Register</button>
+                        {{ form_end(form) }}
                         <div class="shortcut-login">
                             <span>Or connect with</span>
                             <div class="buttons">
@@ -99,8 +94,19 @@
         </div>
     </div>
 
-{% endblock main %}
-
-{% block footer %}
-{% endblock footer %}
-
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/visible.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <script src="{{ asset('assets/js/plyr.js') }}"></script>
+    <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+{% endblock %}
