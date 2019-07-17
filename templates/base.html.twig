@@ -25,6 +25,7 @@
 
         <!-- Custom Css -->
         <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
         {% block stylesheets %}{% endblock %}
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7CRoboto:300i,400,500" rel="stylesheet">
@@ -55,13 +56,35 @@
                                 <div class="header-top-toggler-button"></div>
                             </div>
                             <div class="top-nav">
-                                
-                                {% include 'common/header-top-notification.htl.twig' %}
-                                
-                                <div class="dropdown header-top-account login-modals">
-                                    <button data-target="#exampleModalLong" data-toggle="modal" title="Title" type="button">Login</button>
-                                    <button data-target="#exampleModalLong2" data-toggle="modal" title="Title" type="button">Registration</button>
-                                </div>
+                                {% if is_granted('ROLE_USER') %}
+                                    
+                                    {% include 'common/header-top-notification.htl.twig' %}
+                                    
+                                    <div class="dropdown header-top-account">
+                                        <a href="dashboard-message.html#" class="account-button">My Account</a>
+                                        <div class="account-card">
+                                            <div class="header-top-account-info">
+                                            <a href="dashboard-message.html#" class="account-thumb">
+                                                <img src="{{ asset('images/account/randomdev.jpg') }}" class="img-fluid" alt="">
+                                            </a>
+                                            <div class="account-body">
+                                                <h5><a href="dashboard-message.html#">{{ app.user.username }}</a></h5>
+                                                <span class="mail">{{ app.user.email }}</span>
+                                            </div>
+                                            </div>
+                                            <ul class="account-item-list">
+                                            <li><a href="{{ path('dashboard') }}"><span class="ti-user"></span>Account</a></li>
+                                            <li><a href="{{ path('dashboard') }}"><span class="ti-settings"></span>Settings</a></li>
+                                            <li><a href="{{ path('fos_user_security_logout') }}"><span class="ti-power-off"></span>Log Out</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="dropdown header-top-account login-modals">
+                                        <button data-target="#exampleModalLong" data-toggle="modal" title="Title" type="button">Login</button>
+                                        <button data-target="#exampleModalLong2" data-toggle="modal" title="Title" type="button">Registration</button>
+                                    </div>
+                                {% endif %}
                                 <select class="selectpicker select-language" data-width="fit">
                                     {% set lang = ('app.locale.' ~ request_locale)|trans %}
                                     <option data-content='<span class="flag-icon flag-icon-{{ request_locale }}"></span> {{ lang }}'>{{ lang }}</option>

@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     $('.account-button').on('click', function(e) {
       e.preventDefault();
-      $('.account-card').toggleClass('show');
+      $('.account-card').addClass('show');
       $('.account-card').fadeToggle();
     })
 
@@ -620,6 +620,3 @@ $(document).ready(function() {
     });
 
 })
-
-
-

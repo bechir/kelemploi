@@ -288,7 +288,7 @@ a:focus {
 	02.0 Banner Style
 ---------------------------------------------*/
 .banner-1-bg {
-  background: url(../images/bg/banner-1-bg.jpg) no-repeat bottom left;
+  background: url(/images/bg/banner-1-bg.jpg) no-repeat bottom left;
   background-size: cover;
 }
 
@@ -314,7 +314,7 @@ a:focus {
 
 .banner-1 .banner-content p:before {
   position: absolute;
-  content: url(../images/curv-arrow-2.png);
+  content: url(/images/curv-arrow-2.png);
   top: 100%;
   left: 190px;
 }
@@ -334,7 +334,7 @@ a:focus {
 }
 
 .banner-2-bg {
-  background: url(../images/bg/banner-2-bg.jpg) no-repeat bottom left;
+  background: url(/images/bg/banner-2-bg.jpg) no-repeat bottom left;
   background-size: cover;
 }
 
@@ -385,7 +385,7 @@ a:focus {
 }
 
 .banner-3-bg {
-  background: url(../images/bg/banner-3-bg.jpg) no-repeat center left;
+  background: url(/images/bg/banner-3-bg.jpg) no-repeat center left;
   background-size: cover;
 }
 
@@ -411,7 +411,7 @@ a:focus {
 
 .banner-3 .banner-content p:before {
   position: absolute;
-  content: url(../images/curv-arrow.png);
+  content: url(/images/curv-arrow.png);
   top: 100%;
   left: 190px;
 }
@@ -432,7 +432,7 @@ a:focus {
 }
 
 .banner-4-bg {
-  background: url(../images/bg/banner-4-bg.jpg) no-repeat center;
+  background: url(/images/bg/banner-4-bg.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -4847,7 +4847,7 @@ a:focus {
 	09.0 App Style
 ---------------------------------------------*/
 .app-download-bg {
-  background: url(../images/bg/app-bg.jpg) no-repeat left;
+  background: url(/images/bg/app-bg.jpg) no-repeat left;
   background-size: cover;
 }
 
@@ -4888,11 +4888,11 @@ a:focus {
 }
 
 .app-download .app-download-button .apple-app:before {
-  content: url(../images/apple-white.png);
+  content: url(/images/apple-white.png);
 }
 
 .app-download .app-download-button .android-app:before {
-  content: url(../images/google-white.png);
+  content: url(/images/google-white.png);
 }
 
 /*---------------------------------------------
@@ -6463,7 +6463,7 @@ header .absolute-nav {
 	13.0 Animated-number Style
 ---------------------------------------------*/
 .fact-bg {
-  background: url(../images/bg/fact-bg.jpg) no-repeat center center;
+  background: url(/images/bg/fact-bg.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -6562,7 +6562,7 @@ header .absolute-nav {
 }
 
 .call-to-action-bg {
-  background: url(../images/bg/cta-2-bg.jpg) no-repeat center;
+  background: url(/images/bg/cta-2-bg.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -6624,7 +6624,7 @@ header .absolute-nav {
 }
 
 .newsletter-bg {
-  background: url(../images/bg/newsletter-bg.jpg) no-repeat center center;
+  background: url(/images/bg/newsletter-bg.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -6998,7 +6998,7 @@ header .absolute-nav {
 }
 
 .package-wrapper .package.professional .package-header {
-  background: url(../images/bg/package-header-bg.jpg) no-repeat center;
+  background: url(/images/bg/package-header-bg.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -7379,11 +7379,11 @@ header .absolute-nav {
 }
 
 .footer-bottom .footer-app-download .apple-app:before {
-  content: url(../images/apple.png);
+  content: url(/images/apple.png);
 }
 
 .footer-bottom .footer-app-download .android-app:before {
-  content: url(../images/google.png);
+  content: url(/images/google.png);
 }
 
 .footer-bottom .back-to-top {
@@ -7907,7 +7907,7 @@ header .absolute-nav {
 
 .about-company {
   padding: 60px 30px;
-  background: url(../images/bg/bg-map.jpg) no-repeat center;
+  background: url(/images/bg/bg-map.jpg) no-repeat center;
   background-size: cover;
 }
 
@@ -8010,7 +8010,7 @@ header .absolute-nav {
 
 .working-process:before {
   position: absolute;
-  content: url(../images/dot.png);
+  content: url(/images/dot.png);
   top: 35px;
   left: 13px;
 }
@@ -9889,7 +9889,7 @@ header .absolute-nav {
 	28.0 Account Style
 ---------------------------------------------*/
 .access-page-bg {
-  background: url("../images/bg/access-bg.jpg") no-repeat center;
+  background: url("/images/bg/access-bg.jpg") no-repeat center;
   background-size: cover;
 }
 

@@ -2,5 +2,82 @@
 {% block title %} {{ 'contact.title'|trans }} &ndash; {{ website.name }}{% endblock %}
 
 {% block main %}
+    <!-- Breadcrumb -->
+    <div class="alice-bg padding-top-70 padding-bottom-70">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="breadcrumb-area">
+              <h1>Contact Us</h1>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="contact.html#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="contact-block">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="contact-address">
+                    <h4>Contact Info</h4>
+                    <ul>
+                      <li><i data-feather="map-pin"></i>{{ website.address }}</li>
+                      <li><i data-feather="mail"></i>{{ website.email }}</li>
+                      <li><i data-feather="phone-call"></i>{{ website.phoneNumber }}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg-7 offset-lg-1">
+                  <div class="contact-form">
+                    <h4>Keep In Touch</h4>
+                    <form action="{{ path('contact') }}" id="contactForm">
+                    {{ form_start(form, {'id': 'contactForm'}) }}
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Name'} }) }}
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            {{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Subject'} }) }}
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'} }) }}
+                          </div>
+                        </div>
+                      </div>
+                      <button class="button">Submit</button>
+                      <p class="input-success">Your message has been sent. Thanks for contact.</p>
+                      <p class="input-error">Something went wrong while sending. Please try leter.</p>
+                    {{ form_end(form) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'common/call-to-action.html.twig' %}
 
 {% endblock %}
