@@ -1,0 +1,59 @@
+<div class="terms-sidebar">
+    <h5>
+        <i data-feather="arrow-down-circle"></i>Navigation</h5>
+    <ul class="sidebar-menu privacy {% if active == 'privacy' %}show{% else %}hide{% endif %}">
+        <li>
+            <a href="#welcome">Welcome Text</a>
+        </li>
+        <li>
+            <a href="#termss">Our Terms</a>
+        </li>
+        <li>
+            <a href="#condition">Conditions</a>
+        </li>
+        <li>
+            <a href="#privacy-2">Your Privacy</a>
+        </li>
+        <li>
+            <a href="#information">Informations We Collect</a>
+        </li>
+        <li>
+            <a href="#security">Security</a>
+        </li>
+        <li>
+            <a href="#update">Privacy Policy Update</a>
+        </li>
+    </ul>
+    <ul class="sidebar-menu terms {% if active == 'terms' %}show{% else %}hide{% endif %}">
+        <li>
+            <a href="#welcome">Welcome Text</a>
+        </li>
+        <li>
+            <a href="#termss">Our Terms</a>
+        </li>
+        <li>
+            <a href="#condition">Conditions</a>
+        </li>
+        <li>
+            <a href="#privacy-2">Your Privacy</a>
+        </li>
+        <li>
+            <a href="#information">Informations We Collect</a>
+        </li>
+        <li>
+            <a href="#security">Security</a>
+        </li>
+        <li>
+            <a href="#update">Privacy Policy Update</a>
+        </li>
+    </ul>
+    {% if not is_granted('ROLE_USER') %}
+        <div class="signin-option">
+            <p>{{ 'privacy.login_before_post'|trans }}</p>
+            <div class="buttons">
+                <a class="signin" data-target="#exampleModalLong" data-toggle="modal" href="#">{{ 'user.login'|trans }}</a>
+                <a class="register" data-target="#exampleModalLong2" data-toggle="modal" href="#">{{ 'user.register'|trans }}</a>
+            </div>
+        </div>
+    {% endif %}
+</div>

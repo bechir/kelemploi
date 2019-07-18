@@ -11,7 +11,7 @@ layout:
   contact_us: Contactez nous # Contact us
   help_faq: Aide / FAQ # Help / FAQ
   privacy: Politique de confidentialité # Privacy Policy
-  terms_conditions: Conditions générales d'utilisation # Terms And Condition
+  terms_conditions: Conditions générales d'utilisation # Terms And Conditions
   help: Aide # Help
   applications_list: Offres # Browse
   candidates_list: Candidats
@@ -43,7 +43,7 @@ user:
 notification:
   title: Notifications
   mark_all_as_read: Marquer tous comme lus # Mark all as read
-  see_all: Voir toutes les notifications # SEE ALL NOTIFICATION
+  see_all: Voir toutes les notifications # SEE ALL NOTIFICATIONS
 
 
 # Contact page
@@ -71,3 +71,6 @@ faq:
   dont_get_answer: Pas de réponse satisfaisante ? # Don’t get Answer?
   email_us: Envoyez nous un e-mail # Email Us
   call_us: Ou passez un appel au <span>%number%</span> # Or maybe you’d like to call us: <span>%number%</span>
+
+privacy:
+  login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !

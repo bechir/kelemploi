@@ -619,4 +619,17 @@ $(document).ready(function() {
         topToggler();
     });
 
+
+    /*-------------------------------------
+    Terms & Conditions
+    -------------------------------------*/
+    $('#terms-tab').on('click', function() {
+      $('.sidebar-menu.terms').addClass('show').removeClass('hide')
+      $('.sidebar-menu.privacy').removeClass('show').addClass('hide')
+    });
+
+    $('#privacy-tab').on('click', function() {
+      $('.sidebar-menu.privacy').addClass('show').removeClass('hide')
+      $('.sidebar-menu.terms').removeClass('show').addClass('hide')
+    });
 })

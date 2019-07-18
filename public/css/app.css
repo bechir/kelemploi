@@ -11,3 +11,8 @@
     width: calc(100% - 157px);
     margin-right: 10px;
 }
+
+
+.terms-container .terms-sidebar .sidebar-menu.hide{
+    display: none;
+}
