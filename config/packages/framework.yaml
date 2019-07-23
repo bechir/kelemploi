@@ -34,4 +34,4 @@ framework:
         email_validation_mode: 'html5'
 
     templating:
-      engines: ['twig', 'php']
+      engines: ['twig']

@@ -2,7 +2,7 @@
 # |   Application module
 # =======================================================
 application_create:
-  path: /{_locale}/offre/creer
+  path: /{_locale}/job/new
   controller: App\Controller\ApplicationController::create
   requirements:
     _locale: '%app_locales%'
@@ -10,7 +10,7 @@ application_create:
     _locale: '%locale%'
 
 applications_list:
-  path: /{_locale}/offres
+  path: /{_locale}/jobs
   controller: App\Controller\ApplicationController::list
   requirements:
     _locale: '%app_locales%'
@@ -18,7 +18,7 @@ applications_list:
     _locale: '%locale%'
 
 application_show:
-  path: /{_locale}/offre/{slug}
+  path: /{_locale}/job/{slug}
   controller: App\Controller\ApplicationController::show
   requirements:
     _locale: '%app_locales%'
@@ -26,7 +26,7 @@ application_show:
     _locale: '%locale%'
 
 application_edit:
-  path: /{_locale}/offre/{slug}/modifier
+  path: /{_locale}/job/{slug}/edit
   controller: App\Controller\ApplicationController::edit
   requirements:
     _locale: '%app_locales%'
@@ -34,7 +34,7 @@ application_edit:
     _locale: '%locale%'
 
 application_delete:
-  path: /{_locale}/offre/{slug}/supprimer
+  path: /{_locale}/job/{slug}/delete
   controller: App\Controller\ApplicationController::delete
   requirements:
     _locale: '%app_locales%'
@@ -42,7 +42,7 @@ application_delete:
     _locale: '%locale%'
 
 application_traineeship:
-  path: /{_locale}/offres/stage
+  path: /{_locale}/jobs/stage
   controller: App\Controller\ApplicationController::traineeship
   requirements:
     _locale: '%app_locales%'
@@ -50,7 +50,7 @@ application_traineeship:
     _locale: '%locale%'
 
 application_alternance:
-  path: /{_locale}/offres/alternance
+  path: /{_locale}/jobs/alternance
   controller: App\Controller\ApplicationController::alternance
   requirements:
     _locale: '%app_locales%'
@@ -58,7 +58,7 @@ application_alternance:
     _locale: '%locale%'
 
 application_ftc:
-  path: /{_locale}/offres/CDD
+  path: /{_locale}/jobs/CDD
   controller: App\Controller\ApplicationController::ftc
   requirements:
     _locale: '%app_locales%'
@@ -66,7 +66,7 @@ application_ftc:
     _locale: '%locale%'
 
 application_oec:
-  path: /{_locale}/offres/CDI
+  path: /{_locale}/jobs/CDI
   controller: App\Controller\ApplicationController::oec
   requirements:
     _locale: '%app_locales%'
