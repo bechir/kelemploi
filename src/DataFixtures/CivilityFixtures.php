@@ -16,6 +16,7 @@ class CivilityFixtures extends Fixture
 
         foreach ($names as $name) {
             $civility = new Civility();
+            $civility->setAbbr($name);
             $civility->setName($name);
 
             $manager->persist($civility);
