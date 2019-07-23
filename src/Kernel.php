@@ -25,9 +25,9 @@ class Kernel extends BaseKernel
         return $this->getProjectDir().'/var/log';
     }
 
-    public function getPrivateDir()
+    public function getVarAppDir()
     {
-        return $this->getProjectDir().'/private';
+        return $this->getProjectDir().'/var/app';
     }
 
     public function registerBundles()

@@ -6,19 +6,15 @@ use App\Entity\JobCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use App\Util\AppDirectoriesTrait;
+
 class JobCategoryFixtures extends Fixture
 {
+    use AppDirectoriesTrait;
+
     public function load(ObjectManager $manager)
     {
-        $categories = [
-            'Banque & Finance',
-            'Commerce',
-            'Génie électrique',
-            'Génie mécanique',
-            'Marketing',
-            'Informatique',
-            'Autres'
-        ];
+        $categories = json_decode(file_get_contents($this->getVarApp() . '/job-data.json'), true)['job']['categories'];
 
         foreach ($categories as $categoryName) {
             $jobCategory = (new JobCategory())

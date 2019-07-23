@@ -96,7 +96,7 @@ class Application
     private $minStudyLevel;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region")
      */
     private $region;
 
