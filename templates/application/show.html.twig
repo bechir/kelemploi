@@ -6,130 +6,315 @@
 {% endblock %}
 
 {% block main %}
-    <div class="page-header card">
-        <div class="row align-items-end">
-            <div class="col-lg-8">
-                <div class="page-header-title">
-                    <i class="feather icon-file bg-c-blue"></i>
-                    <div class="d-inline">
-                        <h5>Dossier &nbsp;&nbsp;&nbsp;
-                            <a href="{{ path('application_edit', {slug: _app.slug}) }}" class="btn btn-warning py-1">
-                                <span class="feather icon-edit f-12"></span> <span class="f-12 f-w-600">Modifier</span>
-                            </a>
-                        </h5>
-                        <span class="f-16">{{ _app.jobTitle }} <label class="badge badge-inverse-primary mb-0">{{ _app.contractType }}</label>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="pcoded-inner-content">
+    <!-- Candidates Details -->
+    <div class="alice-bg padding-top-60 section-padding-bottom">
+      <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-block tab-icon">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="nav nav-tabs md-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a aria-selected="true" class="nav-link active show" data-toggle="tab" href="#application-details" role="tab">
-                                            <i class="feather icon-file"></i>Dossier</a>
-                                        <div class="slide"></div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a aria-selected="false" class="nav-link" data-toggle="tab" href="#candidates" role="tab">
-                                            <i class="feather icon-users"></i>Candidats
-                                            {% if _app.nbCandidatesToRecruit > 0 %}
-                                                0 / {{ _app.nbCandidatesToRecruit }}
-                                            {% endif %}
-                                        </a>
-                                        <div class="slide"></div>
-                                    </li>
-                                </ul>
-                                <div class="tab-content card-block">
-                                    <div class="tab-pane active show" id="application-details" role="tabpanel">
-                                        <p class="m-0">{{ _app.jobTitle }}</p>
-                                    </div>
-                                    <div class="tab-pane" id="candidates" role="tabpanel">
-                                        <p class="m-0">Pas de candidats pour le moment.</p>
-                                        <hr>
-                                        <div class="col-md-12">
-                                            <div class="card latest-update-card">
-                                                <div class="card-header">
-                                                    <h5>Activités récentes</h5>
-                                                    <div class="card-header-right">
-                                                        <ul class="list-unstyled card-option" style="width: 130px;">
-                                                            <li class="first-opt" style="display: none;">
-                                                                <i class="feather open-card-option icon-x"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="feather icon-maximize full-card"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="feather icon-minus minimize-card"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="feather icon-refresh-cw reload-card"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="feather icon-trash close-card"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="feather open-card-option icon-x"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="card-block">
-                                                    <div class="latest-update-box">
-                                                        <div class="row p-t-20 p-b-30">
-                                                            <div class="col-auto text-right update-meta">
-                                                                <i class="feather icon-sunrise bg-c-blue update-icon"></i>
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6>Directeur RH</h6>
-                                                                <p class="text-muted m-b-15">The trip was an amazing and a life changing experience!!</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row p-b-30">
-                                                            <div class="col-auto text-right update-meta">
-                                                                <i class="feather icon-file-text bg-c-blue update-icon"></i>
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6>Admin</h6>
-                                                                <p class="text-muted m-b-0">Free courses for all our customers at A1 Conference Room - 9:00 am tomorrow!</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row p-b-30">
-                                                            <div class="col-auto text-right update-meta">
-                                                                <i class="feather icon-map-pin bg-c-blue update-icon"></i>
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6>CRM Manager</h6>
-                                                                <p class="text-muted m-b-15">Happy Hour! Free drinks at
-                                                                    <span>
-                                                                        <a class="text-c-blue" href="#!">Cafe-Bar all
-                                                                        </a>
-                                                                    </span>day long!</p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <a class=" b-b-primary text-primary" href="#!">Voir toutes les activités</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+          <div class="col">
+            <div class="job-listing-details">
+              <div class="job-title-and-info">
+                <div class="title">
+                  <div class="thumb">
+                    <img src="/images/job/company-logo-1.png" class="img-fluid" alt="">
+                  </div>
+                  <div class="title-body">
+                    <h4>{{ _app.jobTitle }}</h4>
+                    <div class="info">
+                      <span class="company"><a href="#" onclick="return false"><i data-feather="briefcase"></i>{{ _app.company }}</a></span>
+                      <span class="office-location"><a href="#" onclick="return false"><i data-feather="map-pin"></i>{{ _app.region }}</a></span>
+                      <span class="job-type full-time"><a href="#" onclick="return false"><i data-feather="clock"></i>{{ _app.contractType }}</a></span>
                     </div>
+                  </div>
                 </div>
+                <div class="buttons">
+                  <a class="save" href="#"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
+                  <a class="apply" href="#" data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                </div>
+              </div>
+              <div class="details-information section-padding-60">
+                <div class="row">
+                  <div class="col-xl-7 col-lg-8">
+                    <div class="description details-section">
+                      <h4><i data-feather="align-left"></i>{{ 'job.description'|trans }}</h4>
+                      <p>{{ _app.jobDescription }}</p>
+                    </div>
+                    <div class="responsibilities details-section">
+                      <h4><i data-feather="zap"></i>{{ 'job.responsibilities'|trans }}</h4>
+                      <ul>
+                        <li>The applicants should have experience in the following areas</li>
+                        <li>Skills on M.S Word, Excel, and Integrated Accounting package i.e. Software</li>
+                        <li>Have sound knowledge of commercial activities.</li>
+                        <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
+                        <li>Good verbal and written communication skills.</li>
+                        <li>Leadership, analytical, and problem-solving abilities.</li>
+                      </ul>
+                    </div>
+                    <div class="edication-and-experience details-section">
+                      <h4><i data-feather="book"></i>{{ 'job.education_xp'|trans }}</h4>
+                      <ul>
+                        <li>{{ _app.minStudyLevel }}</li>
+                        <li>2 à 3 ans d'expériences</li>
+                      </ul>
+                    </div>
+                    {# <div class="other-benifit details-section">
+                      <h4><i data-feather="gift"></i>Other Benefits</h4>
+                      <ul>
+                        <li>Health and life insurance </li>
+                        <li>2 days of weekend </li>
+                        <li>2 annual performanc Bonuses</li>
+                        <li>Lunch &amp; Snacks</li>
+                      </ul>
+                    </div> #}
+                    <div class="job-apply-buttons">
+                      <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                      <a href="#" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 offset-xl-1 col-lg-4">
+                    <div class="information-and-share">
+                      <div class="job-summary">
+                        <h4>{{ 'job.summary'|trans }}</h4>
+                        <ul>
+                            <li><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
+                            {% if _app.nbCandidatesToRecruit %}
+                                <li><span>{{ 'job.vacancy'|trans }}</span> {{ _app.nbCandidatesStr }}</li>
+                            {% endif %}
+                            <li><span>{{ 'job.contract_type'|trans }}</span> {{ _app.contractType }}</li>
+                            <li><span>{{ 'job.experience'|trans }}:</span> 2 à 3 an(s)</li>
+                            <li><span>{{ 'job.region'|trans }}</span> {{ _app.region }}</li>
+                            {% if _app.salary %}
+                                <li><span>{{ 'job.salary'|trans }}</span> {{ _app.salary }}</li>
+                            {% endif %}
+                            <li><span>{{ 'job.gender'|trans }}</span> H/F</li>
+                            {% if _app.dates.end is not null %}
+                                <li><span>{{ 'job.deadline'|trans }}</span> {{ _app.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
+                            {% endif %}
+                        </ul>
+                      </div>
+                      <div class="share-job-post">
+                        <span class="share"><i class="fas fa-share-alt"></i>{{ 'job.share'|trans }}</span>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                      </div>
+                      <div class="buttons">
+                        <a href="#" class="button print"><i data-feather="printer"></i>{{ 'job.print'|trans }}</a>
+                        <a href="#" class="button report"><i data-feather="flag"></i>{{ 'job.report'|trans }}</a>
+                      </div>
+                      {# <div class="job-location">
+                        <h4>{{ 'job.location'|trans }}</h4>
+                        <div id="map-area">
+                          <div class="cp-map" id="location" data-lat="40.713355" data-lng="-74.005535" data-zoom="10"></div>
+                          <!-- <div class="cp-map" id="location" data-lat="40.713355" data-lng="-74.005535" data-zoom="10"></div> -->
+                        </div>
+                      </div> #}
+                    </div> 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-7 col-lg-8">
+                  <div class="company-information details-section">
+                    <h4><i data-feather="briefcase"></i>{{ 'company.about'|trans }}</h4>
+                    <ul>
+                      <li><span>{{ 'company.name'|trans }}</span> {{ _app.company }}</li>
+                      <li><span>{{ 'company.address'|trans }}</span> Queens, NY 11375 USA</li>
+                      <li><span>{{ 'company.website'|trans }}</span> <a href="#">www.theoreoltd.com</a></li>
+                      <li><span>{{ 'company.description'|trans }}</span></li>
+                      <li>{{ _app.companyDescription }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+    <!-- Candidates Details End -->
+
+    <div class="apply-popup">
+      <div class="modal fade" id="apply-popup-id" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><i data-feather="edit"></i>APPLY FOR THIS JOB</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="#">
+                <div class="form-group">
+                  <input type="text" placeholder="Full Name" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="email" placeholder="Email Address" class="form-control">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" placeholder="Message"></textarea>
+                </div>
+                <div class="form-group file-input-wrap">
+                  <label for="up-cv">
+                    <input id="up-cv" type="file">
+                    <i data-feather="upload-cloud"></i>
+                    <span>Upload your resume <span>(pdf,zip,doc,docx)</span></span>
+                  </label>
+                </div>
+                <div class="more-option">
+                  <input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
+                  <label for="radio-4">
+                    <span class="dot"></span> I accept the <a href="#">terms & conditions</a>
+                  </label>
+                </div>
+                <button class="button primary-bg btn-block">Apply Now</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Jobs -->
+    <div class="section-padding-bottom alice-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="section-header section-header-2 section-header-with-right-content">
+              <h2>{{ 'job.simillar'|trans }}</h2>
+              <a href="{{ path('applications_list') }}" class="header-right">{{ 'job.browse_all'|trans }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="job-list">
+              <div class="thumb">
+                <a href="#">
+                  <img src="/images/job/company-logo-1.png" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="body">
+                <div class="content">
+                  <h4><a href="">Designer Required</a></h4>
+                  <div class="info">
+                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Theoreo</a></span>
+                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>New York City</a></span>
+                    <span class="job-type full-time"><a href="#"><i data-feather="clock"></i>Full Time</a></span>
+                  </div>
+                </div>
+                <div class="more">
+                  <div class="buttons">
+                    <a href="#" class="button">Apply Now</a>
+                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
+                  </div>
+                  <p class="deadline">Deadline: Oct 31,  2019</p>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="#">
+                  <img src="/images/job/company-logo-2.png" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="body">
+                <div class="content">
+                  <h4><a href="">Project Manager</a></h4>
+                  <div class="info">
+                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Degoin</a></span>
+                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>San Francisco</a></span>
+                    <span class="job-type part-time"><a href="#"><i data-feather="clock"></i>Part Time</a></span>
+                  </div>
+                </div>
+                <div class="more">
+                  <div class="buttons">
+                    <a href="#" class="button">Apply Now</a>
+                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
+                  </div>
+                  <p class="deadline">Deadline: Oct 31,  2019</p>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="#">
+                  <img src="/images/job/company-logo-8.png" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="body">
+                <div class="content">
+                  <h4><a href="">Restaurant Team Member - Crew </a></h4>
+                  <div class="info">
+                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Geologitic</a></span>
+                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>New Orleans</a></span>
+                    <span class="job-type temporary"><a href="#"><i data-feather="clock"></i>Temporary</a></span>
+                  </div>
+                </div>
+                <div class="more">
+                  <div class="buttons">
+                    <a href="#" class="button">Apply Now</a>
+                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
+                  </div>
+                  <p class="deadline">Deadline: Oct 31,  2019</p>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="#">
+                  <img src="/images/job/company-logo-9.png" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="body">
+                <div class="content">
+                  <h4><a href="">Nutrition Advisor</a></h4>
+                  <div class="info">
+                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Theoreo</a></span>
+                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>New York City</a></span>
+                    <span class="job-type full-time"><a href="#"><i data-feather="clock"></i>Full Time</a></span>
+                  </div>
+                </div>
+                <div class="more">
+                  <div class="buttons">
+                    <a href="#" class="button">Apply Now</a>
+                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
+                  </div>
+                  <p class="deadline">Deadline: Oct 31,  2019</p>
+                </div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="thumb">
+                <a href="#">
+                  <img src="/images/job/company-logo-3.png" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="body">
+                <div class="content">
+                  <h4><a href="">Land Development Marketer</a></h4>
+                  <div class="info">
+                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Realouse</a></span>
+                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>Washington, D.C.</a></span>
+                    <span class="job-type freelance"><a href="#"><i data-feather="clock"></i>Freelance</a></span>
+                  </div>
+                </div>
+                <div class="more">
+                  <div class="buttons">
+                    <a href="#" class="button">Apply Now</a>
+                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
+                  </div>
+                  <p class="deadline">Deadline: Oct 31,  2019</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jobs End -->
+
+    '{% include 'common/call-to-action.html.twig' %}
 {% endblock %}

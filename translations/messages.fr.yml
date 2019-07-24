@@ -30,7 +30,7 @@ layout:
 home:
   title: "%name%: Recrutez, trouvez votre emploi au Sénégal"
   banner_title: "Plus de %x% offres d'emploi"
-  banner_text: "Créez un compte gratuitement pour trouver des milliers d'employés et de carrières autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
+  banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
   add_resume: "Ajoutez votre CV" # Upload a Resume
 
 job:
@@ -38,6 +38,34 @@ job:
   by_category: Emploi par métier # Job Category
   list:
     title: Offres d'emploi
+  save: Enregistrer # Save Job
+  apply_online: Candidater en ligne # Apply Online
+  send_email: "Envoyer un email" # Email Job
+  summary: En resumé 
+  published_on: "Publié le: " # Published on# Job Summary
+  vacancy: "Poste vaccant: "
+  contract_type: "Type de contrat: " # Employment Status
+  experience: "Expérience: "
+  region: "Region: "
+  salary: "Salaire: " # Salary
+  gender: "Sexe: " # Gender
+  deadline: "Date limite: " # Application Deadline
+  share: Partager
+  print: Imprimer
+  report: Signaler
+  location: Lieu de travail # Job Location
+  description: "Description du poste" # Job Description
+  responsibilities: Responsibilités # Responsibilities
+  education_xp: "Éducation & Expérience: " # "Education + Experience"
+  simillar: "Offres similaires" # Simillar Jobs
+  browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
+
+company:
+  about: "À propos de la companie" # About the Company
+  name: "Nom: " # Company Name
+  address: "Adresse: "
+  website: "Site web: "
+  description: "Description: "
 
 # User account
 user:
