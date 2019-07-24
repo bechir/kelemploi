@@ -351,15 +351,6 @@ class Application
         return $this;
     }
 
-    // /
-    //   @ORM\PrePersist
-    //   @ORM\PreUpdate
-    //  /
-    // public function slugify()
-    // {
-    //     $this->slug = Slugger::slugify($this->jobTitle . '-' . $this->workTime . $this->id);
-    // }
-
     public function getStatus(): ?string
     {
         return $this->status;
