@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/html5-simple-date-input-polyfill.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/dashboard.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('employer.breadcrumb') }}
+
+    <div class="alice-bg section-padding-bottom">
+        <div class="container no-gliters">
+            <div class="row no-gliters">
+                <div class="col">
+                    <div class="dashboard-container">
+                        <div class="dashboard-content-wrapper {% block wrapper_class %}{% endblock %}">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                        {% include 'employer/dashboard-sidebar.html.twig' with {active: active, company: company} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('assets/js/html5-simple-date-input-polyfill.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
+    <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
+    <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
+{% endblock %}

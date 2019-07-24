@@ -39,6 +39,8 @@ job:
   by_category: Emploi par métier # Job Category
   list:
     title: Offres d'emploi
+  new:
+    title: "Poster une nouvelle offre d'emploi"
   save: Enregistrer # Save Job
   apply_online: Candidater en ligne # Apply Online
   send_email: "Envoyer un email" # Email Job
@@ -68,6 +70,16 @@ company:
   website: "Site web: "
   description: "Description: "
 
+employer:
+  breadcrumb: "Tableau de bord"
+  dashboard: "Tableau de bord"
+  edit_profile: "Modifier le profil"
+  manage_jobs: "Gèrer les offres"
+  manage_candidates: "Gèrer les candidats"
+  message: "Message"
+  shortlisted_resumes: "CV présélectionnés"
+  post_new_job: "Ajouter une offre d'emploi"
+
 call_to_action:
   title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
   body: "Ajoutez votre CV pour trouver rapidement un emploi. Ou créez une offre pour trouver facilement des candidats."
@@ -81,6 +93,9 @@ user:
   logout:  Déconnexion # Log Out
   login: Connexion # Sign up
   register: Inscription # Sign in
+  delete_account:
+    title: Supprimer le compte # Delete Profile
+    confirm_text: "Êtes vous de vouloir supprimer votre compte? Cette action est irréversible!" # "Are you sure! You want to delete your profile. This can't be undone!"
 
 login:
   title: Connnectez vous
@@ -116,6 +131,7 @@ form:
   submit: Envoyer
   enter_keywords: "Entrez les mots clés"
   password: Mot de passe
+  post_job: "Poster l'offre" # Post Your Job
 
 faq:
   candidate: Candidat
@@ -131,6 +147,11 @@ privacy:
   login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
 
 word:
+  cancel: Annuler
+  delete: Supprimer
   category: Catégorie
   region: Région
   or: Ou
+
+text:
+  accepd_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

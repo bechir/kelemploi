@@ -8,6 +8,7 @@ use App\Form\ApplicationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Entity\Company;
 
 class ApplicationController extends AbstractController
 {
@@ -32,8 +33,10 @@ class ApplicationController extends AbstractController
             ]);
         }
 
-        return $this->render('application/create.html.twig', [
-            'form' => $form->createView()
+        return $this->render('employer/post-job.html.twig', [
+            'form' => $form->createView(),
+            'company' => null,
+            'active' => 'post-job'
         ]);
     }
 

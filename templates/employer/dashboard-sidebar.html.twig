@@ -1,0 +1,97 @@
+<div class="dashboard-sidebar">
+    <div class="company-info">
+        <div class="thumb">
+            <img alt="" class="img-fluid" src="/dashboard/images/company-logo.png">
+        </div>
+        <div class="company-body">
+            <h5>A Company Inc</h5>
+            <span>@{{ app.user.username }}</span>
+        </div>
+    </div>
+    <div class="profile-progress">
+        <div class="progress-item">
+            <div class="progress-head">
+                <p class="progress-on">Profile</p>
+            </div>
+            <div class="progress-body">
+                <div class="progress">
+                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                </div>
+                <p class="progress-to">70%</p>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-menu">
+        <ul>
+            <li {% if active == 'dashboard' %}class="active"{% endif %}>
+                <i class="fas fa-home"></i>
+                <a href="employer-dashboard.html">{{ 'employer.dashboard'|trans }}</a>
+            </li>
+            <li {% if active == 'edit-profile' %}class="active"{% endif %}>
+                <i class="fas fa-user"></i>
+                <a href="employer-dashboard-edit-profile.html">{{ 'employer.edit_profile'|trans }}</a>
+            </li>
+            <li {% if active == 'manage-job' %}class="active"{% endif %}>
+                <i class="fas fa-briefcase"></i>
+                <a href="employer-dashboard-manage-job.html">{{ 'employer.manage_jobs'|trans }}</a>
+            </li>
+            <li {% if active == 'manage-candidate' %}class="active"{% endif %}>
+                <i class="fas fa-users"></i>
+                <a href="employer-dashboard-manage-candidate.html">{{ 'employer.manage_candidates'|trans }}</a>
+            </li>
+            <li {% if active == 'shortlisted' %}class="active"{% endif %}>
+                <i class="fas fa-heart"></i>
+                <a href="{{ path('application_create') }}">{{ 'employer.shortlisted_resumes'|trans }}</a>
+            </li>
+            <li {% if active == 'post-job' %}class="active"{% endif %}>
+                <i class="fas fa-plus-square"></i>
+                <a href="employer-dashboard-post-job.html">{{ 'employer.post_new_job'|trans }}</a>
+            </li>
+            <li {% if active == 'message' %}class="active"{% endif %}>
+                <i class="fas fa-comment"></i>
+                <a href="employer-dashboard-message.html">{{ 'employer.message'|trans }}</a>
+            </li>
+            <li {% if active == 'pricing' %}class="active"{% endif %}>
+                <i class="fas fa-calculator"></i>
+                <a href="employer-dashboard-pricing.html">{{ 'layout.pricing'|trans }}</a>
+            </li>
+        </ul>
+        <ul class="delete">
+            <li>
+                <i class="fas fa-power-off"></i>
+                <a href="employer-dashboard-post-job.html#">{{ 'user.logout'|trans }}</a>
+            </li>
+            <li>
+                <i class="fas fa-trash-alt"></i>
+                <a data-target="#modal-delete" data-toggle="modal" href="employer-dashboard-post-job.html#">{{ 'user.delete_account.title'|trans }}</a>
+            </li>
+        </ul>
+        <!-- Modal -->
+        <div aria-hidden="true" class="modal fade modal-delete" id="modal-delete" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4>
+                            <i data-feather="trash-2"></i>{{ 'user.delete_account.title'|trans }}</h4>
+                        <p>{{ 'user.delete_account.confirm_text'|trans }}</p>
+                        <form action="employer-dashboard-post-job.html#">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Enter password" type="password">
+                            </div>
+                            <div class="buttons">
+                                <button class="delete-button">{{ 'word.detele'|trans }}</button>
+                                <button class="">{{ 'word.cancel'|trans }}</button>
+                            </div>
+                            <div class="form-group form-check">
+                                <input checked="" class="form-check-input" type="checkbox">
+                                <label class="form-check-label">
+                                    {{ 'text.accept_terms'|trans({'%terms_url%': path('terms_conditions'), '%privacy_url%': path('privacy')})|raw }}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

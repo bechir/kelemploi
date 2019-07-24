@@ -1,0 +1,9 @@
+{% extends 'employer/base.html.twig' %}
+
+{% block title %}{{ 'job.new.title'|trans }}{% endblock %}
+
+{% block content %}
+    
+    {% include 'application/form.html.twig' with {form: form, company: company} %}
+
+{% endblock %}

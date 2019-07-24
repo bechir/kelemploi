@@ -14,28 +14,9 @@ class DateIntervalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start', TextType::class, [
-                'required' => false,
-            ])
             ->add('end', TextType::class, [
                 'required' => false,
             ])
-        ;
-
-        $builder->get('start')
-            ->addModelTransformer(new CallbackTransformer(
-                  function ($startAsDate) {
-                      return $startAsDate ? $startAsDate->format('m/d/Y') : '';
-                  },
-
-                  function ($startAsString) {
-                      if (empty($startAsString)) {
-                          return null;
-                      } else {
-                          return \DateTime::createFromFormat('m/d/Y', $startAsString);
-                      }
-                  }
-            ))
         ;
 
         $builder->get('end')
