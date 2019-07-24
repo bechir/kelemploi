@@ -27,6 +27,15 @@ layout:
   create_account: Créer un compte
   copyright: Copyright %name% %date%, tout droit réservé # Copyright %name% %date%, All right reserved
 
+home:
+  title: "%name%: Recrutez, trouvez votre emploi au Sénégal"
+  banner_title: "Plus de %x% offres d'emploi"
+  banner_text: "Créez un compte gratuitement pour trouver des milliers d'employés et de carrières autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
+  add_resume: "Ajoutez votre CV" # Upload a Resume
+
+job:
+  search: "Recherchez" # Search Job
+  by_category: Emploi par catégorie # Job Category
 
 # User account
 user:
@@ -63,6 +72,7 @@ form:
   subject: Sujet
   message: Message
   submit: Envoyer
+  enter_keywords: "Entrez les mots clés"
 
 faq:
   candidate: Candidat
@@ -76,3 +86,7 @@ faq:
 
 privacy:
   login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
+
+word:
+  category: Catégorie
+  region: Région

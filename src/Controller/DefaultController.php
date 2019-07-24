@@ -6,13 +6,20 @@ use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Region;
+use App\Entity\JobCategory;
 
 class DefaultController extends Controller
 {
     public function index(Request $request): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $regions = $em->getRepository(Region::class)->findAll();
+        $categories = $em->getRepository(JobCategory::class)->findAll();
+        
         return $this->render('default/index.html.twig', [
-            'stats' => $this->getStats()
+            'regions' => $regions,
+            'categories' => $categories
         ]);
     }
 

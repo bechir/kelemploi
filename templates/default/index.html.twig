@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ 'home.title'|trans({'%name%': website.name}) }}{% endblock %}
+
 {% block stylesheets %}
         <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
@@ -17,9 +19,9 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-              <h1>58,246 Job Listed</h1>
-              <p>Create free account to find thousands Jobs, Employment & Career Opportunities around you!</p>
-              <a href="add-resume.html" class="button">Upload Resume</a>
+              <h1>{{ 'home.banner_title'|trans({'%x%': '58,246'}) }}</h1>
+              <p>{{ 'home.banner_text'|trans }}</p>
+              <a href="add-resume.html" class="button">{{ 'home.add_resume'|trans }}</a>
             </div>
           </div>
         </div>
@@ -32,66 +34,37 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="searchAndFilter-block-3">
-              <div class="searchAndFilter-3">
-                <form action="" class="search-form">
-                  <div class="keyword">
-                    <label>What?</label>
-                    <input type="text" placeholder="Enter Your Keywords">
-                  </div>
-                  <div class="location-input">
-                    <label>Where?</label>
-                    <select class="selectpicker" id="search-location">
-                      <option value="" selected>All Locations</option>
-                      <option value="california">California</option>
-                      <option value="las-vegas">Las Vegas</option>
-                      <option value="new-work">New Work</option>
-                      <option value="carolina">Carolina</option>
-                      <option value="chicago">Chicago</option>
-                      <option value="silicon-vally">Silicon Vally</option>
-                      <option value="washington">Washington DC</option>
-                      <option value="neveda">Neveda</option>
-                    </select>
-                  </div>
-                  <div class="category-input">
-                    <label>Category</label>
-                    <select class="selectpicker" id="search-category">
-                      <option value="" selected>All Categories</option>
-                      <option value="real-state">Real State</option>
-                      <option value="vehicales">Vehicales</option>
-                      <option value="electronics">Electronics</option>
-                      <option value="beauty">Beauty</option>
-                      <option value="furnitures">Furnitures</option>
-                    </select>
-                  </div>
-                  <button class="button primary-bg"><i class="fas fa-search"></i></button>
+            <div class="searchAndFilter-block">
+              <div class="searchAndFilter">
+                <form action="{{ path('applications_list') }}" class="search-form">
+                  <input type="text" placeholder="{{ 'form.enter_keywords'|trans }}">
+                  <select class="selectpicker" id="search-location">
+                    <option value="" selected>{{ 'word.region'|trans }}</option>
+                    {% for region in regions %}
+                      <option value="{{ region.id }}">{{ region.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <select class="selectpicker" id="search-category">
+                    <option value="" selected>{{ 'word.category'|trans }}</option>
+                    {% for category in categories %}
+                      <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <button class="button primary-bg"><i class="fas fa-search"></i>{{ 'job.search'|trans }}</button>
                 </form>
                 <div class="filter-categories">
-                  <h4><i data-feather="align-left"></i>Job Category</h4>
+                  <h4>{{ 'job.by_category'|trans }}</h4>
                   <ul>
-                    <li><a href="job-listing.html">Accounting / Finance <span>(233)</span></a></li>
-                    <li><a href="job-listing.html">Education <span>(46)</span></a></li>
-                    <li><a href="job-listing.html">Design & Creative <span>(156)</span></a></li>
-                    <li><a href="job-listing.html">Health Care <span>(98)</span></a></li>
-                    <li><a href="job-listing.html">Engineer & Architects <span>(188)</span></a></li>
-                    <li><a href="job-listing.html">Marketing & Sales <span>(124)</span></a></li>
-                    <li><a href="job-listing.html">Garments / Textile <span>(584)</span></a></li>
-                    <li><a href="job-listing.html">Customer Support <span>(233)</span></a></li>
-                    <li><a href="job-listing.html">Digital Media <span>(15)</span></a></li>
-                    <li><a href="job-listing.html">Telecommunication <span>(03)</span></a></li>
-                  </ul>
-                </div>
-                <div class="filter-location">
-                  <h4><i data-feather="map-pin"></i>Location Filter</h4>
-                  <ul>
-                    <li><a href="job-listing.html">New York City <span>(233)</span></a></li>
-                    <li><a href="job-listing.html">Washington, D.C <span>(46)</span></a></li>
-                    <li><a href="job-listing.html">Chicago <span>(156)</span></a></li>
-                    <li><a href="job-listing.html">San Francisco <span>(98)</span></a></li>
-                    <li><a href="job-listing.html">Los Angeles <span>(188)</span></a></li>
-                    <li><a href="job-listing.html">Boston <span>(124)</span></a></li>
-                    <li><a href="job-listing.html">Seattle <span>(584)</span></a></li>
-                    <li><a href="job-listing.html">New Orleans <span>(233)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="bar-chart-2"></i>Accounting / Finance <span>(233)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="edit-3"></i>Education <span>(46)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="feather"></i>Design & Creative <span>(156)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="briefcase"></i>Health Care <span>(98)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="package"></i>Engineer & Architects <span>(188)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="pie-chart"></i>Marketing & Sales <span>(124)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="command"></i>Garments / Textile <span>(584)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="globe"></i>Customer Support <span>(233)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="headphones"></i>Digital Media <span>(15)</span></a></li>
+                    <li><a href="{{ path('applications_list') }}"><i data-feather="radio"></i>Telecommunication <span>(03)</span></a></li>
                   </ul>
                 </div>
               </div>
