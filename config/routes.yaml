@@ -58,3 +58,11 @@ how_it_work:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+pricing:
+  path: /{_locale}/pricing
+  controller: App\Controller\DefaultController::pricing
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
