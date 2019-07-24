@@ -23,7 +23,7 @@ class CVFile implements \Serializable
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="products", fileNameProperty="src")
+     * @Vich\UploadableField(mapping="resume", fileNameProperty="src")
      */
     private $cvFile;
 

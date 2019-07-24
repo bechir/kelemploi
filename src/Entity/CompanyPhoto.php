@@ -8,10 +8,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AvatarRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyPhotoRepository")
  * @Vich\Uploadable
  */
-class Avatar implements \Serializable
+class CompanyPhoto implements \Serializable
 {
     /**
      * @ORM\Id()
@@ -23,9 +23,9 @@ class Avatar implements \Serializable
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="user", fileNameProperty="src")
+     * @Vich\UploadableField(mapping="company", fileNameProperty="src")
      */
-    private $avatarFile;
+    private $companyPhotoFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -42,16 +42,16 @@ class Avatar implements \Serializable
         return $this->id;
     }
 
-    public function getAvatarFile(): ?File
+    public function getCompanyPhotoFile(): ?File
     {
-        return $this->avatarFile;
+        return $this->companyPhotoFile;
     }
 
-    public function setAvatarFile(?File $avatarFile = null): self
+    public function setCompanyPhotoFile(?File $companyPhotoFile = null): self
     {
-        $this->avatarFile = $avatarFile;
+        $this->companyPhotoFile = $companyPhotoFile;
 
-        if ($avatarFile !== null) {
+        if ($companyPhotoFile !== null) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -89,14 +89,14 @@ class Avatar implements \Serializable
     public function validate(ExecutionContextInterface $context)
     {
         // do your own validation
-        if (! in_array($this->avatarFile->getMimeType(), array(
+        if (! in_array($this->companyPhotoFile->getMcmeType(), array(
             'image/jpeg',
             'image/jpg',
             'image/png'
         ))) {
             $context
                 ->buildViolation('Erreur de format (Insérer uniquement une image au format jpg ou png)')
-                ->atPath('avatarFile')
+                ->atPath('companyPhotoFile')
                 ->addViolation();
         }
     }
@@ -108,10 +108,10 @@ class Avatar implements \Serializable
     public function checkSize(ExecutionContextInterface $context)
     {
         // do your own validation
-        if ($this->avatarFile->getSize() > '500000') {
+        if ($this->companyPhotoFile->getSizc() > '500000') {
             $context
                 ->buildViolation('Veuillez uploader un fichier inférieur à 5M.')
-                ->atPath('avatarFile')
+                ->atPath('companyPhotoFile')
                 ->addViolation();
         }
     }
