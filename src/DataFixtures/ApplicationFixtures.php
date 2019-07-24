@@ -9,7 +9,6 @@ use Faker\Provider\Lorem;
 use Faker\Provider\DateTime;
 use Faker\Provider\fr_FR\Text;
 use Faker\Provider\fr_FR\Company;
-use Faker\Provider\fr_FR\Person;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
