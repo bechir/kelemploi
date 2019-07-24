@@ -5,13 +5,13 @@
             <div class="col">
                 <div class="call-to-action-2">
                     <div class="call-to-action-content">
-                        <h2>For Find Your Dream Job or Candidate</h2>
-                        <p>Add resume or post a job. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>
+                        <h2>{{ 'call_to_action.title'|trans }}</h2>
+                        <p>{{ 'call_to_action.body'|trans }}</p>
                     </div>
                     <div class="call-to-action-button">
-                        <a class="button" href="add-resume.html">Add Resume</a>
-                        <span>Or</span>
-                        <a class="button" href="{{ path('application_create') }}">Post A Job</a>
+                        <a class="button" href="{{ path('add_resume') }}">{{ 'home.add_resume'|trans }}</a>
+                        <span>{{ 'word.or'|trans }}</span>
+                        <a class="button" href="{{ path('application_create') }}">{{ 'layout.post_job'|trans }}</a>
                     </div>
                 </div>
             </div>

@@ -67,6 +67,10 @@ company:
   website: "Site web: "
   description: "Description: "
 
+call_to_action:
+  title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
+  body: "Ajoutez votre CV pour trouver rapidement un emploi. Ou créez une offre pour trouver facilement des candidats."
+
 # User account
 user:
   account: Compte
@@ -128,3 +132,4 @@ privacy:
 word:
   category: Catégorie
   region: Région
+  or: Ou

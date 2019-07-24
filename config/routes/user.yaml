@@ -14,3 +14,11 @@ dashboard:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+add_resume:
+  path: /{_locale}/add-resume
+  controller: App\Controller\UserController::addResume
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
