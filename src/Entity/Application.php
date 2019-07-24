@@ -142,12 +142,12 @@ class Application
         return $this;
     }
 
-    public function getInterlocutor(): ?User
+    public function getInterlocutor(): ?string
     {
         return $this->interlocutor;
     }
 
-    public function setInterlocutor(?User $interlocutor): self
+    public function setInterlocutor(?string $interlocutor): self
     {
         $this->interlocutor = $interlocutor;
 

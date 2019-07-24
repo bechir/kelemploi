@@ -7,9 +7,13 @@ use App\Entity\Application;
 use App\Form\ApplicationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ApplicationController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_USER")
+     */
     public function create(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();

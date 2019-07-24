@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ 'user.sign_in_to_account'|trans }}{% endblock %}
+{% block title %}{{ 'login.title'|trans }}{% endblock %}
 
 {% block header %}
   <header class="header-2 access-page-nav">
@@ -31,7 +31,7 @@
                               <svg class="feather feather-user" fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                   <circle cx="12" cy="7" r="4"></circle>
-                              </svg>Login</h5>
+                              </svg>{{ 'login.title'|trans }}</h5>
                       </div>
                       <form action="{{ path("fos_user_security_check") }}" method="post">
                           {% if error %}
@@ -42,7 +42,7 @@
                           </div>
                           {% endif %}
                           <div class="form-group">
-                              <input class="form-control" placeholder="Email Address" name="_username" type="email">
+                              <input class="form-control" placeholder="Username or email address" name="_username" type="text">
                           </div>
                           <div class="form-group">
                               <input class="form-control" placeholder="Password" name="_password" type="password">

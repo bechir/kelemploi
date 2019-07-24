@@ -38,6 +38,8 @@ user:
   login: Connexion # Sign up
   register: Inscription # Sign in
 
+login:
+  title: Connnectez vous
 
 # Notifications
 notification:
