@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i data-feather="user"></i>Login</h5>
+                        <i data-feather="user"></i>{{ 'login.title'|trans }}</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -13,34 +13,34 @@
                 <div class="modal-body">
                     <form action="{{ path("fos_user_security_check") }}" method="post">
                         <div class="form-group">
-                            <input class="form-control" name="_username" placeholder="Email Address" type="email">
+                            <input class="form-control" name="_username" placeholder="{{ 'login.username'|trans }}" type="text">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" name="_password" placeholder="Password" type="password">
+                            <input class="form-control" name="_password" placeholder="{{ 'form.password'|trans }}" type="password">
                         </div>
                         <div class="more-option">
                             <div class="mt-0 terms">
                                 <input class="custom-radio" id="radio-4" name="_remember_me" type="checkbox">
                                 <label for="radio-4">
                                     <span class="dot"></span>
-                                    Remember Me
+                                    {{ 'login.remember_me'|trans }}
                                 </label>
                             </div>
-                            <a href="{{ path('fos_user_resetting_request') }}">Forget Password?</a>
+                            <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forget_password'|trans }}</a>
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                        <button class="button primary-bg btn-block">Login</button>
+                        <button class="button primary-bg btn-block">{{ 'login.submit_btn'|trans }}</button>
                     </form>
                     <div class="shortcut-login">
-                        <span>Or connect with</span>
+                        <span>{{ 'login.connect_with'|trans }}</span>
                         <div class="buttons">
                             <a class="facebook" href="">
                                 <i class="fab fa-facebook-f"></i>Facebook</a>
                             <a class="google" href="">
                                 <i class="fab fa-google"></i>Google</a>
                         </div>
-                        <p>Don't have an account?
-                            <a href="">Register</a>
+                        <p>{{ 'login.no_account'|trans }}
+                            <a href="{{ path('fos_user_registration_register') }}">{{ 'login.register'|trans }}</a>
                         </p>
                     </div>
                 </div>

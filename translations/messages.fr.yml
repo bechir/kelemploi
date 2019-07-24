@@ -51,6 +51,13 @@ user:
 
 login:
   title: Connnectez vous
+  no_account: Vous n'avez pas de compte?
+  register: Inscrivez vous
+  connect_with: Ou connectez vous avec
+  submit_btn: Se connecter
+  remember_me: Se souvenir de moi
+  forget_password: Mot de passe oublié?
+  username: Nom d'utilisateur ou e-mail
 
 # Notifications
 notification:
@@ -75,6 +82,7 @@ form:
   message: Message
   submit: Envoyer
   enter_keywords: "Entrez les mots clés"
+  password: Mot de passe
 
 faq:
   candidate: Candidat

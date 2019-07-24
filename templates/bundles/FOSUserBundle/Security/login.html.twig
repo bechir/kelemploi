@@ -42,36 +42,36 @@
                           </div>
                           {% endif %}
                           <div class="form-group">
-                              <input class="form-control" placeholder="Username or email address" name="_username" type="text">
+                              <input class="form-control" placeholder="{{ 'login.username'|trans }}" name="_username" type="text">
                           </div>
                           <div class="form-group">
-                              <input class="form-control" placeholder="Password" name="_password" type="password">
+                              <input class="form-control" placeholder="{{ 'form.password'|trans }}" name="_password" type="password">
                           </div>
                           <div class="more-option">
                               <div class="mt-0 terms">
-                                  <input class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox">
+                                  <input class="custom-radio" id="radio-4" name="_remember_me" type="checkbox">
                                   <label for="radio-4">
                                       <span class="dot"></span>
-                                      Remember Me
+                                      {{ 'login.remember_me'|trans }}
                                   </label>
                               </div>
-                              <a href="login.html#">Forget Password?</a>
+                              <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forget_password'|trans }}</a>
                           </div>
                           {% if csrf_token %}
                               <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                           {% endif %}
-                          <button class="button primary-bg btn-block">Login</button>
+                          <button class="button primary-bg btn-block">{{ 'login.submit_btn'|trans }}</button>
                       </form>
                       <div class="shortcut-login">
-                          <span>Or connect with</span>
+                          <span>{{ 'login.connect_with'|trans }}</span>
                           <div class="buttons">
-                              <a class="facebook" href="login.html#">
+                              <a class="facebook" href="#">
                                   <i class="fab fa-facebook-f"></i>Facebook</a>
-                              <a class="google" href="login.html#">
+                              <a class="google" href="#">
                                   <i class="fab fa-google"></i>Google</a>
                           </div>
-                          <p>Don't have an account?
-                              <a href="{{ path('fos_user_registration_register') }}">Register</a>
+                          <p>{{ 'login.no_account'|trans }}
+                              <a href="{{ path('fos_user_registration_register') }}">{{ 'login.register'|trans }}</a>
                           </p>
                       </div>
                   </div>
