@@ -11,7 +11,7 @@ class ContractTypeFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $contracts = [
-            'CDD', 'CDI', 'Stage', 'Alternance'
+            'CDD', 'CDI', 'Freelance', 'Stage', 'Alternance'
         ];
 
         foreach ($contracts as $contract) {

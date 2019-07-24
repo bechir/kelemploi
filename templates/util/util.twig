@@ -1,0 +1,12 @@
+{% macro jobTypeClass(contract) %}
+    {% set class = contract|lower %}
+
+    {% if class == 'cdd' or class == 'stage' %}
+        {% set class = 'temporary' %}
+    {% elseif class == 'cdi' %}
+        {% set class = 'full-time' %}
+    {% elseif class == 'alternance' %}
+        {% set class = 'part-time' %}
+    {% endif %}
+    {{ class }}
+{% endmacro %}

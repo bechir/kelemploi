@@ -73,7 +73,7 @@ class ApplicationController extends AbstractController
 
     public function list(): Response
     {
-        return $this->render('application/list-all.html.twig', [
+        return $this->render('application/listing.html.twig', [
             'list' => $this->getDoctrine()->getRepository(Application::class)->findAll()
         ]);
     }

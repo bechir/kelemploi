@@ -35,7 +35,9 @@ home:
 
 job:
   search: "Recherchez" # Search Job
-  by_category: Emploi par catégorie # Job Category
+  by_category: Emploi par métier # Job Category
+  list:
+    title: Offres d'emploi
 
 # User account
 user:
