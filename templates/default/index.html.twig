@@ -3,12 +3,12 @@
 {% block title %}{{ 'home.title'|trans({'%name%': website.name}) }}{% endblock %}
 
 {% block stylesheets %}
-        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
+  <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
 {% endblock stylesheets %}
 
 {% block main %}
@@ -21,7 +21,7 @@
             <div class="banner-content">
               <h1>{{ 'home.banner_title'|trans({'%x%': '58,246'}) }}</h1>
               <p>{{ 'home.banner_text'|trans }}</p>
-              <a href="add-resume.html" class="button">{{ 'home.add_resume'|trans }}</a>
+              <a href="{{ path('add_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
             </div>
           </div>
         </div>
@@ -93,16 +93,16 @@
 
 
 {% block javascript %}
-    {{ parent() }}
+  {{ parent() }}
 
-    <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/visible.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
-    <script src="{{ asset('assets/js/chart.js') }}"></script>
-    <script src="{{ asset('assets/js/plyr.js') }}"></script>
-    <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
+  <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('assets/js/visible.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
+  <script src="{{ asset('assets/js/chart.js') }}"></script>
+  <script src="{{ asset('assets/js/plyr.js') }}"></script>
+  <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
+  <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+  <script src="{{ asset('js/custom.js') }}"></script>
 {% endblock javascript %}
