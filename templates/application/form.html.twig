@@ -34,11 +34,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
                             {{ form_widget(form.contractType, {'attr': {'class': 'form-control'}}) }}
                             <i class="fa fa-caret-down"></i>
                         </div>
@@ -63,21 +58,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select class="form-control">
-                                <option>Qualification</option>
-                                <option>Matriculation</option>
-                                <option>Intermidiate</option>
-                                <option>Gradute</option>
-                            </select>
+                            {{ form_widget(form.minStudyLevel, {'attr': {'class': 'form-control'}}) }}
                             <i class="fa fa-caret-down"></i>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <select class="form-control">
-                                <option>Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option>H/F</option>
+                                <option>Homme</option>
+                                <option>Femme</option>
                             </select>
                             <i class="fa fa-caret-down"></i>
                         </div>
@@ -119,68 +109,33 @@
                 <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea4" placeholder="Description text here"></textarea>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label">Your Location</label>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option>Country</option>
-                                <option>USA</option>
-                                <option>United Kindom</option>
-                                <option>Spain</option>
-                                <option>France</option>
-                                <option>Germany</option>
-                            </select>
-                            <i class="fa fa-caret-down"></i>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect11">
-                                <option>City</option>
-                                <option>New Work</option>
-                                <option>Washington D.C</option>
-                                <option>California</option>
-                                <option>Las Vegas</option>
-                            </select>
-                            <i class="fa fa-caret-down"></i>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Zip Code" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Your Location" type="text">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="set-location">
-                            <h5>Pin Location</h5>
-                            <div class="contact-location" id="map-area">
-                                <div class="cp-map" data-lat="40.713355" data-lng="-74.005535" data-zoom="10" id="location"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <label class="col-md-3 col-form-label">About Company</label>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Company Name" type="text">
-                            {{ form_widget(form.company, {'attr': {'class': 'form-control', 'placeholder': 'Company Name'}}) }}
+                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'Company Name'}}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Web Address" type="text">
+                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'Web Address'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'Zip Code'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'Web Address'}}) }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            {{ form_widget(form.companyDescription, {'attr': {'class': 'form-control', 'placeholder': 'Company Description'}}) }}
+                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'Company Description'}}) }}
                         </div>
                     </div>
                 </div>

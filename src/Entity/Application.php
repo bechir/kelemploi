@@ -19,12 +19,12 @@ class Application
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company")
      */
     private $company;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $interlocutor;
 
@@ -32,6 +32,16 @@ class Application
      * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
      */
     private $postCategory;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $jobTitle;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $jobDescription;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -43,31 +53,6 @@ class Application
      * @ORM\JoinColumn(nullable=false)
      */
     private $dates;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $jobTitle;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $companyDescription;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $jobDescription;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $profile;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ContractType")
@@ -83,22 +68,12 @@ class Application
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $variable;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $workTime;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\StudyLevel")
      */
     private $minStudyLevel;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Region")
-     */
-    private $region;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Language")
@@ -130,24 +105,24 @@ class Application
         return $this->id;
     }
 
-    public function getCompany(): ?string
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
 
-    public function setCompany(?string $company): self
+    public function setCompany(?Company $company): self
     {
         $this->company = $company;
 
         return $this;
     }
 
-    public function getInterlocutor(): ?string
+    public function getInterlocutor(): ?User
     {
         return $this->interlocutor;
     }
 
-    public function setInterlocutor(?string $interlocutor): self
+    public function setInterlocutor(?User $interlocutor): self
     {
         $this->interlocutor = $interlocutor;
 
@@ -207,18 +182,6 @@ class Application
         return $this;
     }
 
-    public function getCompanyDescription(): ?string
-    {
-        return $this->companyDescription;
-    }
-
-    public function setCompanyDescription(string $companyDescription): self
-    {
-        $this->companyDescription = $companyDescription;
-
-        return $this;
-    }
-
     public function getJobDescription(): ?string
     {
         return $this->jobDescription;
@@ -227,30 +190,6 @@ class Application
     public function setJobDescription(string $jobDescription): self
     {
         $this->jobDescription = $jobDescription;
-
-        return $this;
-    }
-
-    public function getProfile(): ?string
-    {
-        return $this->profile;
-    }
-
-    public function setProfile(string $profile): self
-    {
-        $this->profile = $profile;
-
-        return $this;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
 
         return $this;
     }
@@ -279,18 +218,6 @@ class Application
         return $this;
     }
 
-    public function getVariable(): ?string
-    {
-        return $this->variable;
-    }
-
-    public function setVariable(?string $variable): self
-    {
-        $this->variable = $variable;
-
-        return $this;
-    }
-
     public function getWorkTime(): ?string
     {
         return $this->workTime;
@@ -311,18 +238,6 @@ class Application
     public function setMinStudyLevel(?StudyLevel $studyLevel): self
     {
         $this->minStudyLevel = $studyLevel;
-
-        return $this;
-    }
-
-    public function getRegion(): ?Region
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?Region $region): self
-    {
-        $this->region = $region;
 
         return $this;
     }

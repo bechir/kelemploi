@@ -55,6 +55,8 @@
                       <ul>
                         <li>{{ _app.minStudyLevel }}</li>
                         <li>2 à 3 ans d'expériences</li>
+                        <li>Fraçais: très bon niveau</li>
+                        <li>Anglais: niveau intermédiaire</li>
                       </ul>
                     </div>
                     {# <div class="other-benifit details-section">
@@ -90,6 +92,8 @@
                             {% if _app.dates.end is not null %}
                                 <li><span>{{ 'job.deadline'|trans }}</span> {{ _app.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
                             {% endif %}
+                            <li><span>Fraçais:</span> très bon niveau</li>
+                            <li><span>Anglais:</span> niveau intermédiaire</li>
                         </ul>
                       </div>
                       <div class="share-job-post">

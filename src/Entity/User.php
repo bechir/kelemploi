@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -72,12 +74,18 @@ class User extends BaseUser implements EquatableInterface
      */
     private $locale;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Company", mappedBy="users")
+     */
+    private $companies;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
     {
         parent::__construct();
         $this->locale = 'FR';
+        $this->companies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -244,5 +252,33 @@ class User extends BaseUser implements EquatableInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompanies(): Collection
+    {
+        return $this->companies;
+    }
+
+    public function addCompany(Company $company): self
+    {
+        if (!$this->companies->contains($company)) {
+            $this->companies[] = $company;
+            $company->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompany(Company $company): self
+    {
+        if ($this->companies->contains($company)) {
+            $this->companies->removeElement($company);
+            $company->removeUser($this);
+        }
+
+        return $this;
     }
 }
