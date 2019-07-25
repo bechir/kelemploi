@@ -85,7 +85,7 @@
                 {{ util.formRequired() }}
             </label>
             <div class="col-md-9">
-                {{ form_widget(form.jobDescription, {'attr': {'class': 'tinymce-editor tinymce-editor-1', 'placeholder': 'form.job.summary'|trans }}) }}
+                {{ form_widget(form.jobDescription, {'attr': {'class': 'tinymce-editor tinymce-editor-1', 'placeholder': 'form.job.summary' }}) }}
             </div>
         </div>
         <div class="row">
@@ -112,39 +112,39 @@
             <label class="col-md-3 col-form-label">
                 {{ 'company.about'|trans }}
                 {{ util.formRequired() }}
-                </label>
+            </label>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'form.company.name'|trans }}) }}
+                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'form.company.name' }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address'|trans }}) }}
+                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address' }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip'|trans }}) }}
+                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip' }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website'|trans }}) }}
+                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website' }}) }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description'|trans }}) }}
+                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description' }}) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Sélectionnez un plan</label>
+            <label class="col-md-3 col-form-label">{{ 'pricing.select_plan'|trans }}</label>
             <div class="col-md-9">
                 <div class="package-select">
                     <div class="package-select-inputs">
@@ -152,32 +152,32 @@
                             <input checked class="custom-radio" id="radio_1" name="my-radio" type="radio" value="1">
                             <label for="radio_1">
                                 <span class="dot"></span>
-                                <span class="package-type">Gratuit</span>
-                                00 FCFA
+                                <span class="package-type">{{ 'pricing.free.label'|trans }}</span>
+                                {{ 'pricing.free.price'|trans }}
                             </label>
                         </div>
                         <div class="form-group">
                             <input class="custom-radio" id="radio_2" name="my-radio" type="radio" value="1">
                             <label for="radio_2">
                                 <span class="dot"></span>
-                                <span class="package-type">Pro</span>
-                                9.000 XOF
+                                <span class="package-type">{{ 'pricing.pro.label'|trans }}</span>
+                                {{ 'pricing.pro.price'|trans }}
                             </label>
                         </div>
                         <div class="form-group">
                             <input class="custom-radio" id="radio_3" name="my-radio" type="radio" value="1">
                             <label for="radio_3">
                                 <span class="dot"></span>
-                                <span class="package-type">Entreprise</span>
-                                25.000 XOF
+                                <span class="package-type">{{ 'pricing.advanced.label'|trans }}</span>
+                                {{ 'pricing.advanced.price'|trans }}
                             </label>
                         </div>
                     </div>
                     <div class="payment-method">
                         <a class="credit active" href="employer-dashboard-post-job.html#">
-                            <i class="fas fa-credit-card"></i>Credit Card</a>
+                            <i class="fas fa-credit-card"></i>{{ 'payment.credit_card'|trans }}</a>
                         <a class="paypal" href="employer-dashboard-post-job.html#">
-                            <i class="fab fa-cc-paypal"></i>PayPal</a>
+                            <i class="fab fa-cc-paypal"></i>{{ 'payment.paypal'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -196,7 +196,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label"></label>
             <div class="col-md-9">
-                <button class="button">{{ 'form.job.publish'|trans }}</button>
+                <button type="submit" class="button">{{ 'form.job.publish'|trans }}</button>
             </div>
         </div>
     </div>

@@ -34,6 +34,42 @@ home:
   banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
   add_resume: "Ajoutez votre CV" # Upload a Resume
 
+# Contact page
+contact:
+  infos: Informations
+  keep_in_touch: Restez en contact avec nous
+  success: Votre message a été envoyé. Merci! # Your message has been sent. Thanks for contact.
+  error: Echec d'envoi. merci de réessayer # Something went wrong while sending. Please try leter.
+
+faq:
+  candidate: Candidat
+  employer: Employeur
+  answer_here: Votre réponse ici # Your answer here
+  faq: Questions Fréquements Posées # Frequently Asked Questions
+  ask_record: Nous répondons vite, en moins d'une heure ! # We have a record of answering everything in 3 hours of less.
+  dont_get_answer: Pas de réponse satisfaisante ? # Don’t get Answer?
+  email_us: Envoyez nous un e-mail # Email Us
+  call_us: Ou passez un appel au <span>%number%</span> # Or maybe you’d like to call us: <span>%number%</span>
+
+privacy:
+  login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
+
+pricing:
+  free:
+    label: Gratuit
+    price: 00 XOF
+  advanced:
+    label: Entreprise
+    price: 9.000 XOF
+  pro:
+    label: Pro
+    price: 25.000 XOF
+  select_plan: Sélectionnez un plan
+
+payment:
+  credit_card: Carte de crédit # Credit Card
+  paypal: PayPal
+
 job:
   search: "Recherchez" # Search Job
   by_category: Emploi par métier # Job Category
@@ -125,15 +161,6 @@ notification:
   mark_all_as_read: Marquer tous comme lus # Mark all as read
   see_all: Voir toutes les notifications # SEE ALL NOTIFICATIONS
 
-
-# Contact page
-contact:
-  infos: Informations
-  keep_in_touch: Restez en contact avec nous
-  success: Votre message a été envoyé. Merci! # Your message has been sent. Thanks for contact.
-  error: Echec d'envoi. merci de réessayer # Something went wrong while sending. Please try leter.
-
-
 # Form
 form:
   name: Nom
@@ -182,19 +209,6 @@ form:
           <li>Travailler chez soi 4 fois par mois</li>
           <li>etc.</li></ul>
         </div>
-
-faq:
-  candidate: Candidat
-  employer: Employeur
-  answer_here: Votre réponse ici # Your answer here
-  faq: Questions Fréquements Posées # Frequently Asked Questions
-  ask_record: Nous répondons vite, en moins d'une heure ! # We have a record of answering everything in 3 hours of less.
-  dont_get_answer: Pas de réponse satisfaisante ? # Don’t get Answer?
-  email_us: Envoyez nous un e-mail # Email Us
-  call_us: Ou passez un appel au <span>%number%</span> # Or maybe you’d like to call us: <span>%number%</span>
-
-privacy:
-  login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
 
 word:
   cancel: Annuler
