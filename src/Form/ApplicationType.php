@@ -9,7 +9,8 @@ use App\Entity\ {
     JobCategory,
     Region,
     Language,
-Experience
+Experience,
+JobGender
 };
 
 use Symfony\Component\Form\AbstractType;
@@ -59,6 +60,11 @@ class ApplicationType extends AbstractType
             ])
             ->add('benefits', TextareaType::class)
             ->add('responsibilities', TextareaType::class)
+            ->add('gender', EntityType::class, [
+                'class' => JobGender::class,
+                'choice_label' => 'name',
+                'choice_translation_domain' => true,
+            ])
             // ->add('requiredLanguages', EntityType::class, [
             //     'class' => Language::class,
             //     'choice_label' => 'name',

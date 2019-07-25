@@ -94,6 +94,10 @@ call_to_action:
 # User account
 user:
   account: Compte
+  gender:
+    mf: "H/F"
+    male: Homme
+    female: Femme
   my_account: Mon compte
   settings: Paramètres # Settings
   profile: Profil # Profile

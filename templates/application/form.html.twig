@@ -57,11 +57,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select class="form-control">
-                                <option>H/F</option>
-                                <option>Homme</option>
-                                <option>Femme</option>
-                            </select>
+                            {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
                             <i class="fa fa-caret-down"></i>
                         </div>
                     </div>

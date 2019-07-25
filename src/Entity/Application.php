@@ -106,6 +106,11 @@ class Application
      */
     private $responsibilities;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobGender")
+     */
+    private $gender;
+
     const FENCED  = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS  = [self::FENCED, self::ONGOING];
@@ -328,6 +333,18 @@ class Application
     public function setResponsibilities(?string $responsibilities): self
     {
         $this->responsibilities = $responsibilities;
+
+        return $this;
+    }
+
+    public function getGender(): ?JobGender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?JobGender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }
