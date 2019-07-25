@@ -632,4 +632,13 @@ $(document).ready(function() {
       $('.sidebar-menu.privacy').addClass('show').removeClass('hide')
       $('.sidebar-menu.terms').removeClass('show').addClass('hide')
     });
+
+    /**
+     * Enable bootstrap tooltip and popover
+     */
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover({
+      trigger: 'hover',
+      html: true
+    })
 })

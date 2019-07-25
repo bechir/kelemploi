@@ -92,19 +92,21 @@
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Responsibilities</label>
+            <label class="col-md-3 col-form-label">{{ 'form.job.responsibilities'|trans }}
+                <a tabindex="0" class="btn btn-link" role="button" data-toggle="popover" data-html="true" data-title="{{ 'form.job.resp_help.title'|trans }}" data-content="{{ 'form.job.resp_help.text'|trans|raw }}">
+                    <i class="fas fa-question-circle fa-lg"></i>
+                </a>
+            </label>
             <div class="col-md-9">
                 <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea2" placeholder="Responsibilities (Optional)"></textarea>
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Education</label>
-            <div class="col-md-9">
-                <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea3" placeholder="Education (Optional)"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-3 col-form-label">Other Benefits</label>
+            <label class="col-md-3 col-form-label">{{ 'form.job.other_benefits'|trans }}
+                <a tabindex="0" class="btn btn-link" role="button" data-toggle="popover" data-html="true" data-title="{{ 'form.job.benefits.title'|trans }}" data-content="{{ 'form.job.benefits.text'|trans|raw }}">
+                    <i class="fas fa-question-circle fa-lg"></i>
+                </a>
+            </label>
             <div class="col-md-9">
                 <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea4" placeholder="Description text here"></textarea>
             </div>
@@ -197,7 +199,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label"></label>
             <div class="col-md-9">
-                <button class="button">{{ 'form.post_job'|trans }}</button>
+                <button class="button">{{ 'form.job.post'|trans }}</button>
             </div>
         </div>
     </div>

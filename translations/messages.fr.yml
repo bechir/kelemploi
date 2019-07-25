@@ -131,7 +131,28 @@ form:
   submit: Envoyer
   enter_keywords: "Entrez les mots clés"
   password: Mot de passe
-  post_job: "Poster l'offre" # Post Your Job
+  job:
+    post: "Poster l'offre" # Post Your Job
+    responsibilities: "Résponsabilités"
+    other_benefits: "Avantages"
+    resp_help:
+      title: "Ce que l'employé fera..."
+      text: >
+        <div>
+          <em>Par exemple::</em>
+          <ul><li>Apporter de nouvelles idées</li>
+          <li>Faire un reporting chaque vendredi</li>
+          <li>etc.</li></ul>
+        </div>
+    benefits:
+      title: "Les avantages à travailler chez vous"
+      text: >
+        <div>
+          <em>Par exemple::</em>
+          <ul><li>Transport entièrement gratuit</li>
+          <li>Travailler chez soi 4 fois par mois</li>
+          <li>etc.</li></ul>
+        </div>
 
 faq:
   candidate: Candidat
