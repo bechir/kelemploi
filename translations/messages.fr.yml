@@ -138,6 +138,7 @@ form:
   submit: Envoyer
   enter_keywords: "Entrez les mots clés"
   password: Mot de passe
+  required_inputs: "<span class=\"text-danger\">*</span> Champs obligatoires"
   company:
     name: "Nom" # Company Name
     address: "Adresse"
@@ -151,7 +152,7 @@ form:
     publish: "Publier" # Post Your Job
     deadline: "Date limite"
     responsibilities: "Résponsabilités (Optionnel)"
-    other_benefits: "Avantages"
+    other_benefits: "Avantages (Optionnel)"
     optionnal_xp: "Expérience (Optionnel)" # Experience (Optionnal)
     optionnal_level: "Niveau d'études (Optionnel)"
     category: "Sélectionnez une catégorie"

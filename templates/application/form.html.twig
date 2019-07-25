@@ -1,6 +1,6 @@
 {{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form'}}) }}
     <div class="dashboard-section basic-info-input">
-        <h4><i data-feather="user-check"></i>Post A Job</h4>
+        <h4><i data-feather="user-check"></i>Post A Job<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
 
         {% if not form.vars.valid %}
             {% for children in form.children %}
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group datepicker">
-                            {{ form_widget(form.dates.end, {'attr': {'class': 'form-control', 'placeholder': 'form.job.deadline' }}) }}
+                            {{ form_widget(form.dates.end, {'type': 'date', 'attr': {'class': 'form-control', 'placeholder': 'form.job.deadline' }}) }}
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                 </a>
             </label>
             <div class="col-md-9">
-                <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea2" placeholder="{{ 'form.job.responsibilities'|trans }}"></textarea>
+                {{ form_widget(form.responsibilities, {'attr': {'class': 'tinymce-editor tinymce-editor-2' }}) }}
             </div>
         </div>
         <div class="row">
@@ -101,7 +101,7 @@
                 </a>
             </label>
             <div class="col-md-9">
-                <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea4" placeholder="Description text here"></textarea>
+                {{ form_widget(form.benefits, {'attr': {'class': 'tinymce-editor tinymce-editor-2' }}) }}
             </div>
         </div>
         <div class="row">

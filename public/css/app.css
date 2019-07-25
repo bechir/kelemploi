@@ -16,3 +16,7 @@
 .terms-container .terms-sidebar .sidebar-menu.hide{
     display: none;
 }
+
+.datepicker{
+    z-index: 999;
+}

@@ -96,6 +96,16 @@ class Application
      */
     private $experience;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $benefits;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $responsibilities;
+
     const FENCED  = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS  = [self::FENCED, self::ONGOING];
@@ -294,6 +304,30 @@ class Application
     public function setExperience(?Experience $experience): self
     {
         $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getBenefits(): ?string
+    {
+        return $this->benefits;
+    }
+
+    public function setBenefits(?string $benefits): self
+    {
+        $this->benefits = $benefits;
+
+        return $this;
+    }
+
+    public function getResponsibilities(): ?string
+    {
+        return $this->responsibilities;
+    }
+
+    public function setResponsibilities(?string $responsibilities): self
+    {
+        $this->responsibilities = $responsibilities;
 
         return $this;
     }

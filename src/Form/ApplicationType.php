@@ -57,6 +57,8 @@ class ApplicationType extends AbstractType
                 'choice_translation_domain' => true,
                 'placeholder' => 'form.job.optionnal_xp'
             ])
+            ->add('benefits', TextareaType::class)
+            ->add('responsibilities', TextareaType::class)
             // ->add('requiredLanguages', EntityType::class, [
             //     'class' => Language::class,
             //     'choice_label' => 'name',
