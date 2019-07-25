@@ -354,6 +354,9 @@ class Application
      */
     public function setStartDate()
     {
+        if(!$this->dates)
+            $this->dates = new DateInterval();
+
         $this->dates->setStart(new \DateTime());
     }
 }

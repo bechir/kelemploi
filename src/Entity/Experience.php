@@ -40,6 +40,6 @@ class Experience
 
     public function __toString()
     {
-        return $this->name . '_p';
+        return $this->name;
     }
 }

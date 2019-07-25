@@ -51,7 +51,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * @var Avatar
      * 
-     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", orphanRemoval=true, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $avatar;
@@ -201,6 +201,11 @@ class User extends BaseUser implements EquatableInterface
         $this->company = $company;
 
         return $this;
+    }
+
+    public function haveCompany() : bool
+    {
+        return null !== $this->company;
     }
 
     /**

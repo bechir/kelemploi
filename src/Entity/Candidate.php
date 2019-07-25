@@ -55,7 +55,7 @@ class Candidate
     private $languages;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CVFile", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\CVFile", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $cv;
 

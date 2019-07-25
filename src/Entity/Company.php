@@ -51,7 +51,7 @@ class Company
     /**
      * @var CompanyPhoto
      * 
-     * @ORM\OneToOne(targetEntity="App\Entity\CompanyPhoto", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\CompanyPhoto", orphanRemoval=true, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $photo;

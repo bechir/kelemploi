@@ -13,16 +13,29 @@ use App\Entity\Company;
 class ApplicationController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CUSTOMER")
      */
     public function create(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
+        
+        $user = $this->getUser();
+
+        if($user->haveCompany()) {
+            $form->remove('company');
+        }
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            
+            $app->setInterlocutor($user);
+            
+            if($user->haveCompany())
+                $app->setCompany($user->getCompany());
+            
             $em->persist($app);
 
             $em->flush();
@@ -35,7 +48,7 @@ class ApplicationController extends AbstractController
 
         return $this->render('employer/post-job.html.twig', [
             'form' => $form->createView(),
-            'company' => null,
+            'company' => $user->getCompany(),
             'active' => 'post-job'
         ]);
     }

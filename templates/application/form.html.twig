@@ -113,40 +113,42 @@
                 {{ 'company.about'|trans }}
                 {{ util.formRequired() }}
             </label>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'form.company.name' }}) }}
+            {% if company is null %}
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'form.company.name' }}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address' }}) }}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address' }}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip' }}) }}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip' }}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.region' }}) }}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.region' }}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {{ form_widget(form.company.website, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website' }}) }}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ form_widget(form.company.website, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website' }}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description' }}) }}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description' }}) }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
         <div class="row">
             <label class="col-md-3 col-form-label">{{ 'pricing.select_plan'|trans }}</label>

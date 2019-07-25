@@ -81,7 +81,9 @@
                             {% if _app.experience %}
                               <li><span>{{ 'job.experience'|trans }}</span>{{ _app.experience|trans }}</li>
                             {% endif %}
-                            <li><span>{{ 'job.region'|trans }}</span>{{ company.region }}</li>
+                            {% if company.region %}
+                              <li><span>{{ 'job.region'|trans }}</span>{{ company.region }}</li>
+                            {% endif %}
                             {% if _app.salary %}
                                 <li><span>{{ 'job.salary'|trans }}</span>{{ _app.salary }}</li>
                             {% endif %}
@@ -125,9 +127,9 @@
                         <li><span>{{ 'company.address'|trans }}</span> {{ company.address }}</li>
                       {% endif %}
                       {% if company.website %}
-                        <li><span>{{ 'company.website'|trans }}</span> <a href="{{ url(company.website) }}">{{ company.website }}</a></li>
+                        <li><span>{{ 'company.website'|trans }}</span> <a href="//{{ company.website }}" target="_blank">{{ company.website }}</a></li>
                       {% endif %}
-                      <li><span>{{ 'company.description'|trans }}</span> {{ company.description }}</li>
+                      <li><span>{{ 'company.description'|trans }}</span></li>
                       <li>{{ company.description }}</li>
                     </ul>
                   </div>
