@@ -11,11 +11,11 @@ class ExperienceFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $experiences = [
-            "job.xp.less1",
-            "job.xp.two",
-            "job.xp.tree",
-            "job.xp.four",
-            "job.xp.over5"
+            "user.xp.less1",
+            "user.xp.two",
+            "user.xp.tree",
+            "user.xp.four",
+            "user.xp.over5"
         ];
 
         foreach ($experiences as $xp) {

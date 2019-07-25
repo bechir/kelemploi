@@ -57,13 +57,13 @@ class Company
     private $photo;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="companies")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
      */
-    private $users;
+    private $owners;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->owners = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,24 +158,29 @@ class Company
     /**
      * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getOwners(): Collection
     {
-        return $this->users;
+        return $this->owners;
     }
 
-    public function addUser(User $user): self
+    public function addOwner(User $owner): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->owners->contains($owner)) {
+            $this->owners[] = $owner;
+            $owner->setCompany($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeOwner(User $owner): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->owners->contains($owner)) {
+            $this->owners->removeElement($owner);
+            // set the owning side to null (unless already changed)
+            if ($owner->getCompany() === $this) {
+                $owner->setCompany(null);
+            }
         }
 
         return $this;

@@ -11,13 +11,13 @@ class StudyLevelFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $levels = [
-            'Bac',
-            'Licence 1',
-            'Licence 2',
-            'Licence 3',
-            'Master 1',
-            'Master 2',
-            'Doctorat'
+            'user.level.bac',
+            'user.level.l1',
+            'user.level.l2',
+            'user.level.l3',
+            'user.level.m1',
+            'user.level.m2',
+            'user.level.doctorat',
         ];
 
         foreach ($levels as $l) {

@@ -60,10 +60,10 @@ pricing:
     price: 00 XOF
   advanced:
     label: Entreprise
-    price: 9.000 XOF
+    price: 25.000 XOF
   pro:
     label: Pro
-    price: 25.000 XOF
+    price: 9.000 XOF
   select_plan: Sélectionnez un plan
 
 payment:
@@ -106,17 +106,6 @@ job:
     stage: Stage
     freelance: Freelance
     alternance: Alternance
-  xp:
-    less1: "Mois d'un an" # Less than 1 Year 
-    two: "2 ans" # 2 Years
-    tree: "3 ans" # 3 Years
-    four: "4 ans" # 4 Years
-    over5: "Plus de 5 ans" # Over 5 Years
-    less1_p: "Mois d'un an d'expérience" # Less than 1 Year 
-    two_p: "2 ans d'expériences" # 2 Years
-    tree_p: "3 ans d'expériences" # 3 Years
-    four_p: "4 ans d'expériences" # 4 Years
-    over5_p: "Plus de 5 ans d'expériences" # Over 5 Years
 
 company:
   about: "À propos de la companie" # About the Company
@@ -147,6 +136,25 @@ user:
     mf: "H/F"
     male: Homme
     female: Femme
+  level:
+    bac: Bac
+    l1: Licence 1
+    l2: Licence 1
+    l3: Licence 1
+    m1: Master 1
+    m2: Master 2
+    doctorat: Doctorat
+  xp:
+    less1: "Mois d'un an" # Less than 1 Year 
+    two: "2 ans" # 2 Years
+    tree: "3 ans" # 3 Years
+    four: "4 ans" # 4 Years
+    over5: "Plus de 5 ans" # Over 5 Years
+    less1_p: "Mois d'un an d'expérience" # Less than 1 Year 
+    two_p: "2 ans d'expériences" # 2 Years
+    tree_p: "3 ans d'expériences" # 3 Years
+    four_p: "4 ans d'expériences" # 4 Years
+    over5_p: "Plus de 5 ans d'expériences" # Over 5 Years
   my_account: Mon compte
   settings: Paramètres # Settings
   profile: Profil # Profile
