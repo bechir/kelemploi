@@ -8,7 +8,8 @@ use App\Entity\ {
     ContractType,
     JobCategory,
     Region,
-    Language
+    Language,
+Experience
 };
 
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +36,7 @@ class ApplicationType extends AbstractType
                 'class' => JobCategory::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'Sélectionnez'
+                'placeholder' => 'form.job.category'
             ])
             ->add('dates', DateIntervalType::class, ['required' => false])
             ->add('contractType', EntityType::class, [
@@ -47,15 +48,22 @@ class ApplicationType extends AbstractType
                 'class' => StudyLevel::class,
                 'choice_label' => 'level',
                 'required' => false,
-                'placeholder' => 'Sélectionnez'
+                'placeholder' => 'form.job.optionnal_level'
             ])
-            ->add('requiredLanguages', EntityType::class, [
-                'class' => Language::class,
+            ->add('experience', EntityType::class, [
+                'class' => Experience::class,
                 'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true,
                 'required' => false,
+                'choice_translation_domain' => true,
+                'placeholder' => 'form.job.optionnal_xp'
             ])
+            // ->add('requiredLanguages', EntityType::class, [
+            //     'class' => Language::class,
+            //     'choice_label' => 'name',
+            //     'multiple' => true,
+            //     'expanded' => true,
+            //     'required' => false,
+            // ])
         ;
     }
 

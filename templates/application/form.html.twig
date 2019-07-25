@@ -17,13 +17,13 @@
         {% endif %}
 
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">Job Title</label>
+            <label class="col-md-3 col-form-label">{{ 'form.job.title'|trans }}</label>
             <div class="col-md-9">
-                {{ form_widget(form.jobTitle, {'attr': {'placeholder': 'Your job title here', 'class': 'form-control'}}) }}
+                {{ form_widget(form.jobTitle, {'attr': {'placeholder': 'form.job.title', 'class': 'form-control'}}) }}
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Job Summery</label>
+            <label class="col-md-3 col-form-label">{{ 'form.job.summary'|trans }}</label>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
@@ -40,20 +40,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select class="form-control">
-                                <option>Experience (Optional)</option>
-                                <option>Less than 1 Year</option>
-                                <option>2 Year</option>
-                                <option>3 Year</option>
-                                <option>4 Year</option>
-                                <option>Over 5 Year</option>
-                            </select>
+                            {{ form_widget(form.experience, {'attr': {'class': 'form-control'}}) }}
                             <i class="fa fa-caret-down"></i>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.salary, {'attr': {'placeholder': 'Salary Range', 'class': 'form-control'}}) }}
+                            {{ form_widget(form.salary, {'attr': {'placeholder': 'form.job.salary', 'class': 'form-control'}}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -74,21 +67,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.nbCandidatesToRecruit, {'attr': {'class': 'form-control', 'placeholder': 'Vacancy'}}) }}
+                            {{ form_widget(form.nbCandidatesToRecruit, {'attr': {'class': 'form-control', 'placeholder': 'form.job.vacancy'}}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group datepicker">
-                            {{ form_widget(form.dates.end, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_widget(form.dates.end, {'attr': {'class': 'form-control', 'placeholder': 'form.job.deadline' }}) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Job Description</label>
+            <label class="col-md-3 col-form-label">{{ 'form.job.description'|trans }}</label>
             <div class="col-md-9">
-                {{ form_widget(form.jobDescription, {'attr': {'class': 'tinymce-editor tinymce-editor-1', 'placeholder': 'Job Description'}}) }}
+                {{ form_widget(form.jobDescription, {'attr': {'class': 'tinymce-editor tinymce-editor-1', 'placeholder': 'form.job.summary'|trans }}) }}
             </div>
         </div>
         <div class="row">
@@ -98,7 +91,7 @@
                 </a>
             </label>
             <div class="col-md-9">
-                <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea2" placeholder="Responsibilities (Optional)"></textarea>
+                <textarea class="tinymce-editor tinymce-editor-2" id="mytextarea2" placeholder="{{ 'form.job.responsibilities'|trans }}"></textarea>
             </div>
         </div>
         <div class="row">
@@ -112,32 +105,32 @@
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">About Company</label>
+            <label class="col-md-3 col-form-label">{{ 'company.about'|trans }}</label>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'Company Name'}}) }}
+                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control', 'placeholder': 'form.company.name'|trans }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'Web Address'}}) }}
+                            {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address'|trans }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'Zip Code'}}) }}
+                            {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip'|trans }}) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'Web Address'}}) }}
+                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website'|trans }}) }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'Company Description'}}) }}
+                            {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description'|trans }}) }}
                         </div>
                     </div>
                 </div>
@@ -199,7 +192,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label"></label>
             <div class="col-md-9">
-                <button class="button">{{ 'form.job.post'|trans }}</button>
+                <button class="button">{{ 'form.job.publish'|trans }}</button>
             </div>
         </div>
     </div>

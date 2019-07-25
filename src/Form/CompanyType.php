@@ -24,9 +24,9 @@ class CompanyType extends AbstractType
                 'class' => Region::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'Sélectionnez une région'
+                'placeholder' => 'form.job.region'
             ])
-            ->add('photo')
+            // ->add('photo')
         ;
     }
 

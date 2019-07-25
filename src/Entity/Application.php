@@ -91,6 +91,11 @@ class Application
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Experience")
+     */
+    private $experience;
+
     const FENCED  = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS  = [self::FENCED, self::ONGOING];
@@ -277,6 +282,18 @@ class Application
             throw new InvalidArgumentException(sprintf("The parameter status required to be one of (%s, %s), %s given.", self::ONGOING, self::FENCED, $status));
         
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getExperience(): ?Experience
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?Experience $experience): self
+    {
+        $this->experience = $experience;
 
         return $this;
     }

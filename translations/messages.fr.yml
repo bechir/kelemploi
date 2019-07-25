@@ -62,12 +62,19 @@ job:
   education_xp: "Éducation & Expérience: " # "Education + Experience"
   simillar: "Offres similaires" # Simillar Jobs
   browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
+  xp:
+    less1: "Mois d'un an" # Less than 1 Year
+    two: "2 ans" # 2 Years
+    tree: "3 ans" # 3 Years
+    four: "4 ans" # 4 Years
+    over5: "Plus de 5 ans" # Over 5 Years
 
 company:
   about: "À propos de la companie" # About the Company
   name: "Nom: " # Company Name
   address: "Adresse: "
   website: "Site web: "
+  zip: "Code postal: "
   description: "Description: "
 
 employer:
@@ -131,10 +138,26 @@ form:
   submit: Envoyer
   enter_keywords: "Entrez les mots clés"
   password: Mot de passe
+  company:
+    name: "Nom" # Company Name
+    address: "Adresse"
+    website: "Site web"
+    zip: "Code postal"
+    description: "Description"
   job:
-    post: "Poster l'offre" # Post Your Job
-    responsibilities: "Résponsabilités"
+    title: "Titre du poste"
+    summary: "Détails"
+    description: Description
+    publish: "Publier" # Post Your Job
+    deadline: "Date limite"
+    responsibilities: "Résponsabilités (Optionnel)"
     other_benefits: "Avantages"
+    optionnal_xp: "Expérience (Optionnel)" # Experience (Optionnal)
+    optionnal_level: "Niveau d'études (Optionnel)"
+    category: "Sélectionnez une catégorie"
+    region: "Choisissez une région"
+    vacancy: "Nombre de postes (optionnel)"
+    salary:  Estimation du salaire # Salary Range
     resp_help:
       title: "Ce que l'employé fera..."
       text: >
