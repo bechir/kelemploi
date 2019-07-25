@@ -71,6 +71,7 @@ class ApplicationController extends AbstractController
 
         return $this->render('application/show.html.twig', [
             '_app' => $app,
+            'company' => $app->getCompany()
         ]);
     }
 

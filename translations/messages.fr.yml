@@ -97,14 +97,26 @@ job:
   description: "Description du poste" # Job Description
   responsibilities: Responsibilités # Responsibilities
   education_xp: "Éducation & Expérience: " # "Education + Experience"
+  benefits: "Autres bénéfices"
   simillar: "Offres similaires" # Simillar Jobs
   browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
+  contract:
+    cdd: CDD
+    cdi: CDI
+    stage: Stage
+    freelance: Freelance
+    alternance: Alternance
   xp:
-    less1: "Mois d'un an" # Less than 1 Year
+    less1: "Mois d'un an" # Less than 1 Year 
     two: "2 ans" # 2 Years
     tree: "3 ans" # 3 Years
     four: "4 ans" # 4 Years
     over5: "Plus de 5 ans" # Over 5 Years
+    less1_p: "Mois d'un an d'expérience" # Less than 1 Year 
+    two_p: "2 ans d'expériences" # 2 Years
+    tree_p: "3 ans d'expériences" # 3 Years
+    four_p: "4 ans d'expériences" # 4 Years
+    over5_p: "Plus de 5 ans d'expériences" # Over 5 Years
 
 company:
   about: "À propos de la companie" # About the Company
@@ -172,11 +184,12 @@ form:
   password: Mot de passe
   required_inputs: "<span class=\"text-danger\">*</span> Champs obligatoires"
   company:
-    name: "Nom" # Company Name
+    name: "Nom *" # Company Name
     address: "Adresse"
     website: "Site web"
     zip: "Code postal"
-    description: "Description"
+    description: "Description *"
+    region: "Region"
   job:
     title: "Titre du poste"
     summary: "Détails"

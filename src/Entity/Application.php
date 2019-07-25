@@ -19,7 +19,7 @@ class Application
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", cascade={"persist"})
      */
     private $company;
 
@@ -347,5 +347,13 @@ class Application
         $this->gender = $gender;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setStartDate()
+    {
+        $this->dates->setStart(new \DateTime());
     }
 }

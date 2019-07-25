@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CompanyType extends AbstractType
 {
@@ -18,8 +19,9 @@ class CompanyType extends AbstractType
         $builder
             ->add('name')
             ->add('description', TextareaType::class)
-            ->add('address')
-            ->add('zip')
+            ->add('address', TextType::class, ['required' => false])
+            ->add('zip', TextType::class, ['required' => false])
+            ->add('website', TextType::class, ['required' => false])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name',

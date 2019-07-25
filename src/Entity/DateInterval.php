@@ -48,9 +48,13 @@ class DateInterval
         return $this->end;
     }
 
-    public function setEnd(?\DateTimeInterface $end): self
+    public function setEnd(?string $end): self
     {
-        $this->end = $end;
+        try {
+            $this->end = new \DateTime($end);
+        } catch (\Exception $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
 
         return $this;
     }

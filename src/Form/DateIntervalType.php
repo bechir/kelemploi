@@ -22,14 +22,14 @@ class DateIntervalType extends AbstractType
         $builder->get('end')
             ->addModelTransformer(new CallbackTransformer(
                   function ($endAsDate) {
-                      return $endAsDate ? $endAsDate->format('m/d/Y') : '';
+                      return $endAsDate ? $endAsDate->format('Y/m/d') : '';
                   },
 
                   function ($endAsString) {
                       if (empty($endAsString)) {
                           return null;
                       } else {
-                          return \DateTime::createFromFormat('m/d/Y', $endAsString);
+                          return \DateTime::createFromFormat('Y/m/d', $endAsString);
                       }
                   }
             ))

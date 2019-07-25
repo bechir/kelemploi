@@ -1,6 +1,6 @@
 {% import 'util/util.twig' as util %}
 
-{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form'}}) }}
+{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form', 'novalidate': 'novalidate'}}) }}
     <div class="dashboard-section basic-info-input">
         <h4><i data-feather="user-check"></i>{{ 'job.new.h1'|trans }}<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
 
@@ -132,7 +132,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website' }}) }}
+                            {{ form_widget(form.company.region, {'attr': {'class': 'form-control', 'placeholder': 'form.company.region' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_widget(form.company.website, {'attr': {'class': 'form-control', 'placeholder': 'form.company.website' }}) }}
                         </div>
                     </div>
                     <div class="col-md-12">

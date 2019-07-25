@@ -21,9 +21,9 @@
                   <div class="title-body">
                     <h4>{{ _app.jobTitle }}</h4>
                     <div class="info">
-                      <span class="company"><a href="#" onclick="return false"><i data-feather="briefcase"></i>{{ _app.company }}</a></span>
-                      <span class="office-location"><a href="#" onclick="return false"><i data-feather="map-pin"></i>{{ _app.region }}</a></span>
-                      <span class="job-type full-time"><a href="#" onclick="return false"><i data-feather="clock"></i>{{ _app.contractType }}</a></span>
+                      <span class="company"><a href="#" onclick="return false"><i data-feather="briefcase"></i>{{ company.name }}</a></span>
+                      <span class="office-location"><a href="#" onclick="return false"><i data-feather="map-pin"></i>{{ company.region }}</a></span>
+                      <span class="job-type full-time"><a href="#" onclick="return false"><i data-feather="clock"></i>{{ _app.contractType|trans }}</a></span>
                     </div>
                   </div>
                 </div>
@@ -37,37 +37,32 @@
                   <div class="col-xl-7 col-lg-8">
                     <div class="description details-section">
                       <h4><i data-feather="align-left"></i>{{ 'job.description'|trans }}</h4>
-                      <p>{{ _app.jobDescription }}</p>
+                      <p>{{ _app.jobDescription|raw }}</p>
                     </div>
-                    <div class="responsibilities details-section">
-                      <h4><i data-feather="zap"></i>{{ 'job.responsibilities'|trans }}</h4>
-                      <ul>
-                        <li>The applicants should have experience in the following areas</li>
-                        <li>Skills on M.S Word, Excel, and Integrated Accounting package i.e. Software</li>
-                        <li>Have sound knowledge of commercial activities.</li>
-                        <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                        <li>Good verbal and written communication skills.</li>
-                        <li>Leadership, analytical, and problem-solving abilities.</li>
-                      </ul>
-                    </div>
-                    <div class="edication-and-experience details-section">
-                      <h4><i data-feather="book"></i>{{ 'job.education_xp'|trans }}</h4>
-                      <ul>
-                        <li>{{ _app.minStudyLevel }}</li>
-                        <li>2 à 3 ans d'expériences</li>
-                        <li>Fraçais: très bon niveau</li>
-                        <li>Anglais: niveau intermédiaire</li>
-                      </ul>
-                    </div>
-                    {# <div class="other-benifit details-section">
-                      <h4><i data-feather="gift"></i>Other Benefits</h4>
-                      <ul>
-                        <li>Health and life insurance </li>
-                        <li>2 days of weekend </li>
-                        <li>2 annual performanc Bonuses</li>
-                        <li>Lunch &amp; Snacks</li>
-                      </ul>
-                    </div> #}
+
+                    {% if _app.responsibilities %}
+                      <div class="responsibilities details-section">
+                        <h4><i data-feather="zap"></i>{{ 'job.responsibilities'|trans }}</h4>
+                        {{ _app.responsibilities|raw }}
+                      </div>
+                    {% endif %}
+                    
+                    {% if _app.experience or _app.minStudyLevel %}
+                      <div class="edication-and-experience details-section">
+                        <h4><i data-feather="book"></i>{{ 'job.education_xp'|trans }}</h4>
+                        <ul>
+                          <li>{{ _app.minStudyLevel }}</li>
+                          <li>{{ _app.experience|trans }}</li>
+                        </ul>
+                      </div>
+                    {% endif %}
+
+                    {% if _app.benefits %}
+                      <div class="other-benifit details-section">
+                        <h4><i data-feather="gift"></i>{{ 'job.benefits'|trans }}</h4>
+                        {{ _app.benefits|raw }}
+                      </div>
+                    {% endif %}
                     <div class="job-apply-buttons">
                       <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
                       <a href="#" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
@@ -80,20 +75,22 @@
                         <ul>
                             <li><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
                             {% if _app.nbCandidatesToRecruit %}
-                                <li><span>{{ 'job.vacancy'|trans }}</span> {{ _app.nbCandidatesStr }}</li>
+                                <li><span>{{ 'job.vacancy'|trans }}</span>{{ _app.nbCandidatesStr }}</li>
                             {% endif %}
-                            <li><span>{{ 'job.contract_type'|trans }}</span> {{ _app.contractType }}</li>
-                            <li><span>{{ 'job.experience'|trans }}:</span> 2 à 3 an(s)</li>
-                            <li><span>{{ 'job.region'|trans }}</span> {{ _app.region }}</li>
+                            <li><span>{{ 'job.contract_type'|trans }}</span>{{ _app.contractType|trans }}</li>
+                            {% if _app.experience %}
+                              <li><span>{{ 'job.experience'|trans }}</span>{{ _app.experience|trans }}</li>
+                            {% endif %}
+                            <li><span>{{ 'job.region'|trans }}</span>{{ company.region }}</li>
                             {% if _app.salary %}
-                                <li><span>{{ 'job.salary'|trans }}</span> {{ _app.salary }}</li>
+                                <li><span>{{ 'job.salary'|trans }}</span>{{ _app.salary }}</li>
                             {% endif %}
-                            <li><span>{{ 'job.gender'|trans }}</span> H/F</li>
+                            {% if _app.gender %}
+                              <li><span>{{ 'job.gender'|trans }}</span>{{ _app.gender|trans }}</li>
+                            {% endif %}
                             {% if _app.dates.end is not null %}
-                                <li><span>{{ 'job.deadline'|trans }}</span> {{ _app.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
+                                <li><span>{{ 'job.deadline'|trans }}</span>{{ _app.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
                             {% endif %}
-                            <li><span>Fraçais:</span> très bon niveau</li>
-                            <li><span>Anglais:</span> niveau intermédiaire</li>
                         </ul>
                       </div>
                       <div class="share-job-post">
@@ -123,11 +120,15 @@
                   <div class="company-information details-section">
                     <h4><i data-feather="briefcase"></i>{{ 'company.about'|trans }}</h4>
                     <ul>
-                      <li><span>{{ 'company.name'|trans }}</span> {{ _app.company }}</li>
-                      <li><span>{{ 'company.address'|trans }}</span> Queens, NY 11375 USA</li>
-                      <li><span>{{ 'company.website'|trans }}</span> <a href="#">www.theoreoltd.com</a></li>
-                      <li><span>{{ 'company.description'|trans }}</span></li>
-                      <li>{{ _app.companyDescription }}</li>
+                      <li><span>{{ 'company.name'|trans }}</span> {{ company.name }}</li>
+                      {% if company.website %}
+                        <li><span>{{ 'company.address'|trans }}</span> {{ company.address }}</li>
+                      {% endif %}
+                      {% if company.website %}
+                        <li><span>{{ 'company.website'|trans }}</span> <a href="{{ url(company.website) }}">{{ company.website }}</a></li>
+                      {% endif %}
+                      <li><span>{{ 'company.description'|trans }}</span> {{ company.description }}</li>
+                      <li>{{ company.description }}</li>
                     </ul>
                   </div>
                 </div>

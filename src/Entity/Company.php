@@ -24,7 +24,7 @@ class Company
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -37,6 +37,11 @@ class Company
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $zip;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $website;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Region")
@@ -114,6 +119,18 @@ class Company
         return $this;
     }
 
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
     public function getRegion(): ?Region
     {
         return $this->region;
@@ -162,5 +179,10 @@ class Company
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
