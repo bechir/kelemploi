@@ -63,6 +63,7 @@
                 <i class="fas fa-power-off"></i>
                 <a href="{{ path('fos_user_security_logout') }}">{{ 'user.logout'|trans }}</a>
             </li>
+            <hr>
             <li>
                 <i class="fas fa-trash-alt"></i>
                 <a data-target="#modal-delete" data-toggle="modal" href="#">{{ 'user.delete_account.title'|trans }}</a>
@@ -76,16 +77,16 @@
                         <h4>
                             <i data-feather="trash-2"></i>{{ 'user.delete_account.title'|trans }}</h4>
                         <p>{{ 'user.delete_account.confirm_text'|trans }}</p>
-                        <form action="#">
+                        <form action="#" method="POST" data-confirmation="true">
                             <div class="form-group">
                                 <input class="form-control" placeholder="{{ 'form.password'|trans }}" type="password">
                             </div>
                             <div class="buttons">
                                 <button class="delete-button">{{ 'word.delete'|trans }}</button>
-                                <button class="">{{ 'word.cancel'|trans }}</button>
+                                <button data-dismiss="modal">{{ 'word.cancel'|trans }}</button>
                             </div>
                             <div class="form-group form-check">
-                                <input checked="" class="form-check-input" type="checkbox">
+                                <input checked="checked" class="form-check-input" type="checkbox">
                                 <label class="form-check-label">
                                     {{ util.acceptTermsConditions() }}
                                 </label>
