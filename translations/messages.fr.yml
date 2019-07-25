@@ -41,6 +41,7 @@ job:
     title: Offres d'emploi
   new:
     title: "Poster une nouvelle offre d'emploi"
+    h1: "Nouvelle offre d'emploi"
   save: Enregistrer # Save Job
   apply_online: Candidater en ligne # Apply Online
   send_email: "Envoyer un email" # Email Job
@@ -203,4 +204,4 @@ word:
   or: Ou
 
 text:
-  accepd_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"
+  accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

@@ -1,6 +1,8 @@
+{% import 'util/util.twig' as util %}
+
 {{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form'}}) }}
     <div class="dashboard-section basic-info-input">
-        <h4><i data-feather="user-check"></i>Post A Job<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
+        <h4><i data-feather="user-check"></i>{{ 'job.new.h1'|trans }}<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
 
         {% if not form.vars.valid %}
             {% for children in form.children %}
@@ -17,7 +19,10 @@
         {% endif %}
 
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">{{ 'form.job.title'|trans }}</label>
+            <label class="col-md-3 col-form-label">
+                {{ 'form.job.title'|trans }}
+                {{ util.formRequired() }}
+            </label>
             <div class="col-md-9">
                 {{ form_widget(form.jobTitle, {'attr': {'placeholder': 'form.job.title', 'class': 'form-control'}}) }}
             </div>
@@ -75,7 +80,10 @@
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">{{ 'form.job.description'|trans }}</label>
+            <label class="col-md-3 col-form-label">
+                {{ 'form.job.description'|trans }}
+                {{ util.formRequired() }}
+            </label>
             <div class="col-md-9">
                 {{ form_widget(form.jobDescription, {'attr': {'class': 'tinymce-editor tinymce-editor-1', 'placeholder': 'form.job.summary'|trans }}) }}
             </div>
@@ -101,7 +109,10 @@
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">{{ 'company.about'|trans }}</label>
+            <label class="col-md-3 col-form-label">
+                {{ 'company.about'|trans }}
+                {{ util.formRequired() }}
+                </label>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
@@ -133,7 +144,7 @@
             </div>
         </div>
         <div class="row">
-            <label class="col-md-3 col-form-label">Select Package</label>
+            <label class="col-md-3 col-form-label">Sélectionnez un plan</label>
             <div class="col-md-9">
                 <div class="package-select">
                     <div class="package-select-inputs">
@@ -141,24 +152,24 @@
                             <input checked class="custom-radio" id="radio_1" name="my-radio" type="radio" value="1">
                             <label for="radio_1">
                                 <span class="dot"></span>
-                                <span class="package-type">Free</span>
-                                $0.00
+                                <span class="package-type">Gratuit</span>
+                                00 FCFA
                             </label>
                         </div>
                         <div class="form-group">
                             <input class="custom-radio" id="radio_2" name="my-radio" type="radio" value="1">
                             <label for="radio_2">
                                 <span class="dot"></span>
-                                <span class="package-type">Stater</span>
-                                $22.00
+                                <span class="package-type">Pro</span>
+                                9.000 XOF
                             </label>
                         </div>
                         <div class="form-group">
                             <input class="custom-radio" id="radio_3" name="my-radio" type="radio" value="1">
                             <label for="radio_3">
                                 <span class="dot"></span>
-                                <span class="package-type">Advance</span>
-                                $44.00
+                                <span class="package-type">Entreprise</span>
+                                25.000 XOF
                             </label>
                         </div>
                     </div>
@@ -177,10 +188,7 @@
                     <input class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox">
                     <label for="radio-4">
                         <span class="dot"></span>
-                        You accepts our
-                        <a href="employer-dashboard-post-job.html#">Terms and Conditions</a>
-                        and
-                        <a href="employer-dashboard-post-job.html#">Privacy Policy</a>
+                        {{ util.acceptTermsConditions() }}
                     </label>
                 </div>
             </div>

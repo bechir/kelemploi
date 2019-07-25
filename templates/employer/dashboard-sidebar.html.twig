@@ -1,3 +1,5 @@
+{% import 'util/util.twig' as util %}
+
 <div class="dashboard-sidebar">
     <div class="company-info">
         <div class="thumb">
@@ -85,7 +87,7 @@
                             <div class="form-group form-check">
                                 <input checked="" class="form-check-input" type="checkbox">
                                 <label class="form-check-label">
-                                    {{ 'text.accept_terms'|trans({'%terms_url%': path('terms_conditions'), '%privacy_url%': path('privacy')})|raw }}
+                                    {{ util.acceptTermsConditions() }}
                                 </label>
                             </div>
                         </form>

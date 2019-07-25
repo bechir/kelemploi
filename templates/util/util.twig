@@ -10,3 +10,11 @@
     {% endif %}
     {{ class }}
 {% endmacro %}
+
+{% macro formRequired() %}
+    <span class="text-danger">*</span>
+{% endmacro %}
+
+{% macro acceptTermsConditions() %}
+    {{ 'text.accept_terms'|trans({'%terms_url%': path('terms_conditions'), '%privacy_url%': path('privacy')})|raw }}
+{% endmacro %}
