@@ -1,5 +1,3 @@
-{% import 'util/util.twig' as util %}
-
 <div class="dashboard-sidebar">
     <div class="company-info">
         <div class="thumb">
@@ -13,7 +11,7 @@
     <div class="profile-progress">
         <div class="progress-item">
             <div class="progress-head">
-                <p class="progress-on">Profile</p>
+                <p class="progress-on">{{ 'word.profile'|trans }}</p>
             </div>
             <div class="progress-body">
                 <div class="progress">
@@ -69,32 +67,8 @@
                 <a data-target="#modal-delete" data-toggle="modal" href="#">{{ 'user.delete_account.title'|trans }}</a>
             </li>
         </ul>
-        <!-- Modal -->
-        <div aria-hidden="true" class="modal fade modal-delete" id="modal-delete" role="dialog" tabindex="-1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4>
-                            <i data-feather="trash-2"></i>{{ 'user.delete_account.title'|trans }}</h4>
-                        <p>{{ 'user.delete_account.confirm_text'|trans }}</p>
-                        <form action="#" method="POST" data-confirmation="true">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="{{ 'form.password'|trans }}" type="password">
-                            </div>
-                            <div class="buttons">
-                                <button class="delete-button">{{ 'word.delete'|trans }}</button>
-                                <button data-dismiss="modal">{{ 'word.cancel'|trans }}</button>
-                            </div>
-                            <div class="form-group form-check">
-                                <input checked="checked" class="form-check-input" type="checkbox">
-                                <label class="form-check-label">
-                                    {{ util.acceptTermsConditions() }}
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        {# Delete account modal #}
+        {% include 'common/delete-account-modal.html.twig' %}
     </div>
 </div>

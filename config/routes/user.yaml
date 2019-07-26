@@ -1,31 +1,65 @@
-add_resume:
-  path: /{_locale}/add-resume
-  controller: App\Controller\UserController::addResume
+resume:
+  controller: App\Controller\UserController::resume
+  path: /{_locale}/user/resume
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
 
-profile:
-  path: /{_locale}/profile
-  controller: App\Controller\UserController::profile
+edit_resume:
+  controller: App\Controller\UserController::editResume
+  path: /{_locale}/user/edit-resume
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
 
-user_edit:
-  path: /{_locale}/edit
-  controller: App\Controller\UserController::edit
+user_dashboard:
+  path: /{_locale}/user/dashboard
+  controller: App\Controller\UserController::dashboard
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+user_profile_edit:
+  path: /{_locale}/user/edit-profile
+  controller: App\Controller\UserController::editProfile
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_bookmarked:
+  path: /{_locale}/user/bookmarked
+  controller: App\Controller\UserController::bookmarked
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_applied:
+  path: /{_locale}/user/applied
+  controller: App\Controller\UserController::applied
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_messages:
+  path: /{_locale}/user/messages
+  controller: App\Controller\UserController::messages
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 
 user_settings:
-  path: /{_locale}/settings
+  path: /{_locale}/user/settings
   controller: App\Controller\UserController::settings
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+

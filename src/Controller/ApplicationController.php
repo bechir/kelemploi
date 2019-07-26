@@ -55,6 +55,9 @@ class ApplicationController extends AbstractController
         ]);
     }
 
+    /**
+     * IsGranted("ROLE_EMPLOYER")
+     */
     public function edit(Request $request, Application $app): Response
     {
         $form = $this->createForm(ApplicationType::class, $app);
@@ -97,6 +100,9 @@ class ApplicationController extends AbstractController
         ]);
     }
 
+    /**
+     * IsGranted("ROLE_EMPLOYER")
+     */
     public function delete(Request $request): Response
     {
         return $this->render('application/delete.html.twig');

@@ -1,0 +1,13 @@
+resume: Mon CV
+edit_profile: Modifier mon profil
+edit_resume: Modifier mon CV
+bookmarked: Favoris
+applied_jobs: Emplois Postulés
+messages: Mes messages
+
+dashboard:
+  title: '%name% | Tableau de bord'
+  statistics:
+    viewed_companies: Companies Vues # Companies Viewed
+    applied_jobs: Emplois Postulés # Applied Jobs
+    favorite_jobs: Emplois Favoris # Favorite Jobs

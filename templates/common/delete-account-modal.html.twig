@@ -1,0 +1,29 @@
+{% import 'util/util.twig' as util %}
+
+<div aria-hidden="true" class="modal fade modal-delete" id="modal-delete" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>
+                    <i data-feather="trash-2"></i>
+                    {{ 'user.delete_account.title'|trans }}</h4>
+                <p>{{ 'user.delete_account.confirm_text'|trans }}</p>
+                <form action="#" data-confirmation="true" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="{{ 'form.password'|trans }}" type="password">
+                    </div>
+                    <div class="buttons">
+                        <button class="delete-button">{{ 'word.delete'|trans }}</button>
+                        <button data-dismiss="modal">{{ 'word.cancel'|trans }}</button>
+                    </div>
+                    <div class="form-group form-check">
+                        <input checked="checked" class="form-check-input" type="checkbox">
+                        <label class="form-check-label">
+                            {{ util.acceptTermsConditions() }}
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

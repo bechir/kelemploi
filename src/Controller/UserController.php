@@ -3,37 +3,112 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Newsletter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UserController extends Controller
 {
-    public function newsletter(Request $request): Response
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function resume(): Response
     {
-        if ($request->isMethod('POST')) {
-            if ($this->isCsrfTokenValid('regsiter_newsletter', $request->request->get('register_newsletter_token'))) {
-                $this->addFlash('danger', 'user.session_expired');
-                return $this->redirectToRoute('index');
-            }
+        $user = $this->getUser();
+    
+        return $this->render('user/resume.html.twig', [
+            'user' => $user,
+            'active' => 'resume',
+        ]);
+    }
 
-            $email = $request->request->get('email');
-            $locale = $request->request->get('locale');
-            $regUrl = $request->request->get('regUrl');
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function editResume(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/edit-esume.html.twig', [
+            'user' => $user,
+            'active' => 'edit-resume',
+        ]);
+    }
 
-            $newsletter = new Newsletter();
-            $newsletter
-                ->setEmail($email)
-                ->setLocale($locale)
-                ->setRegistrationUrl($regUrl);
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function dashboard(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/dashboard.html.twig', [
+            'user' => $user,
+            'active' => 'dashboard',
+        ]);
+    }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newsletter);
-            $em->flush();
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function editProfile(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/editProfile.html.twig', [
+            'user' => $user,
+            'active' => 'edit-profile',
+        ]);
+    }
+    
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function bookmarked(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/bookmarked.html.twig', [
+            'user' => $user,
+            'active' => 'bookmarked',
+        ]);
+    }
+    
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function applied(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/applied.html.twig', [
+            'user' => $user,
+            'active' => 'applied',
+        ]);
+    }
+    
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function messages(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/messages.html.twig', [
+            'user' => $user,
+            'active' => 'messages',
+        ]);
+    }
 
-            $this->addFlash('success', 'newsletter.registrated_successfully');
-        }
-
-        return $this->redirectToRoute('index');
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function settings(): Response
+    {
+        $user = $this->getUser();
+    
+        return $this->render('user/settings.html.twig', [
+            'user' => $user,
+            'active' => 'settings',
+        ]);
     }
 }
