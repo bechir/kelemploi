@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Form\EditProfileType;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -50,12 +52,24 @@ class UserController extends Controller
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function editProfile(): Response
+    public function editProfile(Request $request): Response
     {
         $user = $this->getUser();
-    
-        return $this->render('user/editProfile.html.twig', [
+
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'edit.success');
+        }
+
+        return $this->render('user/edit-profile.html.twig', [
             'user' => $user,
+            'form' => $form->createView(),
             'active' => 'edit-profile',
         ]);
     }
@@ -72,7 +86,7 @@ class UserController extends Controller
             'active' => 'bookmarked',
         ]);
     }
-    
+
     /**
      * @IsGranted("ROLE_USER")
      */

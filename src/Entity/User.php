@@ -63,11 +63,6 @@ class User extends BaseUser implements EquatableInterface
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, unique=false)
-     */
-    private $city;
-
-    /**
      * @ORM\Column(type="string", length=10, nullable=true, unique=false)
      */
     private $locale;
@@ -76,6 +71,16 @@ class User extends BaseUser implements EquatableInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="owners")
      */
     private $company;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $about;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region")
+     */
+    private $region;
 
     const NUM_ITEMS = 15;
 
@@ -157,18 +162,6 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getLocale(): ?string
     {
         return $this->locale;
@@ -225,7 +218,7 @@ class User extends BaseUser implements EquatableInterface
             $this->username,
             $this->phoneNumber,
             $this->email,
-            $this->city,
+            $this->region,
             $this->plainPassword,
             $this->password,
             $this->submittedAt,
@@ -244,7 +237,7 @@ class User extends BaseUser implements EquatableInterface
             $this->username,
             $this->phoneNumber,
             $this->email,
-            $this->city,
+            $this->region,
             $this->plainPassword,
             $this->password,
             $this->submittedAt,
@@ -273,5 +266,29 @@ class User extends BaseUser implements EquatableInterface
             return false;
         }
         return true;
+    }
+
+    public function getAbout(): ?string
+    {
+        return $this->about;
+    }
+
+    public function setAbout(?string $about): self
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
     }
 }

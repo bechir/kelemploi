@@ -11,3 +11,25 @@ dashboard:
     viewed_companies: Companies Vues # Companies Viewed
     applied_jobs: Emplois Postulés # Applied Jobs
     favorite_jobs: Emplois Favoris # Favorite Jobs
+
+edit:
+  success: Votre pofile a été mis à jour avec succès!
+
+form:
+  save_change: Sauvegarder les modifications # Save Change
+  edit_avatar: Changer d'avatar # Change Avatar
+  edit_infos: Modifier mes informations #
+  first_name: Prénom
+  last_name: Nom de famille
+  username: Nom d'utilisateur
+  civility: Civilité
+  region: Région
+  email: Adresse e-mail
+  phone: Numéro de téléphone
+  address: Adresse
+  expertise:
+    label: Expértise
+    placeholder: UI & UX Designer
+  about_user:
+    label: À propos de moi
+    placeholder: Parlez de vous en quelques lignes.
