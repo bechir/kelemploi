@@ -35,6 +35,8 @@ class ApplicationController extends AbstractController
             
             if($user->haveCompany())
                 $app->setCompany($user->getCompany());
+            else
+                $app->getCompany()->addOwner($user);
             
             $em->persist($app);
 
