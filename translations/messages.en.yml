@@ -1,142 +1,237 @@
-app.locale.fr: Français
-app.locale.en: English
-app.locale.ar: العربية
-layout.about: About
-layout.home: Home
-layout.contact_us: Contact-us
-layout.help_faq: 'Help / FAQ'
-layout.help: Help
-layout.applications_list: Jobs
-layout.profile: Profile
-layout.settings: Settings
-layout.logout: Logout
-layout.login: 'Sign up'
-layout.register: 'Sign in'
-job.new.h1: __job.new.h1
-form.required_inputs: __form.required_inputs
-form.job.title: __form.job.title
-form.job.summary: __form.job.summary
-form.job.description: __form.job.description
-form.job.responsibilities: __form.job.responsibilities
-form.job.resp_help.title: __form.job.resp_help.title
-form.job.resp_help.text: __form.job.resp_help.text
-form.job.other_benefits: __form.job.other_benefits
-form.job.benefits.title: __form.job.benefits.title
-form.job.benefits.text: __form.job.benefits.text
-company.about: __company.about
-pricing.select_plan: __pricing.select_plan
-pricing.free.label: __pricing.free.label
-pricing.free.price: __pricing.free.price
-pricing.pro.label: __pricing.pro.label
-pricing.pro.price: __pricing.pro.price
-pricing.advanced.label: __pricing.advanced.label
-pricing.advanced.price: __pricing.advanced.price
-payment.credit_card: __payment.credit_card
-payment.paypal: __payment.paypal
-form.job.publish: __form.job.publish
-job.save: __job.save
-job.apply_online: __job.apply_online
-job.description: __job.description
-job.responsibilities: __job.responsibilities
-job.education_xp: __job.education_xp
-job.benefits: __job.benefits
-job.send_email: __job.send_email
-job.summary: __job.summary
-job.published_on: __job.published_on
-job.vacancy: __job.vacancy
-job.contract_type: __job.contract_type
-job.experience: __job.experience
-job.region: __job.region
-job.salary: __job.salary
-job.gender: __job.gender
-job.deadline: __job.deadline
-job.share: __job.share
-job.print: __job.print
-job.report: __job.report
-company.name: __company.name
-company.address: __company.address
-company.website: __company.website
-company.description: __company.description
-job.simillar: __job.simillar
-job.browse_all: __job.browse_all
-user.edit_profile: __user.edit_profile
-user.create_account: __user.create_account
-login.title: __login.title
-login.username: __login.username
-form.password: __form.password
-login.remember_me: __login.remember_me
-login.forget_password: __login.forget_password
-login.submit_btn: __login.submit_btn
-login.connect_with: __login.connect_with
-login.no_account: __login.no_account
-login.register: __login.register
-call_to_action.title: __call_to_action.title
-call_to_action.body: __call_to_action.body
-home.add_resume: __home.add_resume
-word.or: __word.or
-layout.post_job: __layout.post_job
-layout.about_us: __layout.about_us
-layout.footer_infos: __layout.footer_infos
-layout.privacy: __layout.privacy
-layout.terms_conditions: __layout.terms_conditions
-layout.footer_employes: __layout.footer_employes
-layout.how_it_work: __layout.how_it_work
-layout.create_account: __layout.create_account
-layout.pricing: __layout.pricing
-layout.copyright: __layout.copyright
-layout.footer_back_top: __layout.footer_back_top
-user.my_account: __user.my_account
-user.account: __user.account
-user.settings: __user.settings
-user.logout: __user.logout
-user.login: __user.login
-user.register: __user.register
-layout.candidates_list: __layout.candidates_list
-layout.entreprises_list: __layout.entreprises_list
-layout.blog: __layout.blog
-notification.title: __notification.title
-notification.mark_all_as_read: __notification.mark_all_as_read
-notification.see_all: __notification.see_all
-privacy.login_before_post: __privacy.login_before_post
-employer.dashboard: __employer.dashboard
-employer.edit_profile: __employer.edit_profile
-employer.manage_jobs: __employer.manage_jobs
-employer.manage_candidates: __employer.manage_candidates
-employer.shortlisted_resumes: __employer.shortlisted_resumes
-employer.post_new_job: __employer.post_new_job
-employer.message: __employer.message
-user.delete_account.title: __user.delete_account.title
-user.delete_account.confirm_text: __user.delete_account.confirm_text
-word.delete: __word.delete
-word.cancel: __word.cancel
-job.new.title: __job.new.title
-error.err404.title: __error.err404.title
-error.err500.title: __error.err500.title
-contact.infos: __contact.infos
-contact.keep_in_touch: __contact.keep_in_touch
-form.submit: __form.submit
-contact.success: __contact.success
-contact.error: __contact.error
-error.err.title: __error.err.title
-faq.answer_here: __faq.answer_here
-faq.faq: __faq.faq
-faq.candidate: __faq.candidate
-faq.employer: __faq.employer
-faq.dont_get_answer: __faq.dont_get_answer
-faq.ask_record: __faq.ask_record
-faq.email_us: __faq.email_us
-faq.call_us: __faq.call_us
-home.title: __home.title
-home.banner_title: __home.banner_title
-home.banner_text: __home.banner_text
-form.enter_keywords: __form.enter_keywords
-word.region: __word.region
-word.category: __word.category
-job.search: __job.search
-job.by_category: __job.by_category
-emails.registration.title: __emails.registration.title
-emails.registration.body: __emails.registration.body
-emails.registration.login: __emails.registration.login
-emails.thanks: __emails.thanks
-emails.sender: __emails.sender
-text.accept_terms: __text.accept_terms
+app:
+  locale:
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: À propos
+  about_us: À propos de nous
+  home: Accueil # Home
+  contact_us: Contactez nous # Contact us
+  help_faq: Aide / FAQ # Help / FAQ
+  privacy: Politique de confidentialité # Privacy Policy
+  terms_conditions: Conditions générales d'utilisation # Terms And Conditions
+  help: Aide # Help
+  applications_list: Offres d'emploi # Browse
+  candidates_list: Candidats
+  entreprises_list: Entreprises
+  pages: Pages
+  blog: Blog
+  pricing: Tarifs
+  application_create: Créer une offre
+  how_it_work: Comment ça marche ? # How it works ?
+  post_job: Publier une offre # Post a Job
+  footer_employes: Employés # Employers
+  footer_infos: Information
+  footer_back_top: Retourner en haut
+  create_account: Créer un compte
+  copyright: Copyright %name% %date%, tout droit réservé # Copyright %name% %date%, All right reserved
+
+home:
+  title: "%name%: Recrutez, trouvez votre emploi au Sénégal"
+  banner_title: "Plus de %x% offres d'emploi"
+  banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
+  add_resume: "Ajoutez votre CV" # Upload a Resume
+
+# Contact page
+contact:
+  infos: Informations
+  keep_in_touch: Restez en contact avec nous
+  success: Votre message a été envoyé. Merci! # Your message has been sent. Thanks for contact.
+  error: Echec d'envoi. merci de réessayer # Something went wrong while sending. Please try leter.
+
+faq:
+  candidate: Candidat
+  employer: Employeur
+  answer_here: Votre réponse ici # Your answer here
+  faq: Questions Fréquements Posées # Frequently Asked Questions
+  ask_record: Nous répondons vite, en moins d'une heure ! # We have a record of answering everything in 3 hours of less.
+  dont_get_answer: Pas de réponse satisfaisante ? # Don’t get Answer?
+  email_us: Envoyez nous un e-mail # Email Us
+  call_us: Ou passez un appel au <span>%number%</span> # Or maybe you’d like to call us: <span>%number%</span>
+
+privacy:
+  login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
+
+pricing:
+  free:
+    label: Gratuit
+    price: 00 XOF
+  advanced:
+    label: Entreprise
+    price: 25.000 XOF
+  pro:
+    label: Pro
+    price: 9.000 XOF
+  select_plan: Sélectionnez un plan
+
+payment:
+  credit_card: Carte de crédit # Credit Card
+  paypal: PayPal
+
+job:
+  search: "Recherchez" # Search Job
+  by_category: Emploi par métier # Job Category
+  list:
+    title: Offres d'emploi
+  new:
+    title: "Poster une nouvelle offre d'emploi"
+    h1: "Nouvelle offre d'emploi"
+  save: Enregistrer # Save Job
+  apply_online: Candidater en ligne # Apply Online
+  send_email: "Envoyer un email" # Email Job
+  summary: En resumé 
+  published_on: "Publié le: " # Published on# Job Summary
+  vacancy: "Poste vaccant: "
+  contract_type: "Type de contrat: " # Employment Status
+  experience: "Expérience: "
+  region: "Region: "
+  salary: "Salaire: " # Salary
+  gender: "Sexe: " # Gender
+  deadline: "Date limite: " # Application Deadline
+  share: Partager
+  print: Imprimer
+  report: Signaler
+  location: Lieu de travail # Job Location
+  description: "Description du poste" # Job Description
+  responsibilities: Responsibilités # Responsibilities
+  education_xp: "Éducation & Expérience: " # "Education + Experience"
+  benefits: "Autres bénéfices"
+  simillar: "Offres similaires" # Simillar Jobs
+  browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
+  contract:
+    cdd: CDD
+    cdi: CDI
+    stage: Stage
+    freelance: Freelance
+    alternance: Alternance
+
+company:
+  about: "À propos de la companie" # About the Company
+  name: "Nom: " # Company Name
+  address: "Adresse: "
+  website: "Site web: "
+  zip: "Code postal: "
+  description: "Description: "
+
+employer:
+  breadcrumb: "Tableau de bord"
+  dashboard: "Tableau de bord"
+  edit_profile: "Modifier le profil"
+  manage_jobs: "Gèrer les offres"
+  manage_candidates: "Gèrer les candidats"
+  message: "Message"
+  shortlisted_resumes: "CV présélectionnés"
+  post_new_job: "Ajouter une offre d'emploi"
+
+call_to_action:
+  title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
+  body: "Ajoutez votre CV pour trouver rapidement un emploi. Ou créez une offre pour trouver facilement des candidats."
+
+# User account
+user:
+  account: Compte
+  gender:
+    mf: "H/F"
+    male: Homme
+    female: Femme
+  level:
+    bac: Bac
+    l1: Licence 1
+    l2: Licence 1
+    l3: Licence 1
+    m1: Master 1
+    m2: Master 2
+    doctorat: Doctorat
+  xp:
+    less1: "Mois d'un an d'expérience" # Less than 1 Year 
+    two: "2 ans d'expériences" # 2 Years
+    tree: "3 ans d'expériences" # 3 Years
+    four: "4 ans d'expériences" # 4 Years
+    over5: "Plus de 5 ans d'expériences" # Over 5 Years
+  my_account: Mon compte
+  settings: Paramètres # Settings
+  profile: Profil # Profile
+  logout:  Déconnexion # Log Out
+  login: Connexion # Sign up
+  register: Inscription # Sign in
+  delete_account:
+    title: Supprimer le compte # Delete Profile
+    confirm_text: "Êtes vous de vouloir supprimer votre compte? Cette action est irréversible!" # "Are you sure! You want to delete your profile. This can't be undone!"
+
+login:
+  title: Connnectez vous
+  no_account: Vous n'avez pas de compte?
+  register: Inscrivez vous
+  connect_with: Ou connectez vous avec
+  submit_btn: Se connecter
+  remember_me: Se souvenir de moi
+  forget_password: Mot de passe oublié?
+  username: Nom d'utilisateur ou e-mail
+
+# Notifications
+notification:
+  title: Notifications
+  mark_all_as_read: Marquer tous comme lus # Mark all as read
+  see_all: Voir toutes les notifications # SEE ALL NOTIFICATIONS
+
+# Form
+form:
+  name: Nom
+  email: Adresse email
+  subject: Sujet
+  message: Message
+  submit: Envoyer
+  enter_keywords: "Entrez les mots clés"
+  password: Mot de passe
+  required_inputs: "<span class=\"text-danger\">*</span> Champs obligatoires"
+  company:
+    name: "Nom *" # Company Name
+    address: "Adresse"
+    website: "Site web"
+    zip: "Code postal"
+    description: "Description *"
+    region: "Region"
+  job:
+    title: "Titre du poste"
+    summary: "Détails"
+    description: Description
+    publish: "Publier" # Post Your Job
+    deadline: "Date limite"
+    responsibilities: "Résponsabilités (Optionnel)"
+    other_benefits: "Avantages (Optionnel)"
+    optionnal_xp: "Expérience (Optionnel)" # Experience (Optionnal)
+    optionnal_level: "Niveau d'études (Optionnel)"
+    category: "Sélectionnez une catégorie"
+    region: "Choisissez une région"
+    vacancy: "Nombre de postes (optionnel)"
+    salary:  Estimation du salaire # Salary Range
+    resp_help:
+      title: "Ce que l'employé fera..."
+      text: >
+        <div>
+          <em>Par exemple::</em>
+          <ul><li>Apporter de nouvelles idées</li>
+          <li>Faire un reporting chaque vendredi</li>
+          <li>etc.</li></ul>
+        </div>
+    benefits:
+      title: "Les avantages à travailler chez vous"
+      text: >
+        <div>
+          <em>Par exemple::</em>
+          <ul><li>Transport entièrement gratuit</li>
+          <li>Travailler chez soi 4 fois par mois</li>
+          <li>etc.</li></ul>
+        </div>
+
+word:
+  cancel: Annuler
+  delete: Supprimer
+  category: Catégorie
+  region: Région
+  or: Ou
+
+text:
+  accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

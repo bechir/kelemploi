@@ -1,8 +1,8 @@
 {% extends 'company/base.html.twig' %}
 
-{% trans_default_domain 'dashboard' %}
+{% trans_default_domain 'company' %}
 
-{% block title %}{{ 'title'|trans({'%name%': company.name|capitalize}) }}{% endblock %}
+{% block title %}{{ 'dashboard.title'|trans({'%name%': company.name|capitalize}) }}{% endblock %}
 
 {% block content %}
     {% if company is not null %}
@@ -10,17 +10,17 @@
             <div class="user-statistic">
                 <i data-feather="command"></i>
                 <h3>06</h3>
-                <span>{{ 'statistics.job_posted'|trans }}</span>
+                <span>{{ 'dashboard.statistics.job_posted'|trans }}</span>
             </div>
             <div class="user-statistic">
                 <i data-feather="file-text"></i>
                 <h3>123</h3>
-                <span>{{ 'statistics.app_submit'|trans }}</span>
+                <span>{{ 'dashboard.statistics.app_submit'|trans }}</span>
             </div>
             <div class="user-statistic">
                 <i data-feather="users"></i>
                 <h3>32</h3>
-                <span>{{ 'statistics.call_for_interview'|trans }}</span>
+                <span>{{ 'dashboard.statistics.call_for_interview'|trans }}</span>
             </div>
         </div>
         <div class="dashboard-section dashboard-view-chart">

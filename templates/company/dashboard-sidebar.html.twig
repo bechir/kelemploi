@@ -27,35 +27,35 @@
         <ul>
             <li {% if active == 'dashboard' %}class="active"{% endif %}>
                 <i class="fas fa-home"></i>
-                <a href="employer-dashboard.html">{{ 'employer.dashboard'|trans }}</a>
+                <a href="{{ path('company_dashboard') }}">{{ 'employer.dashboard'|trans }}</a>
             </li>
             <li {% if active == 'edit-profile' %}class="active"{% endif %}>
                 <i class="fas fa-user"></i>
-                <a href="employer-dashboard-edit-profile.html">{{ 'employer.edit_profile'|trans }}</a>
+                <a href="{{ path('company_edit_profile') }}">{{ 'employer.edit_profile'|trans }}</a>
             </li>
-            <li {% if active == 'manage-job' %}class="active"{% endif %}>
+            <li {% if active == 'manage-jobs' %}class="active"{% endif %}>
                 <i class="fas fa-briefcase"></i>
-                <a href="employer-dashboard-manage-job.html">{{ 'employer.manage_jobs'|trans }}</a>
+                <a href="{{ path('company_manage_jobs') }}">{{ 'employer.manage_jobs'|trans }}</a>
             </li>
-            <li {% if active == 'manage-candidate' %}class="active"{% endif %}>
+            <li {% if active == 'manage-candidates' %}class="active"{% endif %}>
                 <i class="fas fa-users"></i>
-                <a href="employer-dashboard-manage-candidate.html">{{ 'employer.manage_candidates'|trans }}</a>
+                <a href="{{ path('company_manage_candidates') }}">{{ 'employer.manage_candidates'|trans }}</a>
             </li>
             <li {% if active == 'shortlisted' %}class="active"{% endif %}>
                 <i class="fas fa-heart"></i>
-                <a href="{{ path('application_create') }}">{{ 'employer.shortlisted_resumes'|trans }}</a>
+                <a href="#">{{ 'employer.shortlisted_resumes'|trans }}</a>
             </li>
             <li {% if active == 'post-job' %}class="active"{% endif %}>
                 <i class="fas fa-plus-square"></i>
-                <a href="">{{ 'employer.post_new_job'|trans }}</a>
+                <a href="{{ path('application_create') }}">{{ 'employer.post_new_job'|trans }}</a>
             </li>
-            <li {% if active == 'message' %}class="active"{% endif %}>
+            <li {% if active == 'messages' %}class="active"{% endif %}>
                 <i class="fas fa-comment"></i>
-                <a href="employer-dashboard-message.html">{{ 'employer.message'|trans }}</a>
+                <a href="{{ path('company_messages') }}">{{ 'employer.message'|trans }}</a>
             </li>
             <li {% if active == 'pricing' %}class="active"{% endif %}>
                 <i class="fas fa-calculator"></i>
-                <a href="employer-dashboard-pricing.html">{{ 'layout.pricing'|trans }}</a>
+                <a href="{{ path('company_pricing') }}">{{ 'layout.pricing'|trans }}</a>
             </li>
         </ul>
         <ul class="delete">

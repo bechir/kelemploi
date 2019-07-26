@@ -5,3 +5,43 @@ company_dashboard:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+company_edit_profile:
+  path: /{_locale}/company/edit-profile
+  controller: App\Controller\CompanyController::editProfile
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+company_manage_jobs:
+  path: /{_locale}/company/manage-jobs
+  controller: App\Controller\CompanyController::manageJobs
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+company_manage_candidates:
+  path: /{_locale}/company/manage-candidates
+  controller: App\Controller\CompanyController::manageCandidates
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+company_messages:
+  path: /{_locale}/company/messages
+  controller: App\Controller\CompanyController::messages
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+company_pricing:
+  path: /{_locale}/company/pricing
+  controller: App\Controller\CompanyController::pricing
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
