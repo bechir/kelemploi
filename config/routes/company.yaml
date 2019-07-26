@@ -1,0 +1,7 @@
+company_dashboard:
+  path: /{_locale}/dashboard
+  controller: App\Controller\CompanyController::dashboard
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

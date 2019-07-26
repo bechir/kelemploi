@@ -6,7 +6,7 @@
             <img alt="" class="img-fluid" src="/dashboard/images/company-logo.png">
         </div>
         <div class="company-body">
-            <h5>A Company Inc</h5>
+            <h5>{{ company ? company.name|capitalize : '-' }}</h5>
             <span>@{{ app.user.username }}</span>
         </div>
     </div>

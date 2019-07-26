@@ -29,12 +29,20 @@
                                         </div>
                                     </div>
                                     <ul class="account-item-list">
+                                        {% if app.user.haveCompany %}
+                                            <li>
+                                                <a href="{{ path('company_dashboard') }}">
+                                                    <span class="ti ti-briefcase"></span>{{ app.user.company.name|capitalize }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        
                                         <li>
-                                            <a href="{{ path('dashboard') }}">
+                                            <a href="{{ path('profile') }}">
                                                 <span class="ti-user"></span>{{ 'user.account'|trans }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ path('dashboard') }}">
+                                            <a href="{{ path('user_settings') }}">
                                                 <span class="ti-settings"></span>{{ 'user.settings'|trans }}</a>
                                         </li>
                                         <li>

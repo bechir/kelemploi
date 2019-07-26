@@ -13,7 +13,7 @@ use App\Entity\Company;
 class ApplicationController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_CUSTOMER")
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function create(Request $request): Response
     {
@@ -48,7 +48,7 @@ class ApplicationController extends AbstractController
             ]);
         }
 
-        return $this->render('employer/post-job.html.twig', [
+        return $this->render('company/post-job.html.twig', [
             'form' => $form->createView(),
             'company' => $user->getCompany(),
             'active' => 'post-job'
