@@ -1,28 +1,32 @@
 {% extends 'company/base.html.twig' %}
 
-{% block title %}{{ company.name|capitalize }}{% endblock %}
+{% trans_default_domain 'dashboard' %}
+
+{% block title %}{{ 'title'|trans({'%name%': company.name|capitalize}) }}{% endblock %}
 
 {% block content %}
-    <div class="dashboard-section user-statistic-block">
-        <div class="user-statistic">
-            <i data-feather="command"></i>
-            <h3>06</h3>
-            <span>Total Job Posted</span>
+    {% if company is not null %}
+        <div class="dashboard-section user-statistic-block">
+            <div class="user-statistic">
+                <i data-feather="command"></i>
+                <h3>06</h3>
+                <span>{{ 'statistics.job_posted'|trans }}</span>
+            </div>
+            <div class="user-statistic">
+                <i data-feather="file-text"></i>
+                <h3>123</h3>
+                <span>{{ 'statistics.app_submit'|trans }}</span>
+            </div>
+            <div class="user-statistic">
+                <i data-feather="users"></i>
+                <h3>32</h3>
+                <span>{{ 'statistics.call_for_interview'|trans }}</span>
+            </div>
         </div>
-        <div class="user-statistic">
-            <i data-feather="file-text"></i>
-            <h3>123</h3>
-            <span>Application Submit</span>
+        <div class="dashboard-section dashboard-view-chart">
+            <canvas height="200" id="view-chart" width="400"></canvas>
         </div>
-        <div class="user-statistic">
-            <i data-feather="users"></i>
-            <h3>32</h3>
-            <span>Call for interview</span>
-        </div>
-    </div>
-    <div class="dashboard-section dashboard-view-chart">
-        <canvas height="200" id="view-chart" width="400"></canvas>
-    </div>
+    {% endif %}
     <div class="dashboard-section dashboard-recent-activity">
         <h4 class="title">Recent Activity</h4>
         <div class="activity-list">

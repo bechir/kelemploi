@@ -1,18 +1,142 @@
-app:
-  locale:
-    fr: Français
-    en: English
-    ar: العربية
-
-layout:
-  about: About
-  home: Home
-  contact_us: Contact-us
-  help_faq: Help / FAQ
-  help: Help
-  applications_list: Jobs
-  profile: Profile
-  settings: Settings
-  logout: Logout
-  login: Sign up
-  register: Sign in
+app.locale.fr: Français
+app.locale.en: English
+app.locale.ar: العربية
+layout.about: About
+layout.home: Home
+layout.contact_us: Contact-us
+layout.help_faq: 'Help / FAQ'
+layout.help: Help
+layout.applications_list: Jobs
+layout.profile: Profile
+layout.settings: Settings
+layout.logout: Logout
+layout.login: 'Sign up'
+layout.register: 'Sign in'
+job.new.h1: __job.new.h1
+form.required_inputs: __form.required_inputs
+form.job.title: __form.job.title
+form.job.summary: __form.job.summary
+form.job.description: __form.job.description
+form.job.responsibilities: __form.job.responsibilities
+form.job.resp_help.title: __form.job.resp_help.title
+form.job.resp_help.text: __form.job.resp_help.text
+form.job.other_benefits: __form.job.other_benefits
+form.job.benefits.title: __form.job.benefits.title
+form.job.benefits.text: __form.job.benefits.text
+company.about: __company.about
+pricing.select_plan: __pricing.select_plan
+pricing.free.label: __pricing.free.label
+pricing.free.price: __pricing.free.price
+pricing.pro.label: __pricing.pro.label
+pricing.pro.price: __pricing.pro.price
+pricing.advanced.label: __pricing.advanced.label
+pricing.advanced.price: __pricing.advanced.price
+payment.credit_card: __payment.credit_card
+payment.paypal: __payment.paypal
+form.job.publish: __form.job.publish
+job.save: __job.save
+job.apply_online: __job.apply_online
+job.description: __job.description
+job.responsibilities: __job.responsibilities
+job.education_xp: __job.education_xp
+job.benefits: __job.benefits
+job.send_email: __job.send_email
+job.summary: __job.summary
+job.published_on: __job.published_on
+job.vacancy: __job.vacancy
+job.contract_type: __job.contract_type
+job.experience: __job.experience
+job.region: __job.region
+job.salary: __job.salary
+job.gender: __job.gender
+job.deadline: __job.deadline
+job.share: __job.share
+job.print: __job.print
+job.report: __job.report
+company.name: __company.name
+company.address: __company.address
+company.website: __company.website
+company.description: __company.description
+job.simillar: __job.simillar
+job.browse_all: __job.browse_all
+user.edit_profile: __user.edit_profile
+user.create_account: __user.create_account
+login.title: __login.title
+login.username: __login.username
+form.password: __form.password
+login.remember_me: __login.remember_me
+login.forget_password: __login.forget_password
+login.submit_btn: __login.submit_btn
+login.connect_with: __login.connect_with
+login.no_account: __login.no_account
+login.register: __login.register
+call_to_action.title: __call_to_action.title
+call_to_action.body: __call_to_action.body
+home.add_resume: __home.add_resume
+word.or: __word.or
+layout.post_job: __layout.post_job
+layout.about_us: __layout.about_us
+layout.footer_infos: __layout.footer_infos
+layout.privacy: __layout.privacy
+layout.terms_conditions: __layout.terms_conditions
+layout.footer_employes: __layout.footer_employes
+layout.how_it_work: __layout.how_it_work
+layout.create_account: __layout.create_account
+layout.pricing: __layout.pricing
+layout.copyright: __layout.copyright
+layout.footer_back_top: __layout.footer_back_top
+user.my_account: __user.my_account
+user.account: __user.account
+user.settings: __user.settings
+user.logout: __user.logout
+user.login: __user.login
+user.register: __user.register
+layout.candidates_list: __layout.candidates_list
+layout.entreprises_list: __layout.entreprises_list
+layout.blog: __layout.blog
+notification.title: __notification.title
+notification.mark_all_as_read: __notification.mark_all_as_read
+notification.see_all: __notification.see_all
+privacy.login_before_post: __privacy.login_before_post
+employer.dashboard: __employer.dashboard
+employer.edit_profile: __employer.edit_profile
+employer.manage_jobs: __employer.manage_jobs
+employer.manage_candidates: __employer.manage_candidates
+employer.shortlisted_resumes: __employer.shortlisted_resumes
+employer.post_new_job: __employer.post_new_job
+employer.message: __employer.message
+user.delete_account.title: __user.delete_account.title
+user.delete_account.confirm_text: __user.delete_account.confirm_text
+word.delete: __word.delete
+word.cancel: __word.cancel
+job.new.title: __job.new.title
+error.err404.title: __error.err404.title
+error.err500.title: __error.err500.title
+contact.infos: __contact.infos
+contact.keep_in_touch: __contact.keep_in_touch
+form.submit: __form.submit
+contact.success: __contact.success
+contact.error: __contact.error
+error.err.title: __error.err.title
+faq.answer_here: __faq.answer_here
+faq.faq: __faq.faq
+faq.candidate: __faq.candidate
+faq.employer: __faq.employer
+faq.dont_get_answer: __faq.dont_get_answer
+faq.ask_record: __faq.ask_record
+faq.email_us: __faq.email_us
+faq.call_us: __faq.call_us
+home.title: __home.title
+home.banner_title: __home.banner_title
+home.banner_text: __home.banner_text
+form.enter_keywords: __form.enter_keywords
+word.region: __word.region
+word.category: __word.category
+job.search: __job.search
+job.by_category: __job.by_category
+emails.registration.title: __emails.registration.title
+emails.registration.body: __emails.registration.body
+emails.registration.login: __emails.registration.login
+emails.thanks: __emails.thanks
+emails.sender: __emails.sender
+text.accept_terms: __text.accept_terms

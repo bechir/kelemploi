@@ -1,7 +1,7 @@
 form:
-  title:  Newsletter
-  body: Get e-mail updates about our latest news and Special offers. We don’t send spam so don’t worry.
+  title: Newsletter
+  body: 'Get e-mail updates about our latest news and Special offers. We don’t send spam so don’t worry.'
   submit: Submit
-  error: Please enter a value
-  success: Thank you for subscribing!
-  email: Email address...
+  error: 'Please enter a value'
+  success: 'Thank you for subscribing!'
+  email: 'Email address...'
