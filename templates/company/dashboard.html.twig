@@ -1,8 +1,16 @@
 {% extends 'company/base.html.twig' %}
 
+{% import 'util/util.twig' as util %}
+
 {% trans_default_domain 'company' %}
 
-{% block title %}{{ 'dashboard.title'|trans({'%name%': company.name|capitalize}) }}{% endblock %}
+{% block title %}
+{% if company is not null %}
+    {{ 'dashboard.title'|trans({'%name%': company.name|capitalize}) }}
+{% else %}
+    {{ 'dashboard.title'|trans({'%name%': website.name}) }}
+{% endif %}
+{% endblock %}
 
 {% block content %}
     {% if company is not null %}
@@ -26,8 +34,17 @@
         <div class="dashboard-section dashboard-view-chart">
             <canvas height="200" id="view-chart" width="400"></canvas>
         </div>
+    {% else %}
+        <div class="dashboard-section dashboard-recent-activity">
+            <h4 class="title">Vue d'ensemble</h4>
+
+            {{ util.temporary_unavailable_alert() }}
+            
+        </div>
     {% endif %}
-    <div class="dashboard-section dashboard-recent-activity">
+
+
+    {# <div class="dashboard-section dashboard-recent-activity">
         <h4 class="title">Recent Activity</h4>
         <div class="activity-list">
             <i class="fas fa-bolt"></i>
@@ -89,5 +106,6 @@
                 <i class="fas fa-times"></i>
             </div>
         </div>
-    </div>
+    </div> #}
+
 {% endblock %}

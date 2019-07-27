@@ -1,25 +1,27 @@
-{% extends 'user/base.html.twig' %}
+{% extends 'company/base.html.twig' %}
 
-{% trans_default_domain 'user' %}
+{% import 'util/util.twig' as util %}
+
+{% trans_default_domain 'company' %}
 
 {% block title %}{{ 'edit_profile'|trans }}{% endblock %}
 {% block content %}
     {{ form_start(form, {'attr': { 'class': 'dashboard-form job-post-form' } }) }}
         <div class="dashboard-section upload-profile-photo">
             <div class="update-photo">
-                {% if app.user.avatar %}
-                    <img alt="{{ app.user.fullName }} Photo" class="image" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
+                {% if company and company.photo %}
+                    <img alt="{{ company.name }} Logo" class="image" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}">
                 {% else %}
-                    <img alt="No image" class="image" src="{{ asset('images/account/default-avatar-profile.jpg') }}">
+                    <img alt="Pas de logo" class="image" src="{{ asset('images/account/default-logo.jpg') }}">
                 {% endif %}
                 
             </div>
-            <div class="file-upload">{{ 'form.edit_avatar'|trans }}
-                {{ form_widget(form.avatar.avatarFile, {'attr': {'class': 'file-input'}}) }}
+            <div class="file-upload">{{ 'form.edit_logo'|trans }}
+                {{ form_widget(form.photo.companyPhotoFile, {'attr': {'class': 'file-input'}}) }}
             </div>
         </div>
         <div class="dashboard-section basic-info-input">
-            <h4><i data-feather="user-check"></i>{{ 'form.edit_infos'|trans }}</h4>
+            <h4><i data-feather="user-check"></i>{{ 'form.edit_infos'|trans }}<span class="small text-capitalize float-right">{{ 'form.required_inputs'|trans({}, 'messages')|raw }}</span></h4>
             {% if not form.vars.valid %}
                 <div class="form-group row">
                     {% for children in form.children %}
@@ -36,40 +38,21 @@
                 </div>
             {% endif %}
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.first_name'|trans }}</label>
+                <label class="col-sm-3 col-form-label">{{ 'form.name'|trans }} {{ util.formRequired() }} </label>
                 <div class="col-sm-9">
-                    {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}})}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.last_name'|trans }}</label>
-                <div class="col-sm-9">
-                    {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}})}}
-                </div>
-            </div>
-            {# <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.username'|trans }}</label>
-                <div class="col-sm-9">
-                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
-                </div>
-            </div> #}
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.civility'|trans }}</label>
-                <div class="col-sm-9">
-                    {{ form_widget(form.civility, {'attr': {'class': 'form-control'}})}}
-                    <i class="fa fa-caret-down"></i>
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}})}}
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">{{ 'form.email'|trans }}</label>
                 <div class="col-sm-9">
-                    <p class="text-muted">{{ app.user.email }}</p>
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.phone'|trans }}</label>
+                <label class="col-sm-3 col-form-label">{{ 'form.address'|trans }}</label>
                 <div class="col-sm-9">
-                    {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}})}}
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}})}}
                 </div>
             </div>
             <div class="form-group row">
@@ -80,9 +63,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.about_user.label'|trans }}</label>
+                <label class="col-sm-3 col-form-label">{{ 'form.website'|trans }}</label>
                 <div class="col-sm-9">
-                    {{ form_widget(form.about, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.website, {'attr': {'class': 'form-control'}})}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'form.about_company.label'|trans }}{{ util.formRequired() }} </label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}})}}
                 </div>
             </div>
         </div>

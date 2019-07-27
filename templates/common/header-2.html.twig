@@ -12,7 +12,7 @@
                     <div class="top-nav">
                         {% if is_granted('ROLE_USER') %}
 
-                            {% include 'common/header-top-notification.htl.twig' %}
+                            {# {% include 'common/header-top-notification.htl.twig' %} #}
 
                             <div class="dropdown header-top-account">
                                 <a class="account-button" href="#">{{ 'user.my_account'|trans }}</a>

@@ -61,7 +61,6 @@ class UserController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $user->setRegion(null);
             $em->persist($user);
             $em->flush();
 

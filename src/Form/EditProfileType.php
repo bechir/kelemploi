@@ -31,7 +31,13 @@ class EditProfileType extends AbstractType
                 'class' => Civility::class,
                 'choice_label' => 'name'
             ])
-            ->add('about', TextareaType::class, ['required' => false])
+            ->add('about', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => 'form.about_user.placeholder'
+                ],
+                'required' => false,
+                'translation_domain' => 'user'
+            ])
             ->add('avatar', UserAvatarType::class, ['required' => false])
             // ->add('skills', CollectionType::class, [
             // 

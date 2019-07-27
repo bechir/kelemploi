@@ -1,8 +1,8 @@
 {% import 'util/util.twig' as util %}
 
-{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form'}}) }}
     <div class="dashboard-section basic-info-input">
-        <h4><i data-feather="user-check"></i>{{ 'job.new.h1'|trans }}<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
+        <h4><i data-feather="plus-circle"></i>{{ 'job.new.h1'|trans }}<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
 
         {% if not form.vars.valid %}
             {% for children in form.children %}
@@ -111,7 +111,7 @@
         {% if company is null %}
             <div class="row">
                 <label class="col-md-3 col-form-label">
-                    {{ 'company.about'|trans }}
+                    {{ 'form.about_company.label'|trans({}, 'company') }}
                     {{ util.formRequired() }}
                 </label>
                 <div class="col-md-9">
@@ -128,7 +128,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_widget(form.company.zip, {'attr': {'class': 'form-control', 'placeholder': 'form.company.zip' }}) }}
+                                {{ form_widget(form.company.email, {'attr': {'class': 'form-control', 'placeholder': 'form.company.email' }}) }}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -143,12 +143,28 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                {{ form_widget(form.company.description, {'attr': {'class': 'form-control', 'placeholder': 'form.company.description' }}) }}
+                                {{ form_widget(form.company.description, {'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">
+                    {{ 'logo'|trans({}, 'company') }}
+                </label>
+                <div class="col-md-9">
+                    <div class="upload-profile-photo">
+                        <div class="update-photo">
+                            <img alt="Pas de logo" class="image" src="{{ asset('images/account/default-logo.jpg') }}">
+                        </div>
+                        <div class="file-upload">{{ 'form.edit_logo'|trans({}, 'company') }}
+                            {{ form_widget(form.company.photo.companyPhotoFile, {'attr': {'class': 'file-input'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom my-5 py-5"></div>
         {% endif %}
         <div class="row">
             <label class="col-md-3 col-form-label">{{ 'pricing.select_plan'|trans }}</label>
@@ -175,8 +191,8 @@
                             <input class="custom-radio" id="radio_3" name="my-radio" type="radio" value="1">
                             <label for="radio_3">
                                 <span class="dot"></span>
-                                <span class="package-type">{{ 'pricing.advanced.label'|trans }}</span>
-                                {{ 'pricing.advanced.price'|trans }}
+                                <span class="package-type">{{ 'pricing.entreprise.label'|trans }}</span>
+                                {{ 'pricing.entreprise.price'|trans }}
                             </label>
                         </div>
                     </div>

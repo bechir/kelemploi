@@ -18,9 +18,14 @@ class CompanyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => 'form.about_company.placeholder'
+                ],
+                'translation_domain' => 'company'
+            ])
             ->add('address', TextType::class, ['required' => false])
-            ->add('zip', TextType::class, ['required' => false])
+            ->add('email', TextType::class, ['required' => false])
             ->add('website', TextType::class, ['required' => false])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
@@ -28,7 +33,7 @@ class CompanyType extends AbstractType
                 'required' => false,
                 'placeholder' => 'form.job.region'
             ])
-            // ->add('photo')
+            ->add('photo', CompanyPhotoType::class, ['required' => false])
         ;
     }
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
@@ -20,11 +21,24 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="company.blank")
      */
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="company.blank")
+     * @Assert\Length(
+     *     min=10,
+     *     minMessage="company.too_short",
+     *     max=10000,
+     *     maxMessage="company.too_long"
+     * )
      */
     private $description;
 
@@ -60,6 +74,7 @@ class Company
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
      */
     private $owners;
+
 
     public function __construct()
     {
@@ -189,5 +204,17 @@ class Company
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }

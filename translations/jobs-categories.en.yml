@@ -20,4 +20,36 @@ Sécurité: Security
 Social: 'Life, and Social'
 Sport: Sport
 Tourisme: Tourism
-'Transports et logistique': 'Transport and logistics'
+Transports et logistique': 'Transport and logistics'
+aeronautique: Aéronautique
+alimentation-restauration: Alimentation / Restauration
+agriculture-peche-elevage: Agriculture / Pêche / Élevage
+creation-arts-mode: Création / Arts / Mode
+papeterie-et-services-lies: Papetérie et Services liés
+direction-generale: Direction Générale
+batiment-construction: Bâtiment / Construction
+commerce-vente: Commerce / Vente
+comptabilite-gestion-administration: Comptabilité / Gestion / Administration
+juridique-droit: Juridique / Droit
+journalisme-edition: Journalisme / Édition
+resources-humaines: Resources Humaines
+consultance-freelance: Consultance / Freelance
+enseignement-recherche: Enseignement / Recherche
+banque-finance-assurance: Banque / Finance / Assurance
+industrie: Industrie
+informatique-telecommunication: Informatique / Télécommunication
+ingenierie-architecture: Ingénierie / Architecture
+desgin-infographie-multimedia: Desgin / Infographie / Multimédia
+langue-ecrit: Langue / Écrit
+marketing-communication: Marketing / Communication
+medias: Médias
+sante: Santé
+sciences: Sciences
+securite: Sécurité
+service-client: Service Client
+social: Social
+secretariat-assistant-accueil: Sécrétariat / Assistant / Accueil
+sport: Sport
+tourisme: Tourisme
+transports-logistique: Transports / Logistique
+form.job.category: Sélectionnez une catégorie

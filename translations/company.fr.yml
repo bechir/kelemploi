@@ -1,3 +1,9 @@
+logo: Logo
+edit_profile: Modifier le profil de companie
+bookmarked: Favoris
+applied_jobs: Emplois Postulés
+messages: Mes messages
+
 dashboard:
   title: '%name% | Tableau de bord'
   statistics:
@@ -7,3 +13,21 @@ dashboard:
 
 profile:
   title: "Profil"
+
+
+form:
+  save_change: Sauvegarder les modifications # Save Change
+  edit_logo: Changer de logo # Change Avatar
+  edit_infos: Modifier mes informations #
+  name: Nom de la companie
+  region: Région
+  email: Adresse e-mail
+  phone: Numéro de téléphone
+  website: Site web
+  address: Adresse
+  expertise:
+    label: Expértise
+    placeholder: UI & UX Designer
+  about_company:
+    label: À propos
+    placeholder: "* Donnez une description de votre companie en quelques lignes."

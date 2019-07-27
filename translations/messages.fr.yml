@@ -144,6 +144,8 @@ company:
   website: "Site web: "
   zip: "Code postal: "
   description: "Description: "
+  edit_profile:
+    success: Le pofile a été mis à jour avec succès!
 
 employer:
   breadcrumb: "Tableau de bord"
@@ -223,10 +225,12 @@ form:
     address: "Adresse"
     website: "Site web"
     zip: "Code postal"
+    email: Adresse email
     description: "Description *"
     region: "Region"
   job:
     title: "Titre du poste"
+    contract_type: "Type de contrat"
     summary: "Détails"
     description: Description
     publish: "Publier" # Post Your Job

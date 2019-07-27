@@ -37,18 +37,23 @@ class ApplicationType extends AbstractType
                 'class' => JobCategory::class,
                 'choice_label' => 'name',
                 'required' => false,
+                'translation_domain' => 'jobs-categories',
                 'placeholder' => 'form.job.category'
             ])
             ->add('dates', DateIntervalType::class, ['required' => false])
             ->add('contractType', EntityType::class, [
                 'class' => ContractType::class,
                 'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'form.job.contract_type',
+                'choice_translation_domain' => true,
                 'multiple' => false,
             ])
             ->add('minStudyLevel', EntityType::class, [
                 'class' => StudyLevel::class,
                 'choice_label' => 'level',
                 'required' => false,
+                'choice_translation_domain' => true,
                 'placeholder' => 'form.job.optionnal_level'
             ])
             ->add('experience', EntityType::class, [
