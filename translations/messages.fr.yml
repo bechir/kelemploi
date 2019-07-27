@@ -94,7 +94,7 @@ pricing:
       - Recommandation des meilleurs candidats
       - Statistiques
   select_plan: Sélectionnez un plan
-  try_now: Essayer maintenant
+  try_now: Essayer gratuitement
 
 payment:
   credit_card: Carte de crédit # Credit Card
