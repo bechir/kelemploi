@@ -641,4 +641,16 @@ $(document).ready(function() {
       trigger: 'hover',
       html: true
     })
+
+    var alerts = $(".alert-wrap");
+    alerts.addClass('show');
+
+    setTimeout(function() {
+      alerts.removeClass('show');
+    }, 7000);
+
+    $('.alert-wrap .close_ a').on('click', function(){
+      alerts.removeClass('show');
+      return false;
+    })
 })

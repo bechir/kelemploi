@@ -60,11 +60,8 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
 
-            $this->addFlash('success', 'edit.success');
+            $this->addFlash('success', 'user.edit_profile.success');
         }
 
         return $this->render('user/edit-profile.html.twig', [

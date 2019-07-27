@@ -162,7 +162,7 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function getLocale(): ?string
+    public function getLocale()
     {
         return $this->locale;
     }

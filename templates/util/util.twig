@@ -18,3 +18,19 @@
 {% macro acceptTermsConditions() %}
     {{ 'text.accept_terms'|trans({'%terms_url%': path('terms_conditions'), '%privacy_url%': path('privacy')})|raw }}
 {% endmacro %}
+
+{% macro temporary_unavailable_alert() %}
+    <div class="alert-wrap">
+        <div class="jy-alert info-alert">
+            <div class="icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <p>{{ 'text.temporary_unavailable_alert'|trans }}</p>
+            <div class="close_">
+                <a href="#">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

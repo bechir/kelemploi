@@ -1,16 +1,17 @@
-{% block flash_messages %}
-
-<div id="snackbar">
-  {% for type, messages in app.session.flashbag.all() %}
-    {% for message in messages %}
-      <div class="alert alert-{{ type }}" role="alert">
-          {% if is_granted('ROLE_USER') %}
-          <p>{{ message|trans({'%username%': app.user.username})|raw }}</p>
-          {% else %}
-          <p>{{ message|trans }}</p>
-          {% endif %}
-      </div>
+<div class="alert-wrap">
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="jy-alert {{ type }}-alert" role="alert">
+                <div class="icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p>{{ message|trans }}</p>
+                <div class="close_">
+                    <a href="#">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
     {% endfor %}
-  {% endfor %}
 </div>
-{% endblock %}

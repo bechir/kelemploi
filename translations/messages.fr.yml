@@ -156,6 +156,8 @@ user:
   logout:  Déconnexion # Log Out
   login: Connexion # Sign up
   register: Inscription # Sign in
+  edit_profile:
+    success: Votre pofile a été mis à jour avec succès!
   delete_account:
     title: Supprimer le compte # Delete Profile
     confirm_text: "Êtes vous de vouloir supprimer votre compte? Cette action est irréversible!" # "Are you sure! You want to delete your profile. This can't be undone!"
@@ -236,3 +238,4 @@ word:
 
 text:
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"
+  temporary_unavailable_alert: "Cette section est temporairement vide."

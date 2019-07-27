@@ -12,9 +12,6 @@ dashboard:
     applied_jobs: Emplois Postulés # Applied Jobs
     favorite_jobs: Emplois Favoris # Favorite Jobs
 
-edit:
-  success: Votre pofile a été mis à jour avec succès!
-
 form:
   save_change: Sauvegarder les modifications # Save Change
   edit_avatar: Changer d'avatar # Change Avatar

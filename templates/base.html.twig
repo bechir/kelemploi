@@ -42,6 +42,7 @@
             <![endif]-->
     </head>
     <body>
+    {% include 'common/flash_messages.twig' %}
     {% block body %}
         {% block header %}
             {% include 'common/header-2.html.twig' with {request_locale: request_locale} %}
