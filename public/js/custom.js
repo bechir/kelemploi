@@ -642,7 +642,7 @@ $(document).ready(function() {
       html: true
     })
 
-    var alerts = $(".alert-wrap");
+    var alerts = $(".alert-wrap.dismissable-alert");
     alerts.addClass('show');
 
     setTimeout(function() {
@@ -650,7 +650,13 @@ $(document).ready(function() {
     }, 7000);
 
     $('.alert-wrap .close_ a').on('click', function(){
-      alerts.removeClass('show');
+      alerts.removeClass('show').html('');
       return false;
     })
+
+    /**
+     * Customize profile image
+     */
+    var profileImage = $('div.profile-image');
+    profileImage.css('background-image', 'url(' + profileImage.attr('data-image') + ')');
 })

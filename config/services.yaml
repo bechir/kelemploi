@@ -16,8 +16,8 @@ parameters:
     website.name: 'Galsen Jobs'
     website.email: 'contact@galsen-jobs.com' #'contact@galsen-jobs.com
     app.notifications.email_sender: '%website.email%'
-    uploads_dir: '%kernel.project_dir%/public/images/uploads'
-    uploads_prefix: '/images/uploads'
+    uploads_dir: '%kernel.project_dir%/public/uploads'
+    uploads_prefix: '/uploads'
 
 services:
     # default configuration for services in *this* file

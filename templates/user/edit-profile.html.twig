@@ -6,10 +6,15 @@
     {{ form_start(form, {'attr': { 'class': 'dashboard-form job-post-form' } }) }}
         <div class="dashboard-section upload-profile-photo">
             <div class="update-photo">
-                <img alt="" class="image" src="/dashboard/images/user-1.jpg">
+                {% if app.user.avatar %}
+                    <img alt="{{ app.user.fullName }} Photo" class="image" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
+                {% else %}
+                    <img alt="No image" class="image" src="{{ asset('images/account/default-avatar-profile.jpg') }}">
+                {% endif %}
+                
             </div>
-            <div class="file-upload">
-                <input class="file-input" type="file">{{ 'form.edit_avatar'|trans }}
+            <div class="file-upload">{{ 'form.edit_avatar'|trans }}
+                {{ form_widget(form.avatar.avatarFile, {'attr': {'class': 'file-input'}}) }}
             </div>
         </div>
         <div class="dashboard-section basic-info-input">
@@ -41,12 +46,12 @@
                     {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}})}}
                 </div>
             </div>
-            <div class="form-group row">
+            {# <div class="form-group row">
                 <label class="col-sm-3 col-form-label">{{ 'form.username'|trans }}</label>
                 <div class="col-sm-9">
                     {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
                 </div>
-            </div>
+            </div> #}
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">{{ 'form.civility'|trans }}</label>
                 <div class="col-sm-9">
@@ -57,7 +62,7 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">{{ 'form.email'|trans }}</label>
                 <div class="col-sm-9">
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'disabled':''}})}}
+                    <p class="text-muted">{{ app.user.email }}</p>
                 </div>
             </div>
             <div class="form-group row">
@@ -71,12 +76,6 @@
                 <div class="col-sm-9">
                     {{ form_widget(form.region, {'attr': {'class': 'form-control'}})}}
                     <i class="fa fa-caret-down"></i>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.expertise.label'|trans }}</label>
-                <div class="col-sm-9">
-                    <input class="form-control" placeholder="{{ 'form.expertise.placeholder'|trans }}" type="text">
                 </div>
             </div>
             <div class="form-group row">
@@ -94,4 +93,3 @@
         </div>
     {{ form_end(form) }}
 {% endblock %}
-

@@ -3,7 +3,7 @@
 <div class="dashboard-sidebar">
     <div class="user-info">
         <div class="thumb">
-            <img alt="" class="img-fluid" src="/dashboard/images/user-1.png">
+            <img alt="{{ app.user.fullName }} Photo" class="img-fluid" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
         </div>
         <div class="user-body">
             <h5>{{ user.fullname }}</h5>
@@ -27,7 +27,7 @@
         <ul>
             <li {% if active == 'dashboard' %}class="active"{% endif %}>
                 <i class="fas fa-home"></i>
-                <a href="{{ path('company_dashboard') }}">{{ 'employer.dashboard'|trans({}, 'messages') }}</a>
+                <a href="{{ path('user_dashboard') }}">{{ 'employer.dashboard'|trans({}, 'messages') }}</a>
             </li>
             <li {% if active == 'edit-profile' %}class="active"{% endif %}>
                 <i class="fas fa-user"></i><a href="{{ path('user_profile_edit') }}">{{ 'edit_profile'|trans }}</a>

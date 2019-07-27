@@ -1,4 +1,4 @@
-<div class="alert-wrap">
+<div class="alert-wrap dismissable-alert">
     {% for type, messages in app.session.flashbag.all() %}
         {% for message in messages %}
             <div class="jy-alert {{ type }}-alert" role="alert">

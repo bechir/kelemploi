@@ -19,7 +19,12 @@
                                 <div class="account-card">
                                     <div class="header-top-account-info">
                                         <a class="account-thumb" href="#">
-                                            <img src="{{ asset('images/account/randomdev.jpg') }}" class="img-fluid" alt="">
+                                            {% if app.user.avatar %}
+                                                {# <img alt="{{ app.user.fullName }} Photo" class="image" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}"> #}
+                                                <div class="profile-image" data-image="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}"></div>
+                                            {% else %}
+                                                <img src="{{ asset('images/account/default-avatar-profile.jpg') }}" class="img-fluid" alt="No image">
+                                            {% endif %}
                                         </a>
                                         <div class="account-body">
                                             <h5>

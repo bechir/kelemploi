@@ -60,6 +60,10 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user->setRegion(null);
+            $em->persist($user);
+            $em->flush();
 
             $this->addFlash('success', 'user.edit_profile.success');
         }

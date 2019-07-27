@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -82,12 +84,18 @@ class User extends BaseUser implements EquatableInterface
      */
     private $region;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Skill")
+     */
+    private $skills;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
     {
         parent::__construct();
         $this->locale = 'fr';
+        $this->skills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +296,32 @@ class User extends BaseUser implements EquatableInterface
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skills->contains($skill)) {
+            $this->skills->removeElement($skill);
+        }
 
         return $this;
     }
