@@ -2,6 +2,7 @@
 
 {% trans_default_domain 'user' %}
 
+{% block title %}{{ 'edit_profile'|trans }}{% endblock %}
 {% block content %}
     {{ form_start(form, {'attr': { 'class': 'dashboard-form job-post-form' } }) }}
         <div class="dashboard-section upload-profile-photo">

@@ -1,0 +1,11 @@
+{% extends 'user/base.html.twig' %}
+
+{% import 'util/util.twig' as util %}
+
+{% trans_default_domain 'user' %}
+
+{% block title %}{{ 'edit_resume'|trans }}{% endblock %}
+
+{% block content %}
+    {{ util.temporary_unavailable_alert() }}
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% block title %} {{ 'layout.pricing'|trans() }} &ndash; {{ website.name }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('layout.pricing') }}
+
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="white-bg others-block">
+              <div class="pricing-plan-block padding-top-60 padding-bottom-90">
+                <div class="row justify-content-center">
+                  <div class="col-12">
+                    <div class="pricing-controller">
+                      <span class="duration duration-month active">{{ 'word.monthly'|trans }}</span>
+                      <div class="switch-wrap"><span class="price-switch"></span></div>
+                      <span class="duration duration-year">{{ 'word.yearly'|trans }}<span>{{ 'pricing.off'|trans({'%x': 20}) }}</span></span>
+                    </div>
+                    <div class="package-wrapper">
+                      <div class="package free col-md-4">
+                        <div class="package-header">
+                          <h5 class="cost">00 FCFA</h5>
+                          <span class="title">{{ 'pricing.free_for_candidates'|trans }}</span>
+                        </div>
+                        <div class="package-features">
+                          <ul>
+                            {% for i in 0 .. 4 %}
+                              <li class="active">{{ ('pricing.free.unlocked_features.' ~ i )|trans }}</li>
+                            {% endfor %}
+
+                            {% for i in 0 .. 0 %}
+                              <li>{{ ('pricing.free.locked_features.' ~ i )|trans }}</li>
+                            {% endfor %}
+                          </ul>
+                          {% if is_granted('ROLE_USER') %}
+                            <a href="{{ path('applications_list') }}" class="button">{{ 'action.explore_jobs'|trans }}</a>
+                          {% else %}
+                            <a href="{{ path('fos_user_registration_register') }}" class="button">{{ 'login.register'|trans }}</a>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="package professional col-md-4">
+                        <div class="package-header">
+                          <h5 class="cost monthly-rate">{{ 'pricing.pro.price'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
+                          <h5 class="cost yearly-rate hidden">{{ 'pricing.pro.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
+                          <span class="title">{{ 'pricing.for_entreprise'|trans }}</span>
+                        </div>
+                        <div class="package-features">
+                          <ul>
+                            {% for i in 0 .. 2 %}
+                              <li class="active">{{ ('pricing.pro.unlocked_features.' ~ i )|trans }}</li>
+                            {% endfor %}
+
+                            {% for i in 0 .. 0 %}
+                              <li>{{ ('pricing.pro.locked_features.' ~ i )|trans }}</li>
+                            {% endfor %}
+                          </ul>
+                          <a href="pricing.html#" class="button">{{ 'pricing.try_now'|trans }}</a>
+                        </div>
+                      </div>
+                      <div class="package entreprise col-md-4">
+                        <div class="package-header">
+                          <h5 class="cost monthly-rate">{{ 'pricing.entreprise.price'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
+                          <h5 class="cost yearly-rate hidden">{{ 'pricing.entreprise.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
+                          <span class="title">{{ 'pricing.for_entreprise'|trans }}</span>
+                        </div>
+                        <div class="package-features">
+                          <ul>
+                            {% for i in 0 .. 3 %}
+                              <li class="active">{{ ('pricing.entreprise.unlocked_features.' ~ i )|trans }}</li>
+                            {% endfor %}
+                          </ul>
+                          <a href="pricing.html#" class="button">{{ 'pricing.try_now'|trans }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% include 'common/call-to-action.html.twig' %}
+
+              {# {% include 'common/testimonial.html.twig' %} #}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

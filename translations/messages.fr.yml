@@ -4,6 +4,9 @@ app:
     en: English
     ar: العربية
 
+action:
+  explore_jobs: Voir les emplois
+
 layout:
   about: À propos
   about_us: À propos de nous
@@ -55,16 +58,43 @@ privacy:
   login_before_post: Vous avez un compte ? Avant de poster une offre, vous devez vous connecter! # Have an Account ? Before submit job you need to sign in !
 
 pricing:
+  off: "%x%% de réduction" # %x%% off
+  free_trial: Essai gratuit
+  free_for_candidates: Candidat
+  for_pro: Professionnel
+  for_entreprise: Entreprise
   free:
-    label: Gratuit
+    label: Essai gratuit
     price: 00 XOF
-  advanced:
-    label: Entreprise
-    price: 25.000 XOF
+    unlocked_features:
+      - Explorer les offres
+      - Uploader votre CV
+      - Créer un CV en ligne
+      - Postuler sur les offres d'emplois
+      - Apparaître dans les résultats de recerches
+    locked_features:
+      - Postuler des offres d'emplois
   pro:
     label: Pro
-    price: 9.000 XOF
+    price: 2 400 XOF
+    price_off: 1 800 XOF
+    unlocked_features:
+      - 10 offres d'emplois / année
+      - Tableau de bord détaillé
+      - Statistiques
+    locked_features:
+      - Recommandation des meilleurs candidats
+  entreprise:
+    label: Entreprise
+    price: 6 000 XOF
+    price_off: 4 200 XOF
+    unlocked_features:
+      - Avantages de l'offre pro
+      - Postuler des offres illimitées
+      - Recommandation des meilleurs candidats
+      - Statistiques
   select_plan: Sélectionnez un plan
+  try_now: Essayer maintenant
 
 payment:
   credit_card: Carte de crédit # Credit Card
@@ -235,6 +265,10 @@ word:
   region: Région
   or: Ou
   profile: Profil
+  monthly: Mensuel
+  yearly: Annuel
+  month: Mois
+  year: Année
 
 text:
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

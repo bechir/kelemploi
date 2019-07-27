@@ -62,3 +62,8 @@
     height: 57px;
     background-size: contain;
 }
+
+.package-wrapper .package.entreprise .package-header {
+    background: url(/images/bg/cta-2-bg.jpg) no-repeat center;
+    background-size: cover;
+}

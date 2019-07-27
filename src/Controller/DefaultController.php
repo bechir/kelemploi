@@ -113,6 +113,11 @@ class DefaultController extends Controller
         ];
     }
 
+    public function pricing(): Response
+    {
+        return $this->render('default/pricing.html.twig');
+    }
+
     public function newsletter(Request $request): Response
     {
         if ($request->isMethod('POST')) {

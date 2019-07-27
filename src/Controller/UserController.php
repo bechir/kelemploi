@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
     
-        return $this->render('user/edit-esume.html.twig', [
+        return $this->render('user/edit-resume.html.twig', [
             'user' => $user,
             'active' => 'edit-resume',
         ]);
@@ -97,7 +97,7 @@ class UserController extends Controller
     
         return $this->render('user/applied.html.twig', [
             'user' => $user,
-            'active' => 'applied',
+            'active' => 'applied-jobs',
         ]);
     }
     
