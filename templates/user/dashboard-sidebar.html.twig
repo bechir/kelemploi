@@ -3,7 +3,11 @@
 <div class="dashboard-sidebar">
     <div class="user-info">
         <div class="thumb">
-            <img alt="{{ app.user.fullName }} Photo" class="img-fluid" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
+            {% if app.user.avatar %}
+                <img alt="{{ app.user.fullName }} Photo" class="img-fluid" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
+            {% else %}
+                <img alt="No image" class="img-fluid" src="{{ asset('images/account/default-avatar-profile.jpg') }}">
+            {% endif %}
         </div>
         <div class="user-body">
             <h5>{{ user.fullname }}</h5>

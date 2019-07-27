@@ -2,11 +2,6 @@
 
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/html5-simple-date-input-polyfill.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/dashboard.css') }}">
-{% endblock %}
-
 {% block main %}
 
     {{ breadcrumb.level_1('employer.breadcrumb') }}
@@ -26,11 +21,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascript %}
-    <script src="{{ asset('assets/js/html5-simple-date-input-polyfill.min.js') }}"></script>
-    <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
-    <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
-    <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
 {% endblock %}

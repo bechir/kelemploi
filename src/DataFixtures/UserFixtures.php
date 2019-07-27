@@ -44,7 +44,7 @@ class UserFixtures extends Fixture
     {
         return [
             // $userData = [$username, $phoneNumber, $password, $email, $roles];
-            ['Administrateur', '+222 26 74 93 34', '12345678', 'contactwebmaster21@gmail.com', ['ROLE_SUPER_ADMIN']],
+            // ['Administrateur', '+222 26 74 93 34', '12345678', 'contactwebmaster21@gmail.com', ['ROLE_SUPER_ADMIN']],
         ];
     }
 }

@@ -25,6 +25,11 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        // $this->loadApplications($manager);
+    }
+
+    public function loadApplications(ObjectManager $manager)
+    {
         $regions = $manager->getRepository(Region::class)->findAll();
         $jobCategories = $manager->getRepository(JobCategory::class)->findAll();
         $contracts = $manager->getRepository(ContractType::class)->findAll();
@@ -41,7 +46,6 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
 
             $application = (new Application())
                 ->setCompany(Company::companySuffix())
-                ->setInterlocutor($faker->name)
                 ->setPostCategory(Base::randomElement($jobCategories))
                 ->setNbCandidatesToRecruit($faker->randomDigitNotNull)
                 ->setJobTitle($faker->word)

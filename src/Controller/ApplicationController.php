@@ -12,6 +12,31 @@ use App\Entity\Company;
 
 class ApplicationController extends AbstractController
 {
+    public function list(): Response
+    {
+        return $this->render('application/listing.html.twig', [
+            'list' => $this->getDoctrine()->getRepository(Application::class)->findAll()
+        ]);
+    }
+
+    public function listCategory(Request $request, $slug): Response
+    {
+        $list = [];
+
+        return $this->render('application/listing.html.twig', [
+            'list' => $list
+        ]);
+    }
+
+    public function listFilter(Request $request): Response
+    {
+        $list = [];
+
+        return $this->render('application/listing.html.twig', [
+            'list' => $list
+        ]);
+    }
+
     /**
      * @IsGranted("ROLE_EMPLOYER")
      */
@@ -90,13 +115,6 @@ class ApplicationController extends AbstractController
         return $this->render('application/show.html.twig', [
             '_app' => $app,
             'company' => $app->getCompany()
-        ]);
-    }
-
-    public function list(): Response
-    {
-        return $this->render('application/listing.html.twig', [
-            'list' => $this->getDoctrine()->getRepository(Application::class)->findAll()
         ]);
     }
 
