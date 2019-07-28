@@ -2,6 +2,10 @@
 
 {% block title %}{{ 'job.new.title'|trans }}{% endblock %}
 
+{% block top_level %}
+    {# How to post job ? #}
+{% endblock %}
+
 {% block content %}
     
     {% include 'application/form.html.twig' with {form: form, company: company} %}

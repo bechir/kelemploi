@@ -111,6 +111,11 @@ class Application
      */
     private $gender;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $tools;
+
     const FENCED  = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS  = [self::FENCED, self::ONGOING];
@@ -358,5 +363,17 @@ class Application
             $this->dates = new DateInterval();
 
         $this->dates->setStart(new \DateTime());
+    }
+
+    public function getTools(): ?string
+    {
+        return $this->tools;
+    }
+
+    public function setTools(?string $tools): self
+    {
+        $this->tools = $tools;
+
+        return $this;
     }
 }

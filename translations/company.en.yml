@@ -1,6 +1,36 @@
-dashoard:
+logo: Logo
+edit_profile: Modifier le profil de companie
+bookmarked: Favoris
+applied_jobs: Emplois Postulés
+messages: Mes messages
+
+dashboard:
+  title: '%name% | Tableau de bord'
   statistics:
-  job_posted: Job Posted
+    job_posted: Offres d'emploi
+    app_submit: Candidatures # Application Submit
+    call_for_interview: Entretiens # Call for interview
 
 profile:
-  title: 'Profil'
+  title: "Profil"
+
+listing:
+  title: 'Les entreprises qui recrutent au Sénégal'
+
+form:
+  save_change: Sauvegarder les modifications # Save Change
+  edit_logo: Changer de logo # Change Avatar
+  edit_infos: Modifier mes informations #
+  name: Nom de la companie
+  region: Région
+  category: "Sécteur"
+  email: Adresse e-mail
+  phone: Numéro de téléphone
+  website: Site web
+  address: Adresse
+  expertise:
+    label: Expértise
+    placeholder: UI & UX Designer
+  about_company:
+    label: À propos
+    placeholder: "* Donnez une description de votre companie en quelques lignes."

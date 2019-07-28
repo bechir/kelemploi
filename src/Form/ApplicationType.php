@@ -64,6 +64,7 @@ class ApplicationType extends AbstractType
                 'placeholder' => 'form.job.optionnal_xp'
             ])
             ->add('benefits', TextareaType::class)
+            ->add('tools', TextareaType::class)
             ->add('responsibilities', TextareaType::class)
             ->add('gender', EntityType::class, [
                 'class' => JobGender::class,

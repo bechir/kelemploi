@@ -1,12 +1,10 @@
+{% import 'util/company_widgets.twig' as widgets %}
+
 <div class="dashboard-sidebar">
     <div class="company-info">
-        <div class="thumb">
-            {% if company and company.photo %}
-                <img alt="{{ company.name }} Logo" class="img-fluid" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}">
-            {% else %}
-                <img alt="Pas de logo" class="img-fluid" src="{{ asset('images/account/default-logo.jpg') }}">
-            {% endif %}
-        </div>
+        {# Company thumb #}
+        {{ widgets.thumb(company) }}
+        
         <div class="company-body">
             <h5>{{ company ? company.name|capitalize : '-' }}</h5>
         </div>

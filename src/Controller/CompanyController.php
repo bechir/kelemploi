@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Company;
 use App\Form\CompanyType;
+use App\Entity\Application;
 
 class CompanyController extends AbstractController
 {
@@ -17,6 +18,24 @@ class CompanyController extends AbstractController
 
         return $this->render('company/listing.html.twig', [
             'companies' => $companies
+        ]);
+    }
+
+    public function show(Company $company): Response
+    {
+        return $this->render('company/show.html.twig', [
+            'company' => $company
+        ]);
+    }
+
+    public function openedJobs(Company $company): Response
+    {
+        $list = $this->getDoctrine()
+            ->getRepository(Application::class)
+                ->findBy(['company' => $company]);
+
+        return $this->render('company/open-job.html.twig', [
+            'jobs' => $list
         ]);
     }
 

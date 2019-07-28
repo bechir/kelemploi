@@ -4,7 +4,7 @@
 
 {% trans_default_domain 'company' %}
 
-{% block title %}{{ 'edit_profile'|trans }}{% endblock %}
+{% block title %}{{ 'edit_profile'|trans({'%name%': company ? company.name : website.name}) }}{% endblock %}
 {% block content %}
     {{ form_start(form, {'attr': { 'class': 'dashboard-form job-post-form' } }) }}
         <div class="dashboard-section upload-profile-photo">

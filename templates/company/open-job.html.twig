@@ -1,0 +1,36 @@
+{% import 'util/company_widgets.twig' as widgets %}
+
+<div class="open-job details-section">
+    <h4><i data-feather="check-circle"></i>{{ 'open_job'|trans({}, 'company') }}</h4>
+
+    {% for job in jobs %}
+        {% set job_url = path('application_show', {slug: job.slug}) %}
+        <div class="job-list">
+            <div class="body">
+                <div class="content">
+                    <h4>
+                        <a href="{{ job_url }}">{{ job.jobTitle }}</a>
+                    </h4>
+
+                    {{ widgets.infos(job.company, 'office-location') }}
+                </div>
+                <div class="more">
+                    <div class="buttons">
+                        <a class="button" data-target="#apply-popup-id" data-toggle="modal" data-app-id="{{ job.id }}" href="{{ job_url }}">{{ 'job.apply'|trans }}</a>
+                        <a class="favourite" href="{{ job_url }}">
+                            <i data-feather="heart"></i>
+                        </a>
+                    </div>
+                    <p class="deadline">{{ 'job.deadline'|trans }} {{ job.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</p>
+                </div>
+            </div>
+        </div>
+    
+    {% else %}
+    
+        {% from 'util/alerts.twig' import default as alert_default %}
+
+        {{ alert_default('open_empty', 'company') }}
+    
+    {% endfor %}
+</div>

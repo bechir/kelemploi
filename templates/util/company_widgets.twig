@@ -1,0 +1,60 @@
+
+{% macro thumb(company, path = '#') %}
+    <div class="thumb">
+        <a href="{{ path }}">
+            {% if company.photo %}
+                <img alt="{{ company.name }} Logo" class="img-fluid" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}"/>
+            {% else %}
+                <img alt="{{ company.name }} Logo" class="img-fluid" src="{{ asset('images/account/default-logo.png') }}"/>
+            {% endif %}
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro infos(company, class = 'location') %}
+    <div class="info">
+        {% if company.category %}
+            <span class="company-category">
+                <a href="#">
+                    <i data-feather="briefcase"></i>
+                    {{ company.category|trans({}, 'jobs-categories') }}
+                </a>
+            </span>
+        {% endif %}
+        <span class="{{ class }}">
+            <a href="#">
+                <i data-feather="map-pin"></i>
+                {% if company.region %}
+                    {{ company.region|trans({}, 'regions') }}
+                {% else %}
+                    {{ 'app.sn'|trans }}
+                {% endif %}
+            </a>
+        </span>
+    </div>
+{% endmacro %}
+
+{% macro office_location(name) %}
+    <span class="office-location">
+        <a href="#">
+            <i data-feather="map-pin"></i>{{ name|trans({}, 'regions') }}
+        </a>
+    </span>
+{% endmacro %}
+
+{% macro job_type(contract) %}
+    {% set class = contract|lower %}
+
+    {% if class == 'cdd' or class == 'stage' %}
+        {% set class = 'temporary' %}
+    {% elseif class == 'cdi' %}
+        {% set class = 'full-time' %}
+    {% elseif class == 'alternance' %}
+        {% set class = 'part-time' %}
+    {% endif %}
+
+    <span class="job-type {{ class }}">
+        <a href="{{ path('applications_list', {contract: contract}) }}">
+            <i data-feather="clock"></i>{{ contract|trans() }}</a>
+    </span>
+{% endmacro %}

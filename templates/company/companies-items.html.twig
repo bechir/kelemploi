@@ -1,42 +1,22 @@
 {% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as widgets %}
 
 <div class="employer-filter-result">
     {% for company in companies %}
         {% set path = path('company_show', {slug: company.slug}) %}
         <div class="employer">
-            <div class="thumb">
-                <a href="{{ path }}">
-                    {% if company.photo %}
-                        <img alt="{{ company.name }}" class="img-fluid" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}" />
-                    {% else %}
-                        <img alt="{{ company.name }}" class="img-fluid" src="{{ asset('images/account/default-logo.png') }}" />
-                    {% endif %}
-                </a>
-            </div>
+
+            {# Company thumb #}
+            {{ widgets.thumb(company, path) }}
+
             <div class="body">
                 <div class="content">
                     <h4>
                         <a href="{{ path }}">{{ company.name }}</a>
                     </h4>
-                    <div class="info">
-                        {% if company.category %}
-                            <span class="company-category">
-                                <a href="#">
-                                    <i data-feather="briefcase"></i>{{ company.category|trans({}, 'jobs-categories') }}
-                                </a>
-                            </span>
-                        {% endif %}
-                        <span class="location">
-                            <a href="#">
-                                <i data-feather="map-pin"></i>
-                                    {% if company.region %}
-                                        {{ company.region|trans({}, 'regions') }}
-                                    {% else %}
-                                        {{ 'app.sn'|trans }}
-                                    {% endif %}
-                                </a>
-                        </span>
-                    </div>
+
+                    {# Company infos #}
+                    {{ widgets.infos(company) }}
                 </div>
                 <div class="button-area">
                     <a href="{{ path('applications_list', {company: company.slug}) }}">{{ random(2, 17) }} Offres</a>

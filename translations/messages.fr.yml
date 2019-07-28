@@ -114,6 +114,7 @@ job:
     h1: "Nouvelle offre d'emploi"
   save: Enregistrer # Save Job
   apply_online: Candidater en ligne # Apply Online
+  apply: Candidater
   send_email: "Envoyer un email" # Email Job
   summary: En resumé 
   published_on: "Publié le: " # Published on# Job Summary
@@ -132,6 +133,7 @@ job:
   responsibilities: Responsibilités # Responsibilities
   education_xp: "Éducation & Expérience: " # "Education + Experience"
   benefits: "Autres bénéfices"
+  tools: "Outils"
   simillar: "Offres similaires" # Simillar Jobs
   browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
   contract:
@@ -147,8 +149,11 @@ company:
   address: "Adresse: "
   website: "Site web: "
   zip: "Code postal: "
+  size: "Taille: "
+  email: "Email: "
+  category: "Sécteur: "
   description: "Description: "
-  listing_title: "Listes des entreprises"
+  listing_title: "Les entreprises qui recrutent"
   edit_profile:
     success: Le pofile a été mis à jour avec succès!
 
@@ -176,8 +181,8 @@ user:
   level:
     bac: Bac
     l1: Licence 1
-    l2: Licence 1
-    l3: Licence 1
+    l2: Licence 2
+    l3: Licence 3
     m1: Master 1
     m2: Master 2
     doctorat: Doctorat
@@ -248,6 +253,8 @@ form:
     region: "Choisissez une région"
     vacancy: "Nombre de postes (optionnel)"
     salary:  Estimation du salaire # Salary Range
+    tools: "Outils (Optionnel)"
+    tools_help: "Les outils ques vous utilisez en entreprise"
     resp_help:
       title: "Ce que l'employé fera..."
       text: >
@@ -279,6 +286,7 @@ word:
   month: Mois
   year: Année
   explore: Explorer
+  company: Entreprise
 
 text:
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

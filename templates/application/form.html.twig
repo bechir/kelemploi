@@ -98,6 +98,18 @@
                 {{ form_widget(form.responsibilities, {'attr': {'class': 'tinymce-editor tinymce-editor-2' }}) }}
             </div>
         </div>
+
+        <div class="row">
+            <label class="col-md-3 col-form-label">{{ 'form.job.tools'|trans }}
+                <a tabindex="0" class="btn btn-link" role="button" data-toggle="tooltip" data-title="{{ 'form.job.tools_help'|trans }}">
+                    <i class="fas fa-question-circle fa-lg"></i>
+                </a>
+            </label>
+            <div class="col-md-9">
+                {{ form_widget(form.tools, {'attr': {'class': 'tinymce-editor tinymce-editor-2' }}) }}
+            </div>
+        </div>
+
         <div class="row">
             <label class="col-md-3 col-form-label">{{ 'form.job.other_benefits'|trans }}
                 <a tabindex="0" class="btn btn-link" role="button" data-toggle="popover" data-html="true" data-title="{{ 'form.job.benefits.title'|trans }}" data-content="{{ 'form.job.benefits.text'|trans|raw }}">
@@ -108,6 +120,7 @@
                 {{ form_widget(form.benefits, {'attr': {'class': 'tinymce-editor tinymce-editor-2' }}) }}
             </div>
         </div>
+
         {% if company is null %}
             <div class="row">
                 <label class="col-md-3 col-form-label">

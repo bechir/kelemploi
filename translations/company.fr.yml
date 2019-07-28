@@ -1,8 +1,13 @@
 logo: Logo
-edit_profile: Modifier le profil de companie
+edit_profile: "%name% | Modifier"
 bookmarked: Favoris
 applied_jobs: Emplois Postulés
 messages: Mes messages
+x_open_positions: "%x% appels à candidatures"
+open_job: "Appels à candidatures en cours"
+open_empty: "Pas d'offres en cours en ce moment"
+social_profile: "Réseaux sociaux" # Social Profile:
+
 
 dashboard:
   title: '%name% | Tableau de bord'
@@ -14,6 +19,16 @@ dashboard:
 profile:
   title: "Profil"
 
+listing:
+  title: 'Les entreprises qui recrutent au Sénégal'
+
+details:
+  about: "À propos de nous"
+  save: "Ajouter aux favoris"
+  info: "Information"
+
+contact:
+  button: Contacter nous # Contact Us
 
 form:
   save_change: Sauvegarder les modifications # Save Change

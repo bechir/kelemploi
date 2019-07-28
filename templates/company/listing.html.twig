@@ -4,6 +4,8 @@
 
 {% trans_default_domain 'comapny' %}
 
+{% block title %}{{ 'listing.title'|trans({}, 'company') }}{% endblock %}
+
 {% block main %}
 
     {{ breadcrumb.level_1('company.listing_title') }}

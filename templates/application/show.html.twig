@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ _app.jobTitle }} &ndash; {{ parent() }}{% endblock %}
+{% import 'util/company_widgets.twig' as company_widgets %}
+
+{% block title %}{{ _app.jobTitle }} | {{ website.name }}{% endblock %}
 
 {% block stylesheets %}
 {% endblock %}
@@ -15,16 +17,11 @@
             <div class="job-listing-details">
               <div class="job-title-and-info">
                 <div class="title">
-                  <div class="thumb">
-                    <img src="/images/job/company-logo-1.png" class="img-fluid" alt="">
-                  </div>
+                  {{ company_widgets.thumb(company) }}
                   <div class="title-body">
                     <h4>{{ _app.jobTitle }}</h4>
-                    <div class="info">
-                      <span class="company"><a href="#" onclick="return false"><i data-feather="briefcase"></i>{{ company.name }}</a></span>
-                      <span class="office-location"><a href="#" onclick="return false"><i data-feather="map-pin"></i>{{ company.region }}</a></span>
-                      <span class="job-type full-time"><a href="#" onclick="return false"><i data-feather="clock"></i>{{ _app.contractType|trans }}</a></span>
-                    </div>
+                    
+                    {{ company_widgets.infos(company) }}
                   </div>
                 </div>
                 <div class="buttons">
@@ -63,6 +60,14 @@
                         {{ _app.benefits|raw }}
                       </div>
                     {% endif %}
+                    
+                    {% if _app.tools %}
+                    <div class="other-benifit details-section">
+                        <h4><i class="fas fa-wrench"></i>{{ 'job.tools'|trans }}</h4>
+                        {{ _app.tools|raw }}
+                    </div>
+                    {% endif %}
+
                     <div class="job-apply-buttons">
                       <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
                       <a href="#" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
@@ -73,6 +78,7 @@
                       <div class="job-summary">
                         <h4>{{ 'job.summary'|trans }}</h4>
                         <ul>
+                            <li><span>{{ 'word.company'|trans }}: </span><a href="{{ path('company_show', {slug: company.slug}) }}" class="btn-link">{{ company.name }}</a></li>
                             <li><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
                             {% if _app.nbCandidatesToRecruit %}
                                 <li><span>{{ 'job.vacancy'|trans }}</span>{{ _app.nbCandidatesStr }}</li>
@@ -82,7 +88,7 @@
                               <li><span>{{ 'job.experience'|trans }}</span>{{ _app.experience|trans }}</li>
                             {% endif %}
                             {% if company.region %}
-                              <li><span>{{ 'job.region'|trans }}</span>{{ company.region }}</li>
+                              <li><span>{{ 'job.region'|trans }}</span>{{ company.region|trans({}, 'regions') }}</li>
                             {% endif %}
                             {% if _app.salary %}
                                 <li><span>{{ 'job.salary'|trans }}</span>{{ _app.salary }}</li>

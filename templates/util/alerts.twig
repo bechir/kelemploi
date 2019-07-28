@@ -1,0 +1,30 @@
+{% macro alert(type, icon, text, domain) %}
+    <div class="alert-wrap">
+        <div class="jy-alert {{ type }}-alert">
+            <div class="icon">
+                <i class="fas {{ icon }}"></i>
+            </div>
+            <p>{{ text|trans({}, domain) }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro default(text, domain = 'messages') %}
+    {{ _self.alert('default', 'fa-info-circle', text, domain) }}
+{% endmacro %}
+
+{% macro success(text, domain = 'messages') %}
+    {{ _self.alert('success', 'fa-check-circle', text, domain)}}
+{% endmacro %}
+
+{% macro info(text, domain = 'messages') %}
+    {{ _self.alert('info', 'fa-info-circle', text, domain)}}
+{% endmacro %}
+
+{% macro warning(text, domain = 'messages') %}
+    {{ _self.alert('warning', 'fa-warning', text, domain)}}
+{% endmacro %}
+
+{% macro danger(text, domain = 'messages') %}
+    {{ _self.alert('danger', 'fa-exclamation-circle', text, domain)}}
+{% endmacro %}

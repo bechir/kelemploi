@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% import 'util/company_widgets.twig' as macros %}
+
+{% block title %}{{ company.name }} | {{ website.name }}{% endblock %}
+
+{% block main %}
+    <!-- Company Details -->
+    <div class="alice-bg padding-top-60 section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="company-details">
+              <div class="title-and-info">
+                <div class="title">
+                    {# Company thumb #}
+                    {{ macros.thumb(company) }}
+                  <div class="title-body">
+                    <h4>{{ company.name }}</h4>
+                    
+                    {# Company's infos #}
+                    {{ macros.infos(company) }}
+
+                  </div>
+                </div>
+                <div class="download-resume">
+                  <a href="#" class="save-btn"><i data-feather="heart"></i>{{ 'details.save'|trans }}</a>
+                  <a href="{{ path('applications_list', {company: company.slug}) }}">{{ 'x_open_positions'|trans({'%x%': 2}) }}</a>
+                </div>
+              </div>
+              <div class="details-information padding-top-60">
+                <div class="row">
+                  <div class="col-xl-7 col-lg-8">
+                    <div class="about-details details-section">
+                      <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
+                      <p>{{ company.description }}</p>
+                    </div>
+                    {# <div class="intor-video details-section">
+                      <h4><i data-feather="video"></i>Intro Video</h4>
+                      <div class="video-area">
+                        <!-- <div data-type="vimeo" data-video-id="126777001"></div> -->
+                        <div id="player" data-plyr-provider="vimeo" data-plyr-embed-id="126777001"></div>
+                      </div>
+                    </div>
+                    <div class="portfolio details-section">
+                      <h4><i data-feather="grid"></i>Image Gallery</h4>
+                      <div class="portfolio-slider owl-carousel">
+                        <div class="portfolio-item">
+                          <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
+                          <div class="overlay">
+                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
+                            <a href="employer-details.html#"><i data-feather="link"></i></a>
+                          </div>
+                        </div>
+                        <div class="portfolio-item">
+                          <img src="/images/portfolio/thumb-1.jpg" class="img-fluid" alt="">
+                          <div class="overlay">
+                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
+                            <a href="employer-details.html#"><i data-feather="link"></i></a>
+                          </div>
+                        </div>
+                        <div class="portfolio-item">
+                          <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
+                          <div class="overlay">
+                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
+                            <a href="employer-details.html#"><i data-feather="link"></i></a>
+                          </div>
+                        </div>
+                        <div class="portfolio-item">
+                          <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
+                          <div class="overlay">
+                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
+                            <a href="employer-details.html#"><i data-feather="link"></i></a>
+                          </div>
+                        </div>
+                        <div class="portfolio-item">
+                          <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
+                          <div class="overlay">
+                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
+                            <a href="employer-details.html#"><i data-feather="link"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    #}
+
+                    {# Open Job for this company #}
+                    {{ render(controller('App\\Controller\\CompanyController::openedJobs', {company: company})) }}
+
+                  </div>
+                  <div class="col-xl-4 offset-xl-1 col-lg-4">
+                    <div class="information-and-contact">
+                      <div class="information">
+                        <h4>{{ 'details.info'|trans }}</h4>
+                        <ul>
+                            {% if company.category %}
+                                <li><span>{{ 'company.category'|trans({}, 'messages') }}</span> {{ company.category|trans({}, 'jobs-categories') }}</li>
+                            {% endif %}
+                          
+                            {% if company.region %}
+                                <li><span>{{ 'job.region'|trans({}, 'messages') }}</span> {{ company.region|trans({}, 'regions') }}</li>
+                            {% endif %}
+
+                            {% if company.address %}
+                                <li><span>{{ 'company.address'|trans({}, 'messages') }}</span> {{ company.address }}</li>
+                            {% endif %}
+
+                            {% if company.email %}
+                                <li><span>{{ 'company.email'|trans({}, 'messages') }}</span>{{ company.email }}</li>
+                            {% endif %}
+                            
+                            {# <li><span>{{ 'company.size'|trans({}, 'messages') }}</span> 20-50</li> #}
+                            
+                            {% if company.website %}
+                                <li><span>{{ 'company.website'|trans({}, 'messages') }}</span> <a href="//{{ company.website }}">{{ company.website }}</a></li>
+                            {% endif %}
+                        </ul>
+                      </div>
+                      <div class="buttons">
+                        <a href="#" class="button contact-button" data-toggle="modal" data-target="#exampleModal">{{ 'contact.button'|trans }}</a>
+                      </div>
+                      <!-- Modal -->
+                      <div class="modal fade contact-form-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <h4><i data-feather="edit"></i>Contact Us</h4>
+                              <form action="employer-details.html#">
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                  <input type="email" class="form-control" placeholder="Your Email">
+                                </div>
+                                <div class="form-group">
+                                  <textarea class="form-control" placeholder="Your Message"></textarea>
+                                </div>
+                                <button class="button">Submit</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {# <div class="job-location">
+                      <h4>Our Location</h4>
+                      <div id="map-area">
+                        <div class="cp-map" id="location" data-lat="40.713355" data-lng="-74.005535" data-zoom="10"></div>
+                      </div>
+                    </div> #}
+                    <div class="share-job-post">
+                      <span class="share">{{ 'social_profile'|trans }}</span>
+                      <a href="#" onclick="return false"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#" onclick="return false"><i class="fab fa-twitter"></i></a>
+                      <a href="#" onclick="return false"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="#" onclick="return false"><i class="fab fa-google-plus-g"></i></a>
+                      <a href="#" onclick="return false"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Company Details End -->
+{% endblock %}
