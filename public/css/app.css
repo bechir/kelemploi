@@ -6,7 +6,9 @@
     color: red;
     font-size: 25px;
 } */
-
+.text-muted-2 {
+    color: #44494e!important;
+}
 .newsletter-form .form-group {
     width: calc(100% - 157px);
     margin-right: 10px;
@@ -66,4 +68,19 @@
 .package-wrapper .package.entreprise .package-header {
     background: url(/images/bg/cta-2-bg.jpg) no-repeat center;
     background-size: cover;
+}
+
+.regions .company-wrap{
+    height: 220px;
+}
+.regions .company-wrap strong{
+    font-style: normal;
+    font-weight: normal;
+}
+.regions .company-wrap .body .button {
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    width: 96%;
+    transform: translateX(-50%);
 }

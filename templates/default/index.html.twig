@@ -70,7 +70,8 @@
 
     {# Top Companies #}
 
-    {# Pricing #}
+    {# Regions #}
+    {{ render(controller('App\\Controller\\RenderedController::regionsListing')) }}
 
     {# Registration box if the user is not logged in #}
     {% include 'common/registration-box.html.twig' %}

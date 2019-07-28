@@ -25,6 +25,14 @@ applications_list_category:
   defaults:
     _locale: '%locale%'
 
+applications_list_region:
+  path: /{_locale}/jobs/region/{region}
+  controller: App\Controller\ApplicationController::listFilter
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 applications_list_filter:
   path: /{_locale}/jobs/filter
   controller: App\Controller\ApplicationController::listFilter

@@ -36,6 +36,9 @@ home:
   banner_title: "Plus de %x% offres d'emploi"
   banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
   add_resume: "Ajoutez votre CV" # Upload a Resume
+  regions_listing:
+    title: Des offres emplois dans toutes les régions du Sénégal
+    x_jobs: "%x% offres d'emploi à "
 
 # Contact page
 contact:
@@ -273,6 +276,7 @@ word:
   yearly: Annuel
   month: Mois
   year: Année
+  explore: Explorer
 
 text:
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"

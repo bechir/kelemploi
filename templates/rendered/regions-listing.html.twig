@@ -1,0 +1,32 @@
+<!-- Top Companies -->
+<div class="section-padding-top padding-bottom-90">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section-header">
+                    <h2 class="text-muted-2">{{ 'home.regions_listing.title'|trans }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="company-carousel owl-carousel regions">
+                {% for region in regions %}
+                    <div class="company-wrap">
+                        <div class="body">
+                            <h4>
+                                <a href="{{ path('applications_list_region', {region: region.slug}) }}">{{ region.slug|trans({}, 'regions') }}</a>
+                            </h4>
+                            <strong>{{ 'home.regions_listing.x_jobs'|trans({'%x%': counts[region.slug]}) }} {{ region.slug|trans({}, 'regions') }}</strong>
+                            <a class="button btn-block" href="{{ path('applications_list_region', {region: region.slug}) }}">
+                                {{ 'word.explore'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top Companies End -->
