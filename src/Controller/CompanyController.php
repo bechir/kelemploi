@@ -11,6 +11,15 @@ use App\Form\CompanyType;
 
 class CompanyController extends AbstractController
 {
+    public function list(Request $request): Response
+    {
+        $companies = $this->getDoctrine()->getRepository(Company::class)->findAll();
+
+        return $this->render('company/listing.html.twig', [
+            'companies' => $companies
+        ]);
+    }
+
     /**
      * IsGranted("ROLE_EMPLOYER")
      */

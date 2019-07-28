@@ -123,6 +123,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                {{ form_widget(form.company.category, {'attr': {'class': 'form-control', 'placeholder': 'form.category' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 {{ form_widget(form.company.address, {'attr': {'class': 'form-control', 'placeholder': 'form.company.address' }}) }}
                             </div>
                         </div>

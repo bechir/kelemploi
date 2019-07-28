@@ -64,6 +64,11 @@ class Company
     private $region;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
+     */
+    private $category;
+
+    /**
      * @var CompanyPhoto
      * 
      * @ORM\OneToOne(targetEntity="App\Entity\CompanyPhoto", orphanRemoval=true, cascade={"persist", "remove"})
@@ -161,6 +166,18 @@ class Company
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    public function getCategory(): ?JobCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?JobCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

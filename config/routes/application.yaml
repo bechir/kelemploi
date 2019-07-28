@@ -33,14 +33,6 @@ applications_list_region:
   defaults:
     _locale: '%locale%'
 
-applications_list_filter:
-  path: /{_locale}/jobs/filter
-  controller: App\Controller\ApplicationController::listFilter
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
 application_show:
   path: /{_locale}/job/{slug}
   controller: App\Controller\ApplicationController::show

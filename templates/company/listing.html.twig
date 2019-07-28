@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% trans_default_domain 'comapny' %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('company.listing_title') }}
+
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="employer-container">
+              <div class="filtered-employer-wrapper">
+                <div class="employer-view-controller-wrapper">
+                  <div class="employer-view-controller">
+                    <div class="controller list active">
+                      <i data-feather="menu"></i>
+                    </div>
+                    <div class="controller grid">
+                      <i data-feather="grid"></i>
+                    </div>
+                    <div class="employer-view-filter">
+                      <select class="selectpicker">
+                        <option value="" selected>Most Recent</option>
+                        <option value="california">Top Rated</option>
+                        <option value="las-vegas">Most Popular</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="showing-number">
+                    <span>Showing 1–12 of 28 Jobs</span>
+                  </div>
+                </div>
+                
+                {% include 'company/companies-items.html.twig' with {companies: companies} %}
+
+                <div class="pagination-list text-center">
+                  <nav class="navigation pagination">
+                    <div class="nav-links">
+                      <a class="prev page-numbers" href="employer-listing.html#"><i class="fas fa-angle-left"></i></a>
+                      <a class="page-numbers" href="employer-listing.html#">1</a>
+                      <span aria-current="page" class="page-numbers current">2</span>
+                      <a class="page-numbers" href="employer-listing.html#">3</a>
+                      <a class="page-numbers" href="employer-listing.html#">4</a>
+                      <a class="next page-numbers" href="employer-listing.html#"><i class="fas fa-angle-right"></i></a>
+                    </div>
+                  </nav>                
+                </div>
+              </div>
+              <div class="employer-filter-wrapper">
+                <div class="selected-options same-pad">
+                  <div class="selection-title">
+                    <h4>You Selected</h4>
+                    <a href="employer-listing.html#">Clear All</a>
+                  </div>
+                  <ul class="filtered-options">
+                  </ul>
+                </div>
+                <div class="employer-filter-dropdown same-pad category">
+                  <select class="selectpicker">
+                    <option value="" selected>Category</option>
+                    <option value="california">Accounting / Finance</option>
+                    <option value="california">Education</option>
+                    <option value="california">Design &amp; Creative</option>
+                    <option value="california">Health Care</option>
+                    <option value="california">Engineer &amp; Architects</option>
+                    <option value="california">Marketing &amp; Sales</option>
+                    <option value="california">Garments / Textile</option>
+                    <option value="california">Customer Support</option>
+                    <option value="california">Digital Media</option>
+                    <option value="california">Telecommunication</option>
+                  </select>
+                </div>
+                <div class="employer-filter-dropdown same-pad location">
+                  <select class="selectpicker">
+                    <option value="" selected>Location</option>
+                    <option value="california">Chicago</option>
+                    <option value="california">New York City</option>
+                    <option value="california">San Francisco</option>
+                    <option value="california">Washington</option>
+                    <option value="california">Boston</option>
+                    <option value="california">Los Angeles</option>
+                    <option value="california">Seattle</option>
+                    <option value="california">Las Vegas</option>
+                    <option value="california">San Diego</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

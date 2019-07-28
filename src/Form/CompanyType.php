@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\JobCategory;
 
 class CompanyType extends AbstractType
 {
@@ -32,6 +33,11 @@ class CompanyType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false,
                 'placeholder' => 'form.job.region'
+            ])->add('category', EntityType::class, [
+                'class' => JobCategory::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'form.job.category'
             ])
             ->add('photo', CompanyPhotoType::class, ['required' => false])
         ;

@@ -21,6 +21,7 @@ form:
   edit_infos: Modifier mes informations #
   name: Nom de la companie
   region: Région
+  category: "Sécteur"
   email: Adresse e-mail
   phone: Numéro de téléphone
   website: Site web

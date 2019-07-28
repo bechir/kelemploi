@@ -1,4 +1,5 @@
 app:
+  sn: Sénégal
   locale:
     fr: Français
     en: English
@@ -147,6 +148,7 @@ company:
   website: "Site web: "
   zip: "Code postal: "
   description: "Description: "
+  listing_title: "Listes des entreprises"
   edit_profile:
     success: Le pofile a été mis à jour avec succès!
 

@@ -47,7 +47,7 @@ class JobCategory
 
     public function __toString()
     {
-        return $this->name;
+        return $this->slug;
     }
 
     public function getSlug(): ?string
