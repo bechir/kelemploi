@@ -1,3 +1,20 @@
+companies_list:
+  path: /{_locale}/entreprises
+  controller: App\Controller\CompanyController::list
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+company_show:
+  path: /{_locale}/entreprise/{slug}
+  controller: App\Controller\CompanyController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+
 company_dashboard:
   path: /{_locale}/dashboard
   controller: App\Controller\CompanyController::dashboard
