@@ -8,8 +8,8 @@
 
 namespace App\Twig;
 
-use App\Utils\AppUtils;
-use App\Utils\CategoryCounter;
+use App\Util\AppUtils;
+use App\Util\CategoryCounter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Intl\Languages;
 use Twig\Extension\AbstractExtension;
@@ -55,7 +55,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getCurrency', [$this, 'getCurrency']),
             new TwigFunction('htmlRating', [HTMLCodeGenerator::class, 'htmlRating']),
             new TwigFunction('citiesByCountry', [$this, 'citiesByCountry']),
-            new TwigFunction('loadQuantites', [$this, 'categoriesQuantities']),
+            new TwigFunction('categoriesCount', [$this, 'categoriesQuantities']),
         ];
     }
 

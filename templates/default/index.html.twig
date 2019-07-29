@@ -4,13 +4,14 @@
 
 {% block main %}
 
+{% set categories_count = categoriesCount() %}
     <!-- Banner -->
     <div class="banner banner-3 banner-3-bg">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-              <h1>{{ 'home.banner_title'|trans({'%x%': '58,246'}) }}</h1>
+            <h1>{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
               <p>{{ 'home.banner_text'|trans }}</p>
               <a href="{{ path('edit_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
             </div>
@@ -46,16 +47,16 @@
                 <div class="filter-categories">
                   <h4>{{ 'job.by_category'|trans }}</h4>
                   <ul>
-                    <li><a href="{{ path('applications_list_category', {slug: 'banque-finance-assurance'}) }}"><i data-feather="bar-chart-2"></i>{{ 'banque-finance-assurance'|trans({}, 'jobs-categories') }} <span>(233)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'enseignement-recherche'}) }}"><i data-feather="edit-3"></i>{{ 'enseignement-recherche'|trans({}, 'jobs-categories') }} <span>(46)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'desgin-infographie-multimedia'}) }}"><i data-feather="feather"></i>{{ 'desgin-infographie-multimedia'|trans({}, 'jobs-categories') }} <span>(156)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'sante'}) }}"><i data-feather="briefcase"></i>{{ 'sante'|trans({}, 'jobs-categories') }} <span>(98)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'ingenierie-architecture'}) }}"><i data-feather="package"></i>{{ 'ingenierie-architecture'|trans({}, 'jobs-categories') }} <span>(188)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'marketing-communication'}) }}"><i data-feather="pie-chart"></i>{{ 'marketing-communication'|trans({}, 'jobs-categories') }} <span>(124)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'langue-ecrit'}) }}"><i data-feather="command"></i>{{ 'langue-ecrit'|trans({}, 'jobs-categories') }} <span>(584)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'service-client'}) }}"><i data-feather="globe"></i>{{ 'service-client'|trans({}, 'jobs-categories') }} <span>(233)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'medias'}) }}"><i data-feather="headphones"></i>{{ 'medias'|trans({}, 'jobs-categories') }} <span>(15)</span></a></li>
-                    <li><a href="{{ path('applications_list_category', {slug: 'informatique-telecommunication'}) }}"><i data-feather="radio"></i>{{ 'informatique-telecommunication'|trans({}, 'jobs-categories') }} <span>(03)</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'banque-finance-assurance'}) }}"><i data-feather="bar-chart-2"></i>{{ 'banque-finance-assurance'|trans({}, 'jobs-categories') }} <span>({{ categories_count['banque-finance-assurance'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'enseignement-recherche'}) }}"><i data-feather="edit-3"></i>{{ 'enseignement-recherche'|trans({}, 'jobs-categories') }} <span>({{ categories_count['enseignement-recherche'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'desgin-infographie-multimedia'}) }}"><i data-feather="feather"></i>{{ 'desgin-infographie-multimedia'|trans({}, 'jobs-categories') }} <span>({{ categories_count['desgin-infographie-multimedia'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'sante'}) }}"><i data-feather="briefcase"></i>{{ 'sante'|trans({}, 'jobs-categories') }} <span>({{ categories_count['sante'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'ingenierie-architecture'}) }}"><i data-feather="package"></i>{{ 'ingenierie-architecture'|trans({}, 'jobs-categories') }} <span>({{ categories_count['ingenierie-architecture'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'marketing-communication'}) }}"><i data-feather="pie-chart"></i>{{ 'marketing-communication'|trans({}, 'jobs-categories') }} <span>({{ categories_count['marketing-communication'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'langue-ecrit'}) }}"><i data-feather="command"></i>{{ 'langue-ecrit'|trans({}, 'jobs-categories') }} <span>({{ categories_count['langue-ecrit'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'service-client'}) }}"><i data-feather="globe"></i>{{ 'service-client'|trans({}, 'jobs-categories') }} <span>({{ categories_count['service-client'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'medias'}) }}"><i data-feather="headphones"></i>{{ 'medias'|trans({}, 'jobs-categories') }} <span>({{ categories_count['medias'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list_category', {slug: 'informatique-telecommunication'}) }}"><i data-feather="radio"></i>{{ 'informatique-telecommunication'|trans({}, 'jobs-categories') }} <span>({{ categories_count['informatique-telecommunication'] }})</span></a></li>
                   </ul>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 form:
   title:  Newsletter
-  body: Get e-mail updates about our latest news and Special offers. We don’t send spam so don’t worry.
+  body: Recevez des mises à jour par e-mail sur nos dernières nouvelles et nos offres spéciales. Et pas de spam, promis!
   submit: S'inscrire
   error: Entrez une adresse e-mail valide # 0 - Please enter a value
   success: Merci pour votre inscription! # Thank you for subscribing!

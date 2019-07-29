@@ -14,6 +14,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Event\ApplicationEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\ApplicationEvents;
 
 class ApplicationController extends AbstractController
 {
@@ -45,7 +48,7 @@ class ApplicationController extends AbstractController
     /**
      * @IsGranted("ROLE_EMPLOYER")
      */
-    public function create(Request $request): Response
+    public function create(Request $request, EventDispatcherInterface $dispatcher): Response
     {
         $em = $this->getDoctrine()->getManager();
         $app = new Application();
@@ -71,6 +74,10 @@ class ApplicationController extends AbstractController
             $em->persist($app);
 
             $em->flush();
+
+            $event = new ApplicationEvent($app);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
+
             $this->addFlash('success', 'Votre offre été créé !');
 
             return $this->redirectToRoute('application_show', [
@@ -110,13 +117,16 @@ class ApplicationController extends AbstractController
         ]);
     }
 
-    public function show(Application $app): Response
+    public function show(Application $app, EventDispatcherInterface $dispatcher): Response
     {
         if (!$app) {
             $this->addFlash('danger', "L'offre' n'existe pas.");
 
             return $this->redirectToRoute('index');
         }
+
+        $event = new ApplicationEvent($app);
+        $dispatcher->dispatch(ApplicationEvents::APPLICATION_VIEWED, $event);
 
         return $this->render('application/show.html.twig', [
             '_app' => $app,
@@ -127,8 +137,20 @@ class ApplicationController extends AbstractController
     /**
      * IsGranted("ROLE_EMPLOYER").
      */
-    public function delete(Request $request): Response
+    public function delete(Request $request, Application $app, EventDispatcherInterface $dispatcher): Response
     {
+        if($app) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($app);
+            $em->flush();
+
+            $event = new ApplicationEvent($app);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+
+            $this->addFlash('success', 'job.delete_success');
+        }
+
         return $this->render('application/delete.html.twig');
     }
 

@@ -10,7 +10,9 @@ namespace App\Util;
 
 class CategoryCounter
 {
-    private static $filename = __DIR__ . '/../../var/categories-count.txt';
+    use AppDirectoriesTrait;
+
+    private static $filename = __DIR__ . '/../../var/app/categories-count.txt';
 
     public static function count()
     {
@@ -53,10 +55,11 @@ class CategoryCounter
             if ($slug === $key) {
                 ++$data[$key];
                 $found = true;
-
                 break;
             }
         }
+
+        ++$data['all'];
 
         if (!$found) {
             throw new \Exception("Le slug $slug est introuvable.");
@@ -71,7 +74,7 @@ class CategoryCounter
         $found = false;
 
         foreach ($data as $key => $value) {
-            if ($slug === $key) {
+            if ($slug === $key || $key == 'all') {
                 --$data[$key];
                 if ($data[$key] < 0) {
                     $data[$key] = 0;
@@ -81,6 +84,8 @@ class CategoryCounter
                 break;
             }
         }
+
+        --$data['all'];
 
         if (!$found) {
             throw new \Exception("Le slug $slug est introuvable.");

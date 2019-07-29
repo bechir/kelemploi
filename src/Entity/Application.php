@@ -122,6 +122,11 @@ class Application
      */
     private $tools;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $viewCount;
+
     const FENCED = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS = [self::FENCED, self::ONGOING];
@@ -129,6 +134,7 @@ class Application
     public function __construct()
     {
         $this->setStatus(self::ONGOING);
+        $this->viewCount = 0;
     }
 
     public function getId(): ?int
@@ -380,6 +386,18 @@ class Application
     public function setTools(?string $tools): self
     {
         $this->tools = $tools;
+
+        return $this;
+    }
+
+    public function getViewCount(): ?int
+    {
+        return $this->viewCount;
+    }
+
+    public function increaseViewCount(): self
+    {
+        ++$this->viewCount;
 
         return $this;
     }
