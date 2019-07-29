@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Twig;
 
+use App\Utils\AppUtils;
+use App\Utils\CategoryCounter;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Intl\Languages;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use App\Utils\AppUtils;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use App\Utils\CategoryCounter;
 
 class AppExtension extends AbstractExtension
 {
@@ -31,8 +37,8 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFilter('country', [$this, 'getCountryName']),
             new TwigFilter('md2html', [$this, 'markdownToHtml'], ['is_safe' => ['html']]),
-            new TwigFilter('price', array(AppRuntime::class, 'priceFilter')),
-            new TwigFilter('htmlRating', array(HTMLCodeGenerator::class, 'priceFilter')),
+            new TwigFilter('price', [AppRuntime::class, 'priceFilter']),
+            new TwigFilter('htmlRating', [HTMLCodeGenerator::class, 'priceFilter']),
         ];
     }
 
@@ -54,13 +60,12 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * Return the country name identified by it's code
+     * Return the country name identified by it's code.
      */
     public function getCountryName($code): ?string
     {
         return Intl::getRegionBundle()->getCountryName($code);
     }
-
 
     /**
      * Transforms the given Markdown content into HTML content.
@@ -97,23 +102,26 @@ class AppExtension extends AbstractExtension
     public function priceFilter($number, $currency = 'MR', $decimals = 0, $decPoint = '.', $thousandsSep = ' ')
     {
         $price = number_format($number, $decimals, $decPoint, $thousandsSep);
-        $price = $price.' ';
+        $price = $price . ' ';
         switch ($currency) {
             case 'MR':
                 $price .= ' MRU';
+
                 break;
             case 'SN':
                 $price .= 'FCFA';
+
                 break;
             case 'ML':
                 $price .= 'FCFA';
+
                 break;
         }
 
         return $price;
     }
 
-    public function getTranslatedCity(string $countryCode, string $cityCode) : string
+    public function getTranslatedCity(string $countryCode, string $cityCode): string
     {
         return $this->container->get('translator')->trans('city.' . $countryCode . '.' . $cityCode);
     }
@@ -124,23 +132,29 @@ class AppExtension extends AbstractExtension
         switch ($code) {
             case 'MR':
                 $currency .= 'MRU';
+
                 break;
             case 'SN':
                 $currency .= 'FCFA';
+
                 break;
             case 'ML':
                 $currency .= 'FCFA';
+
                 break;
             default:
-                throw new \Exception("Unknown country");
+                throw new \Exception('Unknown country');
+
                 break;
         }
+
         return $currency;
     }
 
-    public function citiesByCountry(string $country = 'MR') : ?array
+    public function citiesByCountry(string $country = 'MR'): ?array
     {
         $cities = json_decode(file_get_contents(__DIR__ . '/../Utils/CityFinder/cities.json'), true);
+
         return $cities[$country] ?: null;
     }
 

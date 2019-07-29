@@ -1,9 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class MaintenanceListener
 {

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Util;
 
 class CategoryCounter
@@ -13,26 +19,27 @@ class CategoryCounter
 
     public static function getCategoriesSlugs()
     {
-        $file = fopen(self::$filename, "r");
+        $file = fopen(self::$filename, 'r');
 
         $categories = [];
 
         while ($line = fgets($file)) {
             $category = explode(':', $line);
-            $categories[trim($category[0])] = intval(trim($category[1]));
+            $categories[trim($category[0])] = (int) (trim($category[1]));
         }
 
         fclose($file);
+
         return $categories;
     }
 
     public static function writeCategoriesSlugs($categories)
     {
-        file_put_contents(self::$filename, "");
-        $file = fopen(self::$filename, "a+");
+        file_put_contents(self::$filename, '');
+        $file = fopen(self::$filename, 'a+');
 
         foreach ($categories as $key => $value) {
-            fputs($file, "$key: $value\n");
+            fwrite($file, "$key: $value\n");
         }
         fclose($file);
     }
@@ -43,9 +50,10 @@ class CategoryCounter
         $found = false;
 
         foreach ($data as $key => $value) {
-            if ($slug == $key) {
-                $data[$key]++;
+            if ($slug === $key) {
+                ++$data[$key];
                 $found = true;
+
                 break;
             }
         }
@@ -63,12 +71,13 @@ class CategoryCounter
         $found = false;
 
         foreach ($data as $key => $value) {
-            if ($slug == $key) {
-                $data[$key]--;
-                if($data[$key] < 0) {
-                  $data[$key] = 0;
+            if ($slug === $key) {
+                --$data[$key];
+                if ($data[$key] < 0) {
+                    $data[$key] = 0;
                 }
                 $found = true;
+
                 break;
             }
         }

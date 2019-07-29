@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -52,7 +58,7 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var Avatar
-     * 
+     *
      * @ORM\OneToOne(targetEntity="App\Entity\Avatar", orphanRemoval=true, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -211,7 +217,7 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function haveCompany() : bool
+    public function haveCompany(): bool
     {
         return null !== $this->company;
     }
@@ -231,7 +237,7 @@ class User extends BaseUser implements EquatableInterface
             $this->password,
             $this->submittedAt,
             $this->roles,
-            $this->avatar
+            $this->avatar,
         ]);
     }
 
@@ -273,6 +279,7 @@ class User extends BaseUser implements EquatableInterface
         if ($this->username !== $user->getUsername()) {
             return false;
         }
+
         return true;
     }
 

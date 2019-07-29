@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Doctrine\ORM\Query;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,7 +30,7 @@ class UserRepository extends ServiceEntityRepository
 
     public function loadUserByUsername($username)
     {
-      return $this->createQueryBuilder('u')
+        return $this->createQueryBuilder('u')
         ->where('u.phoneNumber = :phoneNumber OR u.email = :email')
         ->setParameter('phoneNumber', $username)
         ->setParameter('email', $username)

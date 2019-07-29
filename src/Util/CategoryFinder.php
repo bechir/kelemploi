@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Util;
 
 class CategoryFinder
 {
-    public function find($name, $categories) : bool
+    public function find($name, $categories): bool
     {
-        return in_array($name, explode('|', $categories));
+        return \in_array($name, explode('|', $categories), true);
     }
 }

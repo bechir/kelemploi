@@ -1,4 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
 
 namespace DoctrineMigrations;
 
@@ -10,10 +18,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20190403072810 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
+        $this->abortIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('DROP INDEX IDX_9F9F7D3C8BAC62AF');
         $this->addSql('DROP INDEX IDX_9F9F7D3CA76ED395');
@@ -199,10 +207,10 @@ final class Version20190403072810 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_88BDF3E986383B10 ON app_user (avatar_id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
+        $this->abortIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('DROP INDEX UNIQ_4D7E6854989D9B62');
         $this->addSql('DROP INDEX UNIQ_4D7E6854CB893157');

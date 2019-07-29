@@ -1,12 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ * This file is part of the Kelemploi application.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * (C) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Util\Validator\Constraints;
@@ -26,7 +23,7 @@ class PhoneNumberValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof PhoneNumber) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\PhoneNumber');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\PhoneNumber');
         }
 
         // custom constraints should ignore null and empty values to allow
@@ -36,7 +33,7 @@ class PhoneNumberValidator extends ConstraintValidator
         }
 
         $user = $this->context->getObject();
-        $method = 'validate_'.$user->getCountry().'_PhoneNumber';
+        $method = 'validate_' . $user->getCountry() . '_PhoneNumber';
 
         if (!method_exists($this, $method)) {
             throw new \Exception(sprintf('%s Country has no validation method', $value));
@@ -55,11 +52,11 @@ class PhoneNumberValidator extends ConstraintValidator
         $value = $this->normalize($value);
 
         // 8 chiffres pour les numeros Mauritaniens
-        if (strlen($value) != 8) {
+        if (8 !== \mb_strlen($value)) {
             return false;
         }
 
-        if (!in_array($value[0], ['2', '3', '4'])) {
+        if (!\in_array($value[0], ['2', '3', '4'], true)) {
             return false;
         }
 
@@ -71,11 +68,11 @@ class PhoneNumberValidator extends ConstraintValidator
         $value = $this->normalize($value);
 
         // 9 chiffres pour les numeros Senegalais
-        if (strlen($value) != 9) {
+        if (9 !== \mb_strlen($value)) {
             return false;
         }
 
-        if ($value[0] != 7) {
+        if (7 !== $value[0]) {
             return false;
         }
 

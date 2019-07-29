@@ -1,9 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Event;
 
-use Symfony\Component\Contracts\Event;
 use App\Entity\Application;
+use Symfony\Component\Contracts\Event;
 
 class ApplicationEvent extends Event
 {
@@ -14,9 +20,6 @@ class ApplicationEvent extends Event
         $this->application = $application;
     }
 
-    /**
-     * @return Application
-     */
     public function getApplication(): Application
     {
         return $this->application;

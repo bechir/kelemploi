@@ -1,17 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
+use App\Entity\Region;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Region;
 
 class RenderedController extends Controller
 {
     public function index(): Response
     {
         return $this->render('rendered/statistics.html.twig', [
-
         ]);
     }
 
@@ -26,7 +31,7 @@ class RenderedController extends Controller
 
         return $this->render('rendered/regions-listing.html.twig', [
             'regions' => $regions,
-            'counts' => $counts
+            'counts' => $counts,
         ]);
     }
 }

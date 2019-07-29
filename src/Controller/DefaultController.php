@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
+use App\Entity\JobCategory;
+use App\Entity\Region;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Region;
-use App\Entity\JobCategory;
 
 class DefaultController extends Controller
 {
@@ -16,17 +22,17 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $regions = $em->getRepository(Region::class)->findAll();
         $categories = $em->getRepository(JobCategory::class)->findAll();
-        
+
         return $this->render('default/index.html.twig', [
             'regions' => $regions,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
     public function about(Request $request): Response
     {
         return $this->render('default/about.html.twig', [
-            'stats' => $this->getStats()
+            'stats' => $this->getStats(),
         ]);
     }
 
@@ -44,7 +50,7 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
 
-            $message = (new \Swift_Message($this->getParameter('website.name').' - [Contact]'))
+            $message = (new \Swift_Message($this->getParameter('website.name') . ' - [Contact]'))
                 ->setFrom($contact->getEmail())
                 ->setTo($this->getParameter('website.email'))
                 ->setSubject($contact->getSubject())
@@ -59,13 +65,14 @@ class DefaultController extends Controller
                 ->addPart(
                     $this->renderView(
                         'emails/contact.txt.twig',
-                        array('user' => $contact)
+                        ['user' => $contact]
                     ),
                     'text/plain'
                 );
             $mailer->send($message);
 
             $this->addFlash('success', 'contact.message_sent');
+
             return $this->redirectToRoute('index');
         }
 
@@ -106,10 +113,9 @@ class DefaultController extends Controller
 
     public function getStats()
     {
-
         return [
             'estabCount' => 33,
-            'purchaseCount' => 2104
+            'purchaseCount' => 2104,
         ];
     }
 
@@ -123,6 +129,7 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             if ($this->isCsrfTokenValid('regsiter_newsletter', $request->request->get('register_newsletter_token'))) {
                 $this->addFlash('danger', 'user.session_expired');
+
                 return $this->redirectToRoute('index');
             }
 

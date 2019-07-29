@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Twig;
 
 use Twig\Extension\RuntimeExtensionInterface;
@@ -15,7 +21,7 @@ class AppRuntime implements RuntimeExtensionInterface
     public function priceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
     {
         $price = number_format($number, $decimals, $decPoint, $thousandsSep);
-        $price = '$'.$price;
+        $price = '$' . $price;
 
         return $price;
     }

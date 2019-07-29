@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Entity\Application;
 use App\Entity\Company;
 use App\Form\CompanyType;
-use App\Entity\Application;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends AbstractController
 {
@@ -17,14 +23,14 @@ class CompanyController extends AbstractController
         $companies = $this->getDoctrine()->getRepository(Company::class)->findAll();
 
         return $this->render('company/listing.html.twig', [
-            'companies' => $companies
+            'companies' => $companies,
         ]);
     }
 
     public function show(Company $company): Response
     {
         return $this->render('company/show.html.twig', [
-            'company' => $company
+            'company' => $company,
         ]);
     }
 
@@ -35,21 +41,21 @@ class CompanyController extends AbstractController
                 ->findBy(['company' => $company]);
 
         return $this->render('company/open-job.html.twig', [
-            'jobs' => $list
+            'jobs' => $list,
         ]);
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER")
+     * IsGranted("ROLE_EMPLOYER").
      */
-    public function dashboard() : Response
+    public function dashboard(): Response
     {
         $user = $this->getUser();
 
         return $this->render('company/dashboard.html.twig', [
             'user' => $user,
             'active' => 'dashboard',
-            'company' => $user->getCompany()
+            'company' => $user->getCompany(),
         ]);
     }
 
@@ -62,13 +68,14 @@ class CompanyController extends AbstractController
 
         $company = $this->getUser()->getCompany();
 
-        if(!$company)
+        if (!$company) {
             $company = new Company();
+        }
 
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $company->addOwner($this->getUser());
             $em->persist($company);
             $em->flush();

@@ -1,23 +1,20 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ * This file is part of the Kelemploi application.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * (C) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\EventSubscriber;
 
 use App\Entity\Comment;
-use App\Entity\Note;
 use App\Entity\Establishment\BasicInfo;
+use App\Entity\Note;
 use App\Events;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Update hotel note.
@@ -51,7 +48,7 @@ class CommentNoteSubscriber implements EventSubscriberInterface
         /** @var Note|null $note */
         $note = $estab->getNote();
 
-        if(null == $note) {
+        if (null === $note) {
             $note = new Note();
         }
 
@@ -62,28 +59,22 @@ class CommentNoteSubscriber implements EventSubscriberInterface
         $rate = $note->setRate($rate)->getRate();
 
         $title = '';
-        
+
         // Finding the title that correspond to the rate
-        if($rate >= 0 && $rate <= 2.9) {
+        if ($rate >= 0 && $rate <= 2.9) {
             $title = Note::VERY_BAD;
-        }
-        elseif($rate >= 3 && $rate <= 4.9) {
+        } elseif ($rate >= 3 && $rate <= 4.9) {
             $title = Note::BAD;
-        }
-        elseif($rate >= 5 && $rate <= 5.9) {
+        } elseif ($rate >= 5 && $rate <= 5.9) {
             $title = Note::FAIR;
-        }
-        elseif($rate >= 6 && $rate <= 7.9) {
+        } elseif ($rate >= 6 && $rate <= 7.9) {
             $title = Note::GOOD;
-        }
-        elseif($rate >= 8 && $rate <= 8.9) {
+        } elseif ($rate >= 8 && $rate <= 8.9) {
             $title = Note::VERY_GOOD;
-        }
-        elseif($rate >= 9 && $rate <= 10) {
+        } elseif ($rate >= 9 && $rate <= 10) {
             $title = Note::EXCELLENT;
-        }
-        else {
-            throw new \Exception(\sprintf("The rate must be between 0 and 10 (%s found)", $rate));
+        } else {
+            throw new \Exception(sprintf('The rate must be between 0 and 10 (%s found)', $rate));
         }
 
         $note->setTitle($title);

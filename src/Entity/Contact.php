@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Entity;
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
 
-use Symfony\Component\Validator\Constraints as Assert;
+namespace App\Entity;
 
 class Contact
 {

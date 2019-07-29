@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -116,9 +122,9 @@ class Application
      */
     private $tools;
 
-    const FENCED  = 'application.status.fenced';
+    const FENCED = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
-    const STATUS  = [self::FENCED, self::ONGOING];
+    const STATUS = [self::FENCED, self::ONGOING];
 
     public function __construct()
     {
@@ -298,9 +304,9 @@ class Application
 
     public function setStatus(?string $status): self
     {
-        if(!in_array($status, self::STATUS))
-            throw new InvalidArgumentException(sprintf("The parameter status required to be one of (%s, %s), %s given.", self::ONGOING, self::FENCED, $status));
-        
+        if (!\in_array($status, self::STATUS, true)) {
+            throw new InvalidArgumentException(sprintf('The parameter status required to be one of (%s, %s), %s given.', self::ONGOING, self::FENCED, $status));
+        }
         $this->status = $status;
 
         return $this;
@@ -359,8 +365,9 @@ class Application
      */
     public function setStartDate()
     {
-        if(!$this->dates)
+        if (!$this->dates) {
             $this->dates = new DateInterval();
+        }
 
         $this->dates->setStart(new \DateTime());
     }

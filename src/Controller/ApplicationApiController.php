@@ -1,29 +1,34 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Application;
 use App\Entity\DateInterval;
 use App\Entity\JobCategory;
 use App\Entity\StudyLevel;
 use App\Form\ApplicationType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/app/api")
  */
 class ApplicationApiController extends AbstractController
 {
-
     /**
      * @Route("/list/{page}", name="app_list", requirements={"page"="\d+"}, defaults={"page"=1})
      */
     public function list(Request $request, int $page): JsonResponse
     {
-        if($list = $this->getDoctrine()->getRepository(Application::class)->findAll()) {
+        if ($list = $this->getDoctrine()->getRepository(Application::class)->findAll()) {
             return $this->buildResponse(200, $list);
         }
 
@@ -36,7 +41,7 @@ class ApplicationApiController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-    
+
         $appData = $request->request->get('application');
         $app = (new Application())
             ->setCompany($appData['company'])
@@ -61,7 +66,7 @@ class ApplicationApiController extends AbstractController
 
         $form = $this->createForm(ApplicationType::class, $app);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $em->persist($app);
             $em->flush();
 
@@ -76,7 +81,7 @@ class ApplicationApiController extends AbstractController
      */
     public function show(Request $request, Application $app): JsonResponse
     {
-        if($app) {
+        if ($app) {
             return $this->buildResponse(200, $app);
         }
 
@@ -99,14 +104,13 @@ class ApplicationApiController extends AbstractController
         return $this->buildResponse();
     }
 
-
     public function buildResponse($code = 404, $data = null): JsonResponse
     {
         $response = [
-            'code' => $code
+            'code' => $code,
         ];
 
-        if($data) {
+        if ($data) {
             $response['data'] = $data;
         }
 

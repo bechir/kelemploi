@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -53,7 +59,7 @@ class DateInterval
         try {
             $this->end = new \DateTime($end);
         } catch (\Exception $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception('Error: ' . $e->getMessage());
         }
 
         return $this;

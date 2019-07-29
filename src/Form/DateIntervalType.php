@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\DateInterval;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\CallbackTransformer;
 
 class DateIntervalType extends AbstractType
 {
@@ -28,9 +34,9 @@ class DateIntervalType extends AbstractType
                   function ($endAsString) {
                       if (empty($endAsString)) {
                           return null;
-                      } else {
-                          return \DateTime::createFromFormat('Y/m/d', $endAsString);
                       }
+
+                      return \DateTime::createFromFormat('Y/m/d', $endAsString);
                   }
             ))
         ;

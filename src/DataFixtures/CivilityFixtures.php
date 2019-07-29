@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Civility;
@@ -11,7 +17,7 @@ class CivilityFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $names = [
-            'Mr', 'Mme', 'Mlle'
+            'Mr', 'Mme', 'Mlle',
         ];
 
         foreach ($names as $name) {

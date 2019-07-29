@@ -1,12 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\JobCategory;
+use App\Util\AppDirectoriesTrait;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-
-use App\Util\AppDirectoriesTrait;
 
 class JobCategoryFixtures extends Fixture
 {
@@ -19,7 +24,7 @@ class JobCategoryFixtures extends Fixture
         foreach ($categories as $categoryName) {
             $jobCategory = (new JobCategory())
                 ->setName($categoryName);
-            
+
             $manager->persist($jobCategory);
         }
 

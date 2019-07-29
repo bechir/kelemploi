@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Experience;
@@ -11,11 +17,11 @@ class ExperienceFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $experiences = [
-            "user.xp.less1",
-            "user.xp.two",
-            "user.xp.tree",
-            "user.xp.four",
-            "user.xp.over5"
+            'user.xp.less1',
+            'user.xp.two',
+            'user.xp.tree',
+            'user.xp.four',
+            'user.xp.over5',
         ];
 
         foreach ($experiences as $xp) {

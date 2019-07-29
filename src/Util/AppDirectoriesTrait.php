@@ -1,6 +1,13 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Util;
+
 use Symfony\Component\HttpKernel\KernelInterface;
 
 trait AppDirectoriesTrait

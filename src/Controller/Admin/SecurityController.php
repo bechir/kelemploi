@@ -1,17 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\User;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller that manage security part of the backend
+ * Controller that manage security part of the backend.
  *
  * @IsGranted("ROLE_ADMIN")
  * @Route("/security")
@@ -43,7 +48,7 @@ class SecurityController extends AbstractController
             $this->addFlash('success', "L'utilisateur est introuvable.");
         } else {
             if ($user->hasRole('ROLE_ADMIN')) {
-                $this->addFlash('success', "Impossible de supprimer cet administrateur.");
+                $this->addFlash('success', 'Impossible de supprimer cet administrateur.');
             } else {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($user);
@@ -65,6 +70,7 @@ class SecurityController extends AbstractController
 
             $em->flush();
         }
+
         return new JsonResponse(true);
     }
 }

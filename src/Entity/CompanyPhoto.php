@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyPhotoRepository")
@@ -51,7 +57,7 @@ class CompanyPhoto implements \Serializable
     {
         $this->companyPhotoFile = $companyPhotoFile;
 
-        if ($companyPhotoFile !== null) {
+        if (null !== $companyPhotoFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -84,16 +90,15 @@ class CompanyPhoto implements \Serializable
 
     /**
      * @Assert\Callback
-     * @param ExecutionContextInterface $context
      */
     public function validate(ExecutionContextInterface $context)
     {
         // do your own validation
-        if (! in_array($this->companyPhotoFile->getMcmeType(), array(
+        if (!\in_array($this->companyPhotoFile->getMcmeType(), [
             'image/jpeg',
             'image/jpg',
-            'image/png'
-        ))) {
+            'image/png',
+        ], true)) {
             $context
                 ->buildViolation('Erreur de format (Insérer uniquement une image au format jpg ou png)')
                 ->atPath('companyPhotoFile')
@@ -103,7 +108,6 @@ class CompanyPhoto implements \Serializable
 
     /**
      * @Assert\Callback
-     * @param ExecutionContextInterface $context
      */
     public function checkSize(ExecutionContextInterface $context)
     {

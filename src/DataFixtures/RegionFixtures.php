@@ -1,12 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Region;
+use App\Util\AppDirectoriesTrait;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-
-use App\Util\AppDirectoriesTrait;
 
 class RegionFixtures extends Fixture
 {
@@ -19,7 +24,7 @@ class RegionFixtures extends Fixture
         foreach ($regions as $regionName) {
             $region = (new Region())
                 ->setName($regionName);
-            
+
             $manager->persist($region);
         }
 

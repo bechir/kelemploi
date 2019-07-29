@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventListener;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserPreferencesListener
 {
@@ -26,7 +32,7 @@ class UserPreferencesListener
 
         $params = [];
 
-        if (null !== $user->getLocale() && in_array($user->getLocale(), $this->locales)) {
+        if (null !== $user->getLocale() && \in_array($user->getLocale(), $this->locales, true)) {
             $event->getRequest()->setLocale($user->getLocale());
             $this->session->set('_locale', $user->getLocale());
             $params['_locale'] = $user->getLocale();

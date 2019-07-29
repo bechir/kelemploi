@@ -42,6 +42,8 @@
         "white-october/pagerfanta-bundle": "^1.2"
     },
     "require-dev": {
+        "symfony/browser-kit": "^4.1",
+        "symfony/css-selector": "^4.1",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.0",
@@ -83,7 +85,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "lint": "php-cs-fixer fix --diff --dry-run",
+        "fix": "php-cs-fixer fix"
     },
     "conflict": {
         "symfony/symfony": "*"

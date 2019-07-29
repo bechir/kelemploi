@@ -1,24 +1,26 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
-use App\Entity\ {
-    Application,
-    StudyLevel,
-    ContractType,
-    JobCategory,
-    Region,
-    Language,
-Experience,
-JobGender
-};
-
+use App\Entity\Application;
+use App\Entity\ContractType;
+use App\Entity\Experience;
+use App\Entity\JobCategory;
+use App\Entity\JobGender;
+use App\Entity\Language;
+use App\Entity\StudyLevel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ApplicationType extends AbstractType
 {
@@ -26,7 +28,7 @@ class ApplicationType extends AbstractType
     {
         $builder
             ->add('nbCandidatesToRecruit', TextType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('jobTitle', TextType::class)
             ->add('jobDescription', TextareaType::class)
@@ -38,7 +40,7 @@ class ApplicationType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false,
                 'translation_domain' => 'jobs-categories',
-                'placeholder' => 'form.job.category'
+                'placeholder' => 'form.job.category',
             ])
             ->add('dates', DateIntervalType::class, ['required' => false])
             ->add('contractType', EntityType::class, [
@@ -54,14 +56,14 @@ class ApplicationType extends AbstractType
                 'choice_label' => 'level',
                 'required' => false,
                 'choice_translation_domain' => true,
-                'placeholder' => 'form.job.optionnal_level'
+                'placeholder' => 'form.job.optionnal_level',
             ])
             ->add('experience', EntityType::class, [
                 'class' => Experience::class,
                 'choice_label' => 'name',
                 'required' => false,
                 'choice_translation_domain' => true,
-                'placeholder' => 'form.job.optionnal_xp'
+                'placeholder' => 'form.job.optionnal_xp',
             ])
             ->add('benefits', TextareaType::class)
             ->add('tools', TextareaType::class)

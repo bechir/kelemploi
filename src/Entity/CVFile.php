@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CVFileRepository")
@@ -51,7 +56,7 @@ class CVFile implements \Serializable
     {
         $this->cvFile = $cvFile;
 
-        if ($cvFile !== null) {
+        if (null !== $cvFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 

@@ -1,17 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\Company;
+use App\Entity\JobCategory;
 use App\Entity\Region;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use App\Entity\JobCategory;
 
 class CompanyType extends AbstractType
 {
@@ -21,9 +26,9 @@ class CompanyType extends AbstractType
             ->add('name')
             ->add('description', TextareaType::class, [
                 'attr' => [
-                    'placeholder' => 'form.about_company.placeholder'
+                    'placeholder' => 'form.about_company.placeholder',
                 ],
-                'translation_domain' => 'company'
+                'translation_domain' => 'company',
             ])
             ->add('address', TextType::class, ['required' => false])
             ->add('email', TextType::class, ['required' => false])
@@ -32,12 +37,12 @@ class CompanyType extends AbstractType
                 'class' => Region::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'form.job.region'
+                'placeholder' => 'form.job.region',
             ])->add('category', EntityType::class, [
                 'class' => JobCategory::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'form.job.category'
+                'placeholder' => 'form.job.category',
             ])
             ->add('photo', CompanyPhotoType::class, ['required' => false])
         ;

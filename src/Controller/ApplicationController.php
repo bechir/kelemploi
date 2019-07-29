@@ -1,21 +1,26 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Application;
 use App\Form\ApplicationType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Entity\Company;
 
 class ApplicationController extends AbstractController
 {
     public function list(): Response
     {
         return $this->render('application/listing.html.twig', [
-            'list' => $this->getDoctrine()->getRepository(Application::class)->findAll()
+            'list' => $this->getDoctrine()->getRepository(Application::class)->findAll(),
         ]);
     }
 
@@ -24,7 +29,7 @@ class ApplicationController extends AbstractController
         $list = [];
 
         return $this->render('application/listing.html.twig', [
-            'list' => $list
+            'list' => $list,
         ]);
     }
 
@@ -33,7 +38,7 @@ class ApplicationController extends AbstractController
         $list = [];
 
         return $this->render('application/listing.html.twig', [
-            'list' => $list
+            'list' => $list,
         ]);
     }
 
@@ -45,43 +50,43 @@ class ApplicationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
-        
+
         $user = $this->getUser();
 
-        if($user->haveCompany()) {
+        if ($user->haveCompany()) {
             $form->remove('company');
         }
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) {
             $app->setInterlocutor($user);
-            
-            if($user->haveCompany())
+
+            if ($user->haveCompany()) {
                 $app->setCompany($user->getCompany());
-            else
+            } else {
                 $app->getCompany()->addOwner($user);
-            
+            }
+
             $em->persist($app);
 
             $em->flush();
             $this->addFlash('success', 'Votre offre été créé !');
 
             return $this->redirectToRoute('application_show', [
-                'slug' => $app->getSlug()
+                'slug' => $app->getSlug(),
             ]);
         }
 
         return $this->render('company/post-job.html.twig', [
             'form' => $form->createView(),
             'company' => $user->getCompany(),
-            'active' => 'post-job'
+            'active' => 'post-job',
         ]);
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER")
+     * IsGranted("ROLE_EMPLOYER").
      */
     public function edit(Request $request, Application $app): Response
     {
@@ -89,12 +94,12 @@ class ApplicationController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($app);
             $em->flush();
 
-            $this->addFlash('success', "job.edit_sucess");
+            $this->addFlash('success', 'job.edit_sucess');
 
             return $this->redirectToRoute('application_show', ['slug' => $app->getSlug()]);
         }
@@ -107,19 +112,20 @@ class ApplicationController extends AbstractController
 
     public function show(Application $app): Response
     {
-        if(!$app) {
+        if (!$app) {
             $this->addFlash('danger', "L'offre' n'existe pas.");
+
             return $this->redirectToRoute('index');
         }
 
         return $this->render('application/show.html.twig', [
             '_app' => $app,
-            'company' => $app->getCompany()
+            'company' => $app->getCompany(),
         ]);
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER")
+     * IsGranted("ROLE_EMPLOYER").
      */
     public function delete(Request $request): Response
     {

@@ -1,25 +1,29 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (C) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
+use App\Entity\Application;
+use App\Entity\ContractType;
+use App\Entity\DateInterval;
+use App\Entity\JobCategory;
+use App\Entity\Region;
+use App\Entity\StudyLevel;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\Base;
-use Faker\Provider\Lorem;
 use Faker\Provider\DateTime;
-use Faker\Provider\fr_FR\Text;
 use Faker\Provider\fr_FR\Company;
-
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
-use App\Entity\Region;
-use App\Entity\StudyLevel;
-use App\Entity\Application;
-use App\Entity\JobCategory;
-use App\Entity\ContractType;
-use App\Entity\DateInterval;
+use Faker\Provider\fr_FR\Text;
+use Faker\Provider\Lorem;
 
 class ApplicationFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -35,11 +39,10 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
         $contracts = $manager->getRepository(ContractType::class)->findAll();
         $studyLevels = $manager->getRepository(StudyLevel::class)->findAll();
 
-
         $faker = Factory::create('fr_FR');
         $text = new Text(new Generator());
 
-        for($i  = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 30; ++$i) {
             $dateInterval = (new DateInterval())
                 ->setStart(DateTime::dateTimeThisYear());
             $salary = $faker->numerify('###000 FCFA');
@@ -59,7 +62,7 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
                 ->setMinStudyLevel($faker->randomElement($studyLevels))
                 ->setSalary($salary)
             ;
-            
+
             $manager->persist($application);
         }
 
