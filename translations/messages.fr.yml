@@ -122,6 +122,8 @@ job:
   vacancy: "Poste vaccant: "
   contract_type: "Type de contrat: " # Employment Status
   experience: "Expérience: "
+  level: "Niveau d'études: "
+  age: "Âge: "
   region: "Region: "
   salary: "Salaire: " # Salary
   gender: "Sexe: " # Gender
@@ -171,6 +173,7 @@ employer:
 
 candidate:
   listing_title: "Des candidats en recherhe d'emploi au Sénégal"
+  domain: "Domaine: "
 
 call_to_action:
   title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
@@ -179,6 +182,7 @@ call_to_action:
 # User account
 user:
   account: Compte
+  years_old: ans
   gender:
     mf: "H/F"
     male: Homme
@@ -299,5 +303,6 @@ word:
   company: Entreprise
 
 text:
+
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"
   temporary_unavailable_alert: "Cette section est temporairement vide."

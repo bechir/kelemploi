@@ -80,9 +80,36 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.jobCategory'|trans }}</label>
+                <label class="col-sm-3 col-form-label">{{ 'candidate.domain'|trans({}, 'messages') }}</label>
                 <div class="col-sm-9">
                     {{ form_widget(form.jobCategory, {'attr': {'class': 'form-control'}})}}
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'form.expertise.label'|trans }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.experience, {'attr': {'class': 'form-control'}})}}
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'job.level'|trans({}, 'messages') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.studyLevel, {'attr': {'class': 'form-control'}})}}
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'job.age'|trans({}, 'messages') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.age, {'attr': {'class': 'form-control'}})}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'job.gender'|trans({}, 'messages') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.gender, {'attr': {'class': 'form-control'}})}}
                     <i class="fa fa-caret-down"></i>
                 </div>
             </div>

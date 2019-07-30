@@ -105,6 +105,26 @@ class User extends BaseUser implements EquatableInterface
      */
     private $jobCategory;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Experience")
+     */
+    private $experience;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\StudyLevel")
+     */
+    private $studyLevel;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $age;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gender")
+     */
+    private $gender;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
@@ -365,6 +385,54 @@ class User extends BaseUser implements EquatableInterface
     public function setJobCategory(?JobCategory $jobCategory): self
     {
         $this->jobCategory = $jobCategory;
+
+        return $this;
+    }
+
+    public function getExperience(): ?Experience
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?Experience $experience): self
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getStudyLevel(): ?StudyLevel
+    {
+        return $this->studyLevel;
+    }
+
+    public function setStudyLevel(?StudyLevel $studyLevel): self
+    {
+        $this->studyLevel = $studyLevel;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(?int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

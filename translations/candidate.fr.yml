@@ -32,6 +32,7 @@ form:
   phone: Numéro de téléphone
   website: Site web
   address: Adresse
+  age: Votr âge
   expertise:
     label: Expértise
     placeholder: UI & UX Designer
