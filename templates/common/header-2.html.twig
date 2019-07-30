@@ -94,7 +94,7 @@
                                 <a href="{{ path('applications_list') }}" title="{{ 'layout.applications_list'|trans }}">{{ 'layout.applications_list'|trans }}</a>
                             </li>
                             <li class="menu-item">
-                                <a href="{#{ path('applications_list') }#}" title="{{ 'layout.candidates_list'|trans }}">{{ 'layout.candidates_list'|trans }}</a>
+                                <a href="{{ path('candidates_list') }}" title="{{ 'layout.candidates_list'|trans }}">{{ 'layout.candidates_list'|trans }}</a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{ path('companies_list') }}" title="{{ 'layout.entreprises_list'|trans }}">{{ 'layout.entreprises_list'|trans }}</a>
@@ -105,10 +105,13 @@
                             <li class="menu-item">
                                 <a href="{{ path('blog_index') }}" title="{{ 'layout.blog'|trans }}">{{ 'layout.blog'|trans }}</a>
                             </li>
-                            <li class="menu-item post-job">
-                                <a href="{{ path('application_create') }}">
-                                    <i class="fas fa-plus"></i>{{ 'layout.post_job'|trans }}</a>
-                            </li>
+                            {% if is_granted('ROLE_EMPLOYER') or not is_granted('ROLE_USER') %}
+                                <li class="menu-item post-job">
+                                    <a href="{{ path('application_create') }}">
+                                        <i class="fas fa-plus"></i>{{ 'layout.post_job'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>

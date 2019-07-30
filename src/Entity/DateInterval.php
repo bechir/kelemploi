@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DateIntervalRepository")
@@ -31,6 +32,11 @@ class DateInterval
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $end;
+
+    public function __construct()
+    {
+        $this->start = new \DateTime();
+    }
 
     public function getId(): ?int
     {

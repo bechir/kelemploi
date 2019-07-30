@@ -1,0 +1,24 @@
+{% import 'util/candidate_widgets.twig' as widgets %}
+
+{% trans_default_domain 'candidate' %}
+
+<div class="candidate-filter-result">
+    {% for user in candidates %}
+        {% set path = path('candidate_show', {username: user.username}) %}
+        <div class="candidate">
+            {# Company thumb #}
+            {{ widgets.thumb(user) }}
+            <div class="body">
+                <div class="content">
+                    <h4><a href="{{ path }}">{{ user.fullName }}</a></h4>
+
+                    {# Candidate's infos #}
+                    {{ widgets.infos(user) }}
+                </div>
+                <div class="button-area">
+                    <a href="{{ path }}">{{ 'show_resume'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

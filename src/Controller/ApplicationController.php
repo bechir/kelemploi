@@ -139,7 +139,12 @@ class ApplicationController extends AbstractController
      */
     public function delete(Request $request, Application $app, EventDispatcherInterface $dispatcher): Response
     {
-        if($app) {
+        if($app && $request->isMethod('POST')) {
+            if (!$this->isCsrfTokenValid('app.delete', $request->request->get('app_delete_token'))) {
+                $this->addFlash('danger', 'app.invalid_csrf_token');
+                return $this->redirectToRoute('application_show', ['slug' => $app->getSlug()]);
+            }
+
             $em = $this->getDoctrine()->getManager();
 
             $em->remove($app);
@@ -150,8 +155,8 @@ class ApplicationController extends AbstractController
 
             $this->addFlash('success', 'job.delete_success');
         }
-
-        return $this->render('application/delete.html.twig');
+        
+        return $this->redirectToRoute('company_dashboard');
     }
 
     public function traineeship(Request $request): Response

@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% trans_default_domain 'candidate' %}
+
+{% block title %}{{ 'listing.title'|trans }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('candidate.listing_title') }}
+  
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="candidate-container">
+              <div class="filtered-candidate-wrapper">
+                <div class="candidate-view-controller-wrapper">
+                  <div class="candidate-view-controller">
+                    <div class="controller list active">
+                      <i data-feather="menu"></i>
+                    </div>
+                    <div class="controller grid">
+                      <i data-feather="grid"></i>
+                    </div>
+                    <div class="candidate-view-filter">
+                      <select class="selectpicker">
+                        <option value="" selected>Most Recent</option>
+                        <option value="california">Top Rated</option>
+                        <option value="las-vegas">Most Popular</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="showing-number">
+                    <span>Showing 1–12 of 28 Jobs</span>
+                  </div>
+                </div>
+
+                {% include 'candidate/candidates-items.html.twig' with {candidates: list} %}
+
+                <div class="pagination-list text-center">
+                  <nav class="navigation pagination">
+                    <div class="nav-links">
+                      <a class="prev page-numbers" href="candidate.html#"><i class="fas fa-angle-left"></i></a>
+                      <a class="page-numbers" href="candidate.html#">1</a>
+                      <span aria-current="page" class="page-numbers current">2</span>
+                      <a class="page-numbers" href="candidate.html#">3</a>
+                      <a class="page-numbers" href="candidate.html#">4</a>
+                      <a class="next page-numbers" href="candidate.html#"><i class="fas fa-angle-right"></i></a>
+                    </div>
+                  </nav>                
+                </div>
+              </div>
+              <div class="candidate-filter-wrapper">
+                <div class="selected-options same-pad">
+                  <div class="selection-title">
+                    <h4>You Selected</h4>
+                    <a href="candidate.html#">Clear All</a>
+                  </div>
+                  <ul class="filtered-options">
+                  </ul>
+                </div>
+                <div class="candidate-filter-dropdown same-pad category">
+                  <select class="selectpicker">
+                    <option value="" selected>Category</option>
+                    <option value="california">Accounting / Finance</option>
+                    <option value="california">Education</option>
+                    <option value="california">Design &amp; Creative</option>
+                    <option value="california">Health Care</option>
+                    <option value="california">Engineer &amp; Architects</option>
+                    <option value="california">Marketing &amp; Sales</option>
+                    <option value="california">Garments / Textile</option>
+                    <option value="california">Customer Support</option>
+                    <option value="california">Digital Media</option>
+                    <option value="california">Telecommunication</option>
+                  </select>
+                </div>
+                <div class="candidate-filter-dropdown same-pad location">
+                  <select class="selectpicker">
+                    <option value="" selected>Location</option>
+                    <option value="california">Chicago</option>
+                    <option value="california">New York City</option>
+                    <option value="california">San Francisco</option>
+                    <option value="california">Washington</option>
+                    <option value="california">Boston</option>
+                    <option value="california">Los Angeles</option>
+                    <option value="california">Seattle</option>
+                    <option value="california">Las Vegas</option>
+                    <option value="california">San Diego</option>
+                  </select>
+                </div>
+                <div data-id="candidate-type" class="candidate-filter same-pad candidate-type">
+                  <h4 class="option-title">Job Type</h4>
+                  <ul>
+                    <li class="full-time"><i data-feather="clock"></i><a href="candidate.html#" data-attr="Full Time">Full Time</a></li>
+                    <li class="part-time"><i data-feather="clock"></i><a href="candidate.html#" data-attr="Part Time">Part Time</a></li>
+                    <li class="freelance"><i data-feather="clock"></i><a href="candidate.html#" data-attr="Freelance">Freelance</a></li>
+                    <li class="temporary"><i data-feather="clock"></i><a href="candidate.html#" data-attr="Temporary">Temporary</a></li>
+                  </ul>
+                </div>
+                <div data-id="experience" class="candidate-filter same-pad experience">
+                  <h4 class="option-title">Experience</h4>
+                  <ul>
+                    <li><a href="candidate.html#" data-attr="Fresh">Fresh</a></li>
+                    <li><a href="candidate.html#" data-attr="Less than 1 year">Less than 1 year</a></li>
+                    <li><a href="candidate.html#" data-attr="2 Year">2 Year</a></li>
+                    <li><a href="candidate.html#" data-attr="3 Year">3 Year</a></li>
+                    <li><a href="candidate.html#" data-attr="4 Year">4 Year</a></li>
+                    <li><a href="candidate.html#" data-attr="5 Year">5 Year</a></li>
+                    <li><a href="candidate.html#" data-attr="Avobe 5 Years">Avobe 5 Years</a></li>
+                  </ul>
+                </div>
+                <div class="candidate-filter same-pad">
+                  <h4 class="option-title">Salary Range</h4>
+                  <div class="price-range-slider">
+                    <div class="nstSlider" data-range_min="0" data-range_max="10000" 
+                     data-cur_min="0"    data-cur_max="6130">
+                      <div class="bar"></div>
+                      <div class="leftGrip"></div>
+                      <div class="rightGrip"></div>
+                      <div class="grip-label">
+                        <span class="leftLabel"></span>
+                        <span class="rightLabel"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-id="post" class="candidate-filter same-pad post">
+                  <h4 class="option-title">Date Posted</h4>
+                  <ul>
+                    <li><a href="candidate.html#" data-attr="Last hour">Last hour</a></li>
+                    <li><a href="candidate.html#" data-attr="Last 24 hour">Last 24 hour</a></li>
+                    <li><a href="candidate.html#" data-attr="Last 7 days">Last 7 days</a></li>
+                    <li><a href="candidate.html#" data-attr="Last 14 days">Last 14 days</a></li>
+                    <li><a href="candidate.html#" data-attr="Last 30 days">Last 30 days</a></li>
+                  </ul>
+                </div>
+                <div data-id="gender" class="candidate-filter same-pad gender">
+                  <h4 class="option-title">Gender</h4>
+                  <ul>
+                    <li><a href="candidate.html#" data-attr="Male">Male</a></li>
+                    <li><a href="candidate.html#" data-attr="Female">Female</a></li>
+                  </ul>
+                </div>
+                <div data-id="qualification" class="candidate-filter same-pad qualification">
+                  <h4 class="option-title">Qualification</h4>
+                  <ul>
+                    <li><a href="candidate.html#" data-attr="Matriculation">Matriculation</a></li>
+                    <li><a href="candidate.html#" data-attr="Intermidiate">Intermidiate</a></li>
+                    <li><a href="candidate.html#" data-attr="Gradute">Gradute</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

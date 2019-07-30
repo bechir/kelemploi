@@ -80,6 +80,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'form.jobCategory'|trans }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.jobCategory, {'attr': {'class': 'form-control'}})}}
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-3 col-form-label">{{ 'form.about_user.label'|trans }}</label>
                 <div class="col-sm-9">
                     {{ form_widget(form.about, {'attr': {'class': 'form-control'}}) }}

@@ -135,6 +135,8 @@ class Application
     {
         $this->setStatus(self::ONGOING);
         $this->viewCount = 0;
+
+        $this->dates = new DateInterval();
     }
 
     public function getId(): ?int
@@ -366,18 +368,6 @@ class Application
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function setStartDate()
-    {
-        if (!$this->dates) {
-            $this->dates = new DateInterval();
-        }
-
-        $this->dates->setStart(new \DateTime());
-    }
-
     public function getTools(): ?string
     {
         return $this->tools;
@@ -400,5 +390,10 @@ class Application
         ++$this->viewCount;
 
         return $this;
+    }
+
+    public function isOwner(User $user): bool
+    {
+        return (bool) $this->company->getOwners()->contains($user);
     }
 }

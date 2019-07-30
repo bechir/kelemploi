@@ -1,3 +1,19 @@
+candidates_list:
+  path: /{_locale}/candidates
+  controller: App\Controller\UserController::list
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+candidate_show:
+  path: /{_locale}/candidate/{username}
+  controller: App\Controller\UserController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 resume:
   controller: App\Controller\UserController::resume
   path: /{_locale}/user/resume

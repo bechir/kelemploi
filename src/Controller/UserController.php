@@ -13,9 +13,36 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Event\CandidateEvent;
+use App\Entity\User;
+use App\Event\CandidateEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UserController extends Controller
 {
+    public function list(): Response
+    {
+        return $this->render('candidate/listing.html.twig', [
+            'list' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+        ]);
+    }
+
+    public function show(User $user, EventDispatcherInterface $dispatcher): Response
+    {
+        if (!$user) {
+            $this->addFlash('danger', "L'utilisateur' n'existe pas.");
+
+            return $this->redirectToRoute('index');
+        }
+
+        $event = new CandidateEvent($user);
+        $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
+
+        return $this->render('candidate/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     /**
      * @IsGranted("ROLE_USER")
      */

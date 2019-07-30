@@ -95,6 +95,16 @@ class User extends BaseUser implements EquatableInterface
      */
     private $skills;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $viewCount;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
+     */
+    private $jobCategory;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
@@ -102,6 +112,8 @@ class User extends BaseUser implements EquatableInterface
         parent::__construct();
         $this->locale = 'fr';
         $this->skills = new ArrayCollection();
+
+        $this->viewCount = 0;
     }
 
     public function getId(): ?int
@@ -329,6 +341,30 @@ class User extends BaseUser implements EquatableInterface
         if ($this->skills->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
+        return $this;
+    }
+
+    public function getViewCount(): ?int
+    {
+        return $this->viewCount;
+    }
+
+    public function increaseViewCount(): self
+    {
+        ++$this->viewCount;
+
+        return $this;
+    }
+
+    public function getJobCategory(): ?JobCategory
+    {
+        return $this->jobCategory;
+    }
+
+    public function setJobCategory(?JobCategory $jobCategory): self
+    {
+        $this->jobCategory = $jobCategory;
 
         return $this;
     }

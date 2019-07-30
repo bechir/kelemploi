@@ -4,6 +4,7 @@ app:
     fr: Français
     en: English
     ar: العربية
+  invalid_csrf_token: "Jeton CSRF invalide."
 
 action:
   explore_jobs: Voir les emplois
@@ -136,6 +137,7 @@ job:
   tools: "Outils"
   simillar: "Offres similaires" # Simillar Jobs
   browse_all: "+ Voir toutes les offres d'emploi" # + Browse All Jobs
+  delete_success: "L'offre a été supprimée!"
   contract:
     cdd: CDD
     cdi: CDI
@@ -153,7 +155,7 @@ company:
   email: "Email: "
   category: "Sécteur: "
   description: "Description: "
-  listing_title: "Les entreprises qui recrutent"
+  listing_title: "Les entreprises qui recrutent au Sénégal"
   edit_profile:
     success: Le pofile a été mis à jour avec succès!
 
@@ -166,6 +168,9 @@ employer:
   message: "Message"
   shortlisted_resumes: "CV présélectionnés"
   post_new_job: "Ajouter une offre d'emploi"
+
+candidate:
+  listing_title: "Des candidats en recherhe d'emploi au Sénégal"
 
 call_to_action:
   title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
@@ -230,6 +235,7 @@ form:
   enter_keywords: "Entrez les mots clés"
   password: Mot de passe
   required_inputs: "<span class=\"text-danger\">*</span> Champs obligatoires"
+  jobCategory: "Domaine"
   company:
     name: "Nom *" # Company Name
     address: "Adresse"
@@ -254,6 +260,9 @@ form:
     vacancy: "Nombre de postes (optionnel)"
     salary:  Estimation du salaire # Salary Range
     tools: "Outils (Optionnel)"
+    delete_modal:
+      title: "Confirmer"
+      body: "Supprimer cette offre d'emploi ? Attetion: cette action est irréversible !"
     tools_help: "Les outils ques vous utilisez en entreprise"
     resp_help:
       title: "Ce que l'employé fera..."
@@ -277,6 +286,7 @@ form:
 word:
   cancel: Annuler
   delete: Supprimer
+  edit: Modifier
   category: Catégorie
   region: Région
   or: Ou

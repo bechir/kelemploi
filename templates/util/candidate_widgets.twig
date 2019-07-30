@@ -1,0 +1,29 @@
+{% macro thumb(user, path = '#') %}
+    <div class="thumb">
+        <a href="{{ path }}">
+            {% if user.avatar %}
+                <img class="img-fluid" src="{{ vich_uploader_asset(user.avatar, 'avatarFile') }}"/>
+            {% else %}
+                <img src="{{ asset('images/account/default-avatar-profile.jpg') }}" class="img-fluid" alt="No image">
+            {% endif %}
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro infos(user) %}
+    <div class="info">
+        {% if user.jobCategory %}
+            <span class="work-post">
+                <a href="#" onclick="return false">
+                    <i data-feather="check-square"></i>{{ user.jobCategory|trans({}, 'jobs-categories') }}</a>
+            </span>
+        {% endif %}
+        
+        {% if user.region %}
+            <span class="location">
+                <a href="#" onclick="return false">
+                    <i data-feather="map-pin"></i>{{ user.region|trans({}, 'regions')}}</a>
+            </span>
+        {% endif %}
+    </div>
+{% endmacro %}

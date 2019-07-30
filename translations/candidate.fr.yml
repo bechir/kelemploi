@@ -1,0 +1,40 @@
+edit_profile: "%name% | Modifier mon profil"
+bookmarked: Favoris
+messages: Mes messages
+social_profile: "Réseaux sociaux" # Social Profile:
+show_resume: Voir le CV
+
+dashboard:
+  title: '%name% | Tableau de bord'
+  statistics:
+    call_for_interview: Entretiens # Call for interview
+
+profile:
+  title: "Profil"
+
+listing:
+  title: "Des candidats en recherhe d'emploi au Sénégal"
+
+details:
+  about: "À propos de moi"
+  save: "Ajouter aux favoris"
+  info: "Information"
+
+contact:
+  button: Contacter moi # Contact Us
+
+form:
+  save_change: Sauvegarder les modifications # Save Change
+  edit_logo: Changer d'avatar # Change Avatar
+  edit_infos: Modifier mes informations #
+  region: Région
+  email: Adresse e-mail
+  phone: Numéro de téléphone
+  website: Site web
+  address: Adresse
+  expertise:
+    label: Expértise
+    placeholder: UI & UX Designer
+  about_company:
+    label: À propos
+    placeholder: "* Donnez une petite description qui retrace votre histoire."

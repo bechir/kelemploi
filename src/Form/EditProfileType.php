@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\JobCategory;
 
 class EditProfileType extends AbstractType
 {
@@ -29,6 +30,10 @@ class EditProfileType extends AbstractType
             ->add('phoneNumber', TextType::class, ['required' => false])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
+                'choice_label' => 'name',
+            ])
+            ->add('jobCategory', EntityType::class, [
+                'class' => JobCategory::class,
                 'choice_label' => 'name',
             ])
             ->add('civility', EntityType::class, [

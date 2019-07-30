@@ -13,7 +13,12 @@
             <div class="banner-content">
             <h1>{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
               <p>{{ 'home.banner_text'|trans }}</p>
-              <a href="{{ path('edit_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
+              
+              {% if is_granted('ROLE_EMPLOYER') %}
+                <a href="{{ path('applications_list') }}" class="button">{{ 'action.explore_jobs'|trans }}</a>
+              {% else %}
+                <a href="{{ path('edit_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
+              {% endif %}              
             </div>
           </div>
         </div>
