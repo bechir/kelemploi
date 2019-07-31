@@ -1,173 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% trans_default_domain 'company' %}
+{% trans_default_domain 'candidate' %}
 
-{% import 'util/company_widgets.twig' as macros %}
+{% import 'util/candidate_widgets.twig' as widgets %}
 
-{% block title %}{{ company.name }} | {{ website.name }}{% endblock %}
+{% block title %}{{ user.fullName }} | {{ website.name }}{% endblock %}
 
 {% block main %}
-    <!-- Company Details -->
-    <div class="alice-bg padding-top-60 section-padding-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="company-details">
-              <div class="title-and-info">
-                <div class="title">
-                    {# Company thumb #}
-                    {{ macros.thumb(company) }}
-                  <div class="title-body">
-                    <h4>{{ company.name }}</h4>
-                    
-                    {# Company's infos #}
-                    {{ macros.infos(company) }}
-
-                  </div>
-                </div>
-                <div class="download-resume">
-                  <a href="#" class="save-btn"><i data-feather="heart"></i>{{ 'details.save'|trans }}</a>
-                  <a href="{{ path('applications_list', {company: company.slug}) }}">{{ 'x_open_positions'|trans({'%x%': 2}) }}</a>
-                </div>
-              </div>
-              <div class="details-information padding-top-60">
-                <div class="row">
-                  <div class="col-xl-7 col-lg-8">
-                    <div class="about-details details-section">
-                      <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
-                      <p>{{ company.description }}</p>
-                    </div>
-                    {# <div class="intor-video details-section">
-                      <h4><i data-feather="video"></i>Intro Video</h4>
-                      <div class="video-area">
-                        <!-- <div data-type="vimeo" data-video-id="126777001"></div> -->
-                        <div id="player" data-plyr-provider="vimeo" data-plyr-embed-id="126777001"></div>
-                      </div>
-                    </div>
-                    <div class="portfolio details-section">
-                      <h4><i data-feather="grid"></i>Image Gallery</h4>
-                      <div class="portfolio-slider owl-carousel">
-                        <div class="portfolio-item">
-                          <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
-                            <a href="employer-details.html#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="/images/portfolio/thumb-1.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
-                            <a href="employer-details.html#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
-                            <a href="employer-details.html#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
-                            <a href="employer-details.html#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="employer-details.html#"><i data-feather="eye"></i></a>
-                            <a href="employer-details.html#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    #}
-
-                    {# Open Job for this company #}
-                    {{ render(controller('App\\Controller\\CompanyController::openedJobs', {company: company})) }}
-
-                  </div>
-                  <div class="col-xl-4 offset-xl-1 col-lg-4">
-                    <div class="information-and-contact">
-                      <div class="information">
-                        <h4>{{ 'details.info'|trans }}</h4>
-                        <ul>
-                            {% if company.category %}
-                                <li><span>{{ 'company.category'|trans({}, 'messages') }}</span> {{ company.category|trans({}, 'jobs-categories') }}</li>
-                            {% endif %}
-                          
-                            {% if company.region %}
-                                <li><span>{{ 'job.region'|trans({}, 'messages') }}</span> {{ company.region|trans({}, 'regions') }}</li>
-                            {% endif %}
-
-                            {% if company.address %}
-                                <li><span>{{ 'company.address'|trans({}, 'messages') }}</span> {{ company.address }}</li>
-                            {% endif %}
-
-                            {% if company.email %}
-                                <li><span>{{ 'company.email'|trans({}, 'messages') }}</span>{{ company.email }}</li>
-                            {% endif %}
-                            
-                            {# <li><span>{{ 'company.size'|trans({}, 'messages') }}</span> 20-50</li> #}
-                            
-                            {% if company.website %}
-                                <li><span>{{ 'company.website'|trans({}, 'messages') }}</span> <a href="//{{ company.website }}">{{ company.website }}</a></li>
-                            {% endif %}
-                        </ul>
-                      </div>
-                      <div class="buttons">
-                        <a href="#" class="button contact-button" data-toggle="modal" data-target="#exampleModal">{{ 'contact.button'|trans }}</a>
-                      </div>
-                      <!-- Modal -->
-                      <div class="modal fade contact-form-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-body">
-                              <h4><i data-feather="edit"></i>Contact Us</h4>
-                              <form action="employer-details.html#">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" placeholder="Your Name">
-                                </div>
-                                <div class="form-group">
-                                  <input type="email" class="form-control" placeholder="Your Email">
-                                </div>
-                                <div class="form-group">
-                                  <textarea class="form-control" placeholder="Your Message"></textarea>
-                                </div>
-                                <button class="button">Submit</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {# <div class="job-location">
-                      <h4>Our Location</h4>
-                      <div id="map-area">
-                        <div class="cp-map" id="location" data-lat="40.713355" data-lng="-74.005535" data-zoom="10"></div>
-                      </div>
-                    </div> #}
-                    <div class="share-job-post">
-                      <span class="share">{{ 'social_profile'|trans }}</span>
-                      <a href="#" onclick="return false"><i class="fab fa-facebook-f"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-twitter"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-linkedin-in"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-google-plus-g"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Company Details End -->
-
     <div class="alice-bg padding-top-60 section-padding-bottom">
       <div class="container">
         <div class="row">
@@ -175,24 +14,19 @@
             <div class="candidate-details">
               <div class="title-and-info">
                 <div class="title">
-                  <div class="thumb">
-                    <img src="images/candidate/thumb-1.jpg" class="img-fluid" alt="">
-                  </div>
+                  {{ widgets.thumb(user) }}
                   <div class="title-body">
-                    <h4>Micheal N. Taylor</h4>
-                    <div class="info">
-                      <span class="candidate-designation"><i data-feather="check-square"></i>ios Developer</span>
-                      <span class="candidate-location"><i data-feather="map-pin"></i>Los Angeles</span>
-                    </div>
+                    <h4>{{ user.fullName }}</h4>
+                    {{ widgets.infos(user) }}
                   </div>
                 </div>
                 <div class="download-resume">
-                  <a href="#">Download CV <i data-feather="download"></i></a>
+                  <a href="#">Télécharger le CV <i data-feather="download"></i></a>
                 </div>
               </div>
               <div class="skill-and-profile">
                 <div class="skill">
-                  <label>Skills:</label>
+                  <label>Compétences:</label>
                   <a href="#">Design</a>
                   <a href="#">Illustration</a>
                   <a href="#">iOS</a>
@@ -213,11 +47,10 @@
                 <div class="row">
                   <div class="col-xl-7 col-lg-8">
                     <div class="about-details details-section">
-                      <h4><i data-feather="align-left"></i>About Me</h4>
-                      <p>Combined with a handful of model sentence structures, to generate lorem Ipsum which  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including.</p>
-                      <p>Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable </p>
+                      <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
+                      <p>{{ user.about }}</p>
                     </div>
-                    <div class="edication-background details-section">
+                    {# <div class="edication-background details-section">
                       <h4><i data-feather="book"></i>Education Background</h4>
                       <div class="education-label">
                         <span class="study-year">2018 - Present</span>
@@ -346,33 +179,46 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> #}
                   </div>
                   <div class="col-xl-4 offset-xl-1 col-lg-4">
                     <div class="information-and-contact">
                       <div class="information">
-                        <h4>{{ 'layout.footer_infos'|trans }}</h4>
+                        <h4>{{ 'layout.footer_infos'|trans({}, 'messages') }}</h4>
                         <ul>
-                          <li><span>{{ 'candidate.domain'|trans }}</span> {{ user.jobCategory|trans({}, 'jobs-categories') }}</li>
-                          <li><span>{{ 'job.region'|trans }}</span> {{ user.region|trans({}, 'regions') }}</li>
+                          <li><span>{{ 'form.full_name'|trans }}</span> {{ user.fullName }}</li>
+                          {% if user.jobCategory %}
+                            <li><span>{{ 'candidate.domain'|trans({}, 'messages') }}</span> {{ user.jobCategory|trans({}, 'jobs-categories') }}</li>
+                          {% endif %}
+                          {% if user.region %}
+                            <li><span>{{ 'job.region'|trans({}, 'messages') }}</span> {{ user.region|trans({}, 'regions') }}</li>
+                          {% endif %}
                           {# <li><span>{{ 'job.contract_type'|trans }}</span> Full-time</li> #}
-                          <li><span>{{ 'job.experience'|trans }}</span> {{ user.experience|trans }}</li>
-                          <li><span>{{ 'job.gender'|trans }}</span>{{ user.gender }}</li>
-                          <li><span>{{ 'job.age'|trans }}</span>{{ user.age}} {{ 'user.years_old'|trans }}</li>
-                          <li><span>{{ 'job.level'|trans }}</span> {{ user.studyLevel|trans }}</li>
+                          {% if user.experience %}
+                            <li><span>{{ 'job.experience'|trans({}, 'messages') }}</span> {{ user.experience|trans({}, 'messages') }}</li>
+                          {% endif %}
+                          {% if user.gender %}
+                            <li><span>{{ 'job.gender'|trans({}, 'messages') }}</span>{{ user.gender({}, 'messages') }}</li>
+                          {% endif %}
+                          {% if user.age %}
+                            <li><span>{{ 'job.age'|trans({}, 'messages') }}</span>{{ user.age}} {{ 'user.years_old'|trans({}, 'messages') }}</li>
+                          {% endif %}
+                          {% if user.studyLevel %}
+                            <li><span>{{ 'job.level'|trans({}, 'messages') }}</span> {{ user.studyLevel|trans({}, 'messages') }}</li>
+                          {% endif %}
                         </ul>
                       </div>
                       <div class="buttons">
-                        <a href="#" class="button contact-button" data-toggle="modal" data-target="#exampleModal">Contact Me</a>
-                        <a href="#" class="button cover-download"><i data-feather="download"></i>Cover Letter</a>
-                        <a href="#" class="button contact-download"><i data-feather="download"></i>Contact</a>
+                        <a href="#" class="button contact-button" data-toggle="modal" data-target="#exampleModal">{{ 'contact.button'|trans }}</a>
+                        <a href="#" class="button cover-download" style="width: 100%"><i data-feather="download"></i>{{ 'download_cv'|trans }}</a>
+                        {# <a href="#" class="button contact-download"><i data-feather="download"></i>{{ 'download_contact'|trans }}</a> #}
                       </div>
                       <!-- Modal -->
                       <div class="modal fade contact-form-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-body">
-                              <h4><i data-feather="edit"></i>Contact Me</h4>
+                              <h4><i data-feather="edit"></i>{{ 'contact.button'|trans }}</h4>
                               <form action="#">
                                 <div class="form-group">
                                   <input type="text" class="form-control" placeholder="Your Name">
@@ -390,22 +236,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-7 col-lg-8">
-                  <div class="personal-information details-section">
-                    <h4><i data-feather="user-plus"></i>Personal Deatils</h4>
-                    <ul>
-                      <li><span>Full Name:</span> Micheal N. Taylor</li>
-                      <li><span>Father's Name:</span> Howard Armour</li>
-                      <li><span>Mother's Name:</span> Megan Higbee</li>
-                      <li><span>Date of Birth:</span> 22/08/1992</li>
-                      <li><span>Nationality:</span> American </li>
-                      <li><span>Sex:</span> Male</li>
-                      <li><span>Address:</span> 2018 Nelm Street, Beltsville, VA 20705</li>
-                    </ul>
                   </div>
                 </div>
               </div>

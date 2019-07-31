@@ -11,10 +11,30 @@ namespace App\Controller;
 use App\Entity\Region;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Application;
 
 class RenderedController extends Controller
 {
-    public function index(): Response
+    public function recentJobs(): Response
+    {
+        $list = $this->getDoctrine()->getRepository(Application::class)->getLatest();
+
+        return $this->render('application/jobs-items.html.twig', [
+            'list' => $list,
+            'class' => 'col'
+        ]);
+    }
+
+    public function similarJobs($category): Response
+    {
+        $list = $this->getDoctrine()->getRepository(Application::class)->findByJobCategory($category);
+
+        return $this->render('application/jobs-items.html.twig', [
+            'list' => $list
+        ]);
+    }
+
+    public function statistics(): Response
     {
         return $this->render('rendered/statistics.html.twig', [
         ]);

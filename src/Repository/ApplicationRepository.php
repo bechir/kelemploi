@@ -25,6 +25,30 @@ class ApplicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Application::class);
     }
 
+    public function getLatest()
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+              ->addSelect('c')
+            ->orderBy('a.id', 'DESC')
+            ->getQuery()
+            ->setMaxResults(Application::NUM_ITEMS_HOME)
+      ->getResult();
+    }
+
+    public function findByJobCategory($category)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->leftJoin('a.postCategory', 'p')
+                ->addSelect('p')
+            ->where('p.name = :name')
+            ->setParameter('name', $category)
+            ->getQuery()
+            ->setMaxResults(Application::NUM_ITEMS_HOME)
+        ->getResult();
+    }
     // /**
     //  * @return Application[] Returns an array of Application objects
     //  */

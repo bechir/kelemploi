@@ -1,7 +1,12 @@
 {% import 'util/util.twig' as util %}
 {% import 'util/company_widgets.twig' as widgets %}
 
-<div class="job-filter-result">
+{% if class is not defined %}
+    {% set class = 'job-filter-result' %}
+{% endif %}
+
+
+<div class="{{ class }}">
     {% for _app in list %}
         {% set app_url = path('application_show', {slug: _app.slug}) %}
         

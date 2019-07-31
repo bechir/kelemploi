@@ -131,6 +131,8 @@ class Application
     const ONGOING = 'application.status.ongoing';
     const STATUS = [self::FENCED, self::ONGOING];
 
+    const NUM_ITEMS_HOME = 5;
+
     public function __construct()
     {
         $this->setStatus(self::ONGOING);

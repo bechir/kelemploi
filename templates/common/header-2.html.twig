@@ -65,12 +65,12 @@
                         {% endif %}
                         <select class="selectpicker select-language" data-width="fit">
                             {% set lang = ('app.locale.' ~ request_locale)|trans %}
-                            <option data-content='<span class="flag-icon flag-icon-{{ request_locale }}"></span> {{ lang }}'>{{ lang }}</option>
+                            <option data-content=''>{{ lang }}</option> {# <span class="flag-icon flag-icon-{{ request_locale }}"></span> {{ lang }} #}
                             {% for l in locales() %}
                                 {% if l.code != request_locale %}
                                     <option
                                         data-href="{{ path( app.request.get('_route', 'index'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}"
-                                        data-content='<span class="flag-icon flag-icon-{{ l.code }}"></span> {{ l.name }}'>
+                                        data-content=''> {# <span class="flag-icon flag-icon-{{ l.code }}"></span> {{ l.name }} #}
                                         {{ l.name }}
                                     </option>
                                 {% endif %}

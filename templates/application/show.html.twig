@@ -101,7 +101,7 @@
                             {% endif %}
                         </ul>
                       </div>
-                      {% if _app.isOwner(app.user) %}
+                      {% if is_granted('ROLE_EMPLOYER') and _app.isOwner(app.user) %}
                         <div class="btn-group">
                           <a href="{{ path('application_edit', {slug: _app.slug}) }}" class="btn btn-lg px-5 btn-primary text-white"><span class="fas fa-edit"></span> {{ 'word.edit'|trans }}</a>
                           {{ include('application/_delete_form.html.twig', {
@@ -213,78 +213,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <div class="job-list">
-              <div class="thumb">
-                <a href="#">
-                  <img src="/images/job/company-logo-1.png" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="body">
-                <div class="content">
-                  <h4><a href="">Designer Required</a></h4>
-                  <div class="info">
-                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Theoreo</a></span>
-                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>New York City</a></span>
-                    <span class="job-type full-time"><a href="#"><i data-feather="clock"></i>Full Time</a></span>
-                  </div>
-                </div>
-                <div class="more">
-                  <div class="buttons">
-                    <a href="#" class="button">Apply Now</a>
-                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
-                  </div>
-                  <p class="deadline">Deadline: Oct 31,  2019</p>
-                </div>
-              </div>
-            </div>
-            <div class="job-list">
-              <div class="thumb">
-                <a href="#">
-                  <img src="/images/job/company-logo-2.png" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="body">
-                <div class="content">
-                  <h4><a href="">Project Manager</a></h4>
-                  <div class="info">
-                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Degoin</a></span>
-                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>San Francisco</a></span>
-                    <span class="job-type part-time"><a href="#"><i data-feather="clock"></i>Part Time</a></span>
-                  </div>
-                </div>
-                <div class="more">
-                  <div class="buttons">
-                    <a href="#" class="button">Apply Now</a>
-                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
-                  </div>
-                  <p class="deadline">Deadline: Oct 31,  2019</p>
-                </div>
-              </div>
-            </div>
-            <div class="job-list">
-              <div class="thumb">
-                <a href="#">
-                  <img src="/images/job/company-logo-8.png" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="body">
-                <div class="content">
-                  <h4><a href="">Restaurant Team Member - Crew </a></h4>
-                  <div class="info">
-                    <span class="company"><a href="#"><i data-feather="briefcase"></i>Geologitic</a></span>
-                    <span class="office-location"><a href="#"><i data-feather="map-pin"></i>New Orleans</a></span>
-                    <span class="job-type temporary"><a href="#"><i data-feather="clock"></i>Temporary</a></span>
-                  </div>
-                </div>
-                <div class="more">
-                  <div class="buttons">
-                    <a href="#" class="button">Apply Now</a>
-                    <a href="#" class="favourite"><i data-feather="heart"></i></a>
-                  </div>
-                  <p class="deadline">Deadline: Oct 31,  2019</p>
-                </div>
-              </div>
-            </div>
+            {{ render(controller('App\\Controller\\RenderedController::similarJobs', {category: _app.postCategory})) }}
           </div>
         </div>
       </div>

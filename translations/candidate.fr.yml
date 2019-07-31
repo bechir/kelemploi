@@ -3,7 +3,8 @@ bookmarked: Favoris
 messages: Mes messages
 social_profile: "Réseaux sociaux" # Social Profile:
 show_resume: Voir le CV
-
+download_cv: "Télécharger le CV"
+download_contact: "Télécharger le contact"
 dashboard:
   title: '%name% | Tableau de bord'
   statistics:
@@ -16,6 +17,7 @@ listing:
   title: "Des candidats en recherhe d'emploi au Sénégal"
 
 details:
+  title: "Détails personnel"
   about: "À propos de moi"
   save: "Ajouter aux favoris"
   info: "Information"
@@ -28,11 +30,12 @@ form:
   edit_logo: Changer d'avatar # Change Avatar
   edit_infos: Modifier mes informations #
   region: Région
+  full_name: "Nom complet: "
+  age: "Âge: " 
   email: Adresse e-mail
   phone: Numéro de téléphone
   website: Site web
   address: Adresse
-  age: Votr âge
   expertise:
     label: Expértise
     placeholder: UI & UX Designer
