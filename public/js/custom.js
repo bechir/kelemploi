@@ -1,5 +1,8 @@
 
 $(document).ready(function() {
+  mount();
+
+  function mount() {
     /*-----------------------------------
     Smooth Scroll
     -----------------------------------*/
@@ -105,7 +108,7 @@ $(document).ready(function() {
       var clickovrAcc = $(event.target);
       var _openAcc =$('.account-card').hasClass('show');
       if(_openAcc && !clickovrAcc.is('.account-button')) {
-        $('.account-button').trigger('click');
+        // $('.account-button').trigger('click');
       }
     });
 
@@ -659,4 +662,17 @@ $(document).ready(function() {
      */
     var profileImage = $('div.profile-image');
     profileImage.css('background-image', 'url(' + profileImage.attr('data-image') + ')');
+
+    $('.row.no-gutters .dropdown.bootstrap-select + button').remove()
+  }
+
+  function unmount() {
+    $('.dropdown.bootstrap-select + button').remove()
+  }
+
+  const swup = new Swup({
+    'containers': ['#swup', '#user']
+  });
+  
+  swup.on('contentReplaced', mount)
 })

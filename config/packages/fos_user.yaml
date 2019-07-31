@@ -5,3 +5,6 @@ fos_user:
     from_email:
         address: "%website.email%"
         sender_name: "%website.name%"
+    registration:
+        form:
+            type: App\Form\Type\RegistrationFormType

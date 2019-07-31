@@ -3,13 +3,20 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<div class="contact-3 content-area-6">
+<div class="contact-3 content-area-6 section-padding">
     <div class="container">
         <div class="main-title mb-60">
-            <p class="lead">✅ {{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-            {% if targetUrl %}
-            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-            {% endif %}
+            <div class="alert-wrap">
+                <div class="jy-alert success-alert" role="alert">
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    {{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                    {% if targetUrl %}
+                        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

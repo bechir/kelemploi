@@ -5,6 +5,8 @@ app:
     en: English
     ar: العربية
   invalid_csrf_token: "Jeton CSRF invalide."
+  employer: Employeur
+  candidate: Candidat
 
 action:
   explore_jobs: Voir les emplois
@@ -223,6 +225,11 @@ login:
   forget_password: Mot de passe oublié?
   username: Nom d'utilisateur ou e-mail
 
+register:
+  title: Inscrivez vous
+  have_account: Vous avez déjà un compte?
+
+
 # Notifications
 notification:
   title: Notifications
@@ -303,6 +310,5 @@ word:
   company: Entreprise
 
 text:
-
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"
   temporary_unavailable_alert: "Cette section est temporairement vide."

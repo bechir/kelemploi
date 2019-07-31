@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Event\ApplicationEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Util\CategoryCounter;
+use App\Util\RegionCounter;
 
 class ApplicationSubscriber implements EventSubscriberInterface
 {
@@ -35,6 +36,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
         $application = $event->getApplication();
         
         CategoryCounter::increment($application->getPostCategory()->getSlug());
+        RegionCounter::increment($application->getRegion()->getSlug());
     }
 
     public function onApplicaionDeleted(ApplicationEvent $event)
@@ -42,6 +44,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
         $application = $event->getApplication();
         
         CategoryCounter::decrement($application->getPostCategory()->getSlug());
+        RegionCounter::decrement($application->getRegion()->getSlug());
     }
 
     public static function getSubscribedEvents()

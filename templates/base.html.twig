@@ -61,7 +61,9 @@
         {% endif %}
 
         <!--Main Layout-->
+        <div id="swup" class="transition-fade">
         {% block main %}{% endblock main %}
+        </div>
         <!--Main Layout-->
 
         <!-- Footer -->
@@ -87,6 +89,7 @@
         <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
         <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
         <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
+        <script src="{{ asset('assets/js/swup.min.js') }}"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
         {% block javascript %}{% endblock %}
     {% endblock %}

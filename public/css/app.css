@@ -96,3 +96,17 @@
     color: #aaa;
     font-size: 2.3rem;
 }
+
+.transition-fade {
+    transition: 0.4s;
+} 
+html.is-animating .transition-fade {
+    opacity: 0;
+    transform: translateY(-33px);
+}
+html.is-animating.is-leaving .transition-fade {
+    transition-delay: 0s!important;
+}
+.delay-02s{
+    transition-delay: 0.2s;
+}

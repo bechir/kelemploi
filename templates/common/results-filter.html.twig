@@ -1,0 +1,89 @@
+<div class="{{ type }}-filter-wrapper">
+  <div class="selected-options same-pad">
+    <div class="selection-title">
+      <h4>Sélection</h4>
+      <a href="#">Effacer tous</a>
+    </div>
+    <ul class="filtered-options">
+    </ul>
+  </div>
+  <div class="{{ type }}-filter-dropdown same-pad category">
+    <select class="selectpicker">
+      <option value="" selected>Catégorie</option>
+      {% set categories = categoriesCount() %}
+      {% for category, key in categories %}
+          <option value="{{ category }}">{{ category|trans({}, 'jobs-categories') }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="{{ type }}-filter-dropdown same-pad location">
+    <select class="selectpicker">
+      <option value="" selected>Région</option>
+      {% set regions = regionsCount() %}
+      {% for region, key in regions %}
+          <option value="{{ region }}">{{ region|trans({}, 'regions') }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div data-id="{{ type }}-type" class="{{ type }}-filter {{ type }}-type same-pad">
+    <h4 class="option-title">Type de contrat</h4>
+    <ul>
+      <li class="full-time"><i data-feather="clock"></i><a href="#" data-attr="CDD">CDD</a></li>
+      <li class="part-time"><i data-feather="clock"></i><a href="#" data-attr="CDI">CDI</a></li>
+      <li class="freelance"><i data-feather="clock"></i><a href="#" data-attr="Freelance">Freelance</a></li>
+      <li class="temporary"><i data-feather="clock"></i><a href="#" data-attr="Stage">Stage</a></li>
+    </ul>
+  </div>
+  <div data-id="experience" class="{{ type }}-filter experience same-pad">
+    <h4 class="option-title">Expérience</h4>
+    <ul>
+      <li><a href="#" data-attr="Aucune">Aucune</a></li>
+      <li><a href="#" data-attr="Moins d'un an">Moins d'un an</a></li>
+      <li><a href="#" data-attr="2 Ans">2 Ans</a></li>
+      <li><a href="#" data-attr="3 Ans">3 Ans</a></li>
+      <li><a href="#" data-attr="4 Ans">4 Ans</a></li>
+      <li><a href="#" data-attr="5 Ans">5 Ans</a></li>
+      <li><a href="#" data-attr="Plus de 5 Ans">Plus de 5 Ans</a></li>
+    </ul>
+  </div>
+  {# <div class="{{ type }}-filter same-pad">
+    <h4 class="option-title">Salaire</h4>
+    <div class="price-range-slider">
+      <div class="nstSlider" data-range_min="0" data-range_max="10000" 
+        data-cur_min="0"    data-cur_max="6130">
+        <div class="bar"></div>
+        <div class="leftGrip"></div>
+        <div class="rightGrip"></div>
+        <div class="grip-label">
+          <span class="leftLabel"></span>
+          <span class="rightLabel"></span>
+        </div>
+      </div>
+    </div>
+  </div> #}
+  <div data-id="post" class="{{ type }}-filter post same-pad">
+    <h4 class="option-title">Date Postée</h4>
+    <ul>
+      <li><a href="#" data-attr="Dernière 24h">Dernière 24h</a></li>
+      <li><a href="#" data-attr="Les 7 derniers jours">Les 7 derniers jours</a></li>
+      <li><a href="#" data-attr="14 derniers jours">14 derniers jours</a></li>
+      <li><a href="#" data-attr="Ce mois">Ce mois</a></li>
+    </ul>
+  </div>
+  <div data-id="gender" class="{{ type }}-filter same-pad gender">
+    <h4 class="option-title">Sexe</h4>
+    <ul>
+      <li><a href="#" data-attr="Homme">Homme</a></li>
+      <li><a href="#" data-attr="Femme">Femme</a></li>
+    </ul>
+  </div>
+  <div data-id="qualification" class="{{ type }}-filter qualification same-pad">
+    <h4 class="option-title">Qualification</h4>
+    <ul>
+      <li><a href="#" data-attr="Bac ou moins">Bac ou moins</a></li>
+      <li><a href="#" data-attr="Licence">Licence</a></li>
+      <li><a href="#" data-attr="Master">Master</a></li>
+      <li><a href="#" data-attr="Doctorat">Doctorat</a></li>
+    </ul>
+  </div>
+</div>

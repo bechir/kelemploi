@@ -8,7 +8,7 @@
 
 namespace App\Twig;
 
-use App\Util\AppUtils;
+use App\Util\RegionCounter;
 use App\Util\CategoryCounter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Intl\Languages;
@@ -49,13 +49,8 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('locales', [$this, 'getLocales']),
-            new TwigFunction('categories', [$this, 'getCategories']),
-            new TwigFunction('price', [$this, 'priceFilter']),
-            new TwigFunction('transCity', [$this, 'getTranslatedCity']),
-            new TwigFunction('getCurrency', [$this, 'getCurrency']),
-            new TwigFunction('htmlRating', [HTMLCodeGenerator::class, 'htmlRating']),
-            new TwigFunction('citiesByCountry', [$this, 'citiesByCountry']),
             new TwigFunction('categoriesCount', [$this, 'categoriesQuantities']),
+            new TwigFunction('regionsCount', [$this, 'regionsCount']),
         ];
     }
 
@@ -94,72 +89,17 @@ class AppExtension extends AbstractExtension
         return $this->locales;
     }
 
-    public function getCategories(): array
-    {
-        return AppUtils::getCategories();
-    }
-
-    public function priceFilter($number, $currency = 'MR', $decimals = 0, $decPoint = '.', $thousandsSep = ' ')
-    {
-        $price = number_format($number, $decimals, $decPoint, $thousandsSep);
-        $price = $price . ' ';
-        switch ($currency) {
-            case 'MR':
-                $price .= ' MRU';
-
-                break;
-            case 'SN':
-                $price .= 'FCFA';
-
-                break;
-            case 'ML':
-                $price .= 'FCFA';
-
-                break;
-        }
-
-        return $price;
-    }
-
     public function getTranslatedCity(string $countryCode, string $cityCode): string
     {
         return $this->container->get('translator')->trans('city.' . $countryCode . '.' . $cityCode);
     }
 
-    public function getCurrency(string $code)
-    {
-        $currency = '';
-        switch ($code) {
-            case 'MR':
-                $currency .= 'MRU';
-
-                break;
-            case 'SN':
-                $currency .= 'FCFA';
-
-                break;
-            case 'ML':
-                $currency .= 'FCFA';
-
-                break;
-            default:
-                throw new \Exception('Unknown country');
-
-                break;
-        }
-
-        return $currency;
-    }
-
-    public function citiesByCountry(string $country = 'MR'): ?array
-    {
-        $cities = json_decode(file_get_contents(__DIR__ . '/../Utils/CityFinder/cities.json'), true);
-
-        return $cities[$country] ?: null;
-    }
-
     public function categoriesQuantities()
     {
         return CategoryCounter::count();
+    }
+    public function regionsCount()
+    {
+        return RegionCounter::count();
     }
 }

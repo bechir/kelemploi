@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ 'user.create_account'|trans }}{% endblock %}
+{% block title %}{{ 'register.title'|trans }}{% endblock %}
+
+{% from 'util/util.twig' import acceptTermsConditions %}
 
 {% block body %}
-    <header class="header-2 access-page-nav">
+    <header class="header-2 access-page-nav" id="login-header">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -25,20 +27,12 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="access-form">
                         <div class="form-header">
-                            <h5>
-                                <i data-feather="edit"></i>Register Account</h5>
-                        </div>
-                        <div class="account-type">
-                            <label for="idRegisterCan">
-                                <input id="idRegisterCan" name="register" type="radio">
-                                <span>Candidate</span>
-                            </label>
-                            <label for="idRegisterEmp">
-                                <input id="idRegisterEmp" name="register" type="radio">
-                                <span>Employer</span>
-                            </label>
+                            <h5><i data-feather="edit"></i>{{ 'register.title'|trans }}</h5>
                         </div>
                         {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_widget(form.accountType, {'attr': {'class': 'form-control'}}) }}
+                        </div>
                         {% if not form.vars.valid %}
                             {% for children in form.children %}
                                 {% if not children.vars.valid %}
@@ -52,9 +46,9 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-                        <div class="form-group">
+                        {# <div class="form-group">
                             {{ form_widget(form.username, {'attr': {'placeholder': 'form.username', 'class': 'form-control'}}) }}
-                        </div>
+                        </div> #}
                         <div class="form-group">
                             {{ form_widget(form.email, {'attr': {'placeholder': 'form.email', 'class': 'form-control'}}) }}
                         </div>
@@ -66,26 +60,25 @@
                         </div>
                         <div class="more-option terms">
                             <div class="mt-0 terms">
-                                <input checked="" class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox">
+                                <input checked="" class="custom-radio" id="radio-4" name="termsandcondition" type="checkbox" disabled>
                                 <label for="radio-4">
                                     <span class="dot"></span>
-                                    I accept the
-                                    <a href="#">terms &amp; conditions</a>
+                                    {{ acceptTermsConditions() }}
                                 </label>
                             </div>
                         </div>
-                        <button class="button primary-bg btn-block">Register</button>
+                        <button class="button primary-bg btn-block">{{ 'user.register'|trans }}</button>
                         {{ form_end(form) }}
                         <div class="shortcut-login">
-                            <span>Or connect with</span>
+                            <span>{{ 'login.connect_with'|trans }}</span>
                             <div class="buttons">
                                 <a class="facebook" href="#">
                                     <i class="fab fa-facebook-f"></i>Facebook</a>
                                 <a class="google" href="#">
                                     <i class="fab fa-google"></i>Google</a>
                             </div>
-                            <p>Already have an account?
-                                <a href="{{ path('fos_user_security_login') }}">Login</a>
+                            <p>{{ 'register.have_account'|trans }}
+                                <a href="{{ path('fos_user_security_login') }}">{{ 'login.submit_btn'|trans }}</a>
                             </p>
                         </div>
                     </div>
@@ -93,20 +86,4 @@
             </div>
         </div>
     </div>
-
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/visible.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
-    <script src="{{ asset('assets/js/chart.js') }}"></script>
-    <script src="{{ asset('assets/js/plyr.js') }}"></script>
-    <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
 {% endblock %}

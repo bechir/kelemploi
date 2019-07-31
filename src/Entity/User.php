@@ -125,6 +125,11 @@ class User extends BaseUser implements EquatableInterface
      */
     private $gender;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\AccountType")
+     */
+    private $accountType;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
@@ -139,6 +144,14 @@ class User extends BaseUser implements EquatableInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        $this->username = $email;
+
+        return $this;
     }
 
     public function getCivility(): ?Civility
@@ -433,6 +446,18 @@ class User extends BaseUser implements EquatableInterface
     public function setGender(?Gender $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getAccountType(): ?AccountType
+    {
+        return $this->accountType;
+    }
+
+    public function setAccountType(?AccountType $accountType): self
+    {
+        $this->accountType = $accountType;
 
         return $this;
     }

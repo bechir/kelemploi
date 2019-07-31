@@ -9,7 +9,7 @@
                     <div class="header-top-toggler">
                         <div class="header-top-toggler-button"></div>
                     </div>
-                    <div class="top-nav">
+                    <div class="top-nav" id="user">
                         {% if is_granted('ROLE_USER') %}
 
                             {# {% include 'common/header-top-notification.htl.twig' %} #}
@@ -60,7 +60,8 @@
                         {% else %}
                             <div class="dropdown header-top-account login-modals">
                                 <button data-target="#exampleModalLong" data-toggle="modal" title="Title" type="button">{{ 'user.login'|trans }}</button>
-                                <button data-target="#exampleModalLong2" data-toggle="modal" title="Title" type="button">{{ 'user.register'|trans }}</button>
+                                {# <button data-target="#exampleModalLong2" data-toggle="modal" title="Title" type="button">{{ 'user.register'|trans }}</button> #}
+                                <a href="{{ path('fos_user_registration_register') }}" class="text-muted">{{ 'user.register'|trans }}</a> | 
                             </div>
                         {% endif %}
                         <select class="selectpicker select-language" data-width="fit">
