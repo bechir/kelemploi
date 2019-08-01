@@ -57,13 +57,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    maintenance_listener:
-        class: App\EventListener\MaintenanceListener
-        arguments:
-            - '%isLocked%'
-            - '@twig'
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    # maintenance_listener:
+    #     class: App\EventListener\MaintenanceListener
+    #     arguments:
+    #         - '%isLocked%'
+    #         - '@twig'
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     # locale_subscribder:
     #     class: App\EventSubscriber\LocaleSubscriber
