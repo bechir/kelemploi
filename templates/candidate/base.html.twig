@@ -6,6 +6,8 @@
 
     {{ breadcrumb.level_1('employer.breadcrumb') }}
 
+    {% block top_level %}{% endblock %}
+
     <div class="alice-bg section-padding-bottom">
         <div class="container no-gliters">
             <div class="row no-gliters">
@@ -15,7 +17,7 @@
                             {% block content %}
                             {% endblock %}
                         </div>
-                        {% include 'user/dashboard-sidebar.html.twig' with {active: active, user: user} %}
+                        {% include 'user/dashboard-sidebar.html.twig' with {active: active, company: company} %}
                     </div>
                 </div>
             </div>

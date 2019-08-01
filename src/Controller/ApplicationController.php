@@ -46,10 +46,15 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER")
+     * @IsGranted("ROLE_USER")
      */
     public function create(Request $request, EventDispatcherInterface $dispatcher): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
@@ -93,10 +98,15 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER").
+     * IsGranted("ROLE_USER").
      */
     public function edit(Request $request, Application $app): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         $form = $this->createForm(ApplicationType::class, $app);
 
         $form->handleRequest($request);
@@ -135,10 +145,15 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER").
+     * IsGranted("ROLE_USER").
      */
     public function delete(Request $request, Application $app, EventDispatcherInterface $dispatcher): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         if($app && $request->isMethod('POST')) {
             if (!$this->isCsrfTokenValid('app.delete', $request->request->get('app_delete_token'))) {
                 $this->addFlash('danger', 'app.invalid_csrf_token');

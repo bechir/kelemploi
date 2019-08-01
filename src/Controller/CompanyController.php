@@ -34,8 +34,16 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    /**
+     * IsGranted("ROLE_USER").
+     */
     public function openedJobs(Company $company): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         $list = $this->getDoctrine()
             ->getRepository(Application::class)
                 ->findBy(['company' => $company]);
@@ -46,10 +54,15 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER").
+     * IsGranted("ROLE_USER").
      */
     public function dashboard(): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         $user = $this->getUser();
 
         return $this->render('company/dashboard.html.twig', [
@@ -60,10 +73,15 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER")
+     * IsGranted("ROLE_USER").
      */
     public function editProfile(Request $request): Response
     {
+        // Acces limité aux employeurs
+        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $company = $this->getUser()->getCompany();

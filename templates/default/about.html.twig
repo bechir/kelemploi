@@ -64,11 +64,11 @@
                 </div>
               </div>
               
-              {{ render(controller('App\\Controller\\StatisticsController::index')) }}
+              {{ render(controller('App\\Controller\\RenderedController::statistics')) }}
 
-              {% include 'common/registration-box.html.twig' %}
+              {# {% include 'common/registration-box.html.twig' %} #}
 
-              {% include 'common/testimonial.html.twig' with {class: 'padding-bottom-90'} %}
+              {# {% include 'common/testimonial.html.twig' with {class: 'padding-bottom-90'} %} #}
             </div>
           </div>
         </div>

@@ -680,7 +680,8 @@ $(document).ready(function() {
   }
 
   function removeLoader() {
-    $("#page-loader").remove();
+    while($("#page-loader").attr('id') == 'page-loader')
+      $("#page-loader").remove();
   }
 
   const swup = new Swup({
