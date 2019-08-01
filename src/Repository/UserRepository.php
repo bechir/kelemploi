@@ -14,6 +14,7 @@ use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,9 +24,12 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $em;
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $em)
     {
         parent::__construct($registry, User::class);
+
+        $this->em = $em;
     }
 
     public function loadUserByUsername($username)
@@ -44,6 +48,18 @@ class UserRepository extends ServiceEntityRepository
               ->orderBy('u.submittedAt', 'DESC');
 
         return $this->createPaginator($qb->getQuery(), $page);
+    }
+
+    public function findCandidates()
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.accountType', 'a')
+                ->addSelect('a')
+            ->where('a.name = :name')
+            ->setParameter('name', User::CANDIDATE)
+            ->setMaxResults(User::NUM_ITEMS)
+            ->getQuery()
+        ->getResult();
     }
 
     /**

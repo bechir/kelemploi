@@ -132,6 +132,9 @@ class User extends BaseUser implements EquatableInterface
 
     const NUM_ITEMS = 15;
 
+    const EMPLOYER = 'app.employer';
+    const CANDIDATE = 'app.candidate';
+
     public function __construct()
     {
         parent::__construct();

@@ -3,6 +3,7 @@ $(document).ready(function() {
   mount();
 
   function mount() {
+    removeLoader();
     /*-----------------------------------
     Smooth Scroll
     -----------------------------------*/
@@ -108,7 +109,7 @@ $(document).ready(function() {
       var clickovrAcc = $(event.target);
       var _openAcc =$('.account-card').hasClass('show');
       if(_openAcc && !clickovrAcc.is('.account-button')) {
-        // $('.account-button').trigger('click');
+        $('.account-card').hide('fast');
       }
     });
 
@@ -667,12 +668,27 @@ $(document).ready(function() {
   }
 
   function unmount() {
-    $('.dropdown.bootstrap-select + button').remove()
+    $("html, body")
+      .animate({ scrollTop: 0 }, "fast")
+      .append(`<div id="page-loader">
+                <span class="dot"></span>
+                <div class="dots">
+                    <span></span><span></span><span></span>
+                </div>
+              </div>`
+      );
+  }
+
+  function removeLoader() {
+    $("#page-loader").remove();
   }
 
   const swup = new Swup({
-    'containers': ['#swup', '#user']
+    containers: ['#swup', '#user'],
+    cache: false
   });
   
   swup.on('contentReplaced', mount)
+  swup.on('animationOutStart', unmount)
+  swup.on('pageLoaded', removeLoader)
 })

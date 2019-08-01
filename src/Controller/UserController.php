@@ -23,7 +23,7 @@ class UserController extends Controller
     public function list(): Response
     {
         return $this->render('candidate/listing.html.twig', [
-            'list' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+            'list' => $this->getDoctrine()->getRepository(User::class)->findCandidates(),
         ]);
     }
 
