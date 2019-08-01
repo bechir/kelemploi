@@ -294,6 +294,11 @@ form:
           <li>etc.</li></ul>
         </div>
 
+
+error:
+  err500:
+    title: "Erreur 500"
+
 word:
   cancel: Annuler
   delete: Supprimer
