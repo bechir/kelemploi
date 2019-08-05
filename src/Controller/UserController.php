@@ -8,17 +8,20 @@
 
 namespace App\Controller;
 
+use App\Form\ResumeType;
 use App\Form\EditProfileType;
+use App\Event\CandidateEvent;
+use App\Event\CandidateEvents;
+use App\Entity\User;
+use App\Entity\Resume;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Event\CandidateEvent;
-use App\Entity\User;
-use App\Event\CandidateEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserController extends Controller
+class UserController extends AbstractController
 {
     public function list(): Response
     {
@@ -50,9 +53,42 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/resume.html.twig', [
+        return $this->render('candidate/resume.html.twig', [
             'user' => $user,
             'active' => 'resume',
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function addResume(Request $request, UserInterface $user = null): Response
+    {
+        if($user->haveResume())
+            return $this->redirectToRoute('edit_resume');
+
+        $resume = new Resume();
+        $form = $this->createForm(ResumeType::class, $resume);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $user->setResume($resume);
+            
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($resume);
+            $em->persist($user);
+
+            $em->flush();
+
+            $this->addFlash('success', 'resume.create_success');
+
+            return $this->redirectToRoute('resume');
+        }
+
+        return $this->render('candidate/add-resume.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 
@@ -63,7 +99,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/edit-resume.html.twig', [
+        return $this->render('candidate/edit-resume.html.twig', [
             'user' => $user,
             'active' => 'edit-resume',
         ]);
@@ -76,7 +112,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/dashboard.html.twig', [
+        return $this->render('candidate/dashboard.html.twig', [
             'user' => $user,
             'active' => 'dashboard',
         ]);
@@ -100,7 +136,7 @@ class UserController extends Controller
             $this->addFlash('success', 'user.edit_profile.success');
         }
 
-        return $this->render('user/edit-profile.html.twig', [
+        return $this->render('candidate/edit-profile.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'active' => 'edit-profile',
@@ -114,7 +150,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/bookmarked.html.twig', [
+        return $this->render('candidate/bookmarked.html.twig', [
             'user' => $user,
             'active' => 'bookmarked',
         ]);
@@ -127,7 +163,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/applied.html.twig', [
+        return $this->render('candidate/applied.html.twig', [
             'user' => $user,
             'active' => 'applied-jobs',
         ]);
@@ -140,7 +176,7 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->render('user/messages.html.twig', [
+        return $this->render('candidate/messages.html.twig', [
             'user' => $user,
             'active' => 'messages',
         ]);

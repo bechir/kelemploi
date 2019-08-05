@@ -22,6 +22,14 @@ resume:
   defaults:
     _locale: '%locale%'
 
+add_resume:
+  controller: App\Controller\UserController::addResume
+  path: /{_locale}/user/add-resume
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 edit_resume:
   controller: App\Controller\UserController::editResume
   path: /{_locale}/user/edit-resume
@@ -69,7 +77,6 @@ user_messages:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
-
 
 user_settings:
   path: /{_locale}/user/settings

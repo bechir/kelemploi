@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+{% from 'util/util.twig' import acceptTermsConditions %}
+
+{% trans_default_domain 'candidate' %}
+
+{% block title %}{{ 'add_resume.title'|trans }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('candidate.add_resume') }}
+
+    <div class="alice-bg section-padding-bottom">
+        <div class="container no-gliters">
+            <div class="row no-gliters">
+                <div class="col">
+                    <div class="post-container">
+                        <div class="post-content-wrapper">
+                            {{ form_start(form, {'attr': {'class': 'job-post-form'}}) }}
+                                <div class="basic-info-input">
+                                    <h4>
+                                        <i data-feather="plus-circle"></i>Ajoutez votre CV</h4>
+                                    <div class="form-group row" id="full-name">
+                                        <label class="col-md-3 col-form-label">Nom complet</label>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.fullName, {attr: {'class': 'form-control', 'value': user.firstName ~ ' ' ~ user.lastName, 'placeholder': 'Votre nom complet'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="row" id="information">
+                                        <label class="col-md-3 col-form-label">Information</label>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ form_widget(form.jobCategory, {attr: {'class': 'form-control'}}) }}
+                                                        <i class="fa fa-caret-down"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ form_widget(form.studyLevel, {attr: {'class': 'form-control'}}) }}
+                                                        <i class="fa fa-caret-down"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ form_widget(form.experienceLevel, {attr: {'class': 'form-control'}}) }}
+                                                        <i class="fa fa-caret-down"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    {{ form_widget(form.skills) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="about">
+                                        <label class="col-md-3 col-form-label">À propos de vous</label>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.about, {attr: {'class': 'tinymce-editor-1'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="row" id="education">
+                                        <label class="col-12 col-form-label"><i data-feather="book"></i> Éducation</label>
+                                    </div>
+                                    
+                                    {{ form_widget(form.educations) }}
+
+                                    <div class="row mt-5" id="experience">
+                                        <label class="col-12 col-form-label"><i data-feather="briefcase"></i> Expérience professionnelle</label>
+                                    </div>
+
+                                    {{ form_widget(form.workExperiences) }}
+
+                                    <!-- <div class="row" id="portfolio">
+                                        <label class="col-md-3 col-form-label">Portfolio</label>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Titre" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-md-3 col-form-label">PORTFOLIO 01</label>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">Image</div>
+                                                    </div>
+                                                    <div class="upload-portfolio-image">
+                                                        <div class="update-photo">
+                                                            <img alt="" class="image" src="/images/portfolio/thumb-1.jpg">
+                                                        </div>
+                                                        <div class="file-upload">
+                                                            <input class="file-input" type="file">
+                                                            <i data-feather="plus"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Lien vers le portfolio (Optionnel)" type="text">
+                                            </div>
+                                            <a class="add-new-field" href="#">+ Add Portfolio</a>
+                                        </div>
+                                    </div> -->
+                                    <div class="row form-group" id="cv">
+                                        <label class="col-md-3 col-form-label">Uploader votre CV</label>
+                                        <div class="col-md-9">
+                                            <div class="add-cv">
+                                                {{ form_widget(form.cv.cvFile) }}
+                                                Fichier PDF ou Word<i data-feather="upload-cloud"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row" id="profile">
+                                        <label class="col-md-3 col-form-label">Social Profile</label>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text dropdown-label">
+                                                            <select class="form-control">
+                                                                <option>Select</option>
+                                                                <option>Facebook</option>
+                                                                <option>Twitter</option>
+                                                                <option>Linkedin</option>
+                                                                <option>Instagram</option>
+                                                            </select>
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input class="form-control" id="inlineFormInputGroup" placeholder="Input Profile Link" type="text">
+                                                </div>
+                                            </div>
+                                            <a class="add-new-field" href="#">+ Add Social</a>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-md-9 offset-md-3">
+                                            <div class="form-group mt-0 terms">
+                                                <input class="custom-radio" id="radio-4" name="termsandcondition" checked type="checkbox">
+                                                <label for="radio-4">
+                                                    <span class="dot"></span>
+                                                    {{ acceptTermsConditions() }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form._token) }}
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label"></label>
+                                        <div class="col-md-9">
+                                            <button class="button">Enregister</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                        <div class="post-sidebar">
+                            <h5><i data-feather="arrow-down-circle"></i>Navigation</h5>
+                            <ul class="sidebar-menu">
+                                <li><a href="#full-name">Nom complet</a></li>
+                                <li><a href="#information">Informations</a></li>
+                                <li><a href="#about">À propos de vous</a></li>
+                                <li><a href="#education">Éducation</a></li>
+                                <li><a href="#experience">Expérience</a></li>
+                                <li><a href="#portfolio">Portfolio</a></li>
+                                <li><a href="#cv">Upload CV</a></li>
+                                <li><a href="#profile">Social Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

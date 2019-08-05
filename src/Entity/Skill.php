@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SkillRepository")
  */
-class Skill
+class Skill implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -26,12 +26,6 @@ class Skill
      * @ORM\Column(type="string", length=100)
      */
     private $name;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
 
     public function getId(): ?int
     {
@@ -50,15 +44,20 @@ class Skill
         return $this;
     }
 
-    public function getCategory(): ?JobCategory
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize(): string
     {
-        return $this->category;
+        // This entity implements JsonSerializable (http://php.net/manual/en/class.jsonserializable.php)
+        // so this method is used to customize its JSON representation when json_encode()
+        // is called, for example in tags|json_encode (app/Resources/views/form/fields.html.twig)
+
+        return $this->name;
     }
 
-    public function setCategory(?JobCategory $category): self
+    public function __toString(): string
     {
-        $this->category = $category;
-
-        return $this;
+        return $this->name;
     }
 }

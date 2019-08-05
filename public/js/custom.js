@@ -646,6 +646,139 @@ $(document).ready(function() {
       html: true
     })
 
+    // Bootstrap-tagsinput initialization
+    // http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
+    var $input = $('input[data-toggle="tagsinput"]');
+    if ($input.length) {
+        var source = new Bloodhound({
+            local: $input.data('tags'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            datumTokenizer: Bloodhound.tokenizers.whitespace
+        });
+        source.initialize();
+
+        $input.tagsinput({
+            confirmKeys: [13, 188],
+            trimValue: true,
+            focusClass: 'focus',
+            typeaheadjs: {
+                name: 'tags',
+                source: source.ttAdapter()
+            }
+        });
+    }
+    $('form.job-post-form input').on('keypress', function(e){
+      if (e.keyCode == 13){
+        e.keyCode = 188;
+        e.preventDefault();
+      };
+    });
+
+    /**
+     * Add resume
+     */
+    var educationsContainer = $('#resume_educations');
+    var addBtn = $(`<div class="col-12 btn-new-education">
+                    <a class="add-new-field float-right" href="#">+ Ajouter une éducation</a>
+                  </div>`);
+    educationsContainer.append(addBtn);
+
+    addBtn.on('click', function(e){
+      addEducation(educationsContainer);
+      e.preventDefault();
+      return false;
+    });
+
+    var index = educationsContainer.find('div.row').length;
+
+    if(index == 0)
+      addEducation(educationsContainer);
+    else {
+      educationsContainer.children('div.row').each(function(){
+        addDeleteEducationLink($(this))
+      });
+    }
+
+    function addEducation(container) {
+      var prototype = $(container.attr('data-prototype').replace(/___name___/g, (index+1)));
+      addDeleteEducationLink(prototype);
+
+      prototype.addClass('transition');
+      prototype.insertBefore('.btn-new-education');
+      index++;
+    }
+
+    function addDeleteEducationLink(prototype) {
+      var deleteLink = $(`<button class="btn delete-item"><i class="fas fa-trash"></i></button>`);
+      var educRow = prototype.find('.education-row');
+      educRow.append(deleteLink);
+
+      deleteLink.on('click', function(e){
+        prototype.hide('normal', function(){
+          prototype.remove();
+        })
+        e.preventDefault();
+        return false;
+      }).hover(function(){
+        educRow.addClass('bordered shadow-lg')
+      }, function(){
+        educRow.removeClass('bordered shadow-lg')
+      })
+    }
+
+    /**
+     * Add Work Experiance
+     */
+    var workExperiencesContainer = $('#resume_workExperiences');
+    var addBtn2 = $(`<div class="col-12 btn-new-work-exp">
+                    <a class="add-new-field float-right" href="#">+ Ajouter une expérience</a>
+                  </div>`);
+    workExperiencesContainer.append(addBtn2);
+
+    addBtn2.on('click', function(e){
+      addWorkExperience(workExperiencesContainer);
+      e.preventDefault();
+      return false;
+    });
+
+    var index2 = workExperiencesContainer.find('div.row').length;
+
+    if(index2 == 0)
+      addWorkExperience(workExperiencesContainer);
+    else {
+      workExperiencesContainer.children('div.row').each(function(){
+        addDeleteWorkExperienceLink($(this))
+      });
+    }
+
+    function addWorkExperience(container) {
+      var prototype = $(container.attr('data-prototype').replace(/___name___/g, (index+1)));
+      addDeleteWorkExperienceLink(prototype);
+
+      prototype.addClass('transition');
+      prototype.insertBefore('.btn-new-work-exp');
+      index2++;
+    }
+
+    function addDeleteWorkExperienceLink(prototype) {
+      var deleteLink = $(`<button class="btn delete-item"><i class="fas fa-trash"></i></button>`);
+      var wokExpRow = prototype.find('.work-experience-row');
+      wokExpRow.append(deleteLink);
+
+      deleteLink.on('click', function(e){
+        prototype.hide('normal', function(){
+          prototype.remove();
+        })
+        e.preventDefault();
+        return false;
+      }).hover(function(){
+        wokExpRow.addClass('bordered shadow-lg')
+      }, function(){
+        wokExpRow.removeClass('bordered shadow-lg')
+      })
+    }
+
+  
     var alerts = $(".alert-wrap.dismissable-alert");
     alerts.addClass('show');
 

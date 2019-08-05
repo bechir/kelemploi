@@ -1,0 +1,20 @@
+{% extends 'user/base.html.twig' %}
+
+{% import 'util/util.twig' as util %}
+
+{% trans_default_domain 'user' %}
+
+{% block title %}{{ 'resume'|trans }}{% endblock %}
+
+{% block content %}
+    {% if user.resume is null %}
+        <div class="alert-wrap">
+            <div class="jy-alert default-alert">
+                <div class="icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <p>Vous n'avez pas encore créé de CV. <a class="btn-link" href="{{ path('add_resume') }}">Cliquez ici pour commencer</a></p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

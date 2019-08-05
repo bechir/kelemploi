@@ -17,7 +17,7 @@
               {% if is_granted('ROLE_EMPLOYER') %}
                 <a href="{{ path('applications_list') }}" class="button">{{ 'action.explore_jobs'|trans }}</a>
               {% else %}
-                <a href="{{ path('edit_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
+                <a href="{{ path('add_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
               {% endif %}              
             </div>
           </div>

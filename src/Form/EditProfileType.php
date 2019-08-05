@@ -37,25 +37,8 @@ class EditProfileType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false
             ])
-            ->add('jobCategory', EntityType::class, [
-                'class' => JobCategory::class,
-                'choice_label' => 'name',
-                'required' => false
-            ])
             ->add('gender', EntityType::class, [
                 'class' => Gender::class,
-                'choice_label' => 'name',
-                'required' => false,
-                'choice_translation_domain' => true
-            ])
-            ->add('studyLevel', EntityType::class, [
-                'class' => StudyLevel::class,
-                'choice_label' => 'level',
-                'required' => false,
-                'choice_translation_domain' => true
-            ])
-            ->add('experience', EntityType::class, [
-                'class' => Experience::class,
                 'choice_label' => 'name',
                 'required' => false,
                 'choice_translation_domain' => true
@@ -63,22 +46,7 @@ class EditProfileType extends AbstractType
             ->add('age', IntegerType::class, [
                 'required' => false
             ])
-            ->add('civility', EntityType::class, [
-                'class' => Civility::class,
-                'choice_label' => 'name',
-                'required' => false
-            ])
-            ->add('about', TextareaType::class, [
-                'attr' => [
-                    'placeholder' => 'form.about_user.placeholder',
-                ],
-                'required' => false,
-                'translation_domain' => 'user',
-            ])
             ->add('avatar', UserAvatarType::class, ['required' => false])
-            // ->add('skills', CollectionType::class, [
-            //
-            // ])
         ;
     }
 

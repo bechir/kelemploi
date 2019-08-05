@@ -176,6 +176,7 @@ employer:
 candidate:
   listing_title: "Des candidats en recherhe d'emploi au Sénégal"
   domain: "Domaine: "
+  add_resume: "Ajoutez votre CV"
 
 call_to_action:
   title: "Pour trouver un emploi ou un candidat" # "For Find Your Dream Job or Candidate"
@@ -267,6 +268,7 @@ form:
     optionnal_xp: "Expérience (Optionnel)" # Experience (Optionnal)
     optionnal_level: "Niveau d'études (Optionnel)"
     category: "Sélectionnez une catégorie"
+    skills: "Vos compétances"
     region: "Choisissez une région"
     vacancy: "Nombre de postes (optionnel)"
     salary:  Estimation du salaire # Salary Range

@@ -34,16 +34,8 @@ class CompanyController extends AbstractController
         ]);
     }
 
-    /**
-     * IsGranted("ROLE_USER").
-     */
     public function openedJobs(Company $company): Response
     {
-        // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
-            return $this->render('candidate/access-limited.html.twig');
-        }
-
         $list = $this->getDoctrine()
             ->getRepository(Application::class)
                 ->findBy(['company' => $company]);

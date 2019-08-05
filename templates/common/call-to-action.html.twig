@@ -12,9 +12,9 @@
                         {% if is_granted('ROLE_EMPLOYER') %}
                             <a class="button" href="{{ path('application_create') }}">{{ 'layout.post_job'|trans }}</a>
                         {% elseif is_granted('ROLE_USER') %}
-                            <a class="button" href="{{ path('edit_resume') }}">{{ 'home.add_resume'|trans }}</a>                        
+                            <a class="button" href="{{ path('add_resume') }}">{{ 'home.add_resume'|trans }}</a>                        
                         {% else %}
-                            <a class="button" href="{{ path('edit_resume') }}">{{ 'home.add_resume'|trans }}</a>
+                            <a class="button" href="{{ path('add_resume') }}">{{ 'home.add_resume'|trans }}</a>
                             <span>{{ 'word.or'|trans }}</span>
                             <a class="button" href="{{ path('application_create') }}">{{ 'layout.post_job'|trans }}</a>
                         {% endif %}

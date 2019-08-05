@@ -12,10 +12,10 @@
 
 {% macro infos(user) %}
     <div class="info">
-        {% if user.jobCategory %}
+        {% if user.resume and user.resume.jobCategory %}
             <span class="work-post">
                 <a href="#" onclick="return false">
-                    <i data-feather="check-square"></i>{{ user.jobCategory|trans({}, 'jobs-categories') }}</a>
+                    <i data-feather="check-square"></i>{{ user.resume.jobCategory|trans({}, 'jobs-categories') }}</a>
             </span>
         {% endif %}
         

@@ -1,31 +1,31 @@
 <?php
 
-/*
- * This file is part of the Kelemploi application.
- *
- * (C) Bechir Ba <bechiirr71@gmail.com>
- */
-
 namespace App\Form;
 
-use App\Entity\ExpertiseTag;
+use App\Entity\Education;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ExpertiseTagType extends AbstractType
+class EducationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('designation')
+            ->add('institue')
+            ->add('period')
+            ->add('description', TextareaType::class, [
+                'required' => false
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ExpertiseTag::class,
+            'data_class' => Education::class,
         ]);
     }
 }

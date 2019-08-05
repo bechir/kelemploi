@@ -1,0 +1,54 @@
+{#
+   Each field type is rendered by a template fragment, which is determined
+   by the name of your form type class (DateTimePickerType -> date_time_picker)
+   and the suffix "_widget". This can be controlled by overriding getBlockPrefix()
+   in DateTimePickerType.
+
+   See https://symfony.com/doc/current/cookbook/form/create_custom_field_type.html#creating-a-template-for-the-field
+#}
+
+{% block skills_input_widget %}
+    <div class="form-group">
+        {{ form_widget(form, {'attr': {'class': 'form-control', 'data-toggle': 'tagsinput', 'data-tags': skills|json_encode}}) }}
+    </div>
+{% endblock %}
+
+{% block education_widget %}
+    <div class="row education-row" id="resume_educations___name__">
+        <label class="col-md-3 col-form-label">Éducation ___name___</label>
+        <div class="col-md-9">
+            <div class="form-group">
+                <input class="form-control" id="resume_educations___name___designation" placeholder="Designation" maxlength="255" name="resume[educations][__name__][designation]" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="resume_educations___name___institue" placeholder="Institut" maxlength="255" name="resume[educations][__name__][institue]" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="resume_educations___name___period" placeholder="Période" maxlength="255" name="resume[educations][__name__][period]" type="text"/>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="resume_educations___name___description" placeholder="Description (Optionnel)" name="resume[educations][__name__][description]"></textarea>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block work_experience_widget %}
+    <div class="row work-experience-row" id="resume_workExperiences___name__">
+        <label class="col-md-3 col-form-label">Expérience  ___name___</label>
+        <div class="col-md-9">
+            <div class="form-group">
+                <input class="form-control" id="resume_workExperiences___name___designation" placeholder="Désignation" maxlength="255" name="resume[workExperiences][__name__][designation]" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="resume_workExperiences___name___companyName" placeholder="Nom de la companie" maxlength="255" name="resume[workExperiences][__name__][companyName]" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="resume_workExperiences___name___period" placeholder="Période" maxlength="255" name="resume[workExperiences][__name__][period]" type="text"/>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="resume_workExperiences___name___description" placeholder="Description (Optionnel)" name="resume[workExperiences][__name__][description]"></textarea>
+            </div>
+        </div>
+    </div>
+{% endblock %}

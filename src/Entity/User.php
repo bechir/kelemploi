@@ -8,8 +8,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -81,39 +79,14 @@ class User extends BaseUser implements EquatableInterface
     private $company;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $about;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Region")
      */
     private $region;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Skill")
-     */
-    private $skills;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $viewCount;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
-     */
-    private $jobCategory;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Experience")
-     */
-    private $experience;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\StudyLevel")
-     */
-    private $studyLevel;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -130,6 +103,16 @@ class User extends BaseUser implements EquatableInterface
      */
     private $accountType;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Resume", cascade={"persist", "remove"})
+     */
+    private $resume;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Nationality")
+     */
+    private $nationality;
+
     const NUM_ITEMS = 15;
 
     const EMPLOYER = 'app.employer';
@@ -139,7 +122,6 @@ class User extends BaseUser implements EquatableInterface
     {
         parent::__construct();
         $this->locale = 'fr';
-        $this->skills = new ArrayCollection();
 
         $this->viewCount = 0;
     }
@@ -355,32 +337,6 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Skill[]
-     */
-    public function getSkills(): Collection
-    {
-        return $this->skills;
-    }
-
-    public function addSkill(Skill $skill): self
-    {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skill $skill): self
-    {
-        if ($this->skills->contains($skill)) {
-            $this->skills->removeElement($skill);
-        }
-
-        return $this;
-    }
-
     public function getViewCount(): ?int
     {
         return $this->viewCount;
@@ -389,42 +345,6 @@ class User extends BaseUser implements EquatableInterface
     public function increaseViewCount(): self
     {
         ++$this->viewCount;
-
-        return $this;
-    }
-
-    public function getJobCategory(): ?JobCategory
-    {
-        return $this->jobCategory;
-    }
-
-    public function setJobCategory(?JobCategory $jobCategory): self
-    {
-        $this->jobCategory = $jobCategory;
-
-        return $this;
-    }
-
-    public function getExperience(): ?Experience
-    {
-        return $this->experience;
-    }
-
-    public function setExperience(?Experience $experience): self
-    {
-        $this->experience = $experience;
-
-        return $this;
-    }
-
-    public function getStudyLevel(): ?StudyLevel
-    {
-        return $this->studyLevel;
-    }
-
-    public function setStudyLevel(?StudyLevel $studyLevel): self
-    {
-        $this->studyLevel = $studyLevel;
 
         return $this;
     }
@@ -461,6 +381,35 @@ class User extends BaseUser implements EquatableInterface
     public function setAccountType(?AccountType $accountType): self
     {
         $this->accountType = $accountType;
+
+        return $this;
+    }
+
+    public function getResume(): ?Resume
+    {
+        return $this->resume;
+    }
+
+    public function setResume(?Resume $resume): self
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
+    public function haveResume(): bool
+    {
+        return null !== $this->resume;
+    }
+
+    public function getNationality(): ?Nationality
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(?Nationality $nationality): self
+    {
+        $this->nationality = $nationality;
 
         return $this;
     }

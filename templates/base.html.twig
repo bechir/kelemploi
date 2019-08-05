@@ -30,6 +30,7 @@
         <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
 
         <!-- Custom Css -->
         {% block stylesheets %}{% endblock %}
@@ -50,7 +51,7 @@
             <![endif]-->
     </head>
     <body>
-    <div class="beta">Version Bêta</div>
+    <div class="beta shadow-sm">Version Bêta</div>
     {% include 'common/flash_messages.twig' %}
     {% block body %}
         {% block header %}
@@ -91,6 +92,9 @@
         <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
         <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
         <script src="{{ asset('assets/js/swup.min.js') }}"></script>
+        <script src="{{ asset('assets/js/typeahead.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap-tagsinput.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bloodhound.min.js') }}"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
         {% block javascript %}{% endblock %}
     {% endblock %}

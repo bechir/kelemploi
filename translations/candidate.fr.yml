@@ -10,6 +10,9 @@ dashboard:
   statistics:
     call_for_interview: Entretiens # Call for interview
 
+add_resume:
+  title: "Ajoutez votre CV"
+
 profile:
   title: "Profil"
 

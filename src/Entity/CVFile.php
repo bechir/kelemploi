@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -41,6 +42,11 @@ class CVFile implements \Serializable
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Resume", mappedBy="cv", cascade={"persist", "remove"})
+     */
+    private $resume;
 
     public function getId(): ?int
     {
@@ -106,5 +112,59 @@ class CVFile implements \Serializable
             $this->src,
             $this->updatedAt,
         ] = unserialize($serialized);
+    }
+
+    public function getResume(): ?Resume
+    {
+        return $this->resume;
+    }
+
+    public function setResume(?Resume $resume): self
+    {
+        $this->resume = $resume;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newCv = $resume === null ? null : $this;
+        if ($newCv !== $resume->getCv()) {
+            $resume->setCv($newCv);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        // do your own validation
+        if (!\in_array($this->cvFile->getMcmeType(), [
+            'application/pdf',
+            'application/x-pdf',
+            'application/msword',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        ], true)) {
+            $context
+                ->buildViolation('Erreur de format (Insérer au format PDF ou Word)')
+                ->atPath('cvFile')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function checkSize(ExecutionContextInterface $context)
+    {
+        // do your own validation
+        if ($this->cvFile->getSize() > '500000') {
+            $context
+                ->buildViolation('Veuillez uploader un fichier inférieur à 5M.')
+                ->atPath('cvFile')
+                ->addViolation();
+        }
     }
 }
