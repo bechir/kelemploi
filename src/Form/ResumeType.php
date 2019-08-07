@@ -69,6 +69,13 @@ class ResumeType extends AbstractType
                 'allow_delete' => true,
                 'required' => false,
             ])
+            ->add('proSkills', CollectionType::class, [
+                'entry_type' => ProfessionalSkillType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+            ])
             // ->add('portfolio')
             // ->add('socialProfiles')
         ;

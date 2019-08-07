@@ -52,3 +52,22 @@
         </div>
     </div>
 {% endblock %}
+
+{% block professional_skill_widget %}
+<div class="row pro-skill-row" id="resume_proSkills___name__">
+    <label class="col-md-3 col-form-label">Compétence ___name___</label>
+    <div class="col-md-9">
+        <div class="form-group">
+            <input type="text" id="resume_proSkills___name___name" name="resume[proSkills][__name__][name]" class="form-control" placeholder="Titre">
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:20px">%</span>
+                </div>
+                <input id="resume_proSkills___name___percentage" name="resume[proSkills][__name__][percentage]" type="number" max="100" min="0" class="form-control" placeholder="Valeur">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

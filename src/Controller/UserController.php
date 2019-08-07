@@ -49,12 +49,11 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function resume(): Response
+    public function resume(UserInterface $user = null): Response
     {
-        $user = $this->getUser();
-
         return $this->render('candidate/resume.html.twig', [
             'user' => $user,
+            'resume' => $user->getResume(),
             'active' => 'resume',
         ]);
     }
@@ -73,6 +72,18 @@ class UserController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $user->setResume($resume);
+
+            foreach ($resume->getEducations() as $educ) {
+                $educ->setResume($resume);
+            }
+
+            foreach ($resume->getWorkExperiences() as $xp) {
+                $xp->setResume($resume);
+            }
+
+            foreach ($resume->getProSkills() as $skills) {
+                $skills->setResume($resume);
+            }
             
             $em = $this->getDoctrine()->getManager();
 
@@ -95,12 +106,14 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function editResume(): Response
+    public function editResume(UserInterface $user = null): Response
     {
-        $user = $this->getUser();
+        if(!$user->haveResume())
+            return $this->redirectToRoute('add_resume');
 
         return $this->render('candidate/edit-resume.html.twig', [
             'user' => $user,
+            'resume' => $user->getResume(),
             'active' => 'edit-resume',
         ]);
     }

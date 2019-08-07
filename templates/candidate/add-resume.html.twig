@@ -73,6 +73,12 @@
 
                                     {{ form_widget(form.workExperiences) }}
 
+                                    <div id="skill" class="row">
+                                        <label class="col-12 col-form-label">Compétences professionnelles</label>
+                                    </div>
+
+                                    {{ form_widget(form.proSkills) }}
+
                                     <!-- <div class="row" id="portfolio">
                                         <label class="col-md-3 col-form-label">Portfolio</label>
                                         <div class="col-md-9">
@@ -178,4 +184,9 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/resume.js') }}"></script>
 {% endblock %}

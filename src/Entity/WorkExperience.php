@@ -38,7 +38,7 @@ class WorkExperience
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Resume", inversedBy="workExperiences")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $resume;
 

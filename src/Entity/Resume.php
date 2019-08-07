@@ -49,17 +49,17 @@ class Resume
     private $skills;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Education", mappedBy="resume", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Education", mappedBy="resume", cascade={"persist", "remove"})
      */
     private $educations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WorkExperience", mappedBy="resume", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\WorkExperience", mappedBy="resume", cascade={"persist", "remove"})
      */
     private $workExperiences;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Portfolio", mappedBy="resume", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Portfolio", mappedBy="resume", cascade={"persist", "remove"})
      */
     private $portfolio;
 
@@ -69,9 +69,14 @@ class Resume
     private $cv;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SocialProfile", mappedBy="resume", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\SocialProfile", mappedBy="resume", cascade={"persist", "remove"})
      */
     private $socialProfiles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProfessionalSkill", mappedBy="resume", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $proSkills;
 
     public function __construct()
     {
@@ -80,6 +85,7 @@ class Resume
         $this->workExperiences = new ArrayCollection();
         $this->portfolio = new ArrayCollection();
         $this->socialProfiles = new ArrayCollection();
+        $this->proSkills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -312,5 +318,36 @@ class Resume
     public function __toString()
     {
         return '';
+    }
+
+    /**
+     * @return Collection|ProfessionalSkill[]
+     */
+    public function getProSkills(): Collection
+    {
+        return $this->proSkills;
+    }
+
+    public function addProSkill(ProfessionalSkill $proSkill): self
+    {
+        if (!$this->proSkills->contains($proSkill)) {
+            $this->proSkills[] = $proSkill;
+            $proSkill->setResume($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProSkill(ProfessionalSkill $proSkill): self
+    {
+        if ($this->proSkills->contains($proSkill)) {
+            $this->proSkills->removeElement($proSkill);
+            // set the owning side to null (unless already changed)
+            if ($proSkill->getResume() === $this) {
+                $proSkill->setResume(null);
+            }
+        }
+
+        return $this;
     }
 }

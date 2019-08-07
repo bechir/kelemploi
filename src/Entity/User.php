@@ -134,7 +134,8 @@ class User extends BaseUser implements EquatableInterface
     public function setEmail($email)
     {
         $this->email = $email;
-        $this->username = $email;
+        if(!$this->username)
+            $this->username = $email;
 
         return $this;
     }

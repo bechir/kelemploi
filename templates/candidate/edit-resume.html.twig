@@ -2,24 +2,23 @@
 
 {% import 'util/util.twig' as util %}
 
-{% trans_default_domain 'user' %}
-
-{% block title %}{{ 'edit_resume'|trans }}{% endblock %}
+{% block title %}{{ 'edit_resume'|trans({}, 'user') }}{% endblock %}
 
 {% block content %}
-<div class="download-resume dashboard-section">
+{# <div class="download-resume dashboard-section">
     <div class="update-file">
         <input type="file">Uploadez votre CV
         <i data-feather="edit-2"></i>
     </div>
     <span>Uploadez un fichier PDF</span>
-</div>
+</div> #}
 <div class="skill-and-profile dashboard-section">
     <div class="skill">
-        <label>Skills:</label>
-        <a href="#">Design</a>
-        <a href="#">Illustration</a>
-        <a href="#">iOS</a>
+        <label>Compétences:</label>
+        {% for skill in resume.skills %}
+            <a href="#" onclick="return false">{{ skill }}</a>
+        {% else %}
+        {% endfor %}
         <!-- Button trigger modal -->
         <button class="btn btn-primary edit-button" data-target="#modal-skill" data-toggle="modal" type="button">
             <i data-feather="edit-2"></i>
@@ -30,7 +29,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="title">
-                            <h4><i data-feather="git-branch"></i>Mes comptétances</h4>
+                            <h4><i data-feather="git-branch"></i>Mes compétances</h4>
                         </div>
                         <div class="content">
                             <form action="#">
@@ -111,7 +110,7 @@
         </div>
     </div>
     <div class="social-profile">
-        <label>Social:</label>
+        <label>Réseaux:</label>
         <a href="#">
             <i class="fab fa-facebook-f"></i>
         </a>
@@ -223,39 +222,22 @@
     </div>
 </div>
 <div class="about-details details-section dashboard-section">
-    <h4>
-        <i data-feather="align-left"></i>À propos de moi</h4>
-    <p>Combined with a handful of model sentence structures, to generate lorem Ipsum which  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including.</p>
-    <p>Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
-    </p>
+    <h4><i data-feather="align-left"></i>À propos de moi</h4>
+    {% if resume.about %}
+        {{ resume.about|raw }}
+    {% else %}
+        <p class="lead">Cette section est vide.<p>
+    {% endif %}
     <div class="information-and-contact">
         <div class="information">
             <h4>Information</h4>
             <ul>
-                <li>
-                    <span>Category:</span>
-                    Design & Creative</li>
-                <li>
-                    <span>Location:</span>
-                    Los Angeles</li>
-                <li>
-                    <span>Status:</span>
-                    Full-time</li>
-                <li>
-                    <span>Experience:</span>
-                    3 year(s)</li>
-                <li>
-                    <span>Salary:</span>
-                    $32k - $36k</li>
-                <li>
-                    <span>Gender:</span>
-                    Male</li>
-                <li>
-                    <span>Age:</span>
-                    24 Year(s)</li>
-                <li>
-                    <span>Qualification:</span>
-                    Gradute</li>
+                <li><span>Catégorie:</span>{{ resume.jobCategory|trans({}, 'jobs-categories') }}</li>
+                <li><span>Région:</span>{{ user.region|trans({}, 'regions')}}</li>
+                <li><span>Expérience:</span>{{ resume.experienceLevel|trans }}</li>
+                <li><span>Sexe:</span>{{ user.gender|trans }}</li>
+                <li><span>Âge:</span>{{ user.age ~ ' ' ~ 'user.years_old'|trans }}</li>
+                <li><span>Niveau d'études:</span>{{ resume.studyLevel|trans }}</li>
             </ul>
         </div>
     </div>
@@ -346,26 +328,17 @@
     </div>
 </div>
 <div class="edication-background details-section dashboard-section">
-    <h4>
-        <i data-feather="book"></i>Education Background</h4>
-    <div class="education-label">
-        <span class="study-year">2018 - Present</span>
-        <h5>Masters in Software Engineering<span>@ Engineering University</span>
-        </h5>
-        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-    </div>
-    <div class="education-label">
-        <span class="study-year">2014 - 2018</span>
-        <h5>Diploma in Graphics Design<span>@ Graphic Arts Institute</span>
-        </h5>
-        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-    </div>
-    <div class="education-label">
-        <span class="study-year">2008 - 2014</span>
-        <h5>Secondary School Certificate<span>@  Engineering High School</span>
-        </h5>
-        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-    </div>
+    <h4><i data-feather="book"></i>Éducation</h4>
+    {% for education in resume.educations %}
+        <div class="education-label">
+            <span class="study-year">{{ education.period }}</span>
+            <h5>{{ education.designation }}<span>@ {{ education.institue }}</span>
+            </h5>
+            <p>{{ education.description }}</p>
+        </div>
+    {% else %}
+        <p class="lead">Cette section est vide</p>
+    {% endfor %}
     <!-- Button trigger modal -->
     <button class="btn btn-primary edit-resume" data-target="#modal-education" data-toggle="modal" type="button">
         <i data-feather="edit-2"></i>
@@ -377,20 +350,21 @@
                 <div class="modal-body">
                     <div class="title">
                         <h4>
-                            <i data-feather="book"></i>Education</h4>
-                        <a class="add-more" href="#">+ Add Education</a>
+                            <i data-feather="book"></i>Éducations</h4>
+                        <a class="add-more" href="#">+ Ajouter</a>
                     </div>
                     <div class="content">
                         <form action="#">
+                        {% for education in resume.educations %}
                             <div class="input-block-wrap">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">01</label>
+                                    <label class="col-sm-3 col-form-label">Éducation {{ loop.index }}</label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Title</div>
+                                                <div class="input-group-text">Titre</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ education.designation }}">
                                         </div>
                                     </div>
                                 </div>
@@ -398,9 +372,9 @@
                                     <div class="offset-sm-3 col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Institute</div>
+                                                <div class="input-group-text">Institut</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ education.institue }}">
                                         </div>
                                     </div>
                                 </div>
@@ -408,9 +382,9 @@
                                     <div class="col-sm-9 offset-sm-3">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Period</div>
+                                                <div class="input-group-text">Période</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ education.period }}">
                                         </div>
                                     </div>
                                 </div>
@@ -420,59 +394,17 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Description</div>
                                             </div>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control">{{ education.description }}</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">02</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Title</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Institute</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-9 offset-sm-3">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Period</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Description</div>
-                                            </div>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        {% endfor %}
                             <div class="row">
-                                <div class="offset-sm-3 col-sm-9">
+                                <div class="offset-sm-3 col-sm-9 mt-5">
                                     <div class="buttons">
-                                        <button class="primary-bg">Save Update</button>
-                                        <button class="" data-dismiss="modal">Cancel</button>
+                                        <button class="primary-bg">Enregister les modifications</button>
+                                        <button class="" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
                             </div>
@@ -484,20 +416,17 @@
     </div>
 </div>
 <div class="experience dashboard-section details-section">
-    <h4>
-        <i data-feather="briefcase"></i>Work Experiance</h4>
-    <div class="experience-section">
-        <span class="service-year">2016 - Present</span>
-        <h5>Lead UI/UX Designer<span>@ Codepassengers LTD</span>
-        </h5>
-        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-    </div>
-    <div class="experience-section">
-        <span class="service-year">2012 - 2016</span>
-        <h5>Former Graphic Designer<span>@ Graphicreeeo CO</span>
-        </h5>
-        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-    </div>
+    <h4><i data-feather="briefcase"></i>Expérience professionnelle</h4>
+    {% for xp in resume.workExperiences %}
+        <div class="experience-section">
+            <span class="service-year">{{ xp.period }}</span>
+            <h5>{{ xp.designation }}<span>@ {{ xp.companyName }}</span>
+            </h5>
+            <p>{{ xp.description }}</p>
+        </div>
+    {% else %}
+        <p class="lead">Cette section est vide</p>
+    {% endfor %}
     <!-- Button trigger modal -->
     <button class="btn btn-primary edit-resume" data-target="#modal-experience" data-toggle="modal" type="button">
         <i data-feather="edit-2"></i>
@@ -509,20 +438,21 @@
                 <div class="modal-body">
                     <div class="title">
                         <h4>
-                            <i data-feather="briefcase"></i>Experience</h4>
-                        <a class="add-more" href="#">+ Add Experience</a>
+                            <i data-feather="briefcase"></i>Expériences</h4>
+                        <a class="add-more" href="#">+ Ajouter une expérience</a>
                     </div>
                     <div class="content">
                         <form action="#">
+                        {% for xp in resume.workExperiences %}
                             <div class="input-block-wrap">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">01</label>
+                                    <label class="col-sm-3 col-form-label">Expérience {{ loop.index }}</label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Title</div>
+                                                <div class="input-group-text">Titre</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ xp.designation }}">
                                         </div>
                                     </div>
                                 </div>
@@ -530,9 +460,9 @@
                                     <div class="offset-sm-3 col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Company</div>
+                                                <div class="input-group-text">Société</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ xp.companyName }}">
                                         </div>
                                     </div>
                                 </div>
@@ -540,9 +470,9 @@
                                     <div class="col-sm-9 offset-sm-3">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">Period</div>
+                                                <div class="input-group-text">Période</div>
                                             </div>
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" type="text" value="{{ xp.period }}">
                                         </div>
                                     </div>
                                 </div>
@@ -552,59 +482,17 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Description</div>
                                             </div>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control">{{ xp.description }}</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">02</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Title</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Company</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-9 offset-sm-3">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Period</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Description</div>
-                                            </div>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        {% endfor %}
                             <div class="row">
                                 <div class="offset-sm-3 col-sm-9">
                                     <div class="buttons">
-                                        <button class="primary-bg">Save Update</button>
-                                        <button class="" data-dismiss="modal">Cancel</button>
+                                        <button class="primary-bg">Enregister</button>
+                                        <button class="" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
                             </div>
@@ -616,54 +504,23 @@
     </div>
 </div>
 <div class="professonal-skill dashboard-section details-section">
-    <h4>
-        <i data-feather="feather"></i>Professional Skill</h4>
-    <p>Combined with a handful of model sentence structures, to generate lorem Ipsum which  It has survived not only five centuries, but also the leap into electronic typesetting</p>
+    <h4><i data-feather="feather"></i>Compétences professionnelles</h4>
     <div class="progress-group">
+    {% for skill in resume.proSkills %}
         <div class="progress-item">
             <div class="progress-head">
-                <p class="progress-on">Photoshop</p>
+                <p class="progress-on">{{ skill.name }}</p>
             </div>
             <div class="progress-body">
                 <div class="progress">
-                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ skill.percentage }}" class="progress-bar" role="progressbar" style="width: 0;"></div>
                 </div>
-                <p class="progress-to">70%</p>
+                <p class="progress-to">{{ skill.percentage }}%</p>
             </div>
         </div>
-        <div class="progress-item">
-            <div class="progress-head">
-                <p class="progress-on">HTML/CSS</p>
-            </div>
-            <div class="progress-body">
-                <div class="progress">
-                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                </div>
-                <p class="progress-to">90%</p>
-            </div>
-        </div>
-        <div class="progress-item">
-            <div class="progress-head">
-                <p class="progress-on">JavaScript</p>
-            </div>
-            <div class="progress-body">
-                <div class="progress">
-                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="74" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                </div>
-                <p class="progress-to">74%</p>
-            </div>
-        </div>
-        <div class="progress-item">
-            <div class="progress-head">
-                <p class="progress-on">PHP</p>
-            </div>
-            <div class="progress-body">
-                <div class="progress">
-                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="86" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                </div>
-                <p class="progress-to">86%</p>
-            </div>
-        </div>
+    {% else %}
+        <p class="lead">Cette section est vide</p>
+    {% endfor %}
     </div>
     <!-- Button trigger modal -->
     <button class="btn btn-primary edit-resume" data-target="#modal-pro-skill" data-toggle="modal" type="button">
@@ -675,122 +532,41 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="title">
-                        <h4>
-                            <i data-feather="feather"></i>Professional Skill</h4>
-                        <a class="add-more" href="#">+ Add Skill</a>
+                        <h4><i data-feather="feather"></i>Compétences professionnelles</h4>
+                        <a class="add-more" href="#">+ Ajouter une compétance</a>
                     </div>
                     <div class="content">
                         <form action="#">
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">About Skill</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Description</div>
+                            {% for skill in resume.proSkills %}
+                                <div class="input-block-wrap mb-3">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Compétence {{ loop.index }}</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Nom</div>
+                                                </div>
+                                                <input class="form-control" type="text" value="{{ skill.name }}">
                                             </div>
-                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-3 col-sm-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Pourcentage</div>
+                                                </div>
+                                                <input class="form-control" type="text" value="{{ skill.percentage }}" min="0" max="100">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Skill 01</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Skill Name</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Percentage</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Skill 02</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Skill Name</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Percentage</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Skill 03</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Skill Name</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Percentage</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-block-wrap">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Skill 04</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Skill Name</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Percentage</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                             <div class="row">
-                                <div class="offset-sm-3 col-sm-9">
+                                <div class="offset-sm-3 col-sm-9 mt-5">
                                     <div class="buttons">
-                                        <button class="primary-bg">Save Update</button>
-                                        <button class="" data-dismiss="modal">Cancel</button>
+                                        <button class="primary-bg">Enregister</button>
+                                        <button class="" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
                             </div>
@@ -801,7 +577,7 @@
         </div>
     </div>
 </div>
-<div class="special-qualification dashboard-section details-section">
+{# <div class="special-qualification dashboard-section details-section">
     <h4>
         <i data-feather="gift"></i>Special Qualification</h4>
     <ul>
@@ -891,7 +667,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> #}
 <div class="portfolio dashboard-section details-section">
     <h4>
         <i data-feather="gift"></i>Portfolio</h4>
@@ -1104,4 +880,9 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/resume.js') }}"></script>
 {% endblock %}
