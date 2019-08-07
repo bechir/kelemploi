@@ -32,7 +32,7 @@ class Portfolio
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Resume", inversedBy="portfolio")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Resume", inversedBy="portfolios")
      * @ORM\JoinColumn(nullable=false)
      */
     private $resume;

@@ -38,6 +38,14 @@ edit_resume:
   defaults:
     _locale: '%locale%'
 
+delete_resume:
+  controller: App\Controller\UserController::deleteResume
+  path: /{_locale}/user/delete-resume
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 user_dashboard:
   path: /{_locale}/user/dashboard
   controller: App\Controller\UserController::dashboard

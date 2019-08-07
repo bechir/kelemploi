@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ResumeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Resume
 {
@@ -59,11 +60,6 @@ class Resume
     private $workExperiences;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Portfolio", mappedBy="resume", cascade={"persist", "remove"})
-     */
-    private $portfolio;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\CVFile", inversedBy="resume", cascade={"persist", "remove"})
      */
     private $cv;
@@ -78,6 +74,16 @@ class Resume
      */
     private $proSkills;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Portfolio", mappedBy="resume", cascade={"persist", "remove"})
+     */
+    private $portfolios;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="resume", cascade={"persist"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -86,6 +92,7 @@ class Resume
         $this->portfolio = new ArrayCollection();
         $this->socialProfiles = new ArrayCollection();
         $this->proSkills = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,37 +248,6 @@ class Resume
         return $this;
     }
 
-    /**
-     * @return Collection|Portfolio[]
-     */
-    public function getPortfolio(): Collection
-    {
-        return $this->portfolio;
-    }
-
-    public function addPortfolio(Portfolio $portfolio): self
-    {
-        if (!$this->portfolio->contains($portfolio)) {
-            $this->portfolio[] = $portfolio;
-            $portfolio->setResume($this);
-        }
-
-        return $this;
-    }
-
-    public function removePortfolio(Portfolio $portfolio): self
-    {
-        if ($this->portfolio->contains($portfolio)) {
-            $this->portfolio->removeElement($portfolio);
-            // set the owning side to null (unless already changed)
-            if ($portfolio->getResume() === $this) {
-                $portfolio->setResume(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCv(): ?CVFile
     {
         return $this->cv;
@@ -346,6 +322,55 @@ class Resume
             if ($proSkill->getResume() === $this) {
                 $proSkill->setResume(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Portfolio[]
+     */
+    public function getPortfolios(): Collection
+    {
+        return $this->portfolios;
+    }
+
+    public function addPortfolio(Portfolio $portfolio): self
+    {
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios[] = $portfolio;
+            $portfolio->setResume($this);
+        }
+
+        return $this;
+    }
+
+    public function removePortfolio(Portfolio $portfolio): self
+    {
+        if ($this->portfolios->contains($portfolio)) {
+            $this->portfolios->removeElement($portfolio);
+            // set the owning side to null (unless already changed)
+            if ($portfolio->getResume() === $this) {
+                $portfolio->setResume(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newResume = $user === null ? null : $this;
+        if ($newResume !== $user->getResume()) {
+            $user->setResume($newResume);
         }
 
         return $this;

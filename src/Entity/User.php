@@ -104,14 +104,14 @@ class User extends BaseUser implements EquatableInterface
     private $accountType;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Resume", cascade={"persist", "remove"})
-     */
-    private $resume;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Nationality")
      */
     private $nationality;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Resume", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $resume;
 
     const NUM_ITEMS = 15;
 
@@ -386,18 +386,6 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function getResume(): ?Resume
-    {
-        return $this->resume;
-    }
-
-    public function setResume(?Resume $resume): self
-    {
-        $this->resume = $resume;
-
-        return $this;
-    }
-
     public function haveResume(): bool
     {
         return null !== $this->resume;
@@ -418,5 +406,17 @@ class User extends BaseUser implements EquatableInterface
     public function isEmployer(): bool
     {
         return $this->accountType && $this->accountType->getName() == self::EMPLOYER;
+    }
+
+    public function getResume(): ?Resume
+    {
+        return $this->resume;
+    }
+
+    public function setResume(?Resume $resume): self
+    {
+        $this->resume = $resume;
+
+        return $this;
     }
 }

@@ -14,59 +14,87 @@
 {% endblock %}
 
 {% block education_widget %}
-    <div class="row education-row" id="resume_educations___name__">
+    <div class="row education-row" id="resume_educations___name___">
         <label class="col-md-3 col-form-label">Éducation ___name___</label>
         <div class="col-md-9">
             <div class="form-group">
-                <input class="form-control" id="resume_educations___name___designation" placeholder="Designation" maxlength="255" name="resume[educations][__name__][designation]" type="text"/>
+                <input class="form-control" id="resume_educations____name____designation" placeholder="Designation" maxlength="255" name="resume[educations][___name___][designation]" type="text"/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="resume_educations___name___institue" placeholder="Institut" maxlength="255" name="resume[educations][__name__][institue]" type="text"/>
+                <input class="form-control" id="resume_educations____name____institue" placeholder="Institut" maxlength="255" name="resume[educations][___name___][institue]" type="text"/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="resume_educations___name___period" placeholder="Période" maxlength="255" name="resume[educations][__name__][period]" type="text"/>
+                <input class="form-control" id="resume_educations____name____period" placeholder="Période" maxlength="255" name="resume[educations][___name___][period]" type="text"/>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="resume_educations___name___description" placeholder="Description (Optionnel)" name="resume[educations][__name__][description]"></textarea>
+                <textarea class="form-control" id="resume_educations____name____description" placeholder="Description (Optionnel)" name="resume[educations][___name___][description]"></textarea>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block work_experience_widget %}
-    <div class="row work-experience-row" id="resume_workExperiences___name__">
+    <div class="row work-experience-row" id="resume_workExperiences___name___">
         <label class="col-md-3 col-form-label">Expérience  ___name___</label>
         <div class="col-md-9">
             <div class="form-group">
-                <input class="form-control" id="resume_workExperiences___name___designation" placeholder="Désignation" maxlength="255" name="resume[workExperiences][__name__][designation]" type="text"/>
+                <input class="form-control" id="resume_workExperiences____name____designation" placeholder="Désignation" maxlength="255" name="resume[workExperiences][___name___][designation]" type="text"/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="resume_workExperiences___name___companyName" placeholder="Nom de la companie" maxlength="255" name="resume[workExperiences][__name__][companyName]" type="text"/>
+                <input class="form-control" id="resume_workExperiences____name____companyName" placeholder="Nom de la companie" maxlength="255" name="resume[workExperiences][___name___][companyName]" type="text"/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="resume_workExperiences___name___period" placeholder="Période" maxlength="255" name="resume[workExperiences][__name__][period]" type="text"/>
+                <input class="form-control" id="resume_workExperiences____name____period" placeholder="Période" maxlength="255" name="resume[workExperiences][___name___][period]" type="text"/>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="resume_workExperiences___name___description" placeholder="Description (Optionnel)" name="resume[workExperiences][__name__][description]"></textarea>
+                <textarea class="form-control" id="resume_workExperiences____name____description" placeholder="Description (Optionnel)" name="resume[workExperiences][___name___][description]"></textarea>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block professional_skill_widget %}
-<div class="row pro-skill-row" id="resume_proSkills___name__">
+<div class="row pro-skill-row" id="resume_proSkills___name___">
     <label class="col-md-3 col-form-label">Compétence ___name___</label>
     <div class="col-md-9">
         <div class="form-group">
-            <input type="text" id="resume_proSkills___name___name" name="resume[proSkills][__name__][name]" class="form-control" placeholder="Titre">
+            <input type="text" id="resume_proSkills____name____name" name="resume[proSkills][___name___][name]" class="form-control" placeholder="Titre">
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" style="width:20px">%</span>
                 </div>
-                <input id="resume_proSkills___name___percentage" name="resume[proSkills][__name__][percentage]" type="number" max="100" min="0" class="form-control" placeholder="Valeur">
+                <input id="resume_proSkills____name____percentage" name="resume[proSkills][___name___][percentage]" type="number" max="100" min="0" class="form-control" placeholder="Valeur">
             </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block portfolio_widget %}
+<div class="row portfolio-row" id="resume_portfolios___name___">
+    <label class="col-md-3 col-form-label">Portfolio ___name___</label>
+    <div class="col-md-9">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Image</div>
+                </div>
+                <div class="upload-portfolio-image">
+                    <div class="update-photo">
+                        <img alt="" class="image" src="/images/portfolio/thumb-1.jpg">
+                    </div>
+                    <div class="file-upload">
+                        <input class="file-input" type="file">
+                        <i data-feather="plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="Lien vers le portfolio (Optionnel)" type="text">
         </div>
     </div>
 </div>

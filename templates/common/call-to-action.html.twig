@@ -1,3 +1,5 @@
+{% if is_granted('ROLE_USER') and not is_granted('ROLE_EMPLOYER') and app.user.resume is not null %}
+{% else %}
 <!-- Call to Action -->
 <div class="call-to-action-bg padding-top-90 padding-bottom-90">
     <div class="container">
@@ -25,3 +27,4 @@
     </div>
 </div>
 <!-- Call to Action End -->
+{% endif %}

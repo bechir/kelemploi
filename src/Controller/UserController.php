@@ -84,8 +84,12 @@ class UserController extends AbstractController
                 $xp->setResume($resume);
             }
 
-            foreach ($resume->getProSkills() as $skills) {
-                $skills->setResume($resume);
+            foreach ($resume->getProSkills() as $skill) {
+                $skill->setResume($resume);
+            }
+
+            foreach ($resume->getPortfolios() as $p) {
+                $p->setResume($resume);
             }
             
             $em = $this->getDoctrine()->getManager();
@@ -119,6 +123,24 @@ class UserController extends AbstractController
             'resume' => $user->getResume(),
             'active' => 'edit-resume',
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function deleteResume(UserInterface $user = null): Response
+    {
+        if($user->haveResume()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($user->getResume());
+            $user->setResume(null);
+            $em->flush();
+            
+            $this->addFlash('success', 'resume.delete_success');
+        }
+
+        return $this->redirectToRoute('user_dashboard');
     }
 
     /**

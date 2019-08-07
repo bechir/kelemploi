@@ -27,160 +27,123 @@
               <div class="skill-and-profile">
                 <div class="skill">
                   <label>Compétences:</label>
-                  <a href="#">Design</a>
-                  <a href="#">Illustration</a>
-                  <a href="#">iOS</a>
+                  {% if resume %}
+                  {% for skill in resume.skills %}
+                    <a href="#">{{ skill }}</a>
+                  {% endfor %}
+                  {% endif %}
                 </div>
                 <div class="social-profile">
-                  <label>Social:</label>
+                  <label>Réseaux sociaux:</label>
                   <a href="#"><i class="fab fa-facebook-f"></i></a>
                   <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-google-plus"></i></a>
                   <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                  <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                  <a href="#"><i class="fab fa-behance"></i></a>
-                  <a href="#"><i class="fab fa-dribbble"></i></a>
                   <a href="#"><i class="fab fa-github"></i></a>
                 </div>
               </div>
               <div class="details-information section-padding-60">
                 <div class="row">
-                  <div class="col-xl-7 col-lg-8">
-                    <div class="about-details details-section">
-                      <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
-                      <p>{{ resume ? resume.about|raw : 'Cette section est vide' }}</p>
-                    </div>
-                    {# <div class="edication-background details-section">
-                      <h4><i data-feather="book"></i>Education Background</h4>
-                      <div class="education-label">
-                        <span class="study-year">2018 - Present</span>
-                        <h5>Masters in Software Engineering<span>@ Engineering University</span></h5>
-                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
+                  {% if resume %}
+                    <div class="col-xl-7 col-lg-8">
+                      <div class="about-details details-section">
+                        <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
+                        <p>{{ resume.about|raw }}</p>
                       </div>
-                      <div class="education-label">
-                        <span class="study-year">2014 - 2018</span>
-                        <h5>Diploma in Graphics Design<span>@ Graphic Arts Institute</span></h5>
-                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                      </div>
-                      <div class="education-label">
-                        <span class="study-year">2008 - 2014</span>
-                        <h5>Secondary School Certificate<span>@  Engineering High School</span></h5>
-                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                      </div>
-                    </div>
-                    <div class="experience details-section">
-                      <h4><i data-feather="briefcase"></i>Work Experiance</h4>
-                      <div class="experience-section">
-                        <span class="service-year">2016 - Present</span>
-                        <h5>Lead UI/UX Designer<span>@ Codepassengers LTD</span></h5>
-                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                      </div>
-                      <div class="experience-section">
-                        <span class="service-year">2012 - 2016</span>
-                        <h5>Former Graphic Designer<span>@ Graphicreeeo CO</span></h5>
-                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                      </div>
-                    </div>
-                    <div class="professonal-skill details-section">
-                      <h4><i data-feather="feather"></i>Professional Skill</h4>
-                      <p>Combined with a handful of model sentence structures, to generate lorem Ipsum which  It has survived not only five centuries, but also the leap into electronic typesetting</p>
-                      <div class="progress-group">
-                        <div class="progress-item">
-                          <div class="progress-head">
-                            <p class="progress-on">Photoshop</p>
+                      <div class="edication-background details-section">
+                        <h4><i data-feather="book"></i>Éducations</h4>
+                        {% for e in resume.educations %}
+                          <div class="education-label">
+                            <span class="study-year">{{ e.period }}</span>
+                            <h5>{{ e.designation }}<span>@ {{ e.institue }}</span></h5>
+                            <p>{{ e.description }}</p>
                           </div>
-                          <div class="progress-body">
-                            <div class="progress">
-                              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                        {% else %}
+                          <p class="lead">Cette section est vide</p>
+                        {% endfor %}
+                      </div>
+                      <div class="experience details-section">
+                        <h4><i data-feather="briefcase"></i>Éxperiences professionnelles</h4>
+                        {% for xp in resume.workExperiences %}
+                          <div class="experience-section">
+                            <span class="service-year">{{ xp.period }}</span>
+                            <h5>{{ xp.designation }}<span>@ {{ xp.companyName }}</span></h5>
+                            <p>{{ xp.description }}</p>
+                          </div>
+                        {% else %}
+                          <p class="lead">Cette section est vide</p>
+                        {% endfor %}
+                      </div>
+                      <div class="professonal-skill details-section">
+                        <h4><i data-feather="feather"></i>Compétences professionnelles</h4>
+                        <div class="progress-group">
+                          {% for ps in resume.proSkills %}
+                            <div class="progress-item">
+                              <div class="progress-head">
+                                <p class="progress-on">{{ ps.name }}</p>
+                              </div>
+                              <div class="progress-body">
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ ps.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                                </div>
+                                <p class="progress-to">{{ ps.percentage }}%</p>
+                              </div>
                             </div>
-                            <p class="progress-to">70%</p>
-                          </div>
+                          {% else %}
+                            <p class="lead">Cette section est vide</p>
+                          {% endfor %}
                         </div>
-                        <div class="progress-item">
-                          <div class="progress-head">
-                            <p class="progress-on">HTML/CSS</p>
-                          </div>
-                          <div class="progress-body">
-                            <div class="progress">
-                              <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                      </div>
+                      {# <div class="special-qualification details-section">
+                        <h4><i data-feather="gift"></i>Special Qualification</h4>
+                        <ul>
+                          <li>5 years+ experience designing and building products.</li>
+                          <li>Skilled at any Kind Design Tools.</li>
+                          <li>Passion for people-centered design, solid intuition.</li>
+                          <li>Hard Worker & Quick Lerner.</li>
+                        </ul>
+                      </div> #}
+                      <div class="portfolio details-section">
+                        <h4><i data-feather="gift"></i>Portfolio</h4>
+                        <div class="portfolio-slider owl-carousel">
+                          <div class="portfolio-item">
+                            <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
+                            <div class="overlay">
+                              <a href="#"><i data-feather="eye"></i></a>
+                              <a href="#"><i data-feather="link"></i></a>
                             </div>
-                            <p class="progress-to">90%</p>
                           </div>
-                        </div>
-                        <div class="progress-item">
-                          <div class="progress-head">
-                            <p class="progress-on">JavaScript</p>
-                          </div>
-                          <div class="progress-body">
-                            <div class="progress">
-                              <div class="progress-bar" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                          <div class="portfolio-item">
+                            <img src="/images/portfolio/thumb-1.jpg" class="img-fluid" alt="">
+                            <div class="overlay">
+                              <a href="#"><i data-feather="eye"></i></a>
+                              <a href="#"><i data-feather="link"></i></a>
                             </div>
-                            <p class="progress-to">74%</p>
                           </div>
-                        </div>
-                        <div class="progress-item">
-                          <div class="progress-head">
-                            <p class="progress-on">PHP</p>
-                          </div>
-                          <div class="progress-body">
-                            <div class="progress">
-                              <div class="progress-bar" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                          <div class="portfolio-item">
+                            <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
+                            <div class="overlay">
+                              <a href="#"><i data-feather="eye"></i></a>
+                              <a href="#"><i data-feather="link"></i></a>
                             </div>
-                            <p class="progress-to">86%</p>
+                          </div>
+                          <div class="portfolio-item">
+                            <img src="/images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
+                            <div class="overlay">
+                              <a href="#"><i data-feather="eye"></i></a>
+                              <a href="#"><i data-feather="link"></i></a>
+                            </div>
+                          </div>
+                          <div class="portfolio-item">
+                            <img src="/images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
+                            <div class="overlay">
+                              <a href="#"><i data-feather="eye"></i></a>
+                              <a href="#"><i data-feather="link"></i></a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="special-qualification details-section">
-                      <h4><i data-feather="gift"></i>Special Qualification</h4>
-                      <ul>
-                        <li>5 years+ experience designing and building products.</li>
-                        <li>Skilled at any Kind Design Tools.</li>
-                        <li>Passion for people-centered design, solid intuition.</li>
-                        <li>Hard Worker & Quick Lerner.</li>
-                      </ul>
-                    </div>
-                    <div class="portfolio details-section">
-                      <h4><i data-feather="gift"></i>Portfolio</h4>
-                      <div class="portfolio-slider owl-carousel">
-                        <div class="portfolio-item">
-                          <img src="images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="images/portfolio/thumb-1.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="images/portfolio/thumb-3.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                        <div class="portfolio-item">
-                          <img src="images/portfolio/thumb-2.jpg" class="img-fluid" alt="">
-                          <div class="overlay">
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="link"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div> #}
-                  </div>
+                  {% endif %}
                   <div class="col-xl-4 offset-xl-1 col-lg-4">
                     <div class="information-and-contact">
                       <div class="information">
