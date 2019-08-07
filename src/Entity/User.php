@@ -414,4 +414,9 @@ class User extends BaseUser implements EquatableInterface
 
         return $this;
     }
+
+    public function isEmployer(): bool
+    {
+        return $this->accountType && $this->accountType->getName() == self::EMPLOYER;
+    }
 }

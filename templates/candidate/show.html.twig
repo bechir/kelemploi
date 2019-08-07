@@ -48,7 +48,7 @@
                   <div class="col-xl-7 col-lg-8">
                     <div class="about-details details-section">
                       <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
-                      <p>{{ user.about }}</p>
+                      <p>{{ resume ? resume.about|raw : 'Cette section est vide' }}</p>
                     </div>
                     {# <div class="edication-background details-section">
                       <h4><i data-feather="book"></i>Education Background</h4>
@@ -187,15 +187,15 @@
                         <h4>{{ 'layout.footer_infos'|trans({}, 'messages') }}</h4>
                         <ul>
                           <li><span>{{ 'form.full_name'|trans }}</span> {{ user.fullName }}</li>
-                          {% if user.jobCategory %}
-                            <li><span>{{ 'candidate.domain'|trans({}, 'messages') }}</span> {{ user.jobCategory|trans({}, 'jobs-categories') }}</li>
+                          {% if resume.jobCategory %}
+                            <li><span>{{ 'candidate.domain'|trans({}, 'messages') }}</span> {{ resume.jobCategory|trans({}, 'jobs-categories') }}</li>
                           {% endif %}
                           {% if user.region %}
                             <li><span>{{ 'job.region'|trans({}, 'messages') }}</span> {{ user.region|trans({}, 'regions') }}</li>
                           {% endif %}
                           {# <li><span>{{ 'job.contract_type'|trans }}</span> Full-time</li> #}
-                          {% if user.experience %}
-                            <li><span>{{ 'job.experience'|trans({}, 'messages') }}</span> {{ user.experience|trans({}, 'messages') }}</li>
+                          {% if resume.experienceLevel %}
+                            <li><span>{{ 'job.experience'|trans({}, 'messages') }}</span> {{ resume.experienceLevel|trans({}, 'messages') }}</li>
                           {% endif %}
                           {% if user.gender %}
                             <li><span>{{ 'job.gender'|trans({}, 'messages') }}</span>{{ user.gender({}, 'messages') }}</li>
@@ -203,8 +203,8 @@
                           {% if user.age %}
                             <li><span>{{ 'job.age'|trans({}, 'messages') }}</span>{{ user.age}} {{ 'user.years_old'|trans({}, 'messages') }}</li>
                           {% endif %}
-                          {% if user.studyLevel %}
-                            <li><span>{{ 'job.level'|trans({}, 'messages') }}</span> {{ user.studyLevel|trans({}, 'messages') }}</li>
+                          {% if resume.studyLevel %}
+                            <li><span>{{ 'job.level'|trans({}, 'messages') }}</span> {{ resume.studyLevel|trans({}, 'messages') }}</li>
                           {% endif %}
                         </ul>
                       </div>

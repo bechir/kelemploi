@@ -38,11 +38,14 @@ class UserController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
-        $event = new CandidateEvent($user);
-        $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
+        if($this->getUser() && $this->getUser()->isEmployer()) {
+            $event = new CandidateEvent($user);
+            $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
+        }
 
         return $this->render('candidate/show.html.twig', [
             'user' => $user,
+            'resume' => $user->getResume()
         ]);
     }
 
