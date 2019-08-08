@@ -36,7 +36,7 @@ class DateIntervalType extends AbstractType
                           return null;
                       }
 
-                      return \DateTime::createFromFormat('Y/m/d', $endAsString);
+                      return $endAsString;
                   }
             ))
         ;

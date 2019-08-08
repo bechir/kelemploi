@@ -65,9 +65,9 @@ class ApplicationType extends AbstractType
                 'choice_translation_domain' => true,
                 'placeholder' => 'form.job.optionnal_xp',
             ])
-            ->add('benefits', TextareaType::class)
-            ->add('tools', TextareaType::class)
-            ->add('responsibilities', TextareaType::class)
+            ->add('benefits', TextareaType::class, ['required' => false])
+            ->add('tools', TextareaType::class, ['required' => false])
+            ->add('responsibilities', TextareaType::class, ['required' => false])
             ->add('gender', EntityType::class, [
                 'class' => JobGender::class,
                 'choice_label' => 'name',

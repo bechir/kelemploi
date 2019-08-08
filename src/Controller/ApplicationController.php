@@ -107,7 +107,7 @@ class ApplicationController extends AbstractController
             return $this->render('candidate/access-limited.html.twig');
         }
 
-        $form = $this->createForm(ApplicationType::class, $app);
+        $form = $this->createForm(ApplicationType::class, $app)->remove('company');
 
         $form->handleRequest($request);
 
@@ -124,6 +124,8 @@ class ApplicationController extends AbstractController
         return $this->render('application/edit.html.twig', [
             'form' => $form->createView(),
             '_app' => $app,
+            'company' => $app->getCompany(),
+            'active' => ''
         ]);
     }
 
