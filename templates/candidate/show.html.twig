@@ -43,8 +43,8 @@
               </div>
               <div class="details-information section-padding-60">
                 <div class="row">
-                  {% if resume %}
                     <div class="col-xl-7 col-lg-8">
+                    {% if resume %}
                       <div class="about-details details-section">
                         <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
                         <p>{{ resume.about|raw }}</p>
@@ -101,7 +101,7 @@
                           <li>Passion for people-centered design, solid intuition.</li>
                           <li>Hard Worker & Quick Lerner.</li>
                         </ul>
-                      </div> #}
+                      </div>
                       <div class="portfolio details-section">
                         <h4><i data-feather="gift"></i>Portfolio</h4>
                         <div class="portfolio-slider owl-carousel">
@@ -141,32 +141,36 @@
                             </div>
                           </div>
                         </div>
+                      </div>#}
+                    {% else %}
+                      <div class="alert alert-info">
+                      <p class="lead">Cette section est vide</p>
                       </div>
+                    {% endif %}
                     </div>
-                  {% endif %}
                   <div class="col-xl-4 offset-xl-1 col-lg-4">
                     <div class="information-and-contact">
                       <div class="information">
                         <h4>{{ 'layout.footer_infos'|trans({}, 'messages') }}</h4>
                         <ul>
                           <li><span>{{ 'form.full_name'|trans }}</span> {{ user.fullName }}</li>
-                          {% if resume.jobCategory %}
+                          {% if resume and resume.jobCategory %}
                             <li><span>{{ 'candidate.domain'|trans({}, 'messages') }}</span> {{ resume.jobCategory|trans({}, 'jobs-categories') }}</li>
                           {% endif %}
                           {% if user.region %}
                             <li><span>{{ 'job.region'|trans({}, 'messages') }}</span> {{ user.region|trans({}, 'regions') }}</li>
                           {% endif %}
                           {# <li><span>{{ 'job.contract_type'|trans }}</span> Full-time</li> #}
-                          {% if resume.experienceLevel %}
+                          {% if resume and resume.experienceLevel %}
                             <li><span>{{ 'job.experience'|trans({}, 'messages') }}</span> {{ resume.experienceLevel|trans({}, 'messages') }}</li>
                           {% endif %}
                           {% if user.gender %}
-                            <li><span>{{ 'job.gender'|trans({}, 'messages') }}</span>{{ user.gender({}, 'messages') }}</li>
+                            <li><span>{{ 'job.gender'|trans({}, 'messages') }}</span>{{ user.gender|trans({}, 'messages') }}</li>
                           {% endif %}
                           {% if user.age %}
                             <li><span>{{ 'job.age'|trans({}, 'messages') }}</span>{{ user.age}} {{ 'user.years_old'|trans({}, 'messages') }}</li>
                           {% endif %}
-                          {% if resume.studyLevel %}
+                          {% if resume and resume.studyLevel %}
                             <li><span>{{ 'job.level'|trans({}, 'messages') }}</span> {{ resume.studyLevel|trans({}, 'messages') }}</li>
                           {% endif %}
                         </ul>

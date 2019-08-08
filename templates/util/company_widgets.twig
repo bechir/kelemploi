@@ -2,10 +2,10 @@
 {% macro thumb(company, path = '#') %}
     <div class="thumb">
         <a href="{{ path }}">
-            {% if company.photo %}
+            {% if company and company.photo %}
                 <img alt="{{ company.name }} Logo" class="img-fluid" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}"/>
             {% else %}
-                <img alt="{{ company.name }} Logo" class="img-fluid" src="{{ asset('images/account/default-logo.png') }}"/>
+                <img alt="{{ company ? company.name : '' }} Logo" class="img-fluid" src="{{ asset('images/account/default-logo.png') }}"/>
             {% endif %}
         </a>
     </div>

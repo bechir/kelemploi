@@ -419,4 +419,14 @@ class User extends BaseUser implements EquatableInterface
 
         return $this;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function updateRoles()
+    {
+        if($this->isEmployer()) {
+            $this->addRole('ROLE_EMPLOYER');
+        }
+    }
 }

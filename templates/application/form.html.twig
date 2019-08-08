@@ -121,7 +121,7 @@
             </div>
         </div>
 
-        {% if company is null %}
+        {% if company is defined and company is null %}
             <div class="row">
                 <label class="col-md-3 col-form-label">
                     {{ 'form.about_company.label'|trans({}, 'company') }}

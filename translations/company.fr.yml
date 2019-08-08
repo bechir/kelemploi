@@ -27,6 +27,9 @@ details:
   save: "Ajouter aux favoris"
   info: "Information"
 
+manage_job:
+  title: Gèrer les offres
+
 contact:
   button: Contacter nous # Contact Us
 

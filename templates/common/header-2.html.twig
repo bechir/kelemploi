@@ -40,6 +40,14 @@
                                                     <span class="ti ti-briefcase"></span>{{ app.user.company.name|capitalize }}
                                                 </a>
                                             </li>
+                                        {% else %}
+                                            {% if app.user.isEmployer %}
+                                                <li>
+                                                    <a href="{{ path('company_edit_profile') }}">
+                                                        <span class="ti ti-plus"></span> Ajouter votre companie
+                                                    </a>
+                                                </li>
+                                            {% endif %}
                                         {% endif %}
                                         
                                         <li>

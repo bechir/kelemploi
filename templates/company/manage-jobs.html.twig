@@ -1,0 +1,114 @@
+{% extends 'company/base.html.twig' %}
+
+{% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as widgets %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}
+{% if company is not null %}
+    {{ 'manage_job.title'|trans({'%name%': company.name|capitalize}) }}
+{% else %}
+    {{ 'manage_job.title'|trans({'%name%': website.name}) }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if company is not null %}
+        <div class="manage-job-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Candidats</th>
+                        <th>Date limite</th>
+                        <th>Status</th>
+                        <th class="action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for job in jobs %}
+                    {% set path = path('application_show', {slug: job.slug}) %}
+                    <tr class="job-items">
+                        <td class="title">
+                            <h5>
+                                <a href="{{ path }}">{{ job.jobTitle }}</a>
+                            </h5>
+                            <div class="info">
+                                {{ widgets.office_location(company.region) }}
+                                {{ widgets.job_type(job.contractType.name) }}
+                            </div>
+                        </td>
+                        <td class="application">
+                            <a href="#">6 Candidat(s)</a>
+                        </td>
+                        <td class="deadline">{{ job.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
+                        {% set status = 'active' %}
+                        {% if job.dates.end|date() < date()|date() %}
+                            {% set status = 'expired' %}
+                        {% endif %}
+                        
+                        <td class="status {{ status }}">{{ status|capitalize }}</td>
+                        <td class="action">
+                            <a class="preview" href="{{ path }}" title="Voir l'offre">
+                                <i data-feather="eye"></i>
+                            </a>
+                            <a class="edit" href="{{ path('application_edit', {slug: job.slug}) }}" title="Modifier">
+                                <i data-feather="edit"></i>
+                            </a>
+                            <a class="remove" data-toggle="modal" data-target="#confirmDeleteModal-{{ loop.index }}" href="#" title="Supprimer l'offre">
+                                <i data-feather="trash-2"></i>
+                            </a>
+                            <div class="modal fade" id="confirmDeleteModal-{{ loop.index }}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-body bg-danger">
+                                            <h4 class="text-danger">{{ 'form.job.delete_modal.title'|trans }}</h4>
+                                            <p>{{ 'form.job.delete_modal.body'|trans({}, 'messages')|raw }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ path('application_delete', {slug: job.slug}) }}" method="POST" data-confirmation="true" id="delete-form">
+                                                <input type="hidden" name="app_delete_token" value="{{ csrf_token('app.delete') }}" />
+
+                                                <button type="button" class="btn btn-default" id="btnNo" data-dismiss="modal">
+                                                    <span class="fa fa-ban" aria-hidden="true"></span> {{ 'word.cancel'|trans({}, 'messages') }}
+                                                </button>
+                                                <button type="submit" class="btn btn-default btn-delete">
+                                                        <span class="fa fa-trash" aria-hidden="true"></span> {{ 'word.delete'|trans({}, 'messages') }}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination-list text-center">
+                <nav class="navigation pagination">
+                    <div class="nav-links">
+                        <a class="prev page-numbers" href="#">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                        <a class="page-numbers" href="#">1</a>
+                        <span aria-current="page" class="page-numbers current">2</span>
+                        <a class="page-numbers" href="#">3</a>
+                        <a class="page-numbers" href="#">4</a>
+                        <a class="next page-numbers" href="#">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="dashboard-section dashboard-recent-activity">
+            <h4 class="title">Vue d'ensemble</h4>
+            <p>Vous n'avez pas de companie.</p>            
+        </div>
+    {% endif %}
+
+{% endblock %}
