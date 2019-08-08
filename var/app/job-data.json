@@ -1,0 +1,52 @@
+{
+    "job": {
+        "categories": [
+            "Aéronautique",
+            "Alimentation / Restauration",
+            "Agriculture / Pêche / Élevage",
+            "Création / Arts / Mode",
+            "Papetérie et Services liés",
+            "Direction Générale",
+            "Bâtiment / Construction",
+            "Commerce / Vente",
+            "Comptabilité / Gestion / Administration",
+            "Juridique / Droit",
+            "Journalisme / Édition",
+            "Resources Humaines",
+            "Consultance / Freelance",
+            "Enseignement / Recherche",
+            "Banque / Finance / Assurance",
+            "Industrie",
+            "Informatique / Télécommunication",
+            "Desgin / Infographie / Multimédia",
+            "Langue / Écrit",
+            "Marketing / Communication",
+            "Médias",
+            "Santé",
+            "Sciences",
+            "Sécurité",
+            "Social",
+            "Sécrétariat / Assistant / Accueil",
+            "Sport",
+            "Tourisme",
+            "Transports / Logistique"
+        ],
+
+        "regions": [
+            "Dakar",
+            "Diourbel",
+            "Fatick",
+            "Kaffrine",
+            "Kaolack",
+            "Kédougou",
+            "Kolda",
+            "Louga",
+            "Matam",
+            "Saint-Louis",
+            "Sédhiou",
+            "Tambacounda",
+            "Thiès",
+            "Ziguinchor"
+        ]
+    }
+}

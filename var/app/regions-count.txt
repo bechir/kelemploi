@@ -1,0 +1,15 @@
+dakar: 1
+diourbel: 0
+fatick: 0
+kaffrine: 0
+kaolack: 0
+kedougou: 0
+kolda: 0
+louga: 0
+matam: 0
+saint-louis: 4
+sedhiou: 0
+tambacounda: 0
+thies: 0
+ziguinchor: 0
+all: 5
