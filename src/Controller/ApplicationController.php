@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Event\ApplicationEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Event\ApplicationEvents;
+use App\Entity\Apply;
+use App\Form\ApplyType;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Resume;
 
 class ApplicationController extends AbstractController
 {
@@ -129,7 +134,7 @@ class ApplicationController extends AbstractController
         ]);
     }
 
-    public function show(Application $app, EventDispatcherInterface $dispatcher): Response
+    public function show(Request $request, Application $app, UserInterface $user = null, EventDispatcherInterface $dispatcher, EntityManagerInterface $em): Response
     {
         if (!$app) {
             $this->addFlash('danger', "L'offre' n'existe pas.");
@@ -140,8 +145,42 @@ class ApplicationController extends AbstractController
         $event = new ApplicationEvent($app);
         $dispatcher->dispatch(ApplicationEvents::APPLICATION_VIEWED, $event);
 
+        $apply = new Apply();
+        $form = $this->createForm(ApplyType::class, $apply);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $apply
+                ->setApplication($app)
+                ->setCandidate($user);
+            
+            // $cvFile = $apply->getCvFile();
+
+            // if($cvFile) {
+            //     $resume = (new Resume())
+            //         ->setCv($cvFile)
+            //         ->setFullName($apply->getFullname())
+            //         ->setUser($user);
+
+            //     $em->persist($cvFile);
+            //     $em->persist($resume);
+            // }
+            
+            $app->addApply($apply);
+            $user->addApply($apply);
+
+            $em->persist($apply);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre candidature a été envoyé, bonne chance!');
+
+            return $this->redirectToRoute('application_show', ['slug' => $app->getSlug()]);
+        }
+
         return $this->render('application/show.html.twig', [
             '_app' => $app,
+            'user' => $user,
+            'form' => $form->createView(),
             'company' => $app->getCompany(),
         ]);
     }

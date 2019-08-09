@@ -8,6 +8,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -127,6 +129,11 @@ class Application
      */
     private $viewCount;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Apply", mappedBy="application")
+     */
+    private $applies;
+
     const FENCED = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS = [self::FENCED, self::ONGOING];
@@ -139,6 +146,7 @@ class Application
         $this->viewCount = 0;
 
         $this->dates = new DateInterval();
+        $this->applies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -397,5 +405,36 @@ class Application
     public function isOwner(User $user): bool
     {
         return (bool) $this->company->getOwners()->contains($user);
+    }
+
+    /**
+     * @return Collection|Apply[]
+     */
+    public function getApplies(): Collection
+    {
+        return $this->applies;
+    }
+
+    public function addApply(Apply $apply): self
+    {
+        if (!$this->applies->contains($apply)) {
+            $this->applies[] = $apply;
+            $apply->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApply(Apply $apply): self
+    {
+        if ($this->applies->contains($apply)) {
+            $this->applies->removeElement($apply);
+            // set the owning side to null (unless already changed)
+            if ($apply->getApplication() === $this) {
+                $apply->setApplication(null);
+            }
+        }
+
+        return $this;
     }
 }

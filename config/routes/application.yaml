@@ -57,6 +57,14 @@ application_delete:
   defaults:
     _locale: '%locale%'
 
+application_apply:
+  path: /{_locale}/job/{slug}/apply
+  controller: App\Controller\ApplicationController::apply
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 application_traineeship:
   path: /{_locale}/jobs/stage
   controller: App\Controller\ApplicationController::traineeship

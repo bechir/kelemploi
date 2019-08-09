@@ -27,12 +27,10 @@ class ApplicationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbCandidatesToRecruit', TextType::class, [
-                'required' => false,
-            ])
+            ->add('nbCandidatesToRecruit', TextType::class, ['required' => false,])
             ->add('jobTitle', TextType::class)
             ->add('jobDescription', TextareaType::class)
-            ->add('company', CompanyType::class)
+            ->add('company', CompanyType::class, ['required' => false])
             ->add('salary', TextType::class, ['required' => false])
             // ->add('workTime', TextType::class, ['required' => false])
             ->add('postCategory', EntityType::class, [
@@ -72,6 +70,7 @@ class ApplicationType extends AbstractType
                 'class' => JobGender::class,
                 'choice_label' => 'name',
                 'choice_translation_domain' => true,
+                'required' => false
             ])
             // ->add('requiredLanguages', EntityType::class, [
             //     'class' => Language::class,

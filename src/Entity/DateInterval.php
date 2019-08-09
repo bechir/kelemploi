@@ -29,7 +29,7 @@ class DateInterval
     private $start;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     private $end;
 

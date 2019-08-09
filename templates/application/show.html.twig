@@ -9,6 +9,8 @@
 
 {% block main %}
 
+    {% set haveApplied = user.haveApplied(_app) %}
+
     <!-- Candidates Details -->
     <div class="alice-bg padding-top-60 section-padding-bottom">
       <div class="container">
@@ -26,7 +28,15 @@
                 </div>
                 <div class="buttons">
                   <a class="save" href="#"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
-                  <a class="apply" href="#" data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                  {% if is_granted('ROLE_USER') %}
+                    {% if haveApplied %}
+                      <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                    {% else %}
+                      <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                    {% endif %}
+                  {% else %}
+                    <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
+                  {% endif %}
                 </div>
               </div>
               <div class="details-information section-padding-60">
@@ -69,8 +79,16 @@
                     {% endif %}
 
                     <div class="job-apply-buttons">
-                      <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
-                      <a href="#" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
+                      {% if is_granted('ROLE_USER') %}
+                        {% if haveApplied %}
+                          <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                        {% else %}
+                          <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                        {% endif %}
+                      {% else %}
+                        <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
+                      {% endif %}
+                        <a href="mailto:{{ _app.company.email }}" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
                     </div>
                   </div>
                   <div class="col-xl-4 offset-xl-1 col-lg-4">
@@ -158,47 +176,56 @@
     </div>
     <!-- Candidates Details End -->
 
-    <div class="apply-popup">
-      <div class="modal fade" id="apply-popup-id" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title"><i data-feather="edit"></i>APPLY FOR THIS JOB</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="#">
-                <div class="form-group">
-                  <input type="text" placeholder="Full Name" class="form-control">
-                </div>
-                <div class="form-group">
-                  <input type="email" placeholder="Email Address" class="form-control">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" placeholder="Message"></textarea>
-                </div>
-                <div class="form-group file-input-wrap">
-                  <label for="up-cv">
-                    <input id="up-cv" type="file">
-                    <i data-feather="upload-cloud"></i>
-                    <span>Upload your resume <span>(pdf,zip,doc,docx)</span></span>
-                  </label>
-                </div>
-                <div class="more-option">
-                  <input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
-                  <label for="radio-4">
-                    <span class="dot"></span> I accept the <a href="#">terms & conditions</a>
-                  </label>
-                </div>
-                <button class="button primary-bg btn-block">Apply Now</button>
-              </form>
+    {% if is_granted('ROLE_USER') and not haveApplied %}
+      <div class="apply-popup">
+        <div class="modal fade" id="apply-popup-id" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title"><i data-feather="edit"></i>CANDIDATER POUR CE POSTE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{ form_start(form) }}
+                  <div class="form-group">
+                    {{ form_widget(form.fullname, {'attr': {'class': 'form-control', 'placeholder': 'Nom complet', 'value': user.fullName}}) }}
+                  </div>
+                  <div class="form-group">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse email', 'value': user.email}}) }}
+                  </div>
+                  <div class="form-group">
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'}}) }}
+                  </div>
+                  <div class="more-option">
+                    {% if user.resume and user.resume.cv %}
+                      <label for="use-resume-cv">
+                        {{ form_widget(form.sendCV, {'id': 'use-resume-cv', 'attr': {'checked': 'checked'}})}}
+                        Envoyer mon CV enregistré
+                      </label>
+                    {% else %}
+                      <div class="alert alert-warning">
+                        <p>Vous n'avez pas encore créé de CV. <a href="{{ path('add_resume') }}" class="text-info" data-dismiss="modal">Commencez par en créer ici</a></p>
+                      </div>
+                      {{ form_widget(form.sendCV, {'attr': {'class': 'd-none'}}) }}
+                    {% endif %}
+                  </div>
+                  {# <div class="form-group file-input-wrap {{ class }}">
+                    <label for="up-cv">
+                      {{ form_widget(form.cvFile.cvFile) }}
+                      <i data-feather="upload-cloud"></i>
+                      <span>Uploader votre CV <span>(pdf,doc,docx)</span></span>
+                    </label>
+                  </div> #}
+                  <button class="button primary-bg btn-block">Envoyer votre candidature</button>
+                {{ form_end(form) }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    {% endif %}
     
     <!-- Jobs -->
     <div class="section-padding-bottom alice-bg">

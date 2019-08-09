@@ -32,6 +32,7 @@ class EditProfileType extends AbstractType
             ->add('firstName', TextType::class, ['required' => false])
             ->add('lastName', TextType::class, ['required' => false])
             ->add('phoneNumber', TextType::class, ['required' => false])
+            ->add('username', TextType::class, ['required' => false])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name',

@@ -6,8 +6,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\AccountType;
 use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class AccountTypeFixtures extends Fixture
+class AccountTypeFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -24,5 +25,10 @@ class AccountTypeFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

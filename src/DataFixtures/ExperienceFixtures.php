@@ -11,8 +11,9 @@ namespace App\DataFixtures;
 use App\Entity\Experience;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class ExperienceFixtures extends Fixture
+class ExperienceFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -31,5 +32,10 @@ class ExperienceFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

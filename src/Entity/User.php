@@ -8,13 +8,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @UniqueEntity(fields="username", message="Ce nom d'utilisateur existe déjà")
+ * 
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="app_user")
  * @ORM\HasLifecycleCallbacks()
@@ -113,6 +118,11 @@ class User extends BaseUser implements EquatableInterface
      */
     private $resume;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Apply", mappedBy="candidate")
+     */
+    private $applies;
+
     const NUM_ITEMS = 15;
 
     const EMPLOYER = 'app.employer';
@@ -124,6 +134,7 @@ class User extends BaseUser implements EquatableInterface
         $this->locale = 'fr';
 
         $this->viewCount = 0;
+        $this->applies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,8 +145,9 @@ class User extends BaseUser implements EquatableInterface
     public function setEmail($email)
     {
         $this->email = $email;
-        if(!$this->username)
-            $this->username = $email;
+        if(!$this->username) {
+            $this->username = substr($email, 0, strpos($email, '@'));
+        }
 
         return $this;
     }
@@ -428,5 +440,45 @@ class User extends BaseUser implements EquatableInterface
         if($this->isEmployer()) {
             $this->addRole('ROLE_EMPLOYER');
         }
+    }
+
+    /**
+     * @return Collection|Apply[]
+     */
+    public function getApplies(): Collection
+    {
+        return $this->applies;
+    }
+
+    public function addApply(Apply $apply): self
+    {
+        if (!$this->applies->contains($apply)) {
+            $this->applies[] = $apply;
+            $apply->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApply(Apply $apply): self
+    {
+        if ($this->applies->contains($apply)) {
+            $this->applies->removeElement($apply);
+            // set the owning side to null (unless already changed)
+            if ($apply->getCandidate() === $this) {
+                $apply->setCandidate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function haveApplied(Application $app): bool
+    {
+        foreach ($this->applies as $apply) {
+            if($apply->getApplication() == $app)
+                return true;
+        }
+        return false;
     }
 }

@@ -31,7 +31,7 @@
                 </div>
                 <div class="more">
                     <div class="buttons">
-                        <a class="button" data-target="#apply-popup-id" data-toggle="modal" data-app-id="{{ _app.id }}" href="{{ app_url }}">{{ 'job.apply_online'|trans }}</a>
+                        <a class="button" {#data-target="#apply-popup-id" data-toggle="modal" data-app-id="{{ _app.id }}"#} href="{{ app_url }}">{{ 'job.apply_online'|trans }}</a>
                         <a class="favourite" href="{{ app_url }}">
                             <i data-feather="heart"></i>
                         </a>
@@ -42,5 +42,5 @@
         </div>
     {% endfor %}
 
-    {% include 'application/apply-popup.html.twig' %}
+    {#% include 'application/apply-popup.html.twig' %#}
 </div>

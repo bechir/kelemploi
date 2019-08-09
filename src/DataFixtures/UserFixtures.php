@@ -12,8 +12,9 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements FixtureGroupInterface
 {
     private $passwordEncoder;
 
@@ -52,5 +53,10 @@ class UserFixtures extends Fixture
             // $userData = [$username, $phoneNumber, $password, $email, $roles];
             // ['Administrateur', '+222 26 74 93 34', '12345678', 'contactwebmaster21@gmail.com', ['ROLE_SUPER_ADMIN']],
         ];
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

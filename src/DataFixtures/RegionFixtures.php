@@ -12,8 +12,9 @@ use App\Entity\Region;
 use App\Util\AppDirectoriesTrait;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class RegionFixtures extends Fixture
+class RegionFixtures extends Fixture implements FixtureGroupInterface
 {
     use AppDirectoriesTrait;
 
@@ -29,5 +30,10 @@ class RegionFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

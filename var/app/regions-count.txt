@@ -1,4 +1,4 @@
-dakar: 1
+dakar: 2
 diourbel: 0
 fatick: 0
 kaffrine: 0
@@ -12,4 +12,4 @@ sedhiou: 0
 tambacounda: 0
 thies: 0
 ziguinchor: 0
-all: 5
+all: 6
