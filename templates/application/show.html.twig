@@ -26,6 +26,7 @@
                     {{ company_widgets.infos(company, 'location', _app.postCategory.slug) }}
                   </div>
                 </div>
+                {% if not _app.isOwner(user) %}
                 <div class="buttons">
                   <a class="save" href="#"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
                   {% if is_granted('ROLE_USER') %}
@@ -38,6 +39,7 @@
                     <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
                   {% endif %}
                 </div>
+                {% endif %}
               </div>
               <div class="details-information section-padding-60">
                 <div class="row">
@@ -78,18 +80,20 @@
                     </div>
                     {% endif %}
 
-                    <div class="job-apply-buttons">
-                      {% if is_granted('ROLE_USER') %}
-                        {% if haveApplied %}
-                          <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                    {% if not _app.isOwner(user) %}
+                      <div class="job-apply-buttons">
+                        {% if is_granted('ROLE_USER') %}
+                          {% if haveApplied %}
+                            <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                          {% else %}
+                            <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                          {% endif %}
                         {% else %}
-                          <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
+                          <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
                         {% endif %}
-                      {% else %}
-                        <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
-                      {% endif %}
-                        <a href="mailto:{{ _app.company.email }}" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
-                    </div>
+                          <a href="mailto:{{ _app.company.email }}" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
+                      </div>
+                    {% endif %}
                   </div>
                   <div class="col-xl-4 offset-xl-1 col-lg-4">
                     <div class="information-and-share">
@@ -175,8 +179,7 @@
       </div>
     </div>
     <!-- Candidates Details End -->
-
-    {% if is_granted('ROLE_USER') and not haveApplied %}
+    {% if is_granted('ROLE_USER') and not _app.isOwner(user) and not haveApplied %}
       <div class="apply-popup">
         <div class="modal fade" id="apply-popup-id" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog" role="document">

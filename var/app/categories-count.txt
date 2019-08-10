@@ -25,8 +25,8 @@ sciences: 0
 securite: 0
 service-client: 0
 social: 0
-secretariat-assistant-accueil: 1
+secretariat-assistant-accueil: 2
 sport: 0
 tourisme: 0
 transports-logistique: 0
-all: 7
+all: 8
