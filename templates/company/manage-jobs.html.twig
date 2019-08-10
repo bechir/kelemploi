@@ -42,7 +42,7 @@
                         <td class="application">
                             <a href="#">6 Candidat(s)</a>
                         </td>
-                        <td class="deadline">{{ job.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
+                        <td class="deadline">{{ job.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
                         {% set status = 'active' %}
                         {% if job.dates.end|date() < date()|date() %}
                             {% set status = 'expired' %}

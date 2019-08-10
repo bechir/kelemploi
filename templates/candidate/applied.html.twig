@@ -1,11 +1,38 @@
 {% extends 'user/base.html.twig' %}
 
 {% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as company_widgets %}
 
 {% trans_default_domain 'user' %}
 
 {% block title %}{{ 'applied'|trans }}{% endblock %}
 
 {% block content %}
-    {{ util.temporary_unavailable_alert() }}
+<div class="dashboard-applied">
+    <h4 class="apply-title">{{ applies|length }} Offres postulées</h4>
+    <div class="dashboard-apply-area">
+        {% for apply in applies %}
+            <div class="job-list">
+                {{ company_widgets.thumb(apply.application.company) }}
+                <div class="body">
+                    <div class="content">
+                        <h4><a href="{{ path('application_show', {slug: apply.application.slug}) }}">{{ apply.application.jobTitle }}</a></h4>
+                        <div class="info">
+                        <span class="company"><a href="#"><i data-feather="briefcase"></i>{{ apply.application.company.name }}</a></span>
+                        {{ company_widgets.office_location(apply.application.company.region) }}
+                        {{ company_widgets.job_type(apply.application.contractType.name) }}
+                        </div>
+                    </div>
+                    <div class="more">
+                        <a href="#" class="bookmark-remove"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <p>Vous n'avez postulé à aucune offre d'emploi.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

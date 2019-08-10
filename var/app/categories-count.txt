@@ -14,7 +14,7 @@ consultance-freelance: 0
 enseignement-recherche: 0
 banque-finance-assurance: 0
 industrie: 0
-informatique-telecommunication: 3
+informatique-telecommunication: 4
 ingenierie-architecture: 0
 desgin-infographie-multimedia: 0
 langue-ecrit: 0
@@ -29,4 +29,4 @@ secretariat-assistant-accueil: 2
 sport: 0
 tourisme: 0
 transports-logistique: 0
-all: 8
+all: 9

@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Apply;
 
 class UserController extends AbstractController
 {
@@ -197,12 +199,13 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function applied(): Response
+    public function applied(UserInterface $user = null, EntityManagerInterface $em): Response
     {
-        $user = $this->getUser();
+        $applies = $em->getRepository(Apply::class)->findBy(['candidate' => $user]);
 
         return $this->render('candidate/applied.html.twig', [
             'user' => $user,
+            'applies' => $applies,
             'active' => 'applied-jobs',
         ]);
     }

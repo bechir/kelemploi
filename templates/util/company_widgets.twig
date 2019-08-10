@@ -58,7 +58,7 @@
     {% endif %}
 
     <span class="job-type {{ class }}">
-        <a href="{{ path('applications_list', {contract: contract}) }}">
+        <a href="{{ path('applications_list', {contract: contract|trans|lower }) }}">
             <i data-feather="clock"></i>{{ contract|trans() }}</a>
     </span>
 {% endmacro %}
