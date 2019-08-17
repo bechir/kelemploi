@@ -93,9 +93,15 @@ class Company
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ResumeBookmark", mappedBy="company")
+     */
+    private $bookmarkedResumes;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
+        $this->bookmarkedResumes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,6 +261,37 @@ class Company
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ResumeBookmark[]
+     */
+    public function getBookmarkedResumes(): Collection
+    {
+        return $this->bookmarkedResumes;
+    }
+
+    public function addBookmarkedResume(ResumeBookmark $bookmarkedResume): self
+    {
+        if (!$this->bookmarkedResumes->contains($bookmarkedResume)) {
+            $this->bookmarkedResumes[] = $bookmarkedResume;
+            $bookmarkedResume->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookmarkedResume(ResumeBookmark $bookmarkedResume): self
+    {
+        if ($this->bookmarkedResumes->contains($bookmarkedResume)) {
+            $this->bookmarkedResumes->removeElement($bookmarkedResume);
+            // set the owning side to null (unless already changed)
+            if ($bookmarkedResume->getCompany() === $this) {
+                $bookmarkedResume->setCompany(null);
+            }
+        }
 
         return $this;
     }
