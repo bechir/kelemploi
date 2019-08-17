@@ -9,7 +9,7 @@
 
 {% block main %}
 
-    {% set haveApplied = user.haveApplied(_app) %}
+    {% set haveApplied = user and user.haveApplied(_app) %}
 
     <!-- Candidates Details -->
     <div class="alice-bg padding-top-60 section-padding-bottom">

@@ -1,9 +1,5 @@
 
 $(document).ready(function() {
-  mount();
-
-  function mount() {
-    removeLoader();
     /*-----------------------------------
     Smooth Scroll
     -----------------------------------*/
@@ -692,32 +688,26 @@ $(document).ready(function() {
     var profileImage = $('div.profile-image');
     profileImage.css('background-image', 'url(' + profileImage.attr('data-image') + ')');
 
-    $('.row.no-gutters .dropdown.bootstrap-select + button').remove()
-  }
+    $('.row.no-gutters .dropdown.bootstrap-select + button').remove();
 
-  function unmount() {
-    $("html, body")
-      .animate({ scrollTop: 0 }, "fast")
-      .append(`<div id="page-loader">
-                <span class="dot"></span>
-                <div class="dots">
-                    <span></span><span></span><span></span>
-                </div>
-              </div>`
-      );
-  }
+    const ratio = .1;
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: ratio
+    };
 
-  function removeLoader() {
-    while($("#page-loader").attr('id') == 'page-loader')
-      $("#page-loader").remove();
-  }
+    const handleIntersect = (entries, observer) => {
+        entries.forEach(entry => {
+            if(entry.intersectionRatio > ratio) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
 
-  const swup = new Swup({
-    containers: ['#swup', '#user', '#js'],
-    cache: false
-  });
-  
-  swup.on('contentReplaced', mount)
-  swup.on('animationOutStart', unmount)
-  swup.on('pageLoaded', removeLoader)
+    const observer = new IntersectionObserver(handleIntersect, options);
+    document.querySelectorAll('[class*="reveal-"]').forEach(r => {
+        observer.observe(r);
+    });
 })

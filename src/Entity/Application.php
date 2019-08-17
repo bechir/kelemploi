@@ -402,7 +402,7 @@ class Application
         return $this;
     }
 
-    public function isOwner(User $user): bool
+    public function isOwner(?User $user): bool
     {
         return (bool) $this->company->getOwners()->contains($user);
     }

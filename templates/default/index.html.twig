@@ -11,13 +11,13 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-            <h1>{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
-              <p>{{ 'home.banner_text'|trans }}</p>
+            <h1 class="reveal-1">{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
+              <p class="reveal-2">{{ 'home.banner_text'|trans }}</p>
               
               {% if is_granted('ROLE_EMPLOYER') %}
-                <a href="{{ path('applications_list') }}" class="button">{{ 'action.explore_jobs'|trans }}</a>
+                <a href="{{ path('applications_list') }}" class="button reveal-3">{{ 'action.explore_jobs'|trans }}</a>
               {% else %}
-                <a href="{{ path('add_resume') }}" class="button">{{ 'home.add_resume'|trans }}</a>
+                <a href="{{ path('add_resume') }}" class="button reveal-3">{{ 'home.add_resume'|trans }}</a>
               {% endif %}              
             </div>
           </div>
@@ -27,7 +27,7 @@
     <!-- Banner End -->
 
     <!-- Search and Filter -->
-    <div class="searchAndFilter-wrapper">
+    <div class="searchAndFilter-wrapper reveal-4">
       <div class="container">
         <div class="row">
           <div class="col">

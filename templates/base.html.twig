@@ -48,7 +48,14 @@
         <!--[if lt IE 9]>
             <script src="assets/js/html5shiv.min.js"></script>
             <script src="assets/js/respond.min.js"></script>
-            <![endif]-->
+        <![endif]-->
+      <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+      {% for l in locales() %}
+        {% if l.code != request_locale %}
+          <link rel="alternate" hreflang="{{ l.code }}" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}" />
+        {% endif %}
+        <link rel="alternate" hreflang="fr" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: 'fr'})) }}" />
+      {% endfor %}
     </head>
     <body>
     <div class="beta shadow-sm">Version Bêta</div>
@@ -63,7 +70,7 @@
         {% endif %}
 
         <!--Main Layout-->
-        <div id="swup" class="transition-fade">
+        <div class="transition-fade">
         {% block main %}{% endblock main %}
         </div>
         <!--Main Layout-->
@@ -74,6 +81,7 @@
             {% include 'common/footer-2.html.twig' %}
         {% endblock footer %}
         <!-- Footer -->
+        <script src="{{ asset('assets/js/intersection-observer.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/feather.min.js') }}"></script>
@@ -91,14 +99,11 @@
         <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
         <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
         <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
-        <script src="{{ asset('assets/js/swup.min.js') }}"></script>
         <script src="{{ asset('assets/js/typeahead.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap-tagsinput.min.js') }}"></script>
         <script src="{{ asset('assets/js/bloodhound.min.js') }}"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
-        <div id="js">
         {% block javascript %}{% endblock %}
-        </div>
     {% endblock %}
 
     </body>
