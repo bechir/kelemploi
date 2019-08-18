@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Resume;
 
 use App\Entity\Resume;
 use App\Entity\StudyLevel;
 use App\Entity\Experience;
 use App\Entity\JobCategory;
+use App\Form\CVFileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

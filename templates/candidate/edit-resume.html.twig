@@ -32,77 +32,22 @@
                             <h4><i data-feather="git-branch"></i>Mes compétances</h4>
                         </div>
                         <div class="content">
-                            <form action="#">
+                            {{ form_start(skillsForm) }}
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ajouter des compétances (6 maximum)</label>
+                                    <label class="col-sm-3 col-form-label">Modifier mes compétances</label>
                                     <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">01</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">02</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">03</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">04</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">05</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-3 col-sm-9">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">06</div>
-                                            </div>
-                                            <input class="form-control" type="text">
-                                        </div>
+                                        {{ form_widget(skillsForm.skills) }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="offset-sm-3 col-sm-9">
                                         <div class="buttons">
-                                            <button class="primary-bg">Entregistrer les modifications</button>
+                                            <button class="primary-bg">Entregistrer</button>
                                             <button class="" data-dismiss="modal">Annuler</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            {{ form_end(skillsForm) }}
                         </div>
                     </div>
                 </div>
@@ -280,7 +225,7 @@
                 <li><span>Région:</span>{{ user.region|trans({}, 'regions')}}</li>
                 <li><span>Expérience:</span>{{ resume.experienceLevel|trans }}</li>
                 <li><span>Sexe:</span>{{ user.gender|trans }}</li>
-                <li><span>Âge:</span>{{ user.age ~ ' ' ~ 'user.years_old'|trans }}</li>
+                <li><span>Âge:</span>{{ user.age ? (user.age ~ ' ' ~ 'user.years_old'|trans) : '-' }}</li>
                 <li><span>Niveau d'études:</span>{{ resume.studyLevel|trans }}</li>
             </ul>
         </div>
@@ -295,76 +240,47 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="title">
-                        <h4>
-                            <i data-feather="align-left"></i>About Me</h4>
+                        <h4><i data-feather="align-left"></i>À propos de moi</h4>
                     </div>
                     <div class="content">
-                        <form action="#">
+                        {{ form_start(aboutForm) }}
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Write Yourself</label>
+                                <label class="col-sm-3 col-form-label">Votre nom complet</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" placeholder="Write Yourself"></textarea>
-                                </div>
-                            </div>
-                            <h4>
-                                <i data-feather="align-left"></i>Information</h4>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Category</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="Design &amp; Creative" type="text">
+                                    {{ form_widget(aboutForm.fullName, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Location</label>
+                                <label class="col-sm-3 col-form-label">Parlez de vous</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" placeholder="Los Angeles" type="text">
+                                    {{ form_widget(aboutForm.about, {'attr': {'class': 'tinymce-editor-1', 'palceholder': 'Parlez nous de vous en quelques lignes...'}}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Status</label>
+                                <label class="col-sm-3 col-form-label">Catégorie</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" placeholder="Full Time" type="text">
+                                    {{ form_widget(aboutForm.jobCategory, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Experience</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="3 Year" type="text">
+                                <label class="col-sm-3 col-form-label">Niveau d'études</label>
+                                    <div class="col-sm-9">{{ form_widget(aboutForm.studyLevel, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Salary Range</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="30k - 40k" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Gender</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="Male" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Age</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="25 Years" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Qualification</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" placeholder="Gradute" type="text">
+                                <label class="col-sm-3 col-form-label">Expérience</label>
+                                    <div class="col-sm-9">{{ form_widget(aboutForm.experienceLevel, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="offset-sm-3 col-sm-9">
                                     <div class="buttons">
-                                        <button class="primary-bg">Save Update</button>
-                                        <button class="" data-dismiss="modal">Cancel</button>
+                                        <button class="primary-bg">Enregister</button>
+                                        <button class="" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        {{ form_end(aboutForm) }}
                     </div>
                 </div>
             </div>

@@ -22,6 +22,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Apply;
+use App\Form\Resume\ResumeEditAboutType;
+use App\Form\Resume\ResumeEditEducationsType;
+use App\Form\Resume\ResumeEditProfessionalSkillsType;
+use App\Form\Resume\ResumeEditSkillsType;
+use App\Form\Resume\ResumeEditWorkExperiencesType;
+use Symfony\Component\Form\Exception\LogicException as SymfonyFormLogicException;
 
 class UserController extends AbstractController
 {
@@ -117,10 +123,46 @@ class UserController extends AbstractController
      */
     public function editResume(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
-        if(!$user->haveResume())
+        $resume = $user->getResume();
+
+        if(!$resume) {
             return $this->redirectToRoute('add_resume');
+        }
+
+        // Perform each form field individually
+        $aboutForm = $this->createForm(ResumeEditAboutType::class, $resume);
+        $skillsForm = $this->createForm(ResumeEditSkillsType::class, $resume);
+        $workExpForm = $this->createForm(ResumeEditWorkExperiencesType::class, $resume);
+        $educationForm = $this->createForm(ResumeEditEducationsType::class, $resume);
+        $proSkillsForm = $this->createForm(ResumeEditProfessionalSkillsType::class, $resume);
+
+        $aboutForm->handleRequest($request);
+        $skillsForm->handleRequest($request);
+        $workExpForm->handleRequest($request);
+        $educationForm->handleRequest($request);
+        $proSkillsForm->handleRequest($request);
+
+        $forms = [$aboutForm, $skillsForm, $workExpForm, $educationForm, $proSkillsForm];
 
         if($request->isMethod('POST')) {
+            foreach ($forms as $form) {
+                try {
+                    if(!$form->isValid()) {
+                        $this->addFlash('danger', 'text.edit_error');
+                    }
+
+                    if($form->isSubmitted() && $form->isValid()) {
+                        $em->flush();
+                        
+                        $this->addFlash('success', 'text.edit_success');
+                        return $this->redirectToRoute('edit_resume');
+                    }
+                } catch (SymfonyFormLogicException $e) {
+                    // the form is not submitted, nothing to do.
+                }
+            }
+
+            // Handle submission of resume title field
             $resumeTitleToken = $request->request->get('resume_edit_title__token');
             if($this->isCsrfTokenValid('resume.edit.title.token', $resumeTitleToken)) {
                 $resumeTitle = $request->request->get('resume_edit_title_value');
@@ -139,6 +181,11 @@ class UserController extends AbstractController
             'user' => $user,
             'resume' => $user->getResume(),
             'active' => 'edit-resume',
+            'aboutForm' => $aboutForm->createView(),
+            'skillsForm' => $skillsForm->createView(),
+            'workExpForm' => $workExpForm->createView(),
+            'educationForm' => $educationForm->createView(),
+            'proSkillsForm' => $proSkillsForm->createView()
         ]);
     }
 

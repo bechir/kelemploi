@@ -320,3 +320,4 @@ text:
   accept_terms: "Vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utiliation</a> et notre <a href=\"%privacy_url%\">Politque de confidentialité</a>" # "You accepts our <a href=\"%terms_url%\">Terms and Conditions</a> and <a href=\"%privacy_url%\">Privacy Policy</a>"
   temporary_unavailable_alert: "Cette section est temporairement vide."
   edit_success: "Modifications effectuées."
+  edit_error: "Erreur: modifications non effectuées."

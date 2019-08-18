@@ -663,12 +663,13 @@ $(document).ready(function() {
             }
         });
     }
-    $('form.job-post-form input').on('keypress', function(e){
+    $('form .bootstrap-tagsinput input').on('keypress', function(e){
       if (e.keyCode == 13){
         e.keyCode = 188;
         e.preventDefault();
       };
     });
+
   
     var alerts = $(".alert-wrap.dismissable-alert");
     alerts.addClass('show');

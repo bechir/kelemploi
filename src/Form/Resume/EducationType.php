@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Resume;
 
 use App\Entity\Education;
 use Symfony\Component\Form\AbstractType;

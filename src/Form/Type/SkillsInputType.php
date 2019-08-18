@@ -57,7 +57,7 @@ class SkillsInputType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-        $view->vars['skills'] = $this->skills->findAll();
+        $view->vars['skills'] = $this->skills->findBy([], ['name' => 'ASC']);
     }
 
     /**

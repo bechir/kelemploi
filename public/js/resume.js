@@ -61,12 +61,14 @@ else {
 }
 
 function addWorkExperience(container) {
-    var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexWorkExp + 1)));
-    addDeleteWorkExperienceLink(prototype);
+    if(typeof container.attr('data-prototype') !== 'undefined') {
+        var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexWorkExp + 1)));
+        addDeleteWorkExperienceLink(prototype);
 
-    prototype.addClass('transition');
-    prototype.insertBefore('.btn-new-work-exp');
-    indexWorkExp++;
+        prototype.addClass('transition');
+        prototype.insertBefore('.btn-new-work-exp');
+        indexWorkExp++;
+    }
 }
 
 function addDeleteWorkExperienceLink(prototype) {
@@ -88,12 +90,14 @@ function addDeleteWorkExperienceLink(prototype) {
 }
 
 function addEducation(container) {
-    var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexEducation + 1)));
-    addDeleteEducationLink(prototype);
+    if(typeof container.attr('data-prototype') !== 'undefined') {
+        var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexEducation + 1)));
+        addDeleteEducationLink(prototype);
 
-    prototype.addClass('transition');
-    prototype.insertBefore('.btn-new-education');
-    indexEducation++;
+        prototype.addClass('transition');
+        prototype.insertBefore('.btn-new-education');
+        indexEducation++;
+    }
 }
 
 function addDeleteEducationLink(prototype) {
@@ -115,12 +119,14 @@ function addDeleteEducationLink(prototype) {
 }
 
 function addProSkill(container) {
-    var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexProSkill + 1)));
-    addDeleteProSkillLink(prototype);
+    if(typeof container.attr('data-prototype') !== 'undefined') {
+        var prototype = $(container.attr('data-prototype').replace(/___name___/g, (indexProSkill + 1)));
+        addDeleteProSkillLink(prototype);
 
-    prototype.addClass('transition');
-    prototype.insertBefore('.btn-new-pro-skill');
-    indexProSkill++;
+        prototype.addClass('transition');
+        prototype.insertBefore('.btn-new-pro-skill');
+        indexProSkill++;
+    }
 }
 
 function addDeleteProSkillLink(prototype) {
