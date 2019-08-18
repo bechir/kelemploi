@@ -8,12 +8,18 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Apply;
+use App\Entity\Resume;
 use App\Form\ResumeType;
 use App\Form\EditProfileType;
+use App\Form\Resume\ResumeEditAboutType;
+use App\Form\Resume\ResumeEditEducationsType;
+use App\Form\Resume\ResumeEditProfessionalSkillsType;
+use App\Form\Resume\ResumeEditSkillsType;
+use App\Form\Resume\ResumeEditWorkExperiencesType;
 use App\Event\CandidateEvent;
 use App\Event\CandidateEvents;
-use App\Entity\User;
-use App\Entity\Resume;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Apply;
-use App\Form\Resume\ResumeEditAboutType;
-use App\Form\Resume\ResumeEditEducationsType;
-use App\Form\Resume\ResumeEditProfessionalSkillsType;
-use App\Form\Resume\ResumeEditSkillsType;
-use App\Form\Resume\ResumeEditWorkExperiencesType;
 use Symfony\Component\Form\Exception\LogicException as SymfonyFormLogicException;
 
 class UserController extends AbstractController
@@ -132,17 +132,17 @@ class UserController extends AbstractController
         // Perform each form field individually
         $aboutForm = $this->createForm(ResumeEditAboutType::class, $resume);
         $skillsForm = $this->createForm(ResumeEditSkillsType::class, $resume);
-        $workExpForm = $this->createForm(ResumeEditWorkExperiencesType::class, $resume);
-        $educationForm = $this->createForm(ResumeEditEducationsType::class, $resume);
+        $workExperiencesForm = $this->createForm(ResumeEditWorkExperiencesType::class, $resume);
+        $educationsForm = $this->createForm(ResumeEditEducationsType::class, $resume);
         $proSkillsForm = $this->createForm(ResumeEditProfessionalSkillsType::class, $resume);
 
         $aboutForm->handleRequest($request);
         $skillsForm->handleRequest($request);
-        $workExpForm->handleRequest($request);
-        $educationForm->handleRequest($request);
+        $workExperiencesForm->handleRequest($request);
+        $educationsForm->handleRequest($request);
         $proSkillsForm->handleRequest($request);
 
-        $forms = [$aboutForm, $skillsForm, $workExpForm, $educationForm, $proSkillsForm];
+        $forms = [$aboutForm, $skillsForm, $workExperiencesForm, $educationsForm, $proSkillsForm];
 
         if($request->isMethod('POST')) {
             foreach ($forms as $form) {
@@ -183,8 +183,8 @@ class UserController extends AbstractController
             'active' => 'edit-resume',
             'aboutForm' => $aboutForm->createView(),
             'skillsForm' => $skillsForm->createView(),
-            'workExpForm' => $workExpForm->createView(),
-            'educationForm' => $educationForm->createView(),
+            'workExperiencesForm' => $workExperiencesForm->createView(),
+            'educationsForm' => $educationsForm->createView(),
             'proSkillsForm' => $proSkillsForm->createView()
         ]);
     }

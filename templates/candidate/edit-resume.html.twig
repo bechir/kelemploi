@@ -309,13 +309,12 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="title">
-                        <h4>
-                            <i data-feather="book"></i>Éducations</h4>
+                        <h4><i data-feather="book"></i>Éducations</h4>
                         <a class="add-more" href="#">+ Ajouter</a>
                     </div>
                     <div class="content">
-                        <form action="#">
-                        {% for education in resume.educations %}
+                        {{ form_start(educationsForm) }}
+                        {% for education in educationsForm.educations %}
                             <div class="input-block-wrap">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Éducation {{ loop.index }}</label>
@@ -324,7 +323,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Titre</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ education.designation }}">
+                                            {{ form_widget(education.designation, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +333,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Institut</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ education.institue }}">
+                                            {{ form_widget(education.institue, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -344,7 +343,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Période</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ education.period }}">
+                                            {{ form_widget(education.period, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +353,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Description</div>
                                             </div>
-                                            <textarea class="form-control">{{ education.description }}</textarea>
+                                            {{ form_widget(education.description, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -368,7 +367,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        {{ form_end(educationsForm) }}
                     </div>
                 </div>
             </div>
@@ -402,8 +401,8 @@
                         <a class="add-more" href="#">+ Ajouter une expérience</a>
                     </div>
                     <div class="content">
-                        <form action="#">
-                        {% for xp in resume.workExperiences %}
+                        {{ form_start(workExperiencesForm) }}
+                        {% for xp in workExperiencesForm.workExperiences %}
                             <div class="input-block-wrap">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Expérience {{ loop.index }}</label>
@@ -412,7 +411,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Titre</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ xp.designation }}">
+                                            {{ form_widget(xp.designation, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -422,7 +421,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Société</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ xp.companyName }}">
+                                            {{ form_widget(xp.companyName, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -432,7 +431,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Période</div>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ xp.period }}">
+                                            {{ form_widget(xp.period, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -442,7 +441,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Description</div>
                                             </div>
-                                            <textarea class="form-control">{{ xp.description }}</textarea>
+                                            {{ form_widget(xp.description, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -456,7 +455,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        {{ form_end(workExperiencesForm) }}
                     </div>
                 </div>
             </div>
@@ -496,8 +495,8 @@
                         <a class="add-more" href="#">+ Ajouter une compétance</a>
                     </div>
                     <div class="content">
-                        <form action="#">
-                            {% for skill in resume.proSkills %}
+                            {{ form_start(proSkillsForm) }}
+                            {% for skill in proSkillsForm.proSkills %}
                                 <div class="input-block-wrap mb-3">
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Compétence {{ loop.index }}</label>
@@ -506,7 +505,7 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Nom</div>
                                                 </div>
-                                                <input class="form-control" type="text" value="{{ skill.name }}">
+                                                {{ form_widget(skill.name, {'attr': {'class': 'form-control'}}) }}
                                             </div>
                                         </div>
                                     </div>
@@ -516,7 +515,7 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Pourcentage</div>
                                                 </div>
-                                                <input class="form-control" type="text" value="{{ skill.percentage }}" min="0" max="100">
+                                                {{ form_widget(skill.percentage, {'attr': {'class': 'form-control'}}) }}
                                             </div>
                                         </div>
                                     </div>
@@ -530,7 +529,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        {{ form_end(proSkillsForm) }}
                     </div>
                 </div>
             </div>
