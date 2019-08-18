@@ -207,6 +207,13 @@ class User extends BaseUser implements EquatableInterface
             : $this->username;
     }
 
+    public function getJobTitle(): string
+    {
+        return ($this->haveResume() && $this->resume->getTitle())
+            ? $this->resume->getTitle()
+            : $this->getFullName();
+    }
+
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;

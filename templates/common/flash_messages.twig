@@ -3,7 +3,14 @@
         {% for message in messages %}
             <div class="jy-alert {{ type }}-alert" role="alert">
                 <div class="icon">
-                    <i class="fas fa-check-circle"></i>
+                    {% set icon = 'check-circle' %}
+                    {% if type == 'danger' %}
+                        {% set icon = 'exclamation-circle' %}
+                    {% elseif icon == 'info'  %}
+                        {% set icon = 'info-circle' %}
+                    {% endif %}
+                    
+                    <i class="fas fa-{{ icon }}"></i>
                 </div>
                 <p>{{ message|trans }}</p>
                 <div class="close_">

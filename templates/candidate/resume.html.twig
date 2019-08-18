@@ -45,6 +45,13 @@
                 </a>
             </div>
         </div>
+
+        {% if resume.title %}
+        <div class="resume-title details-section dashboard-section">
+            <h4><i data-feather="user"></i>{{ resume.title }}</h4>
+        </div>
+        {% endif %}
+        <hr>
         <div class="about-details details-section dashboard-section">
             <h4><i data-feather="align-left"></i>À propos de moi</h4>
             {% if resume.about %}

@@ -20,6 +20,9 @@ class ResumeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title', TextType::class, [
+                'required' => false
+            ])
             ->add('fullName', TextType::class, [
                 'required' => false
             ])

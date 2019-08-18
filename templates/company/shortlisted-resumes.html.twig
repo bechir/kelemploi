@@ -1,0 +1,82 @@
+{% extends 'company/base.html.twig' %}
+
+{% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as widgets %}
+{% import 'util/candidate_widgets.twig' as candidate_widgets %}
+
+{% block title %}{{ 'employer.shortlisted_resumes'|trans }}{% endblock %}
+
+{% block content %}
+<div class="manage-candidate-container">
+  {% if bookmarkedResumes %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th class="action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bookmarked in bookmarkedResumes %}
+                {% set resume = bookmarked.resume %}
+                <tr class="candidates-list">
+                    <td class="title">
+                        {{ candidate_widgets.thumb(resume.user) }}
+                        <div class="body">
+                            <h5>
+                                <a href="#">{{ resume.fullName }}</a>
+                            </h5>
+                            <div class="info">
+                                <span class="designation">
+                                    <a href="#">
+                                        <i data-feather="check-square"></i>Senior UI / UX Designer</a>
+                                </span>
+                                <span class="location">
+                                    <a href="#">
+                                        <i data-feather="map-pin"></i>New Orleans</a>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="status">
+                        <i data-feather="check-circle"></i>Shortlisted</td>
+                    <td class="action">
+                        <a class="download" href="#">
+                            <i data-feather="download"></i>
+                        </a>
+                        <a class="inbox" href="#">
+                            <i data-feather="mail"></i>
+                        </a>
+                        <a class="remove" href="#">
+                            <i data-feather="trash-2"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-list text-center">
+        <nav class="navigation pagination">
+            <div class="nav-links">
+                <a class="prev page-numbers" href="#">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                <a class="page-numbers" href="#">1</a>
+                <span aria-current="page" class="page-numbers current">2</span>
+                <a class="page-numbers" href="#">3</a>
+                <a class="page-numbers" href="#">4</a>
+                <a class="next page-numbers" href="#">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
+  {% else %}
+      <div class="alert alert-info">
+          <p>Vous n'avez pas de CV présélectionnés</p>
+      </div>
+  {% endif %}
+</div>
+
+{% endblock %}

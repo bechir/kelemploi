@@ -47,6 +47,14 @@ company_manage_candidates:
   defaults:
     _locale: '%locale%'
 
+company_shortlisted_resumes:
+  path: /{_locale}/company/shortlisted
+  controller: App\Controller\CompanyController::shortlistedResumes
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 company_messages:
   path: /{_locale}/company/messages
   controller: App\Controller\CompanyController::messages

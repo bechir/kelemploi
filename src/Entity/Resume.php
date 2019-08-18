@@ -22,6 +22,11 @@ class Resume
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $fullName;
 
     /**
@@ -108,6 +113,18 @@ class Resume
     public function setFullName(?string $fullName): self
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

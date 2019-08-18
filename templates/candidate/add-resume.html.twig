@@ -19,12 +19,17 @@
                         <div class="post-content-wrapper">
                             {{ form_start(form, {'attr': {'class': 'job-post-form'}}) }}
                                 <div class="basic-info-input">
-                                    <h4>
-                                        <i data-feather="plus-circle"></i>Ajoutez votre CV</h4>
+                                    <h4><i data-feather="plus-circle"></i>Ajoutez votre CV</h4>
                                     <div class="form-group row" id="full-name">
                                         <label class="col-md-3 col-form-label">Nom complet</label>
                                         <div class="col-md-9">
                                             {{ form_widget(form.fullName, {attr: {'class': 'form-control', 'value': user.firstName ~ ' ' ~ user.lastName, 'placeholder': 'Votre nom complet'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" id="full-name">
+                                        <label class="col-md-3 col-form-label">Titre</label>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.title, {attr: {'class': 'form-control', 'placeholder': 'ex: Ingénieur Civil'}}) }}
                                         </div>
                                     </div>
                                     <div class="row" id="information">

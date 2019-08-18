@@ -10,7 +10,10 @@ namespace App\Controller;
 
 use App\Entity\Application;
 use App\Entity\Company;
+use App\Entity\ResumeBookmark;
 use App\Form\CompanyType;
+use Doctrine\ORM\EntityManagerInterface;
+use Proxies\__CG__\App\Entity\Resume;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -126,13 +129,27 @@ class CompanyController extends AbstractController
      */
     public function manageCandidates(UserInterface $user = null): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $company = $user->getCompany();
 
         return $this->render('company/manage-candidates.html.twig', [
             'user' => $user,
             'company' => $company,
             'active' => 'manage-candidates'
+        ]);
+    }
+
+    /**
+     * IsGranted("ROLE_EMPLOYER")
+     */
+    public function shortlistedResumes(Request $request, UserInterface $user = null, EntityManagerInterface $em): Response
+    {
+        $company = $user->getCompany();
+        $bookmarkedResumes = $em->getRepository(ResumeBookmark::class)->findByCompany($company);
+
+        return $this->render('company/shortlisted-resumes.html.twig', [
+            'bookmarkedResumes' => $bookmarkedResumes,
+            'active' => 'shortlisted',
+            'company' => $company
         ]);
     }
 

@@ -4,7 +4,10 @@
 
 {% import 'util/candidate_widgets.twig' as widgets %}
 
-{% block title %}{{ user.fullName }} | {{ website.name }}{% endblock %}
+{% block title %}
+  {% if resume and resume.title %}{{ resume.title }} &ndash; {% endif %}{{ user.fullName|capitalize }}
+ | {{ website.name }}
+{% endblock %}
 
 {% block main %}
     <div class="alice-bg padding-top-60 section-padding-bottom">
@@ -16,7 +19,9 @@
                 <div class="title">
                   {{ widgets.thumb(user) }}
                   <div class="title-body">
-                    <h4>{{ user.fullName }}</h4>
+                    <h1 class="h1">{{ user.fullname }}
+                      {% if resume and resume.title %} &ndash; {{ resume.title }}{% endif %}
+                    </h1>
                     {{ widgets.infos(user) }}
                   </div>
                 </div>

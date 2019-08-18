@@ -115,10 +115,25 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function editResume(UserInterface $user = null): Response
+    public function editResume(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
         if(!$user->haveResume())
             return $this->redirectToRoute('add_resume');
+
+        if($request->isMethod('POST')) {
+            $resumeTitleToken = $request->request->get('resume_edit_title__token');
+            if($this->isCsrfTokenValid('resume.edit.title.token', $resumeTitleToken)) {
+                $resumeTitle = $request->request->get('resume_edit_title_value');
+                $user->getResume()->setTitle($resumeTitle);
+
+                $em->flush();
+
+                $this->addFlash('success', 'text.edit_success');
+                return $this->redirectToRoute('edit_resume');
+            } else {
+                $this->addFlash('danger', 'app.invalid_csrf_token');
+            }
+        }
 
         return $this->render('candidate/edit-resume.html.twig', [
             'user' => $user,

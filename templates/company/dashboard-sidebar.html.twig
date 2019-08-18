@@ -42,7 +42,7 @@
             </li>
             <li {% if active == 'shortlisted' %}class="active"{% endif %}>
                 <i class="fas fa-heart"></i>
-                <a href="#">{{ 'employer.shortlisted_resumes'|trans }}</a>
+                <a href="{{ path('company_shortlisted_resumes') }}">{{ 'employer.shortlisted_resumes'|trans }}</a>
             </li>
             <li {% if active == 'post-job' %}class="active"{% endif %}>
                 <i class="fas fa-plus-square"></i>
