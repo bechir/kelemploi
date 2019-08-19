@@ -1,98 +1,35 @@
-# =======================================================
-# |   Application module
-# =======================================================
 application_create:
-  path: /{_locale}/job/new
+  path: /job/new
   controller: App\Controller\ApplicationController::create
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 applications_list:
-  path: /{_locale}/jobs
+  path: /jobs
   controller: App\Controller\ApplicationController::list
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 applications_list_category:
-  path: /{_locale}/jobs/category/{slug}
-  controller: App\Controller\ApplicationController::listCategory
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+  path: /jobs?category={category}
+  controller: App\Controller\ApplicationController::listFilter
 
 applications_list_region:
-  path: /{_locale}/jobs/region/{region}
+  path: /jobs?region={region}
   controller: App\Controller\ApplicationController::listFilter
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+
+application_list_contract:
+  path: /jobs?contract={contract}
+  controller: App\Controller\ApplicationController::listFilter
 
 application_show:
-  path: /{_locale}/job/{slug}
+  path: /job/{slug}
   controller: App\Controller\ApplicationController::show
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 application_edit:
-  path: /{_locale}/job/{slug}/edit
+  path: /job/{slug}/edit
   controller: App\Controller\ApplicationController::edit
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 application_delete:
-  path: /{_locale}/job/{slug}/delete
+  path: /job/{slug}/delete
   controller: App\Controller\ApplicationController::delete
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 application_apply:
-  path: /{_locale}/job/{slug}/apply
+  path: /job/{slug}/apply
   controller: App\Controller\ApplicationController::apply
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
-application_traineeship:
-  path: /{_locale}/jobs/stage
-  controller: App\Controller\ApplicationController::traineeship
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
-application_alternance:
-  path: /{_locale}/jobs/alternance
-  controller: App\Controller\ApplicationController::alternance
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
-application_ftc:
-  path: /{_locale}/jobs/CDD
-  controller: App\Controller\ApplicationController::ftc
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
-application_oec:
-  path: /{_locale}/jobs/CDI
-  controller: App\Controller\ApplicationController::oec
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'

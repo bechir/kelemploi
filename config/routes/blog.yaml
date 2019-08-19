@@ -2,41 +2,21 @@
 # |   Blog module
 # =======================================================
 blog_index:
-  path: /{_locale}/blog
+  path: /blog
   controller: App\Controller\BlogController::index
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 article_create:
-  path: /{_locale}/blog/new
+  path: /blog/new
   controller: App\Controller\BlogController::create
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 article_show:
-  path: /{_locale}/blog/{slug}
+  path: /blog/{slug}
   controller: App\Controller\BlogController::show
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 article_edit:
-  path: /{_locale}/blog/{slug}/edit
+  path: /blog/{slug}/edit
   controller: App\Controller\BlogController::edit
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 article_delete:
-  path: /{_locale}/blog/{slug}/delete
+  path: /blog/{slug}/delete
   controller: App\Controller\BlogController::delete
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'

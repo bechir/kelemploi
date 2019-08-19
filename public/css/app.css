@@ -9,6 +9,9 @@
 .text-muted-2 {
     color: #44494e!important;
 }
+.icon-sm{
+    font-size: 19px
+}
 .f-s-normal{
     font-style: normal;
 }

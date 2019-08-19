@@ -7,11 +7,19 @@
                     <div class="breadcrumb-area">
                         <h1>{{ title|trans }}</h1>
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="{{ path('index') }}">{{ 'layout.home'|trans }}</a>
+                            <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item">
+                                    <a itemprop="item" href="{{ path('index') }}" href="{{ path('index') }}">
+                                    <span itemprop="name">{{ 'layout.home'|trans }}</span>
+                                    </a>
+                                    <meta itemprop="position" content="1" />
                                 </li>
-                                <li aria-current="page" class="breadcrumb-item active">{{ title|trans }}</li>
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" aria-current="page" class="breadcrumb-item active">
+                                    <span itemprop="item">
+                                        <span itemprop="name">{{ title|trans }}</span>
+                                        <meta itemprop="position" content="2" />
+                                    </span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -21,4 +29,3 @@
     </div>
     <!-- Breadcrumb End -->
 {% endmacro %}
-

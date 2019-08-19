@@ -14,14 +14,14 @@
             {# Company thumb #}
             {{ widgets.thumb(_app.company, app_url )}}
             <div class="body">
-                <div class="content">
-                    <h4>
-                        <a href="{{ app_url }}">{{ _app.jobTitle }}</a>
-                    </h4>
+                <div itemscope itemtype="http://schema.org/JobPosting" class="content">
+                    <h4><a itemprop="title" href="{{ app_url }}">{{ _app.jobTitle }}</a></h4>
                     <div class="info">
                         <span class="company">
-                            <a href="{{ app_url }}">
-                                <i data-feather="briefcase"></i>{{ _app.company }}</a>
+                            <a itemprop="url" href="{{ app_url }}">
+                                <i data-feather="briefcase"></i>
+                                <span itemprop="occupationalCategory">{{ _app.postCategory|trans({}, 'jobs-categories') }}</span>
+                            </a>
                         </span>
 
                         {{ widgets.office_location(_app.company.region.slug) }}

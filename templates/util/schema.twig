@@ -1,0 +1,57 @@
+{% macro company_info_json(company) %}
+    <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "Organization",
+        "name": "{{ company.name }}",
+        {% if company.description %}
+        "description": "{{ company.description }}",
+        {% endif %}
+        {% if company.photo %}
+            "image": "{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}",
+        {% endif %}
+        "location": "{{ company.region|trans({}, 'regions') }} {{ company.address }}",
+        "url" : "{{ app.request.getSchemeAndHttpHost ~ path('company_show', {slug: company.slug}) }}",
+        "contactPoint" : [
+            { "@type" : "ContactPoint",
+                {% if company.email %}
+                "email": "{{ company.email }}"{% endif %}{% if company.website %},
+                "url": "{{ company.website }}"
+                {% endif %}
+            }
+        ]
+    }
+    </script>
+{% endmacro %}
+
+{% macro job_post_details_json(job) %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org/",
+        "@type": "JobPosting",
+        "title": "{{ job.jobTitle }}",
+        "url": "{{ app.request.getSchemeAndHttpHost ~ path('application_show', {slug: job.slug}) }}",
+        "employmentType": "{{ job.contractType|trans }}",
+        "datePosted": "{{ job.dates.start|date('Y-m-d') }}",
+        "relevantOccupation": {
+            "@type": "Occupation",
+            "name": "{{ job.jobTitle }}",
+            "occupationalCategory": "{{ job.postCategory|trans({}, 'jobs-categories') }}",
+        },
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "{{ job.company.name }}"
+        },
+        "educationRequirements": "{{ job.minStudyLevel|trans }}",
+        "experienceRequirements": "{{ job.experience|trans }}",
+        "industry": "{{ job.company.category|trans({}, 'jobs-categories') }}",
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "{{ job.company.region|trans({}, 'regions') }}"
+            }
+        }
+    }
+    </script>
+{% endmacro %}

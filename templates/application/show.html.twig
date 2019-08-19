@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% import 'util/company_widgets.twig' as company_widgets %}
+{% import 'util/schema.twig' as schema %}
 
 {% block title %}{{ _app.jobTitle }} | {{ website.name }}{% endblock %}
 
@@ -17,6 +18,7 @@
         <div class="row">
           <div class="col">
             <div class="job-listing-details">
+              {{ schema.job_post_details_json(_app) }}
               <div class="job-title-and-info">
                 <div class="title">
                   {{ company_widgets.thumb(company) }}
@@ -101,7 +103,7 @@
                         <h4>{{ 'job.summary'|trans }}</h4>
                         <ul>
                             <li><span>{{ 'word.company'|trans }}: </span><a href="{{ path('company_show', {slug: company.slug}) }}" class="btn-link">{{ company.name }}</a></li>
-                            <li><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
+                            <li><time itemprop="publishDate" datetime="{{ _app.dates.start|date('Y-m-d\\TH:i:sP') }}" pubdate><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</time></li>
                             {% if _app.nbCandidatesToRecruit %}
                                 <li><span>{{ 'job.vacancy'|trans }}</span>{{ _app.nbCandidatesStr }}</li>
                             {% endif %}
@@ -158,6 +160,7 @@
               <div class="row">
                 <div class="col-xl-7 col-lg-8">
                   <div class="company-information details-section">
+                    {{ schema.company_info_json(company) }}
                     <h4><i data-feather="briefcase"></i>{{ 'company.about'|trans }}</h4>
                     <ul>
                       <li><span>{{ 'company.name'|trans }}</span> {{ company.name }}</li>
@@ -167,7 +170,7 @@
                       {% if company.website %}
                         <li><span>{{ 'company.website'|trans }}</span> <a href="//{{ company.website }}" target="_blank">{{ company.website }}</a></li>
                       {% endif %}
-                      <li><span>{{ 'company.description'|trans }}</span></li>
+                      <hr>
                       <li>{{ company.description }}</li>
                     </ul>
                   </div>

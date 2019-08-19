@@ -1,72 +1,35 @@
 companies_list:
-  path: /{_locale}/entreprises
+  path: /companies
   controller: App\Controller\CompanyController::list
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_show:
-  path: /{_locale}/entreprise/{slug}
+  path: /company/{slug}
   controller: App\Controller\CompanyController::show
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-
 
 company_dashboard:
-  path: /{_locale}/dashboard
+  path: /company/dashboard
   controller: App\Controller\CompanyController::dashboard
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_edit_profile:
-  path: /{_locale}/company/edit-profile
+  path: /company/edit-profile
   controller: App\Controller\CompanyController::editProfile
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_manage_jobs:
-  path: /{_locale}/company/manage-jobs
+  path: /company/manage-jobs
   controller: App\Controller\CompanyController::manageJobs
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_manage_candidates:
-  path: /{_locale}/company/manage-candidates
+  path: /company/manage-candidates
   controller: App\Controller\CompanyController::manageCandidates
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_shortlisted_resumes:
-  path: /{_locale}/company/shortlisted
+  path: /company/shortlisted
   controller: App\Controller\CompanyController::shortlistedResumes
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_messages:
-  path: /{_locale}/company/messages
+  path: /company/messages
   controller: App\Controller\CompanyController::messages
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 company_pricing:
-  path: /{_locale}/company/pricing
+  path: /company/pricing
   controller: App\Controller\CompanyController::pricing
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'

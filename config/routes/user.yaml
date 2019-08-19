@@ -1,96 +1,47 @@
 candidates_list:
-  path: /{_locale}/candidates
+  path: /candidates
   controller: App\Controller\UserController::list
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 candidate_show:
-  path: /{_locale}/candidate/{username}
+  path: /candidate/{username}
   controller: App\Controller\UserController::show
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 resume:
   controller: App\Controller\UserController::resume
-  path: /{_locale}/user/resume
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+  path: /user/resume
 
 add_resume:
   controller: App\Controller\UserController::addResume
-  path: /{_locale}/user/add-resume
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+  path: /user/add-resume
 
 edit_resume:
   controller: App\Controller\UserController::editResume
-  path: /{_locale}/user/edit-resume
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+  path: /user/edit-resume
 
 delete_resume:
   controller: App\Controller\UserController::deleteResume
-  path: /{_locale}/user/delete-resume
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
+  path: /user/delete-resume
 
 user_dashboard:
-  path: /{_locale}/user/dashboard
+  path: /user/dashboard
   controller: App\Controller\UserController::dashboard
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 user_profile_edit:
-  path: /{_locale}/user/edit-profile
+  path: /user/edit-profile
   controller: App\Controller\UserController::editProfile
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 user_bookmarked:
-  path: /{_locale}/user/bookmarked
+  path: /user/bookmarked
   controller: App\Controller\UserController::bookmarked
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 user_applied:
-  path: /{_locale}/user/applied
+  path: /user/applied
   controller: App\Controller\UserController::applied
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 user_messages:
-  path: /{_locale}/user/messages
+  path: /user/messages
   controller: App\Controller\UserController::messages
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
 
 user_settings:
-  path: /{_locale}/user/settings
+  path: /user/settings
   controller: App\Controller\UserController::settings
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
-

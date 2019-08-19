@@ -1,8 +1,4 @@
 register_newsletter:
-  path: /{_locale}/newsletter
+  path: /newsletter
   controller: App\Controller\DefaultController::newsletter
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'
   methods: [GET, POST]

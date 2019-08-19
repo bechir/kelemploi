@@ -72,19 +72,19 @@
                                 <a href="{{ path('fos_user_registration_register') }}" class="text-muted">{{ 'user.register'|trans }}</a> | 
                             </div>
                         {% endif %}
-                        <select class="selectpicker select-language" data-width="fit">
+                        {# <select class="selectpicker select-language" data-width="fit">
                             {% set lang = ('app.locale.' ~ request_locale)|trans %}
                             <option data-content=''>{{ lang }}</option> {# <span class="flag-icon flag-icon-{{ request_locale }}"></span> {{ lang }} #}
-                            {% for l in locales() %}
+                            {#% for l in locales() %}
                                 {% if l.code != request_locale %}
                                     <option
                                         data-href="{{ path( app.request.get('_route', 'index'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}"
                                         data-content=''> {# <span class="flag-icon flag-icon-{{ l.code }}"></span> {{ l.name }} #}
-                                        {{ l.name }}
+                                        {#{ l.name }}
                                     </option>
                                 {% endif %}
                             {% endfor %}
-                        </select>
+                        </select>#}
                     </div>
                 </div>
                 <nav class="navbar navbar-expand-lg cp-nav-2">
@@ -102,9 +102,9 @@
                             <li class="menu-item">
                                 <a href="{{ path('applications_list') }}" title="{{ 'layout.applications_list'|trans }}">{{ 'layout.applications_list'|trans }}</a>
                             </li>
-                            <li class="menu-item">
+                            {# <li class="menu-item">
                                 <a href="{{ path('candidates_list') }}" title="{{ 'layout.candidates_list'|trans }}">{{ 'layout.candidates_list'|trans }}</a>
-                            </li>
+                            </li> #}
                             <li class="menu-item">
                                 <a href="{{ path('companies_list') }}" title="{{ 'layout.entreprises_list'|trans }}">{{ 'layout.entreprises_list'|trans }}</a>
                             </li>

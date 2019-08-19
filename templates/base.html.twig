@@ -1,68 +1,81 @@
-{% set request_locale = app.request.attributes.get('_locale') %}
-{% set _route = app.request.get('_route') %}
+{% set currentPath = path(app.request.get('_route'), app.request.attributes.get('_route_params')) %}
+
 <!DOCTYPE html>
-<html lang="{{ request_locale }}" class="full-height">
+<html prefix="og: http://ogp.me/ns#" lang="fr" class="full-height" />
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no" />
+        <meta http-equiv="Content-Language" content="fr" />
+        
+        <meta name="application-name" content="{{ website.name }}" />
+        <meta name="theme-color" content="white">
 
         <title>{% block title %}{{ website.name }}{% endblock %}</title>
 
+        <meta property="og:locale" content="fr" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="{{ website.name }}" />
+        <meta name="twitter:site" content="@{{ website.name }}" />
+        {% block meta_tags %}
+        <meta property="og:title" content="" />
+        <meta property="title" content="" />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:title" content="" />
+        <meta property="twitter:image" content="" />
+        <meta name="description" content="" />
+        <meta property="og:description" content="" />
+        <meta property="twitter:description" content="" />
+        {% endblock %}
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+
         <!-- Bootstrap CSS -->
-        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 
         <!-- External Css -->
-        <link href="{{ asset('assets/css/fontawesome-all.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/et-line.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/html5-simple-date-input-polyfill.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('dashboard/css/dashboard.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/fontawesome-all.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/et-line.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/html5-simple-date-input-polyfill.css') }}" rel="stylesheet" />
+        <link href="{{ asset('dashboard/css/dashboard.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
 
         <!-- Custom Css -->
         {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7CRoboto:300i,400,500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7CRoboto:300i,400,500" rel="stylesheet" />
 
         <!-- Favicon -->
-        <link href="{{ asset('images/favicon.png') }}" rel="icon">
-        <link href="{{ asset('images/apple-touch-icon.png') }}" rel="apple-touch-icon">
-        <link href="{{ asset('images/icon-72x72.png') }}" rel="apple-touch-icon" sizes="72x72">
-        <link href="{{ asset('images/icon-114x114.png') }}" rel="apple-touch-icon" sizes="114x114">
+        <link href="{{ asset('images/favicon.png') }}" rel="icon" />
+        <link href="{{ asset('images/apple-touch-icon.png') }}" rel="apple-touch-icon" />
+        <link href="{{ asset('images/icon-72x72.png') }}" rel="apple-touch-icon" sizes="72x72" />
+        <link href="{{ asset('images/icon-114x114.png') }}" rel="apple-touch-icon" sizes="114x114" />
 
         <!--[if lt IE 9]>
             <script src="assets/js/html5shiv.min.js"></script>
             <script src="assets/js/respond.min.js"></script>
         <![endif]-->
-      <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-      {% for l in locales() %}
-        {% if l.code != request_locale %}
-          <link rel="alternate" hreflang="{{ l.code }}" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}" />
-        {% endif %}
-        <link rel="alternate" hreflang="fr" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: 'fr'})) }}" />
-      {% endfor %}
+      <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     </head>
     <body>
     <div class="beta shadow-sm">Version Bêta</div>
     {% include 'common/flash_messages.twig' %}
     {% block body %}
         {% block header %}
-            {% include 'common/header-2.html.twig' with {request_locale: request_locale} %}
+            {% include 'common/header-2.html.twig' %}
         {% endblock header %}
         
         {% if not is_granted('ROLE_ADMIN') %}

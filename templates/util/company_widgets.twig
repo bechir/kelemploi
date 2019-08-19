@@ -39,9 +39,12 @@
 {% endmacro %}
 
 {% macro office_location(name) %}
-    <span class="office-location">
+    <span itemprop="jobLocation" itemscope itemtype="http://schema.org/Place" class="office-location">
         <a href="#">
-            <i data-feather="map-pin"></i>{{ name|trans({}, 'regions') }}
+            <i data-feather="map-pin"></i>
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="addressLocality">{{ name|trans({}, 'regions') }}</span>
+            </span>
         </a>
     </span>
 {% endmacro %}
@@ -59,6 +62,6 @@
 
     <span class="job-type {{ class }}">
         <a href="{{ path('applications_list', {contract: contract|trans|lower }) }}">
-            <i data-feather="clock"></i>{{ contract|trans() }}</a>
+            <i data-feather="clock"></i><span itemprop="employmentType">{{ contract|trans() }}</span></a>
     </span>
 {% endmacro %}
