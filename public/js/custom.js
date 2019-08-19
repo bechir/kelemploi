@@ -246,8 +246,8 @@ $(document).ready(function() {
     function animateCountTo(ct) {
       if ($.fn.visible && $(ct).visible() && !$(ct).hasClass('animated')) {
         $(ct).countTo({
-          speed: 1000,
-          refreshInterval: 1
+          speed: 500,
+          refreshInterval: 3
         });
         $(ct).addClass('animated');
       }

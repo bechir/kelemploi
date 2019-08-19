@@ -6,18 +6,6 @@ applications_list:
   path: /jobs
   controller: App\Controller\ApplicationController::list
 
-applications_list_category:
-  path: /jobs?category={category}
-  controller: App\Controller\ApplicationController::listFilter
-
-applications_list_region:
-  path: /jobs?region={region}
-  controller: App\Controller\ApplicationController::listFilter
-
-application_list_contract:
-  path: /jobs?contract={contract}
-  controller: App\Controller\ApplicationController::listFilter
-
 application_show:
   path: /job/{slug}
   controller: App\Controller\ApplicationController::show

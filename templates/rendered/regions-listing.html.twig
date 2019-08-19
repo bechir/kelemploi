@@ -15,10 +15,10 @@
                     <div class="company-wrap">
                         <div class="body">
                             <h4>
-                                <a href="{{ path('applications_list_region', {region: region.slug}) }}">{{ region.slug|trans({}, 'regions') }}</a>
+                                <a href="{{ path('applications_list', {region: region.slug}) }}">{{ region.slug|trans({}, 'regions') }}</a>
                             </h4>
                             <strong>{{ 'home.regions_listing.x_jobs'|trans({'%x%': counts[region.slug]}) }} {{ region.slug|trans({}, 'regions') }}</strong>
-                            <a class="button btn-block" href="{{ path('applications_list_region', {region: region.slug}) }}">
+                            <a class="button btn-block" href="{{ path('applications_list', {region: region.slug}) }}">
                                 {{ 'word.explore'|trans }}
                             </a>
                         </div>
