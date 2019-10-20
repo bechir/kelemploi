@@ -11,7 +11,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Apply;
 use App\Entity\Resume;
-use App\Form\ResumeType;
+use App\Form\Resume\ResumeType;
 use App\Form\EditProfileType;
 use App\Form\Resume\ResumeEditAboutType;
 use App\Form\Resume\ResumeEditEducationsType;

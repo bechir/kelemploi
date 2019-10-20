@@ -7,29 +7,29 @@ company_show:
   controller: App\Controller\CompanyController::show
 
 company_dashboard:
-  path: /company/dashboard
+  path: /dashboard
   controller: App\Controller\CompanyController::dashboard
 
 company_edit_profile:
-  path: /company/edit-profile
+  path: /dashboard/edit-profile
   controller: App\Controller\CompanyController::editProfile
 
 company_manage_jobs:
-  path: /company/manage-jobs
+  path: /dashboard/manage-jobs
   controller: App\Controller\CompanyController::manageJobs
 
 company_manage_candidates:
-  path: /company/manage-candidates
+  path: /dashboard/manage-candidates
   controller: App\Controller\CompanyController::manageCandidates
 
 company_shortlisted_resumes:
-  path: /company/shortlisted
+  path: /dashboard/shortlisted
   controller: App\Controller\CompanyController::shortlistedResumes
 
 company_messages:
-  path: /company/messages
+  path: /dashboard/messages
   controller: App\Controller\CompanyController::messages
 
 company_pricing:
-  path: /company/pricing
+  path: /dashboard/pricing
   controller: App\Controller\CompanyController::pricing

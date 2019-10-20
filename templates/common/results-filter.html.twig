@@ -1,3 +1,6 @@
+{% set request_region = app.request.get('region', '') %}
+{% set request_category = app.request.get('c', '') %}
+
 <div class="{{ type }}-filter-wrapper">
   <div class="selected-options same-pad">
     <div class="selection-title">
@@ -12,7 +15,7 @@
       <option value="" selected>Catégorie</option>
       {% set categories = categoriesCount() %}
       {% for category, key in categories %}
-          <option value="{{ category }}">{{ category|trans({}, 'jobs-categories') }}</option>
+          <option {% if request_category == category %}selected{% endif %} value="{{ category }}">{{ category|trans({}, 'jobs-categories') }}</option>
       {% endfor %}
     </select>
   </div>
@@ -21,7 +24,7 @@
       <option value="" selected>Région</option>
       {% set regions = regionsCount() %}
       {% for region, key in regions %}
-          <option value="{{ region }}">{{ region|trans({}, 'regions') }}</option>
+          <option {% if request_region == region %}selected{% endif %} value="{{ region }}">{{ region|trans({}, 'regions') }}</option>
       {% endfor %}
     </select>
   </div>

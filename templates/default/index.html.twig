@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-            <h1 class="reveal-1">{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
+            <h1 class="reveal-1 w-75">{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
               <p class="reveal-2">{{ 'home.banner_text'|trans }}</p>
               
               {% if is_granted('ROLE_EMPLOYER') %}
@@ -35,7 +35,7 @@
               <div class="searchAndFilter">
                 <form action="{{ path('applications_list') }}" method="get" class="search-form">
                   <input type="text" placeholder="{{ 'form.enter_keywords'|trans }}">
-                  <select class="selectpicker" name="l" id="search-location">
+                  <select class="selectpicker" name="region" id="search-location">
                     <option value="" selected>{{ 'word.region'|trans }}</option>
                     {% for region in regions %}
                       <option value="{{ region.slug }}">{{ region.slug|trans({}, 'regions') }}</option>

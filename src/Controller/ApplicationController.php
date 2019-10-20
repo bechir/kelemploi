@@ -22,13 +22,34 @@ use App\Form\ApplyType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Resume;
+use App\Repository\ApplicationRepository;
 
 class ApplicationController extends AbstractController
 {
-    public function list(): Response
+    public function list(Request $request, $page = 1, ApplicationRepository $appRepository): Response
     {
+        $queries = $request->query;
+        $search = [];
+
+        $search['category'] = $queries->get('c');
+        $search['region'] = strtolower($queries->get('region'));
+
+        foreach ($search as $key => $value) {
+            if(empty($value))
+                unset($search[$key]);
+        }
+
+        $list = null;
+    
+        if (!empty($search)) {
+            $list = $appRepository->findBySearchQuery($search, $page);
+
+        } else {
+            $list = $appRepository->getApps($page);
+        }
+
         return $this->render('application/listing.html.twig', [
-            'list' => $this->getDoctrine()->getRepository(Application::class)->findAll(),
+            'list' => $list
         ]);
     }
 

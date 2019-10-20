@@ -43,15 +43,28 @@ class RenderedController extends Controller
     public function regionsListing(): Response
     {
         $regions = $this->getDoctrine()->getRepository(Region::class)->findAll();
-        $counts = [];
 
-        foreach ($regions as $region) {
-            $counts[$region->getSlug()] = rand(1, 11) * 3 + rand(0, 233);
+        $em = $this->getDoctrine()->getManager();
+        $q =  $em->createQueryBuilder();
+        
+        $counts = $q->select('count(a.id), r.slug', 'a')
+            ->from('App:Application', 'a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->leftJoin('c.region', 'r')
+                ->addSelect('r')
+            ->groupBy('r.id')
+            ->getQuery()
+            ->getArrayResult();
+
+        $keysValues = [];
+        foreach ($counts as $c) {
+            $keysValues[$c['slug']] = $c[1];
         }
 
         return $this->render('rendered/regions-listing.html.twig', [
             'regions' => $regions,
-            'counts' => $counts,
+            'counts' => $keysValues,
         ]);
     }
 }

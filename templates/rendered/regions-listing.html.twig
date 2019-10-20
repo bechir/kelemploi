@@ -17,7 +17,7 @@
                             <h4>
                                 <a href="{{ path('applications_list', {region: region.slug}) }}">{{ region.slug|trans({}, 'regions') }}</a>
                             </h4>
-                            <strong>{{ 'home.regions_listing.x_jobs'|trans({'%x%': counts[region.slug]}) }} {{ region.slug|trans({}, 'regions') }}</strong>
+                            <strong>{{ 'home.regions_listing.x_jobs'|trans({'%x%': counts[region.slug] is defined ? counts[region.slug] : 0 }) }} {{ region.slug|trans({}, 'regions') }}</strong>
                             <a class="button btn-block" href="{{ path('applications_list', {region: region.slug}) }}">
                                 {{ 'word.explore'|trans }}
                             </a>

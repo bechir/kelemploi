@@ -20,7 +20,7 @@
                   <div class="row">
                     <div class="col">
                       <div class="section-header section-header-center">
-                        <h6>{{ 'faq.answer_here'|trans }}</h6>
+                        {# <h6>{{ 'faq.answer_here'|trans }}</h6> #}
                         <h2>{{ 'faq.faq'|trans }}</h2>
                       </div>
                     </div>
@@ -29,15 +29,18 @@
                     <div class="col-lg-10">
                       <ul class="nav nav-tabs faq-tab" id="myTab" role="tablist">
                         <li class="nav-item">
-                          <a class="nav-link active show" id="feature-tab" data-toggle="tab" href="#feature" role="tab" aria-controls="feature" aria-selected="false">{{ 'faq.candidate'|trans }}</a>
+                          <a class="nav-link active show" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">Général</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">{{ 'faq.employer'|trans }}</a>
+                          <a class="nav-link" id="candidate-tab" data-toggle="tab" href="#candidate" role="tab" aria-controls="candidate" aria-selected="false">{{ 'faq.candidate'|trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="employer-tab" data-toggle="tab" href="#employer" role="tab" aria-controls="employer" aria-selected="false">{{ 'faq.employer'|trans }}</a>
                         </li>
                       </ul>
                       <div class="tab-content faq-tab-content" id="myTabContent">
-                        <div class="tab-pane fade active show" id="feature" role="tabpanel" aria-labelledby="feature-tab">
-                          <div class="accordion" id="accordionExample">
+                        <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="candidate-tab">
+                          <div class="accordion" id="accordionGeneral">
                             <div class="card">
                               <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
@@ -46,7 +49,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGeneral">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -61,7 +64,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionGeneral">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -72,11 +75,11 @@
                               <div class="card-header" id="headingThree">
                                 <h5 class="mb-0">
                                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    What is our features product?
+                                    What is our candidates product?
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionGeneral">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -91,7 +94,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionGeneral">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -106,7 +109,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionGeneral">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -115,8 +118,87 @@
                             </div>
                           </div>
                         </div>
-                        <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
-                          <div class="accordion" id="accordionExample2">
+                        <div class="tab-pane fade" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
+                          <div class="accordion" id="accordionCandidate">
+                            <div class="card">
+                              <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What is Oficiona ?
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionCandidate">
+                                <div class="card-body">
+                                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+                                  <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How we sell your product here ?
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCandidate">
+                                <div class="card-body">
+                                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+                                  <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What is our candidates product?
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCandidate">
+                                <div class="card-body">
+                                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+                                  <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header" id="headingFour">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Is it ecommerce site?
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCandidate">
+                                <div class="card-body">
+                                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+                                  <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header" id="headingFive">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    How we take payment from our customers?
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionCandidate">
+                                <div class="card-body">
+                                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+                                  <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="employer" role="tabpanel" aria-labelledby="employer-tab">
+                          <div class="accordion" id="accordionEmployer">
                             <div class="card">
                               <div class="card-header" id="headingSix">
                                 <h5 class="mb-0">
@@ -125,7 +207,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordionExample2">
+                              <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordionEmployer">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -140,7 +222,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample2">
+                              <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEmployer">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -151,11 +233,11 @@
                               <div class="card-header" id="headingEight">
                                 <h5 class="mb-0">
                                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                    What is our features product?
+                                    What is our candidates product?
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample2">
+                              <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEmployer">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -170,7 +252,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample2">
+                              <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionEmployer">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -185,7 +267,7 @@
                                   </button>
                                 </h5>
                               </div>
-                              <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample2">
+                              <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionEmployer">
                                 <div class="card-body">
                                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
                                   <p>Did you like this answer ? <a href="#">Yes</a> or <a href="#">No</a></p>
@@ -208,8 +290,8 @@
                   <h4>{{ 'faq.dont_get_answer'|trans }}</h4>
                   <p>{{ 'faq.ask_record'|trans }}</p>
                   <div class="buttons">
-                    <a href="#" class="email"><i class="fas fa-envelope"></i> {{ 'faq.email_us'|trans }}</a>
-                    {# <a href="#" class="chat">Let's Chat</a> #}
+                    <a href="{{ path('contact') }}" class="email"><i class="fas fa-envelope"></i> {{ 'faq.email_us'|trans }}</a>
+                    <a href="#" class="chat">Ouvrez une conversation</a>
                   </div>
                   <p class="call">{{ 'faq.call_us'|trans({'%number%': website.phoneNumber})|raw }}</p>
                 </div>

@@ -138,7 +138,10 @@ class Application
     const ONGOING = 'application.status.ongoing';
     const STATUS = [self::FENCED, self::ONGOING];
 
-    const NUM_ITEMS_HOME = 5;
+    const NB_IMTEMS_HOME = 7;
+    CONST NB_IMTEMS_SIMILAR = 7;
+    const NB_ITEMS_LISTING = 20;
+    const NB_ITEMS_ADMIN_LISTING = 50;
 
     public function __construct()
     {

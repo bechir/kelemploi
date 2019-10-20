@@ -16,7 +16,7 @@ layout:
   about_us: À propos de nous
   home: Accueil # Home
   contact_us: Contactez nous # Contact us
-  help_faq: Aide / FAQ # Help / FAQ
+  help_faq: Aide et FAQ # Help / FAQ
   privacy: Politique de confidentialité # Privacy Policy
   terms_conditions: Conditions générales d'utilisation # Terms And Conditions
   help: Aide # Help
@@ -37,7 +37,7 @@ layout:
 
 home:
   title: "%name%: Recrutez, trouvez votre emploi au Sénégal"
-  banner_title: "Plus de %x% offres d'emploi"
+  banner_title: "Des offres d'empoi et de stage partout au Sénégal!" # Plus de %x% offres d'emploi
   banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
   add_resume: "Ajoutez votre CV" # Upload a Resume
   regions_listing:
@@ -67,37 +67,43 @@ privacy:
 pricing:
   off: "%x%% de réduction" # %x%% off
   free_trial: Essai gratuit
-  free_for_candidates: Candidat
-  for_pro: Professionnel
-  for_entreprise: Entreprise
-  free:
-    label: Essai gratuit
-    price: 00 XOF
+  standard:
+    label: Standard
+    price: 3 000 FCFA
     unlocked_features:
-      - Explorer les offres
-      - Uploader votre CV
-      - Créer un CV en ligne
-      - Postuler sur les offres d'emplois
-      - Apparaître dans les résultats de recerches
+      - Créer une (1) offre
+      - Diffusion pendant 3 mois
+      - Ajoutez votre entreprise avec un logo
+      - Accès aux profils des postulants
+      - Recevoir les candidatures par mail
+      - Gestion des candidatures
     locked_features:
-      - Postuler des offres d'emplois
+      - Tableau de bord détaillé
+      - Statistiques
+      - Accès à la CVThèque
   pro:
-    label: Pro
-    price: 2 400 XOF
-    price_off: 1 800 XOF
+    label: Gold
+    price: 27 000 FCFA
     unlocked_features:
-      - 10 offres d'emplois / année
+      - Avantages Offre Standard
+      - 10 offres d'emplois
+      - Accès à la CVThèque
+      - Offre moyennement mise en avant
       - Tableau de bord détaillé
       - Statistiques
     locked_features:
+      - Tri des candidatures
+      - Publication sur LinkedIn
       - Recommandation des meilleurs candidats
-  entreprise:
-    label: Entreprise
-    price: 6 000 XOF
-    price_off: 4 200 XOF
+  pro_plus:
+    label: Premium
+    price: 45 000 FCFA
     unlocked_features:
-      - Avantages de l'offre pro
-      - Postuler des offres illimitées
+      - Avantages Offre Gold
+      - Offres d'emploi illimitées pendant 6 mois
+      - Tri des candidatures
+      - Publication sur LinkedIn
+      - Top résultats de recherches
       - Recommandation des meilleurs candidats
       - Statistiques
   select_plan: Sélectionnez un plan

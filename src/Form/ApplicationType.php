@@ -69,8 +69,7 @@ class ApplicationType extends AbstractType
             ->add('gender', EntityType::class, [
                 'class' => JobGender::class,
                 'choice_label' => 'name',
-                'choice_translation_domain' => true,
-                'required' => false
+                'choice_translation_domain' => true
             ])
             // ->add('requiredLanguages', EntityType::class, [
             //     'class' => Language::class,

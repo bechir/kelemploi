@@ -9,29 +9,32 @@
     {{ breadcrumb.level_1('layout.how_it_work') }}
 
     <!-- How It Work -->
-    <div class="alice-bg section-padding-bottom">
+    <div class="alice-bg padding-bottom-70">
       <div class="container">
         <div class="row">
           <div class="col">
             <div class="white-bg others-block">
               <div class="how-it-work">
                 <div class="row">
+                  <div class="col-12 reveal-1">
+                    <h1 class="h1 border-bottom mb-5 pb-5 text-center text-theme-blue"><i data-feather="user" class="mb-2"></i> Vous êtes un candidat ?</h1>
+                  </div>
                   <div class="col-lg-6 order-lg-2 reveal-3">
                     <div class="working-process-thumb">
                       <img src="{{ asset('images/feature/thumb-2.jpg') }}" class="img-fluid" alt="">
                     </div>
                   </div>
                   <div class="col-lg-6 order-lg-1">
-                    <div class="working-process">
-                      <h3 class="reveal-1"><span>#01.</span>Créez un compte</h3>
-                      <p class="reveal-2">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    <div class="working-process reveal-2">
+                      <h3><span>#01.</span>Créez un compte candidat</h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
                     </div>
-                    <div class="working-process">
-                      <h3 class="reveal-1"><span>#02.</span>Recherchez votre emploi</h3>
-                      <p class="reveal-2">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    <div class="working-process reveal-3">
+                      <h3><span>#02.</span><a href="{{ path('applications_list') }}">{# path('blog_article_show', {slug: ''}) #}Recherchez un emploi qui vous correspondant</a></h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
                     </div>
-                    <div class="working-process">
-                      <h3 class="reveal-1"><span>#03.</span>Candidatez !</h3>
+                    <div class="working-process reveal-4">
+                      <h3 class="reveal-1"><span>#03.</span>Postuler en et obtenez un job !</h3>
                       <p class="reveal-2">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
                     </div>
                   </div>
@@ -40,6 +43,42 @@
               
               {% include 'common/testimonial.html.twig' %}
 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="white-bg others-block">
+              <div class="how-it-work">
+                <div class="row">
+                  <div class="col-12 mb-3 reveal-1">
+                    <h1 class="h1 border-bottom mb-5 pb-5 text-center text-theme-blue"><i data-feather="briefcase" class="mb-2"></i> Vous êtes un employeur ?</h1>
+                  </div>
+                  <div class="col-lg-6 order-lg-2 reveal-3">
+                    <div class="working-process-thumb">
+                      <img src="{{ asset('images/feature/thumb-2.jpg') }}" class="img-fluid" alt="">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 order-lg-1">
+                    <div class="working-process reveal-2">
+                      <h3><span>#01.</span>Inscrivez-vous en tant qu'employeur</h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                    <div class="working-process reveal-3">
+                      <h3><span>#02.</span><a href="{{ path('application_create') }}"> Créez une offre d'emploi</a></h3>
+                      <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                    <div class="working-process reveal-4">
+                      <h3><span>#03.</span>Trouvez le profil qu'il vous faut</h3>
+                      <p>Directement ou parcourrez notre CV thèque, all the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -3,21 +3,28 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<div class="contact-3 content-area-6 section-padding">
-    <div class="container">
-        <div class="main-title mb-60">
-            <div class="alert-wrap">
-                <div class="jy-alert success-alert" role="alert">
-                    <div class="icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    {{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-                    {% if targetUrl %}
-                        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-                    {% endif %}
+    <div class="alice-bg section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="block-wrapper">
+              <div class="payment-result">
+                <div class="icon">
+                  <i data-feather="check"></i>
                 </div>
+                <h3>Compte <span>Candidat</span> créé avec succès</h3>
+                <p>Bienvenue sur {{ website.name }} {{ user.username }}!</p>
+                <div class="result" style="padding-bottom: 0">
+                  <span>Vous venez de créer un compte candidat. Il est temps de passer à l'étape suivante:<br><a href="#" class="btn-link">Créer un CV captivant et trouvez un job!</a></span>
+                </div>
+                <div class="w-100"></div>
+                {% if targetUrl %}
+                    <a href="{{ targetUrl }}" class="view-invoice">{{ 'registration.back'|trans }}</a>
+                {% endif %}
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 {% endblock fos_user_content %}

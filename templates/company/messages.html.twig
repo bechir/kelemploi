@@ -10,3 +10,128 @@
 {% block content %}
     {{ util.temporary_unavailable_alert() }}
 {% endblock %}
+{#
+<div class="dashboard-message-wrapper {% block wrapper_class %}no-padding{% endblock %}">
+    <div class="message-lists">
+        <form action="#" class="message-search">
+            <input placeholder="Search Friend..." type="text">
+            <button>
+                <i data-feather="search"></i>
+            </button>
+        </form>
+        <a class="message-single" href="#">
+            <div class="thumb">
+                <img alt="" class="img-fluid" src="/dashboard/images/user-1.jpg">
+            </div>
+            <div class="body">
+                <h6 class="username">Laura Cormier</h6>
+                <span class="text-number">2</span>
+            </div>
+        </a>
+        <a class="message-single" href="#">
+            <div class="thumb">
+                <img alt="" class="img-fluid" src="/dashboard/images/user-2.jpg">
+            </div>
+            <div class="body">
+                <h6 class="username">Paul Cox</h6>
+                <span class="send-time">2 min</span>
+            </div>
+        </a>
+        <a class="message-single active" href="#">
+            <div class="thumb">
+                <img alt="" class="img-fluid" src="/dashboard/images/user-3.jpg">
+            </div>
+            <div class="body">
+                <h6 class="username">Carlos Dobson</h6>
+                <span class="send-time">6 min</span>
+            </div>
+        </a>
+        <a class="message-single" href="#">
+            <div class="thumb">
+                <img alt="" class="img-fluid" src="/dashboard/images/user-4.jpg">
+            </div>
+            <div class="body">
+                <h6 class="username">Dahlia Divers</h6>
+                <span class="send-time">45 min</span>
+            </div>
+        </a>
+    </div>
+    <div class="message-box">
+        <div class="message-box-header">
+            <a href="#">
+                <i class="fas fa-ellipsis-h"></i>
+            </a>
+            <h5>Carlos Dobson</h5>
+        </div>
+        <ul class="dashboard-conversation">
+            <li class="conversation in">
+                <div class="avater">
+                    <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                </div>
+                <div class="message">
+                    <span>Can we go inside? I feel like my toes are starting to go numb.</span>
+                </div>
+                <span class="send-time">2.32 am</span>
+            </li>
+            <li class="conversation out">
+                <div class="avater">
+                    <img alt="" class="img-fluid" src="/dashboard/images/avater-2.jpg">
+                </div>
+                <div class="message">
+                    <span>Can we go inside? I feel like my toes are starting to go numb.</span>
+                </div>
+                <span class="send-time">2.32 am</span>
+            </li>
+            <li class="conversation in">
+                <div class="avater">
+                    <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                </div>
+                <div class="message">
+                    <span>Hi, Luke! How are you? Can you please stop</span>
+                </div>
+                <span class="send-time">2.34 am</span>
+            </li>
+            <li class="conversation out">
+                <div class="avater">
+                    <img alt="" class="img-fluid" src="/dashboard/images/avater-2.jpg">
+                </div>
+                <div class="message">
+                    <span>Hi, Luke! How are you? Can you please stop and pick up extra paper for the computer ?</span>
+                </div>
+                <span class="send-time">2.34 am</span>
+            </li>
+            <li class="conversation in">
+                <div class="avater">
+                    <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                </div>
+                <div class="message file-send">
+                    <div class="images">
+                        <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                        <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                        <img alt="" class="img-fluid" src="/dashboard/images/avater-1.jpg">
+                        <span class="more">+12</span>
+                    </div>
+                </div>
+                <span class="send-time">2.34 am</span>
+            </li>
+        </ul>
+        <div class="conversation-write-wrap">
+            <form action="#">
+                <label class="send-file">
+                    <input type="file"><i data-feather="paperclip"></i>
+                </label>
+                <label class="send-image">
+                    <input type="file"><i data-feather="image"></i>
+                </label>
+                <textarea placeholder="Type a message"></textarea>
+                <a class="emoji" href="#">
+                    <i data-feather="thumbs-up"></i>
+                </a>
+                <button class="send-message">
+                    <i data-feather="send"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+#}

@@ -38,7 +38,7 @@
                       <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
                     {% endif %}
                   {% else %}
-                    <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
+                    <a href="{{ path('fos_user_security_login') }}" class="apply"><i class="fas fa-briefcase"></i>&nbsp;&nbsp; {{ 'job.apply_online'|trans }}</a>
                   {% endif %}
                 </div>
                 {% endif %}

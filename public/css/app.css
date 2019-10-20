@@ -9,6 +9,13 @@
 .text-muted-2 {
     color: #44494e!important;
 }
+.text-theme-blue{
+    color:#246df8;
+}
+.rounded-top{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
 .icon-sm{
     font-size: 19px
 }

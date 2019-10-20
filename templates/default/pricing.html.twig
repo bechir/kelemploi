@@ -17,62 +17,59 @@
                 <div class="row justify-content-center">
                   <div class="col-12">
                     <div class="pricing-controller">
-                      <span class="duration duration-month active">{{ 'word.monthly'|trans }}</span>
+                      {# <span class="duration duration-month active">{{ 'word.monthly'|trans }}</span>
                       <div class="switch-wrap"><span class="price-switch"></span></div>
-                      <span class="duration duration-year">{{ 'word.yearly'|trans }}<span>{{ 'pricing.off'|trans({'%x': 20}) }}</span></span>
+                      <span class="duration duration-year">{{ 'word.yearly'|trans }}<span>{{ 'pricing.off'|trans({'%x': 20}) }}</span></span> #}
+                      <span class="duration text-dark">Profitez de <span>35% de réduction</span> à partir de l'offre Gold!</span>
                     </div>
                     <div class="package-wrapper">
-                      <div class="package free col-md-4">
-                        <div class="package-header">
-                          <h5 class="cost">00 FCFA</h5>
-                          <span class="title">{{ 'pricing.free_for_candidates'|trans }}</span>
+                      <div class="package pb-3 free shadow-sm pt-3">
+                        <div class="package-header rounded-top">
+                          <h5 class="cost">{{ 'pricing.standard.price'|trans }}</h5>
+                          <span class="title">{{ 'pricing.standard.label'|trans }}</span>
                         </div>
                         <div class="package-features">
                           <ul>
-                            {% for i in 0 .. 4 %}
-                              <li class="active">{{ ('pricing.free.unlocked_features.' ~ i )|trans }}</li>
+                            {% for i in 0 .. 5 %}
+                              <li class="active">{{ ('pricing.standard.unlocked_features.' ~ i )|trans }}</li>
                             {% endfor %}
 
-                            {% for i in 0 .. 0 %}
-                              <li>{{ ('pricing.free.locked_features.' ~ i )|trans }}</li>
+                            {% for i in 0 .. 2 %}
+                              <li>{{ ('pricing.standard.locked_features.' ~ i )|trans }}</li>
                             {% endfor %}
                           </ul>
-                          {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path('applications_list') }}" class="button">{{ 'action.explore_jobs'|trans }}</a>
-                          {% else %}
-                            <a href="{{ path('fos_user_registration_register') }}" class="button">{{ 'login.register'|trans }}</a>
-                          {% endif %}
+                          <a href="#" onclick="return false" class="button">{{ 'pricing.try_now'|trans }}</a>
                         </div>
                       </div>
-                      <div class="package professional col-md-4">
-                        <div class="package-header">
-                          <h5 class="cost monthly-rate">{{ 'pricing.pro.price'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
-                          <h5 class="cost yearly-rate hidden">{{ 'pricing.pro.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
-                          <span class="title">{{ 'pricing.for_pro'|trans }}</span>
+                      <div class="package pb-3 professional mx-2 shadow">
+                        <div class="package-header rounded-top">
+                          <h5 class="cost monthly-rate">{{ 'pricing.pro.price'|trans }}</h5>
+                          {# <h5 class="cost yearly-rate hidden">{{ 'pricing.pro.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5> #}
+                          <span class="title">{{ 'pricing.pro.label'|trans }}</span>
                         </div>
                         <div class="package-features">
                           <ul>
-                            {% for i in 0 .. 2 %}
+                            {% for i in 0 .. 5 %}
                               <li class="active">{{ ('pricing.pro.unlocked_features.' ~ i )|trans }}</li>
                             {% endfor %}
 
-                            {% for i in 0 .. 0 %}
+                            {% for i in 0 .. 2 %}
                               <li>{{ ('pricing.pro.locked_features.' ~ i )|trans }}</li>
                             {% endfor %}
                           </ul>
                           <a href="#" onclick="return false" class="button">{{ 'pricing.try_now'|trans }}</a>
                         </div>
                       </div>
-                      <div class="package entreprise col-md-4">
-                        <div class="package-header">
-                          <h5 class="cost monthly-rate">{{ 'pricing.entreprise.price'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
-                          <h5 class="cost yearly-rate hidden">{{ 'pricing.entreprise.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5>
-                          <span class="title">{{ 'pricing.for_entreprise'|trans }}</span>
+                      <div class="package pb-3 entreprise shadow-sm pt-3">
+                        <div class="package-header rounded-top">
+                          <h5 class="cost monthly-rate">{{ 'pricing.pro_plus.price'|trans }}</h5>
+                          {# <h5 class="cost yearly-rate hidden">{{ 'pricing.entreprise.price_off'|trans }}<span>/{{ 'word.month'|trans }}</span></h5> #}
+                          <span class="title">{{ 'pricing.pro_plus.label'|trans }}</span>
                         </div>
                         <div class="package-features">
                           <ul>
-                            {% for i in 0 .. 3 %}
-                              <li class="active">{{ ('pricing.entreprise.unlocked_features.' ~ i )|trans }}</li>
+                            {% for i in 0 .. 6 %}
+                              <li class="active">{{ ('pricing.pro_plus.unlocked_features.' ~ i )|trans }}</li>
                             {% endfor %}
                           </ul>
                           <a href="#" onclick="return false" class="button">{{ 'pricing.try_now'|trans }}</a>
