@@ -1,0 +1,20 @@
+- Une fois un utilisateur s'inscrit en tant qu'entreprise,
+ avant de pouvoir poster une offre d'emploi, il est demande
+ d'envoyer les dossiers prouvant l'existance de son entreprise (NSSE, etc.).
+
+- Un utilisateur qui inscrit une entreprise est par defaut l'administrateur de l'espace reserve a l'entreprise.
+- L'administrateur peut inviter d'autres personnes a s'inscrire et leurs attribuer des roles sur l'espace personnel de ladite entreprise.
+
+Type de structure de l'employeur:
+    Entreprise
+    ONG/Association/Programme
+    Cabinet de recrutement
+
+Diviser les structures en deux:
+ - Cabinet de recrutement: adapte a leurs besoin
+ - Entreprise ou ONG: Disposition standard
+
+DIFFERENTES ROLES UTILISATEUR DE L'ESPACE PERSONNEL D'UNE ENTREPRISE:
+    - Administrateur (peut tout faire)
+    - Responsable du paiement
+    - Recruteur

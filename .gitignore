@@ -3,7 +3,8 @@
 /.env.dist
 /.env.local.php
 /.env.*.local
-/var/
+/var/cache
+/var/log
 /vendor/
 ###< symfony/framework-bundle ###
 ###> symfony/phpunit-bridge ###
