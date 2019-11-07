@@ -1,3 +1,8 @@
+{% set _locale = 'en' %}
+
+{% set search_terms = app.request.query.get('terms', '') %}
+{% set search_type = app.request.query.get('type', '') %}
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -12,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('admin/vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/linearicons/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/chartist/css/chartist-custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.min.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('admin/css/main.css') }}">
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -31,33 +37,43 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="brand">
                 <a href="{{ path('index') }}" class="logo" target="_blank">
-                    {#<img src="{{ asset('img/logos/logo.png') }}" alt="logo">#}
+                    {# <img class="logo" src="{{ asset('images/logo/logo.png') }}" alt="logo"> #}
                     <div class="logo"><span class="last">{{ website.name }}</span></div>
                 </a>
             </div>
             <div class="container-fluid">
-                <div class="navbar-btn">
+                <div class="navbar-btn py-0">
                     <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
                 </div>
-                <form class="navbar-form navbar-left">
-                    <div class="input-group">
-                        <input type="text" value="" class="form-control" placeholder="Entrez les mots clés">
-                        <span class="input-group-btn"><button type="button" class="btn btn-primary">Rechercher</button></span>
+                <form class="navbar-form navbar-left ml-5 pl-3 form-inline pt-1 pb-2" method="GET" action="{{ path('admin_search') }}">
+                    <div class="form-group">
+                        <input type="text" value="{{ search_terms }}" name="terms" class="form-control input-sm min-w-300" placeholder="Entrez les mots clés">
                     </div>
+                    <div class="form-group">
+                        <select class="custom-select input-sm px-5" name="type">
+                            <option value="job"{% if search_type == 'job' %} selected{% endif %}>Offres d'emploi</option>
+                            <option value="info"{% if search_type == 'info' %} selected{% endif %}>Avis & Infos</option>
+                            <option value="offer"{% if search_type == 'offer' %} selected{% endif %}>Appels d'offres</option>
+                            <option value="company"{% if search_type == 'company' %} selected{% endif %}>Organisations</option>
+                            <option value="user"{% if search_type == 'user' %} selected{% endif %}>Utilisateurs</option>
+                            {# <option value="all"{% if search_type == 'all' %} selected{% endif %}>Tous</option> #}
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm py-2 border-0">Rechercher</button>
                 </form>
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
+                        {# <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Aide</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ path('admin_basic_usage') }}"><i class="lnr lnr-graduation-hat"></i> <span>Utilisation de base</span></a></li>
                                 <li><a href="{{ path('admin_security') }}"><i class="lnr lnr-lock"></i> <span>Securité</span></a></li>
                                 <li><a href="{{ path('admin_troubleshooting') }}"><i class="lnr lnr-cog"></i> <span>Dépannage</span></a></li>
                             </ul>
-                        </li>
+                        </li> #}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-user"></i> <span>{{ app.user.username }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle pt-4 pb-0" data-toggle="dropdown"><i class="lnr lnr-user"></i> <span>{{ app.user.fullname }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-menu mt-3">
                                 <li><a href="{{ path('admin_profile') }}"><i class="lnr lnr-user"></i> <span>Mon profil</span></a></li>
                                 <li><a href="{{ path('fos_user_security_logout') }}"><i class="lnr lnr-exit"></i> <span>Deconnexion</span></a></li>
                             </ul>
@@ -82,35 +98,24 @@
             <!-- END MAIN CONTENT -->
         </div>
 
-        {% include 'common/flash_messages.twig' %}
+        {% include 'common/flash_messages.html.twig' %}
 
         <!-- END MAIN -->
         <div class="clearfix"></div>
-        <footer>
-            <div class="container-fluid">
-                <p class="copyright">Administration de {{ website.name }}</p>
-            </div>
-        </footer>
     </div>
     <!-- END WRAPPER -->
     {% endblock %}
     {% block javascript %}
         <!-- Javascript -->
         <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('admin/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
         <script src="{{ asset('admin/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
         <script src="{{ asset('admin/vendor/chartist/js/chartist.min.js') }}"></script>
         <script src="{{ asset('admin/scripts/klorofil-common.js') }}"></script>
         <script src="{{ asset('admin/vendor/toastr/toastr.min.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                var x = document.getElementById("snackbar");
-                x.className = "show";
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 7000);
-            });
-        </script>           
- 
+        <script src="{{ asset('admin/js/app.js') }}"></script>
     {% endblock %}
 </body>
 

@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    {% if banners is not empty %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for banner in banners %}
+                <tr class="td-3rem">
+                    <td>
+                        <img class="img-responsive" src="{{ vich_uploader_asset(banner.image, 'file') }}">
+                        <br>
+                        <a href="{{ banner.url }}">{{ banner.title ? : banner.url }}</a>
+                    </td>
+                    <td>
+                        <a href="#" data-id="{{ banner.id }}" class="disable text-warning float-left {% if not banner.isEnabled %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                        <a href="#" data-id="{{ banner.id }}" class="enable text-success float-left {% if banner.isEnabled %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                        <a href="{{ path('admin_settings_banner_ad_delete', {id: banner.id}) }}" class="text-danger float-right"><span class="lnr lnr-trash"></span> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="alert alert-info">Pas de bannière publicitaire disponible.</p>
+    {% endif %}
+<div>

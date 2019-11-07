@@ -1,0 +1,197 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'resumes' } %}
+
+{% endblock %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <div class="col-md-10 col-md-offset-1">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if user.enabled %}bg-primary-2{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main py-3">
+            <h3 class="name my-0">
+              <a class="text-white" href="{{ path('admin_user_show', {user: user.id}) }}">
+                {% if resume.photo %}
+                    <img class="img-fluid img-50 img-circle" src="{{ vich_uploader_asset(resume.photo, 'avatarFile') }}" alt="Image">
+                {% else %}
+                    <img class="img-fluid img-50 img-circle" src="{{ asset('images/user/default-user.jpg') }}" alt="Image">
+                {% endif %}
+                {{ user.fullname }}
+              </a>
+            </h3>
+          </div>
+            {% set class = 'bg-default-2' %}
+            {% if resume.rank %}
+              {% if resume.rank.name in [constant('TOP', resume.rank), constant('EXCELLENT', resume.rank)] %}
+                {% set class = 'bg-success-2' %}
+              {% elseif resume.rank.name == constant('MEDIUM', resume.rank) %}
+                {% set class = 'bg-warning-2' %}
+              {% else %}
+                {% set class = '' %}
+              {% endif %}
+            {% endif %}
+            
+            <div class="profile-stat {{ class }}">
+              <div class="row">
+                <h4>
+                  {% if resume.rank %}
+                    {% if resume.rank == constant('TOP', resume.rank) %}
+                      <i class="fa fa-star text-gold"></i>
+                    {% endif %}
+                    CV {{ resume.rank }}
+                  {% else %}
+                    CV non classé
+                  {% endif %}
+                </h4>
+              </div>
+            </div>
+        </div>
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info px-0">
+            <h4 class="heading">Informations</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Nom Complet <span><strong><a href="{{ path('admin_user_show', {user: user.id}) }}">{{ user.fullname }}</a></strong></span></li>
+							<li>Sexe<span>{{ resume.gender|trans ? : 'N/A' }}</span></li>
+              <li>Email <span>{{ user.email }}</span></li>
+              <li>Date de modification <span>{{ resume.updatedAt|date('d M Y, H') ~ 'h ' ~ resume.updatedAt|date('i') }}</span></li>
+            </ul>
+          </div>
+          {% if resume.cv %}
+            <a href="{{ vich_uploader_asset(resume.cv, 'cvFile') }}" class="btn btn-default btn-block my-3"><span class="fa fa-download"></span> Télécharger le CV</a>
+          {% endif %}
+          
+          <a href="{{ path('resume_show', {slug: resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
+          {% if is_granted('ROLE_RESUMES_MANAGER') %}
+            <div class="profile-info px-0 text-center">
+              <hr>
+              <div class="text-center">
+                  <div class="btn-group">
+                    {% if is_granted('ROLE_RESUMES_MANAGER') %}
+                      <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not resume.validated %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                      <a href="#" class="btn btn-info m-1 px-4 my-3 {% if resume.validated %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Valider</a>
+                    {% endif %}
+                    <a href="#" data-toggle="modal" data-target="#updateRankModal" class="btn btn-primary m-1 px-4 my-3" id="rank-btn">Modifier le classement</a>
+                    <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+                  </div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if is_granted('ROLE_RESUMES_MANAGER') %}
+            <div class="modal fade" id="updateRankModal" tabindex="-1" role="dialog" aria-labelledby="updateRankLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="updateRankLabel">Modifier le classement</h4>
+                      </div>
+                      <div class="modal-body">
+                        {{ form_start(formRank) }}
+                          <div class="form-row">
+                              <label>Classement</label>
+                              {{ form_widget(formRank.resumeRank, {'attr': {'class': 'custom-select input-lg'}}) }}
+                          </div>
+                          <hr>
+                          <button type="submit" class="btn btn-success btn-lg">
+                              <i class="fa fa-check-circle"></i> Mettre à jour
+                          </button>
+                        {{ form_end(formRank) }}
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="float-right btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p class="text-danger">Voulez-vous vraiment supprimer ce CV de la base de données ?</p>
+                          <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                          <form action="{{ path('admin_resume_delete', {id: resume.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                            <input type="hidden" name="resume[delete_token]" value="{{ csrf_token('resume.delete_token') }}" />
+                            <button type="submit" id="btn-resume-delete" class="btn btn-danger btn-lg">
+                                <span class="lnr lnr-trash"></span> Supprimer
+                            </button>
+                          </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          {% endif %}
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% if is_granted('ROLE_RESUMES_MANAGER') %}
+  {% block javascript %}
+    {{ parent() }}
+
+    <script>
+      // Disable user when we click on the disable user button
+      $("#disable-user").on('click', function(e){
+        button = $(this)
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_resume_disable') }}",
+          data: "id=" + {{ resume.id }},
+
+          success: function(data) {
+            button.addClass('hidden')
+            $("#enable-user").removeClass('hidden')
+          },
+
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+
+      // Enable user when we click on the enable user button
+      $("#enable-user").on('click', function(e){
+        button = $(this)
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_resume_enable') }}",
+          data: "id=" + {{ resume.id }},
+
+          success: function(data) {
+            button.addClass('hidden')
+            $("#disable-user").removeClass('hidden')
+          },
+
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+    </script>
+
+
+  {% endblock %}
+{% endif %}
+

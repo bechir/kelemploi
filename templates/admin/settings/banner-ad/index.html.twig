@@ -1,0 +1,70 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% block content %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des publicités</h3>
+    </div>
+    <div class="panel-body">
+        {% include 'admin/settings/banner-ad/table.html.twig' with {banners: banners} %}
+    </div>
+    <div class="panel-footer pl-0 pb-0 mt-5">
+        <a href="{{ path('admin_settings_banner_ad_new') }}" class="ml-3 mb-3 btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter une bannière</a>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        // Disable user when we click on the disable user button
+        $(".disable").on('click', function(e){
+            button = $(this)
+            button.addClass('disabled')
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('admin_settings_banner_ad_disable') }}",
+                data: "id=" + button.data('id'),
+
+                success: function(data) {
+                    button.removeClass('disabled')
+                    button.addClass('hidden')
+                    button.next().removeClass('hidden')
+                },
+
+                error: function(data) {
+                    button.removeClass('disabled')
+                    console.error(data)
+                    alert('Une erruer est survenue au niveau du serveur.')
+                }
+            })
+            e.preventDefault();
+        });
+
+        // Enable user when we click on the enable user button
+        $(".enable").on('click', function(e){
+            button = $(this)
+            button.addClass('disabled')
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('admin_settings_banner_ad_enable') }}",
+                data: "id=" + button.data('id'),
+
+                success: function(data) {
+                    button.addClass('hidden')
+                    button.prev().removeClass('hidden')
+                },
+
+                error: function(data) {
+                    console.error(data)
+                    alert('Une erruer est survenue au niveau du serveur.')
+                }
+            })
+            e.preventDefault();
+        });
+    </script>
+{% endblock %}

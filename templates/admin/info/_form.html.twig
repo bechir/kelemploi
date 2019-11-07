@@ -1,0 +1,91 @@
+{{ form_start(form) }}
+    <div class="container-fluid">
+        <div class="col-12 mb-5">
+            <label>Organisation <span class="text-danger">*</span></label>
+            {{ form_widget(form.company, {'attr': {'class': 'custom-select input-lg'}}) }}
+            <blockquote class="blockquote bg-info mt-3">
+                <p class="small">Pas dans la liste ? <a href="{{ path('admin_company_create') }}">créer une nouvelle organisation</a></p>
+            </blockquote>
+        </div>
+
+        <div class="col-12 mb-5">
+            <label>Titre <span class="text-danger">*</span></label>
+            {{ form_widget(form.title, {'attr': {'placeholder': 'Titre', 'class': 'form-control input-lg'}}) }}
+        </div>
+
+        <div class="col-12 mb-5">
+            <label>Montant</label>
+            {{ form_widget(form.amount, {'attr': {'placeholder': 'Montant', 'class': 'form-control input-lg'}}) }}
+        </div>
+
+        <div class="col-12 mb-5">
+            <label>Fournisseur</label>
+            {{ form_widget(form.provider, {'attr': {'placeholder': 'Fournisseur', 'class': 'form-control input-lg'}}) }}
+        </div>
+
+        <div class="col-12 mb-5">
+            <label>Lien du site du fournisseur</label>
+            {{ form_widget(form.providerWebsiteLink, {'attr': {'placeholder': 'Lien du site du fournisseur', 'class': 'form-control input-lg'}}) }}
+        </div>
+
+        <div class="col-12 mb-5 bg-primary pt-2">
+            <label class="pl-2">Annonce liée à</label>
+            {{ form_widget(form.linkedTo, {'attr': {'class': 'custom-select input-lg'}}) }}
+            <blockquote class="blockquote bg-info pt-3">
+                <p class="small">Laissez par défaut (n/a) si l'annonce n'est pas liée.</p>
+            </blockquote>
+        </div>
+
+        <div class="col-12 mb-5">
+            <label>Description <span class="text-danger">*</span></label>
+            {{ form_widget(form.description, {'attr': {'class': 'ckeditor'}}) }}
+        </div>
+
+        {% if editing %}
+            <div class="col-12 mb-5">
+                <label>Date de publication</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-addon">
+                        <label class="cursor-pointer m-0 py-2 px-4" for="info_created_at"><i class="fa fa-calendar fa-lg"></i></label>
+                    </div>
+                    {{ form_widget(form.createdAt, {attr: {class: 'form-control input-lg datepicker'}}) }}
+                </div>
+            </div>
+        {% endif %}
+        <hr>
+        <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check-circle"></i> Valider</button>
+        {% if editing %}
+            <button class="btn btn-info btn-lg float-right" type="button" data-toggle="modal" data-target="#modifyModal">Changer le type de l'annonce</button>
+        {% endif %}
+    </div>
+{{ form_end(form) }}
+
+{% if editing %}
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{ path('admin_ad_modify', {'type': 'info', 'id': info.id}) }}" method="get">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer le type de l'annonce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        Changer en:
+                        <select name="change-to" class="custom-select input-lg">
+                            <option value="offer">Appel d'offre</option>
+                            <option value="job">Offre d'emploi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Continuer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}

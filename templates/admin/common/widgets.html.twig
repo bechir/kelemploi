@@ -1,0 +1,15 @@
+{% macro rankLabel(rank) %}
+    {% set class = 'default' %}
+    {% if rank %}
+        {% if rank.name == constant('TOP', rank) %}
+            {% set class = 'success' %}
+        {% elseif rank.name == constant('EXCELLENT', rank) %}
+            {% set class = 'primary' %}
+        {% elseif rank.name == constant('VERY_GOOD', rank) %}
+            {% set class = 'info' %}
+        {% elseif rank.name == constant('MEDIUM', rank) %}
+            {% set class = 'warning' %}
+        {% endif %}
+    {% endif %}
+    <label class="label label-{{ class }}">{{ rank ? 'CV ' ~ rank.name : 'Non classé' }}</label>
+{% endmacro %}

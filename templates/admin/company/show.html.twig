@@ -1,0 +1,316 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'companies-list' } %}
+
+{% endblock %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <!-- LEFT COLUMN -->
+      <div class="col-md-5 package profile-left">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if company.confirmed %}{% if company.isActivated %}bg-success-2{% else %}bg-default-2{% endif %}{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main">
+            <h3 class="name">{{ company.name }}</h3><div class="user-state">
+              {% if company.confirmed %}
+                {% if company.isActivated %}
+                    <span class="lnr lnr-checkmark-circle"></span> Activé
+                {% else %}
+                  <span class="lnr lnr-cross-circle"></span> Desactivé
+                {% endif %}
+              {% else %}
+                  <span class="lnr lnr-history"></span> En attente
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% if company.photo %}
+          <img class="img-responsive mx-auto" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}">
+        {% endif %}
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info">
+            <h4 class="heading">Détails de l'organisation</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Nom <span>{{ company.name }}</span></li>
+              {% if company.industry %}
+                <li>Industrie <span>{{ company.industry|trans({}, 'job-categories') }}</span></li>
+              {% endif %}
+              {% if company.phone %}
+                <li>Téléphone <span><a href="tel:{{ company.phone|replace({' ': ''}) }}">{{ company.phone }}</span></a></li>
+              {% endif %}
+              {% if company.email %}
+                <li>Email <span><a href="mailto:{{ company.email }}">{{ company.email }}</a></span></li>
+              {% endif %}
+              {% if company.website %}
+                <li>Site web <span><a href="http://{{ company.website }}">{{ company.website }}</a></span></li>
+              {% endif %}
+              <li>Créée par <span><a href="{{ path('admin_user_show', {user: company.user.id}) }}">{{ company.user.fullname }}</a></span></li>
+            </ul><hr>
+            <h4 class="heading text-center">Description</h4>
+            <div class="row">{{ company.description|raw }}</div>
+          </div>
+          <div class="profile-info text-center">
+            <hr>
+            <div class="text-center">
+              {% if company.adminOwner %}
+                <a href="{{ path('admin_company_edit', {slug: company.slug}) }}" class="btn btn-block btn-default mx-1 px-4 my-3"><span class="lnr lnr-pencil"></span> Modifier l'organisation</a>
+              {% endif %}
+
+              {% if is_granted('ROLE_COMPANIES_MANAGER') %}
+                <div class="btn-group">
+                  <a href="#" class="btn btn-success m-1 px-4 my-3 {% if company.confirmed %}hidden{% endif %}" id="confirm-company"><span class="lnr lnr-checkmark-circle"></span> Confirmer</a>
+                  {% if company.confirmed %}
+                    <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not company.isActivated %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                    <a href="#" class="btn btn-info m-1 px-4 my-3 {% if company.isActivated %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                  {% endif %}
+                  <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% if is_granted('ROLE_COMPANIES_MANAGER') %}
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p class="text-danger">Voulez-vous vraiment supprimer <strong>{{ company.name }}</strong> de la base de données ?</p>
+                          <p class="alert alert-danger"><span class="fa fa-warning"></span>Toutes les annonces liées seront aussi supprimées.</p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                          <form action="{{ path('admin_company_delete', {id: company.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                            <input type="hidden" name="user[delete_token]" value="{{ csrf_token('company.delete_token') }}" />
+                            <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                                <span class="lnr lnr-trash"></span> Supprimer
+                            </button>
+                          </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          {% endif %}
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+      <!-- END LEFT COLUMN -->
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-7 package profile-right">
+        <div class="awards">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="heading bg-primary pt-3">Offres d'emploi</h4>
+              <div class="tab-content pb-5">
+                <div class="table-responsive">
+                  <table class="table project-table table-hover text-left">
+                    {% if jobs|length > 0 %}
+                    <thead>
+                      <tr>
+                        <th>Titre</th>
+                        <th>Date création</th>
+                        <th>Statut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% endif %}
+                      {% for job in jobs %}
+                        <tr>
+                          <td><a href="{{ path('admin_job_show', {job: job.id}) }}">{{ job.title[:45] }}{{ job.title|length > 45 ? '...' : '' }}</a></td>
+                          <td>{{ job.createdAt|date('d, M Y') }}</td>
+                          <td>
+                            {% if job.isActivated %}
+                              <span class="label label-success">ACTIVÉ</span>
+                            {% else %}
+                              <span class="label label-warning">DESACTIVÉE</span>
+                            {% endif %}
+                          </td>
+                        </tr>
+                      {% else %}
+                        <p class="alert alert-info text-center my-3">Aucune offre d'emploi postée.</p>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="heading bg-primary pt-3">Appels d'ofres</h4>
+              <div class="tab-content pb-5">
+                <div class="table-responsive">
+                  <table class="table project-table table-hover text-left">
+                    {% if offers|length > 0 %}
+                    <thead>
+                      <tr>
+                        <th>Titre</th>
+                        <th>Date création</th>
+                        <th>Statut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% endif %}
+                      {% for offer in offers %}
+                        <tr>
+                          <td><a href="{{ path('admin_offer_show', {offer: offer.id}) }}">{{ offer.title[:45] }}{{ offer.title|length > 45 ? '...' : '' }}</a></td>
+                          <td>{{ offer.createdAt|date('d, M Y') }}</td>
+                          <td>
+                            {% if offer.isActivated %}
+                              <span class="label label-success">ACTIVÉ</span>
+                            {% else %}
+                              <span class="label label-warning">DESACTIVÉE</span>
+                            {% endif %}
+                          </td>
+                        </tr>
+                      {% else %}
+                        <p class="alert alert-info text-center my-3">Aucun appel d'offre posté.</p>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="heading bg-primary pt-3">Avis & Informations</h4>
+              <div class="tab-content pb-5">
+                <div class="table-responsive">
+                  <table class="table project-table table-hover text-left">
+                    {% if infos|length > 0 %}
+                    <thead>
+                      <tr>
+                        <th>Titre</th>
+                        <th>Date création</th>
+                        <th>Statut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% endif %}
+                      {% for info in infos %}
+                        <tr>
+                          <td><a href="{{ path('admin_info_show', {info: info.id}) }}">{{ info.title[:45] }}{{ info.title|length > 45 ? '...' : '' }}</a></td>
+                          <td>{{ info.createdAt|date('d, M Y') }}</td>
+                          <td>
+                            {% if info.isActivated %}
+                              <span class="label label-success">ACTIVÉ</span>
+                            {% else %}
+                              <span class="label label-warning">DESACTIVÉE</span>
+                            {% endif %}
+                          </td>
+                        </tr>
+                      {% else %}
+                        <p class="alert alert-info text-center my-3">Aucun avis & info posté.</p>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END AWARDS -->
+      </div>
+      <!-- END RIGHT COLUMN -->
+    </div>
+  </div>
+{% endblock %}
+
+{% if is_granted('ROLE_COMPANIES_MANAGER') %}
+  {% block javascript %}
+    {{ parent() }}
+
+    <script>
+      // Disable user when we click on the disable user button
+      $("#disable-user").on('click', function(e){
+        button = $(this);
+        button.addClass('disabled');
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_company_disable') }}",
+          data: "id=" + {{ company.id }},
+
+          success: function(data) {
+            button.addClass('hidden');
+            $("#enable-user").removeClass('hidden');
+            button.removeClass('disabled');
+            $('.overlay').removeClass('bg-success-2').addClass('bg-default-2')
+            $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+          },
+
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+
+      // Enable company when we click on the enable company button
+      $("#enable-user").on('click', function(e){
+        button = $(this);
+        button.addClass('disabled');
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_company_enable') }}",
+          data: "id=" + {{ company.id }},
+
+          success: function(data) {
+            button.addClass('hidden');
+            $("#disable-user").removeClass('hidden');
+            button.removeClass('disabled');
+            $('.overlay').removeClass('bg-default-2').addClass('bg-success-2')
+            $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+          },
+
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+
+      // Confirm company when we click on the confirm company button
+      $("#confirm-company").on('click', function(e){
+        button = $(this);
+        button.addClass('disabled');
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_company_confirm') }}",
+          data: "id=" + {{ company.id }},
+
+          success: function(data) {
+            button.addClass('hidden');
+            $("#disable-user").removeClass('hidden')
+            $('.overlay').removeClass('bg-default-2').addClass('bg-success-2')
+            $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+            location.reload(true);
+          },
+
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+    </script>
+
+
+  {% endblock %}
+{% endif %}

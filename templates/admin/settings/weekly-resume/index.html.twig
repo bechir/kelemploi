@@ -1,0 +1,173 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            {% if resume_of_week %}
+                {% set resume = resume_of_week.resume %}
+                <div class="card text-center">
+                    {% set src = asset('images/user/default-user.jpg') %}
+                    {% if resume.photo %}
+                        {% set src = vich_uploader_asset(resume.photo, 'avatarFile') %}
+                    {% elseif resume.user.avatar %}
+                        {% set src = vich_uploader_asset(resume.user.avatar, 'avatarFile') %}
+                    {% endif %}
+                    <img class="img-100 img-circle" src="{{ src }}">
+                    <h3>
+                        <a href="{{ path('admin_user_show', {user: resume.user.id}) }}">{{ resume.fullname }}</a>
+                    </h3>
+                    <h4>
+                        <a target="_blank" href="{{ path('resume_show', {slug: resume.slug}) }}">{{ resume.title }} <i class="fa fa-external-link"></i></a>
+                    </h4>
+                    <h5 class="label label-success">{{ resume.jobCategory|trans({}, 'job-categories') }}</h5>
+                    <div class="card-footer border-top mt-3 pt-2">
+                        <p class="card-text"><i class="lnr lnr-history"></i> Défini {{ resume_of_week.definedAt|time_diff }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="alert alert-warning">Vous n'avez pas defini de CV pour cette semaine</p>
+            {% endif %}
+        </div>
+
+        {% if is_granted('ROLE_RESUMES_MANAGER') %}
+            <div class="panel-footer pl-0 pb-0 mt-5">
+                <a href="#" data-toggle="modal" data-target="#updateWeeklyResumeModal" class="ml-3 mb-3 btn btn-primary">Définir un CV de la semaine</a>
+                <div class="modal fade" id="updateWeeklyResumeModal" tabindex="-1" role="dialog" aria-labelledby="updateWeeklyResumeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="updateWeeklyResumeModalLabel">CV de la semaine</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="GET" action="{{ path('admin_settings_search_candidate') }}">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input class="form-control" type="text" id="terms" placeholder="Rechercher un candidat par son nom, ou sa spécialité">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Rechercher</button>
+                                        </span>
+                                    </div>
+                                </form>
+                                <hr class="my-3">
+                                <div class="row scrollable">
+                                    <div class="loader text-center">
+                                        <img class="loading-img" src="{{ asset('images/horizontal-loader.gif') }}" alt="Loading...">
+                                    </div>
+                                    <div class="px-4" id="results">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-lg float-right" data-dismiss="modal">Fermer la fenêtre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% if is_granted('ROLE_RESUMES_MANAGER') %}
+    {% block javascript %}
+        {{ parent() }}
+
+        <script>
+            let listStateChanged = false;
+            let roleStateChanged = false;
+            let currentRequest = null;
+            const successMessage = `<span class="float-right btn btn-success py-0 px-2 mt-4"><i class="fa fa-check-circle"></i> CV sélectionné</span>`;
+
+            $("#updateWeeklyResumeModal").on('show.bs.modal', function(){
+                const modal = $(this);
+                modal.find('form').submit(function(event){
+                    event.preventDefault();
+
+                    const terms = $.trim(modal.find('form input#terms').val());
+
+                    if(terms.length >= 2) {
+                        $(".loader").show()
+                        $('#results').css('opacity', 0.173);
+
+                        currentRequest = $.ajax({
+                            type: "GET",
+                            dataType: "html",
+                            url: modal.find('form').attr('action'),
+                            data: `terms=${terms}`,
+                            
+                            beforeSend: function(){
+                                if(currentRequest) {
+                                    currentRequest.abort();
+                                }
+                            },
+
+                            success: function(data) {
+                                $(".loader").hide()
+                                $('#results').css('opacity', 1);
+                                $("#results").html(data);
+
+                                $("#results ul li").hover(function(){
+                                    $(this).find('a.select').fadeIn();
+                                }, function(){
+                                    if(!$(this).find('a.select').hasClass('loading')) {
+                                        $(this).find('a.select').fadeOut(0);
+                                    }
+                                });
+
+                                modal.find('a.select').click(function(e) {
+                                    const actualUser = $(this);
+                                    e.preventDefault();
+
+                                    actualUser.addClass('disabled loading');
+
+                                    currentRequest = $.ajax({
+                                        type: "GET",
+                                        dataType: "json",
+                                        url: "{{ path('admin_settings_weekly_resume_update') }}",
+                                        data: 'userId=' + actualUser.data('user-id'),
+
+                                        success: function(data) {
+                                            if(data == 'success') {
+                                                actualUser.replaceWith(successMessage);
+                                                modal.find('a.select').remove();
+                                                listStateChanged = true;
+                                            } else {
+                                                console.log(data);
+                                                actualUser.removeClass('disabled');
+                                            }
+                                        },
+
+                                        error: function(data) {
+                                            console.log(data);
+                                            actualUser.removeClass('disabled loading');
+                                        },
+
+                                        beforeSend: function(){
+                                            if(currentRequest) {
+                                                currentRequest.abort();
+                                            }
+                                        }
+                                    });
+                                });
+                            },
+
+                            error: function(data) {
+                                $(".loader").hide();
+                                $('#results').css('opacity', 1);
+                                console.error(data)
+                            }
+                        })
+                    } else {
+                        alert('Entrez au moins 2 caractères.');
+                    }
+                });
+
+            }).on('hidden.bs.modal', function(){
+                if(listStateChanged) {
+                    location.reload(true);
+                }
+            });
+        </script>
+    {% endblock %}
+{% endif %}

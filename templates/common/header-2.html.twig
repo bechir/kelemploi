@@ -37,15 +37,14 @@
                                         {% if app.user.haveCompany %}
                                             <li>
                                                 <a href="{{ path('company_dashboard') }}">
-                                                    <span class="ti ti-briefcase"></span>{{ app.user.company.name|capitalize }}
+                                                    <span class="ti-briefcase"></span>{{ app.user.company.name|capitalize }}
                                                 </a>
                                             </li>
                                         {% else %}
-                                        
                                             {% if app.user.isEmployer %}
                                                 <li>
                                                     <a href="{{ path('company_edit_profile') }}">
-                                                        <span class="ti ti-plus"></span> Ajouter votre companie
+                                                        <span class="ti-plus"></span> Ajouter votre companie
                                                     </a>
                                                 </li>
                                             {% endif %}
@@ -59,6 +58,11 @@
                                             <a href="{{ path('user_settings') }}">
                                                 <span class="ti-settings"></span>{{ 'user.settings'|trans }}</a>
                                         </li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li>
+                                                <a href="{{ path('admin_index') }}">
+                                                    <span class="ti-dashboard"></span>Administration</a></li>
+                                        {% endif %}
                                         <li>
                                             <a href="{{ path('fos_user_security_logout') }}">
                                                 <span class="ti-power-off"></span>{{ 'user.logout'|trans }}</a>

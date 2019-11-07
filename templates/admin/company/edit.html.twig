@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'new-company' } %}
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title text-info">
+        <span><i class="fa fa-briefcase"></i> Modifier l'organisation ({{ company.name }})</span></a>
+    </h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-body">
+                    {% include 'admin/company/_form.html.twig' with {form: form, editing: true, company: company} %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor/adapters/jquery.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+</script>
+{% endblock %}

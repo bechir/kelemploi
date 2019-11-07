@@ -1,0 +1,71 @@
+{{ form_start(form) }}
+<div class="container-fluid">
+    <div class="col-12 mb-5">
+        <label>Nom de l'organisation *</label>
+        {% if form_errors(form.description) %}
+        <p class="alert alert-danger">Le nom est obligatoire et doit faire 255 caracètres maximum</p>
+        {% endif %}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Industrie</label>
+        {{ form_widget(form.industry, {'attr': {'class': 'custom-select input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Description</label>
+        {% if form_errors(form.description) %}
+        <p class="alert alert-danger">La description est obligatoire et doit faire entre 10 et 5000 caracètres</p>
+        {% endif %}
+        {{ form_widget(form.description, {'attr': {'class': 'ckeditor'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Adresse (Emplacement) *</label>
+        {% if editing %}
+            {{ form_widget(form.address, {attr: {class: 'form-control input-lg'}}) }}
+        {% else %}
+            {{ form_widget(form.address, {attr: {value: 'Nouakchott', class: 'form-control input-lg'}}) }}
+        {% endif %}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Adresse email</label>
+        {{ form_widget(form.email, {attr: {class: 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Numéro de téléphone</label>
+        {{ form_widget(form.phone, {attr: {class: 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Site web</label>
+        {{ form_widget(form.website, {attr: {class: 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label class="col-sm-4 pl-0">Logo</label>
+        <div class="col-sm-8 mb-5">
+            <div class="preview-container">
+                {% if editing and company.photo is not null %}
+                        <img id="img-preview" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}">
+                {% endif %}
+            </div>
+            <label class="cursor-pointer file-upload w-auto bg-primary py-3 px-3 my-0 text-white rounded shadow">
+                <i class="fa fa-upload"></i>
+                Uploader une image: JPG, PNG
+                {{ form_widget(form.photo.companyPhotoFile, {attr: {class: 'hidden'}}) }}
+            </label>
+        </div>
+    </div>
+
+    <div class="my-5 container-fluid px-0">
+        <hr>
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fa fa-briefcase"></i> Enregistrer
+        </button>
+    </div>
+</div>
+{{ form_end(form) }}

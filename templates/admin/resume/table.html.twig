@@ -1,0 +1,42 @@
+{% from 'admin/common/widgets.html.twig' import rankLabel %}
+
+<div class="table-responsive">
+    {% if resumes is not empty %}
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Nom et prénom</th>
+                    <th>Titre</th>
+                    <th>Spécialité</th>
+                    <th>Expérience</th>
+                    <th>Classement</th>
+                    <th>Dernière modification</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resume in resumes %}
+                    {% set user = resume.user %}
+                    <tr class="td-3rem">
+                        <td>
+                            <a href="{{ path('admin_resume_show', {resume: resume.id}) }}">
+                                {% if resume.photo %}
+								    <img class="img-fluid img-35 img-circle" src="{{ vich_uploader_asset(resume.photo, 'avatarFile') }}" alt="Image">
+                                {% else %}
+								    <img class="img-fluid img-35 img-circle" src="{{ asset('images/user/default-user.jpg') }}" alt="Image">
+							    {% endif %}
+                                {{ resume.fullname }}
+                            </a>
+                        </td>
+                        <td>{{ resume.title ? : '-' }}</td>
+                        <td>{{ resume.jobCategory|trans({}, 'job-categories') ? : 'N/A' }}</td>
+                        <td>{{ resume.experienceLevel ? (resume.experienceLevel ~ '_short')|trans : 'N/A' }}</td>
+                        <td>{{ rankLabel(resume.rank) }}</td>
+                        <td>{{ resume.updatedAt|date('d M Y, H') ~ 'h ' ~ resume.updatedAt|date('i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>La base CV est vide.</p>
+    {% endif %}
+<div>

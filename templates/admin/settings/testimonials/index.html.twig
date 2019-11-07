@@ -1,0 +1,77 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% block content %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des témoignages</h3>
+    </div>
+    <div class="panel-body">
+        {% include 'admin/settings/testimonials/table.html.twig' with {testimonials: testimonials} %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $('#showDetailsModal').on('show.bs.modal', function (event) {
+            const modal = $(this);
+            const target = $(event.relatedTarget);
+            const username = target.data('username');
+
+            modal.find('.modal-title').replaceWith(`Témoignage de ${username}`)
+            modal.find('.sender-info').html(`<strong>${username}</strong>`)
+            modal.find('.contact-message p').text(target.data('message'))
+            modal.find('.contact-datetime-value').text(target.data('datetime'))
+        })
+
+        // Disable user when we click on the disable user button
+        $(".disable").on('click', function(e){
+            button = $(this)
+            button.addClass('disabled')
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('admin_settings_testimonial_disable') }}",
+                data: "id=" + button.data('id'),
+
+                success: function(data) {
+                    button.removeClass('disabled')
+                    button.addClass('hidden')
+                    button.next().removeClass('hidden')
+                },
+
+                error: function(data) {
+                    button.removeClass('disabled')
+                    console.error(data)
+                    alert('Une erruer est survenue au niveau du serveur.')
+                }
+            })
+            e.preventDefault();
+        });
+
+        // Enable user when we click on the enable user button
+        $(".enable").on('click', function(e){
+            button = $(this)
+            button.addClass('disabled')
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('admin_settings_testimonial_enable') }}",
+                data: "id=" + button.data('id'),
+
+                success: function(data) {
+                    button.addClass('hidden')
+                    button.prev().removeClass('hidden')
+                },
+
+                error: function(data) {
+                    console.error(data)
+                    alert('Une erruer est survenue au niveau du serveur.')
+                }
+            })
+            e.preventDefault();
+        });
+    </script>
+{% endblock %}

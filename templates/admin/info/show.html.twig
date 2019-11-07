@@ -1,0 +1,178 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'infos-list' } %}
+
+{% endblock %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <div class="col-md-12 package profile-left">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if info.archived %}bg-default-2{% elseif info.isActivated %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main">
+            <h3 class="name">{{ info.title }}</h3>
+            <div class="user-state">
+              {% if info.archived %}
+                <span class="fa fa-file-archive-o"></span> Archivée
+              {% elseif info.isActivated %}
+                  <span class="lnr lnr-checkmark-circle"></span> Activé
+              {% else %}
+                <span class="lnr lnr-cross-circle"></span> Desactivé
+              {% endif %}
+            </div>
+          </div>
+          <div class="profile-stat">
+            <div class="row">
+              <div class="col-md-12 stat-item">
+                {{ info.viewCount }} Vue{{ info.viewCount > 1 ? 's' : '' }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info">
+            <h4 class="heading">Détails de l'offre d'emploi</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Date d'ajout <span>{{ info.createdAt|date('d M Y, H:i') }}</span></li>
+              <li>Organisation <span><a href="{{ path('admin_company_show', {company: company.id}) }}">{{ company }}</a></span></li>
+              <hr>
+              <li>Créé par<span><a href="{{ path('admin_user_show', {user: info.interlocutor.id}) }}">{{ info.interlocutor.fullname }}</a></span></li>
+              {% if info.isActivated %}
+                <li>Validé par<span><a href="{{ path('admin_user_show', {user: info.validatedBy.id}) }}">{{ info.validatedBy.fullname }}</a></span></li>
+              {% endif %}
+            </ul>
+            <hr>
+            <h4 class="heading text-center">Description</h4>
+            <div class="row">{{ info.description|raw }}</div>
+          </div>
+          {% if info.isActivated %}
+            <a href="{{ path('info_show', {slug: info.slug}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="fa fa-external-link"></span> Afficher les détails sur un nouvel onglet</a>
+          {% endif %}
+          <div class="profile-info">
+            <hr>
+            <div class="text-center">
+              <div class="btn-group">
+                {% if info.archived %}
+                  <a href="{{ path('admin_info_desarchive', {slug: info.slug}) }}" class="btn btn-info mx-1 px-4 my-3">Désarchiver</a>
+                {% else %}
+                  <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not info.isActivated %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                  <a href="#" class="btn btn-info m-1 px-4 my-3 {% if info.isActivated %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                  <a href="{{ path('admin_info_edit', {slug: info.slug}) }}" class="btn btn-default m-1 px-4 my-3"><span class="lnr lnr-pencil"></span> Modifier l'offre</a>
+                  <a href="#" class="btn btn-dark mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmArchiveModal"><span class="fa fa-file-archive-o"></span> Archiver</a>
+                {% endif %}    
+                <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p class="text-danger">Voulez-vous vraiment supprimer <strong>{{ info.title }}</strong> de la base de données ?</p>
+                      <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                      <form action="{{ path('admin_info_delete', {id: info.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                        <input type="hidden" name="user[delete_token]" value="{{ csrf_token('info.delete_token') }}" />
+                        <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                            <span class="lnr lnr-trash"></span> Supprimer
+                        </button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal fade" id="confirmArchiveModal" tabindex="-1" role="dialog" aria-labelledby="confirmArchiveModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="confirmArchiveModalLabel">Confirmation</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p class="text-warning bg-primary p-2">Archiver <strong>{{ info.title }}</strong> ?</p>
+                      <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                      <form action="{{ path('admin_info_archive', {slug: info.slug}) }}" method="POST" data-confirmation="true" id="archive-form">
+                        <input type="hidden" name="user[archive_token]" value="{{ csrf_token('info.archive_token') }}" />
+                        <button type="submit" id="btn-user-archive" class="btn btn-warning btn-lg">
+                            <span class="fa fa-file-archive-o"></span> Archiver
+                        </button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+
+  <script>
+    // Disable user when we click on the disable user button
+    $("#disable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_info_disable') }}",
+        data: "id=" + {{ info.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#enable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+
+    // Enable user when we click on the enable user button
+    $("#enable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_info_enable') }}",
+        data: "id=" + {{ info.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#disable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+  </script>
+{% endblock %}

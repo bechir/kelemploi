@@ -1,0 +1,58 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for testimonial in testimonials %}
+                <tr class="td-3rem">
+                    <td>
+                        {{ testimonial.username }}
+                    </td>
+                    <td>
+                        <a class="details" data-placement="top" data-target="#showDetailsModal" data-username="{{ testimonial.username }}" data-message="{{ testimonial.message }}" data-datetime="{{ testimonial.updatedAt|localizeddate('full', 'none', _locale)|capitalize }}" data-toggle="modal" style="cursor:pointer;" title="Afficher les détails du témoignage">
+                            {{ testimonial.message[ : 77 ] }}...
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" data-id="{{ testimonial.id }}" class="disable text-warning float-left {% if not testimonial.isEnabled %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                        <a href="#" data-id="{{ testimonial.id }}" class="enable text-success float-left {% if testimonial.isEnabled %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                        <a href="{{ path('admin_settings_testimonial_delete', {id: testimonial.id}) }}" class="text-danger float-right"><span class="lnr lnr-trash"></span> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <div class="modal fade" id="showDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showDetailsModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <div class="sender">
+                                <div class="icon d-inline-block"><i class="lnr lnr-user"></i></div>
+                                <div class="sender-info d-inline-block"></div>
+                            </div>
+                            <div class="contact-datetime my-3 font-12">
+                                <span class="lnr lnr-clock fa-sm"></span>
+                                <span class="contact-datetime-value"></span>
+                            </div>
+                            <div class="contact-message my-5 pr-3 text-justify">
+                                <p class="font-15"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-lg float-right" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </table>
+<div>

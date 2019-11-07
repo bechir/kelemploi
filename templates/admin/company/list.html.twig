@@ -1,0 +1,135 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'companies-list' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="fa fa-briefcase"></span> Organisations <span class="badge badge-info mb-1">{{ companies|length }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des organisations</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Status</th>
+                                <th>Industrie</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for company in companies %}
+                                <tr {% if company.photo %} class="td-3rem"{% endif %}>
+                                    <td>
+                                        <a title="Afficher les details" href="{{ path('admin_company_show', {company: company.id}) }}">
+                                            {% if company.photo %}
+                                                <img class="img-fluid img-35" src="{{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}" />
+                                            {% endif %}
+                                            {{ company.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if company.confirmed %}
+                                            {% if company.isActivated %}
+                                                <span class="label label-success">ACTIVÉ</label>
+                                            {% else %}
+                                                <span class="label label-default">DESACTIVÉ</label>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="label label-warning">EN ATTENTE</label>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ company.industry|trans({}, 'job-categories')|capitalize }}
+                                    <td class="px-0">
+                                        <div class="btn-group">
+                                            <a class="mx-2 edit-item" href="{{ path('admin_company_show', {company: company.id}) }}" data-toggle="tooltip" data-placement="top" title="Afficher les détails.">
+                                                <i class="lnr fa-lg lnr-eye"></i>
+                                            </a>
+                                            <a class="mx-2 delete-item" data-placement="top" data-target="#confirmDeleteModal" data-ad-name="{{ company.name }}" data-ad-id="{{ company.id }}" data-toggle="modal" style="cursor:pointer;" title="Supprimer cette offre">
+                                                <i class="lnr lnr-trash text-danger"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-danger">Voulez-vous vraiment supprimer <strong class="ad-name"></strong> de la base de données ?</p>
+                                        <p class="alert alert-danger"><span class="fa fa-warning"></span> Toutes les annonces liées seront aussi supprimées.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                                        <form action="" method="POST" data-confirmation="true" id="delete-form">
+                                            <input type="hidden" name="ad[delete_token]" value="{{ csrf_token('company.delete_token') }}" />
+                                            <button type="submit" id="btn-ad-delete" class="btn btn-danger btn-lg">
+                                                <span class="lnr lnr-trash"></span> Supprimer
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                 <!-- Page navigation start -->
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                      {% if companies.haveToPaginate %}
+                          {{ pagerfanta(
+                                    companies,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_companies_list',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+            </div>
+        </div>
+        <!-- END TABLE STRIPED -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $("#confirmDeleteModal").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var adId = button.data('ad-id')
+            var adName = button.data('ad-name')
+
+            modal.find('.ad-name').text(adName)
+            modal.find('form').attr('action', '/admin/companies/delete/' + adId)
+        });
+    </script>
+{% endblock %}
+

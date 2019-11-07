@@ -1,0 +1,110 @@
+{{ form_start(form) }}
+<div class="container-fluid">
+    <div class="col-12 mb-5">
+        <label>Organisation *</label>
+        {{ form_widget(form.company, {'attr': {'class': 'custom-select input-lg'}}) }}
+        <blockquote class="blockquote bg-info mt-3">
+            <p class="small">Pas dans la liste ? <a href="{{ path('admin_company_create') }}">créer une nouvelle organisation</a></p>
+        </blockquote>
+    </div>
+    <div class="col-12 mb-5">
+        <label>Titre *</label>
+        {% if form_errors(form.title) %}
+        <p class="alert alert-danger">La titre est obligatoire et doit faire 255 caracètres maximum</p>
+        {% endif %}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5 bg-primary pt-2">
+        <label class="pl-2">Annonce liée à</label>
+        {{ form_widget(form.linkedTo, {'attr': {'class': 'custom-select input-lg'}}) }}
+        <blockquote class="blockquote bg-info pt-3">
+            <p class="small">Laissez par défaut (n/a) si l'annonce n'est pas liée.</p>
+        </blockquote>
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Description *</label>
+        {% if form_errors(form.description) %}
+        <p class="alert alert-danger">La description est obligatoire et doit faire entre 10 et 5000 caracètres</p>
+        {% endif %}
+        {{ form_widget(form.description, {'attr': {'class': 'ckeditor'}}) }}
+    </div>
+    <div class="col-12 mb-5">
+        <label>Région</label>
+        {{ form_widget(form.region, {attr: {class: 'custom-select input-lg'}}) }}
+    </div>
+    <div class="col-12 mb-5">
+        <label>Date limite</label>
+        <div class="input-group mb-3">
+            <div class="input-group-addon">
+                <label class="cursor-pointer m-0 py-2 px-4" for="job_deadline"><i class="fa fa-calendar fa-lg"></i></label>
+            </div>
+            {{ form_widget(form.deadline, {attr: {class: 'form-control input-lg datepicker'}}) }}
+        </div>
+    </div>
+
+    {% if editing %}
+        <div class="col-12 mb-5">
+            <label>Date de publication</label>
+            <div class="input-group mb-3">
+                <div class="input-group-addon">
+                    <label class="cursor-pointer m-0 py-2 px-4" for="job_created_at"><i class="fa fa-calendar fa-lg"></i></label>
+                </div>
+                {{ form_widget(form.createdAt, {attr: {class: 'form-control input-lg datepicker'}}) }}
+            </div>
+        </div>
+    {% endif %}
+
+    {# <div class="col-12 mb-5">
+        <label> Entreprise annonyme
+            {{ form_widget(form.isAnonymous) }}
+        </label>
+    </div> #}
+    <div class="col-12 mb-5">
+        <label> Afficher le bouton pour postuler sur {{ website.name }}
+            {{ form_widget(form.applyOnline) }}
+        </label>
+    </div>
+    <div class="my-5 container-fluid px-0">
+        <hr>
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fa fa-check-circle"></i> Publier l'offre
+        </button>
+
+        {% if editing %}
+            <button class="btn btn-info btn-lg float-right" type="button" data-toggle="modal" data-target="#modifyModal">Changer le type de l'annonce</button>
+        {% endif %}
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% if editing %}
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{ path('admin_ad_modify', {'type': 'job', 'id': job.id}) }}" method="get">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer le type de l'annonce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        Changer en:
+                        <select name="change-to" class="custom-select input-lg">
+                            <option value="info">Avis & Info</option>
+                            <option value="offer">Appel d'offre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Continuer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}

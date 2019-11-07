@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: '' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="lnr lnr-search"></span> Recherche <span class="badge badge-info mb-1">{{ results ? results|length : '0' }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Résultats de recherche</h3>
+            </div>
+            <div class="panel-body">
+                {% if results %}
+                    {% if type == "job" %}
+                        {% include 'admin/job/table.html.twig' with {jobs: results} %}
+                    {% elseif type == "info" %}
+                        {% include 'admin/info/table.html.twig' with {infos: results} %}
+                    {% elseif type == "user" %}
+                        {% include 'admin/user/table.html.twig' with {users: results} %}
+                    {% elseif type == "offer" %}
+                        {% include 'admin/offer/table.html.twig' with {offers: results} %}
+                    {% elseif type == "company" %}
+                        {% include 'admin/company/table.html.twig' with {companies: results} %}
+                    {% endif %}
+                {% else %}
+                    <p class="alert alert-info">Pas de résultats.</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- END TABLE STRIPED -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(".modal.fade.item").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var adId = button.data('ad-id')
+            var adType = button.data('ad-type')
+            var adName = button.data('ad-name')
+
+            modal.find('.ad-name').text(adName)
+
+            if(adType == 'user') {
+                modal.find('form').attr('action', `/admin/security/user/delete/${adId}`);
+            } else {
+                modal.find('form').attr('action', `/admin/${adType}/delete/${adId}`);
+            }
+        });
+    </script>
+{% endblock %}
+

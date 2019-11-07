@@ -1,4 +1,9 @@
-<!-- LEFT SIDEBAR -->
+{% set in_list = ['pendings', 'jobs-list', 'offers-list', 'infos-list'] %}
+{% set in_archives = ['jobs', 'offers', 'infos'] %}
+{% set in_settings = ['featured', 'resume-of-week', 'testimonials', 'banner-ad', 'emails', 'admin-users'] %}
+{% set in_create = ['new-company', 'new-user', 'new-job', 'new-offer', 'new-info', 'new-user'] %}
+
+
 <div id="sidebar-nav" class="sidebar">
     <div class="sidebar-scroll">
         <nav>
@@ -9,55 +14,126 @@
                 <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
                     <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
                 </li>
-                <li><a href="{{ path('admin_purchases') }}" {% if active == 'purchases' %} class="active" {% endif %}>
-                    <i class="lnr lnr-select"></i> <span>Réservations</span></a>
-                </li>
                 <li>
-                    <a class="collapsed" data-toggle="collapse" href="#estabPages">
-                        <i class="lnr lnr-apartment"></i>
-                        <span>&Eacute;tablissements</span>
+                    <a {% if active in ['validated_resumes', 'pending_resumes'] %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#resume">
+                        <i class="lnr lnr-database"></i>
+                        <span>Base CV</span>
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
-                    <div class="collapse" id="estabPages">
+                    <div class="collapse{% if active in ['validated_resumes', 'pending_resumes'] %} in{% endif %}" id="resume">
                         <ul class="nav">
-                            <li><a href="{{ path('admin_hotels') }}" {% if active == 'hotels' %} class="active" {% endif %}>
-                                <span>H&ocirc;tels</span></a>
+                            <li><a href="{{ path('admin_resumes_list') }}" {% if active == 'validated_resumes' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-checkmark-circle text-success"></i> CV validés</span></a>
                             </li>
-                            <li><a href="{{ path('admin_apartments') }}" {% if active == 'apartments' %} class="active" {% endif %}>
-                                <span>Appartements</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_restaurants') }}" {% if active == 'restaurants' %} class="active" {% endif %}>
-                                <span>Restaurants</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_immovables_sale') }}" {% if active == 'immovables_sale' %} class="active" {% endif %}>
-                                <span>&Agrave; vendre</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_immovables_rental') }}" {% if active == 'immovables_rental' %} class="active" {% endif %}>
-                                <span>&Agrave; louer</span></a>
+                            <li><a href="{{ path('admin_resumes_list_pending') }}" {% if active == 'pending_resumes' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-history text-warning"></i> CV à valider</span></a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li><a href="{{ path('admin_stats') }}" {% if active == 'stats' %} class="active" {% endif %}>
-                    <i class="lnr lnr-chart-bars"></i> <span>Statistiques</span></a>
-                </li>
-                {# <li>
-                    <a href="{{ path('admin_inbox') }}" {% if active == 'inbox' %} class="active" {% endif %}>
-                        <i class="lnr lnr-inbox"></i>
-                        <span>Boîte de réception
-                            <span class="badge mt-1">
-                                {{ render(controller('App\\Controller\\Admin\\InboxController::getMessagesCount')) }}
-                            </span>
-                        </span>
+                <li>
+                    <a {% if active in in_list %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#ads">
+                        <i class="lnr lnr-list"></i>
+                        <span>Offres</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
-                </li> #}
-                {# <li><a href="{{ path('admin_notifications') }}" {% if active == 'notifs' %} class="active" {% endif %}>
-                    <i class="lnr lnr-alarm"></i> <span>Notifications</span></a>
-                </li> #}
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    {% include 'admin/common/super-admin-sidebar-addon.html.twig' with {active: active} %}
-                {% endif %}
-                <li><a href="{{ path('admin_settings') }}" {% if active == 'settings' %}class="active"{% endif %}><i class="lnr lnr-cog"></i> <span>Param&egrave;tres</span></a></li>
+                    <div class="collapse{% if active in in_list %} in{% endif %}" id="ads">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
+                                <span>En attentes de validation</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_jobs_list') }}" {% if active == 'jobs-list' %} class="active" {% endif %}>
+                                <span>Offres d'emploi</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_offers_list') }}" {% if active == 'offers-list' %} class="active" {% endif %}>
+                                <span>Appels d'offres</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_infos_list') }}" {% if active == 'infos-list' %} class="active" {% endif %}>
+                                <span>Avis & Infos</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="{{ path('admin_companies_list') }}" {% if active == 'companies' %} class="active" {% endif %}>
+                    <i class="lnr lnr-briefcase"></i> <span>Organisations</span></a>
+                </li>
+                <li>
+                    <a {% if active in in_create %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#newAd">
+                        <i class="lnr lnr-plus-circle"></i>
+                        <span>Créer</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
+                    </a>
+                    <div class="collapse{% if active in in_create %} in{% endif %}" id="newAd">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_job_create') }}" {% if active == 'new-job' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-bullhorn"></i> Offre d'emploi</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_offer_create') }}" {% if active == 'new-offer' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-file-add"></i> Appel d'offre</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_info_create') }}" {% if active == 'new-info' %} class="active" {% endif %}>
+                                <span><i class="fa fa-info-circle"></i> Avis & Info</span></a>
+                            </li>
+                            {% if is_granted('ROLE_RESUMES_MANAGER') %}
+                                <li><a href="{{ path('admin_company_create') }}" {% if active == 'new-company' %} class="active" {% endif %}>
+                                    <span><i class="lnr lnr-briefcase"></i> Organisation</span></a>
+                                </li>
+                            {% endif %}
+                            {# <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
+                                <i class="lnr lnr-plus-circle"></i> <span>Ajouter un utilisateur</span></a>
+                            </li> #}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a {% if active in in_settings %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#settings">
+                        <i class="lnr lnr-cog"></i>
+                        <span>Paramètres</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
+                    </a>
+                    <div class="collapse{% if active in in_settings %} in{% endif %}" id="settings">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_settings_featured') }}" {% if active == 'featured' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-star fa-lg"></i> Offres à la une</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_settings_resume_of_week') }}" {% if active == 'resume-of-week' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-pushpin fa-lg"></i> CV de la semaine</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_settings_banner_ad') }}" {% if active == 'banner-ad' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-layers fa-lg"></i> Bannière publicitaire</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_settings_testimonials') }}" {% if active == 'testimonials' %} class="active" {% endif %}>
+                                <span><i class="fa fa-comments-o fa-lg"></i> Témoignages</span></a>
+                            </li>
+                            {# <li><a href="{{ path('admin_settings_emails') }}" {% if active == 'emails' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-envelope fa-lg"></i> Envoie d'e-mails</span></a>
+                            </li> #}
+                            <li><a href="{{ path('admin_settings_admin_users') }}" {% if active == 'admin-users' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-users fa-lg"></i> Administrateurs</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a {% if active in in_archives %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#archive">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                        <i class="icon-submenu fa-bo fa-box fa-box lnr-box lnr lnr-chevron-left"></i>
+                    </a>
+                    <div class="collapse{% if active in in_archives %} in{% endif %}" id="archive">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_jobs_list_archived') }}" {% if active == 'jobs' %} class="active" {% endif %}>
+                                <span>Offres d'emploi</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_offers_list_archived') }}" {% if active == 'offers' %} class="active" {% endif %}>
+                                <span>Appels d'offres</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_infos_list_archived') }}" {% if active == 'infos' %} class="active" {% endif %}>
+                                <span>Avis & Infos</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>

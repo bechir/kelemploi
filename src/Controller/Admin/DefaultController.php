@@ -1,14 +1,17 @@
 <?php
 
 /*
- * This file is part of the Kelemploi application.
+ * This file is part of the Beta application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
+use App\Entity\Company;
+use App\Entity\Application;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +32,61 @@ class DefaultController extends AbstractController
      * @Route("", name="admin_index")
      * @Route("", name="admin_index")
      */
-    public function index(Request $request): Response
+    public function index(Request $request, EntityManagerInterface $em): Response
     {
+        $jobs = $em->getRepository(Application::class)->adminGetRecents();
+        $users = $em->getRepository(User::class)->adminGetRecents();
+
         return $this->render('admin/pages/index.html.twig', [
             'data' => $this->getStats(),
+            'jobs' => $jobs,
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="admin_search")
+     */
+    public function search(Request $request, EntityManagerInterface $em): Response
+    {
+        $type = $request->query->get('type');
+        $terms = $request->query->get('terms');
+        $results = null;
+
+        if (!in_array($type, ['job', 'user', 'company'])) {
+            $this->addFlash('info', "Le de resultat est inconnu.");
+            return $this->redirectToRoute('admin_index');
+        }
+
+        switch($type) {
+            case 'job':
+                $results = $em->getRepository(Application::class)->findBySearchTerms($terms);
+            break;
+            case 'user':
+                $results = $em->getRepository(User::class)->findBySearchTerms($terms);
+            break;
+            case 'company':
+                $results = $em->getRepository(Company::class)->findBySearchTerms($terms);
+            break;
+            default: break;
+        }
+
+        return $this->render("admin/search/index.html.twig", [
+            'type' => $type,
+            'results' => $results
+        ]);
+    }
+
+    /**
+     * @Route("/pendings", name="admin_pendings")
+     */
+    public function pendings(EntityManagerInterface $em): Response
+    {
+        $jobs = $em->getRepository(Application::class)->getPendings();
+
+        return $this->render('admin/pendings.html.twig', [
+            'jobs' => $jobs,
+            'count' => count($jobs),
         ]);
     }
 
@@ -113,14 +167,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/settings", name="admin_settings")
-     */
-    public function settings(Request $request): Response
-    {
-        return $this->render('admin/pages/settings.html.twig');
-    }
-
-    /**
      * @Route("/user/{user}", name="admin_user_show")
      */
     public function show(Request $request, User $user): Response
@@ -149,17 +195,27 @@ class DefaultController extends AbstractController
 
         $qb = $em->createQueryBuilder();
 
-        $activeUsers = $qb->select('count(u.id)')
-            ->from('App:User', 'u')
-            ->where($qb->expr()->eq('u.enabled', 'true'))
-            ->getQuery()
-            ->getSingleScalarResult();
+        $users = $qb->select('count(u.id)')->from('App:User', 'u')
+            ->getQuery()->getSingleScalarResult();
 
-        $purchasesCount = 112;
+        $ads =
+            $em->createQueryBuilder('j')->select('count(j.id)')
+                ->from('App:Application', 'j')
+                ->getQuery()->getSingleScalarResult();
+
+        $resumes = $em->createQueryBuilder('r')->select('count(r.id)')
+            ->from('App:Resume', 'r')
+            ->getQuery()->getSingleScalarResult();
+
+        $companies = $em->createQueryBuilder('c')->select('count(c.id)')
+            ->from('App:Company', 'c')
+            ->getQuery()->getSingleScalarResult();
 
         return [
-            'activeUsers' => $activeUsers,
-            'purchasesCount' => $purchasesCount,
+            'ads' => $ads,
+            'users' => $users,
+            'resumes' => $resumes,
+            'companies' => $companies,
         ];
     }
 }

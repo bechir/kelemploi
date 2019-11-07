@@ -1,0 +1,31 @@
+<div class="table-responsive">
+    {% if jobs is not empty %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Organisation</th>
+                <th>Titre</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr class="td-3rem">
+                    <td>
+                        {% if job.company.photo %}
+                            <img class="img-35" src="{{ vich_uploader_asset(job.company.photo, 'companyPhotoFile') }}"/>
+                        {% endif %}
+                        <a href="{{ path('admin_company_show', {company: job.company.id}) }}">{{ job.company }}</a>
+                    </td>
+                    <td><a title="Afficher les details" href="{{ path('admin_job_show', {job: job.id}) }}">{{ job.title }}</a></td>
+                    <td>
+                        <a href="{{ path('admin_settings_remove_from_featureds', {job: job.id}) }}"><span class="fa fa-minus-circle"></span> Retirer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="alert alert-info">Pas d'offres à la une actuellement.</p>
+    {% endif %}
+<div>

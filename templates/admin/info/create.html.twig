@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'new-info' } %}
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title text-info">
+        <span><i class="fa fa-plus-circle"></i> Créer un avis & info</span></a>
+    </h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-body">
+                    {% include 'admin/info/_form.html.twig' with {form: form, editing: false} %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="//cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+</script>
+{% endblock %}

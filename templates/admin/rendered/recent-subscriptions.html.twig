@@ -33,7 +33,7 @@
                         <td><a href="{{ path('admin_user_show', {user: subscription.user.id}) }}">{{ subscription.user.username }}</a></td>
                         <td><a href="{{ path('admin_training_show', {slug: subscription.package.slug}) }}">{{ subscription.title }}</a></td>
                         <td>{{ subscription.paidPrice }} €</td>
-                        <td>{{ subscription.startAt|localizeddate('full', 'none', _locale )|capitalize }}</td>
+                        <td>{{ subscription.startAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
                         <td>
                             {% if subscription.expired %}
                                 <span class="label label-default">TERMINÉ</span>

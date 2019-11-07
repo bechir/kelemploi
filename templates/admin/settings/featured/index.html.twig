@@ -1,0 +1,164 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% block content %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Offres à la une</h3>
+    </div>
+    <div class="panel-body">
+        {% include 'admin/settings/featured/table.html.twig' with {jobs: jobs} %}
+    </div>
+    <div class="panel-footer pl-0 pb-0 mt-5">
+        <a href="#" data-toggle="modal" data-target="#addFeatured" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter des offres à la une</a>
+        <div class="modal fade" id="addFeatured" tabindex="-1" role="dialog" aria-labelledby="addFeaturedLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addFeaturedLabel"><i class="fa fa-plus-circle"></i> Ajouter des offres à la une</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="GET" action="{{ path('admin_settings_search_jobs') }}">
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="terms" placeholder="Rechercher une offre par son titre ou son organisation">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Rechercher</button>
+                                </span>
+                            </div>
+                        </form>
+                        <hr class="my-3">
+                        <div class="row scrollable">
+                            <div class="loader text-center">
+                                <img class="loading-img" src="{{ asset('images/horizontal-loader.gif') }}" alt="Loading...">
+                            </div>
+                            <div class="px-4" id="results">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-lg float-right" data-dismiss="modal">Fermer la fenêtre</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% block javascript %}
+        {{ parent() }}
+
+        <script>
+            let listStateChanged = false;
+            let roleStateChanged = false;
+            const successMessage = `<span class="float-right btn btn-success py-0 px-2 mt-4"><i class="fa fa-check-circle"></i> Offre ajoutée</span>`;
+
+            $("#addFeatured").on('show.bs.modal', function(){
+                const modal = $(this);
+                modal.find('form').submit(function(event){
+                    event.preventDefault();
+
+                    const terms = $.trim(modal.find('form input#terms').val());
+                    let currentRequest = null;
+
+                    if(terms.length > 3) {
+                        $(".loader").show()
+                        $('#results').css('opacity', 0.173);
+
+                        $.ajax({
+                            type: "GET",
+                            dataType: "html",
+                            url: modal.find('form').attr('action'),
+                            data: `terms=${terms}`,
+                            
+                            beforeSend: function(){
+                                if(currentRequest) {
+                                    currentRequest.abort();
+                                }
+                            },
+
+                            success: function(data) {
+                                $(".loader").hide()
+                                $('#results').css('opacity', 1);
+                                $("#results").html(data);
+
+                                modal.find('a.add-job-btn').click(function(e) {
+                                    const actualAd = $(this);
+                                    e.preventDefault();
+
+                                    actualAd.addClass('disabled');
+
+                                    $.ajax({
+                                        type: "GET",
+                                        dataType: "json",
+                                        url: "{{ path('admin_settings_featured_new') }}",
+                                        data: 'jobId=' + actualAd.data('job-id'),
+
+                                        success: function(data) {
+                                            if(data.code == 200) {
+                                                actualAd.replaceWith(successMessage);
+                                                listStateChanged = true;
+                                            } else {
+                                                alert(data.message);
+                                                actualAd.removeClass('disabled');
+                                            }
+                                        },
+
+                                        error: function(data) {
+                                            console.log(data);
+                                            actualAd.removeClass('disabled');
+                                        }
+                                    });
+                                });
+                            },
+
+                            error: function(data) {
+                                $(".loader").hide();
+                                $('#results').css('opacity', 1);
+                                console.error(data)
+                            }
+                        })
+                    } else {
+                        alert('Entrez au moins 4 caractères.');
+                    }
+                });
+
+            }).on('hidden.bs.modal', function(){
+                if(listStateChanged) {
+                    location.reload(true);
+                }
+            });
+
+            $("#updateRoleModal").on('show.bs.modal', function(e){
+                const modal = $(this);
+                const button = $(e.relatedTarget);
+
+                modal.find('.username').text(button.data('username'));
+
+                $(".role-form-loader").show()
+                $('#role-form-results').css('opacity', 0.173);
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: "{{ path('admin_settings_edit_user_role') }}",
+                    data: 'userId=' + button.data('user-id') + '&ajax=true',
+                    
+                    success: function(data) {
+                        $(".role-form-loader").hide()
+                        $('#role-form-results').css('opacity', 1);
+                        $("#role-form-results").html(data);
+                    },
+
+                    error: function(data) {
+                        $(".role-form-loader").hide();
+                        $('#role-form-results').css('opacity', 1);
+                        console.error(data)
+                    }
+                })
+            });
+        </script>
+    {% endblock %}
+{% endif %}

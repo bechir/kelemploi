@@ -9,13 +9,12 @@
 {% block main %}
   <div class="panel panel-profile">
     <div class="clearfix">
-      <!-- LEFT COLUMN -->
-      <div class="col-md-4 package profile-left">
+      <div class="col-md-10 col-md-offset-1">
         <!-- PROFILE HEADER -->
         <div class="profile-header">
           <div class="overlay {% if user.enabled %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
           <div class="profile-main">
-            <h3 class="name">{{ user.username }}</h3>
+            <h3 class="name">{{ user.fullname }}</h3>
             <div class="user-state">
               {% if user.enabled %}
                   <span class="lnr lnr-checkmark-circle"></span> Activé
@@ -28,30 +27,55 @@
               {% endif %}
             </div>
           </div>
-          <div class="profile-stat">
-            <div class="row">
-              <div class="col-md-12 stat-item">
-                {{ user.purchases|length }} <span>Réservation·s effectuée·s</span>
+          {% if user.hasRole('ROLE_SUPER_ADMIN') %}
+            <div class="profile-stat">
+              <div class="row">
+                <h4><i class="fa fa-star"></i> Super Admin</h4>
               </div>
             </div>
-          </div>
+          {% elseif user.isAdmin() %}
+            <div class="profile-stat">
+              <div class="row">
+                <h4>Administrateur</h4>
+              </div>
+            </div>
+          {% elseif user.isEmployer() %}
+            <div class="profile-stat">
+              <div class="row">
+                <h4>Recruteur</h4>
+                <div class="col-md-12 stat-item">
+                  <span><a class="text-white" href="{{ path('admin_company_show', {company: user.company.id}) }}">{{ user.company }}</a></span>
+                </div>
+              </div>
+            </div>
+          {% endif %}
         </div>
         <!-- END PROFILE HEADER -->
         <!-- PROFILE DETAIL -->
         <div class="profile-detail">
-          <div class="profile-info">
-            <h4 class="heading">Informations de base</h4>
+          <div class="profile-info px-0">
+            <h4 class="heading">Informations</h4>
             <ul class="list-unstyled list-justify">
-              <li>Date de inscrit <span>{{ user.submittedAt|date('d M, Y') }}</span></li>
-              {# <li>Mobile <span>(221) 78 123 45 67</span></li> #}
+              <li>Nom <span><strong>{{ user.fullname }}</strong></span></li>
+              <li>Login <span>{{ user.username }}</span></li>
+              <li>Date d'inscription <span>{{ user.submittedAt|date('d M, Y') }}</span></li>
               <li>Email <span>{{ user.email }}</span></li>
-              {# <li>Site web <span><a href="#">www.un-site.com</a></span></li> #}
+              {% if user.haveCompany() %}
+                <li>Entreprise <span><a href="{{ path('admin_company_show', {company: user.company.id}) }}">{{ user.company }}</a></span></li>
+              {% endif %}
+              {% if user.haveResume() %}
+                <li>CV <span><a href="{{ path('admin_resume_show', {resume: user.resume.id}) }}">Afficher le CV</a></span></li>
+              {% endif %}
+              
             </ul>
           </div>
-          <div class="profile-info">
-            <h4 class="heading">Actions sur le compte</h4>
+            {% if user.haveResume() %}
+              <a href="{{ path('resume_show', {slug: user.resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
+            {% endif %}
+          <div class="profile-info px-0 text-center">
+            <hr>
             <div class="text-center">
-              {% if not user.hasRole('ROLE_ADMIN') %}
+              {% if not user.hasRole('ROLE_SUPER_ADMIN') %}
                 <div class="btn-group">
                     <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not user.enabled %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
                     <a href="#" class="btn btn-info m-1 px-4 my-3 {% if user.enabled %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
@@ -59,7 +83,7 @@
                 </div>
               {% endif %}
               {% if app.user == user %}
-                <a href="{{ path('fos_user_profile_edit') }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier mon profil</a>
+                <a href="{{ path('user_profile_edit') }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier mon profil</a>
               {% endif %}
             </div>
           </div>
@@ -72,7 +96,7 @@
                             <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
                         </div>
                         <div class="modal-body">
-                            <p class="text-danger">Voulez-vous vraiment supprimer <strong>{{ user.username }}</strong> de la base de données ?</p>
+                            <p class="text-danger">Voulez-vous vraiment supprimer <strong>{{ user.fullname }}</strong> de la base de données ?</p>
                             <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
                         </div>
                         <div class="modal-footer">
@@ -91,61 +115,6 @@
         </div>
         <!-- END PROFILE DETAIL -->
       </div>
-      <!-- END LEFT COLUMN -->
-      <!-- RIGHT COLUMN -->
-      <div class="col-md-8 package profile-right">
-        <h4 class="heading"> ​{{ user.username }}</h4>
-        <!-- TABBED CONTENT -->
-        <div class="custom-tabs-line tabs-line-bottom left-aligned">
-          <ul class="nav" role="tablist">
-            <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Réservation·s <span class="badge">{{ user.purchases|length }}</span></a></li>
-          </ul>
-        </div>
-        <div class="tab-content pb-5">
-          <div class="tab-pane fade in active" id="tab-bottom-left1">
-            <div class="table-responsive">
-              <table class="table project-table">
-                {% if user.purchases|length > 0 %}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Hôtel</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                    <th>Liens</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% endif %}
-                  {% for p in user.purchases %}
-                    <tr>
-                      <td>{{ loop.index }}</td>
-                      <td>{{ p.estab.name }}</td>
-                      <td>{{ p.createdAt|date('d M Y') }}</td>
-                      <td>
-                        {% if p.state == p.CONFIRMED %}
-                          <span class="label label-success">{{ p.state|trans }}</span>
-                        {% elseif p.state == p.PENDING %}
-                          <span class="label label-info">{{ p.state|trans }}</span>
-                        {% else %}
-                          <span class="label label-default">{{ p.state|trans }}</span>
-                        {% endif %}
-                      </td>
-                      <td>
-                        <a href="#">Détails</a>
-                      </td>
-                    </tr>
-                  {% else %}
-                    <p class="text-center my-6">Aucune réservation effectuée.</p>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- END TABBED CONTENT -->
-      </div>
-      <!-- END RIGHT COLUMN -->
     </div>
   </div>
 {% endblock %}

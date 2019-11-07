@@ -1,0 +1,35 @@
+<h4>Résultats de recherche</h4><hr>
+<ul class="list-unstyled list-hoverable">
+    {% for job in jobs %}
+        <li class="mt-3 {% if not loop.last %}border-bottom{% endif %}{% if job.linkedJobs is not empty %} row mx-0{% endif %}">
+            {% if job.linkedJobs is empty %}
+                <a class="d-block py-1 my-2 mx-2 text-info btn-link" href="#">
+                    {% if job.company.photo %}
+                        <img class="img-50" src="{{ vich_uploader_asset(job.company.photo, 'companyPhotoFile') }}"/>
+                    {% endif %}
+                    {{ job.title[ : 100] }}
+                </a>
+                <a href="#" data-job-id="{{ job.id }}" class="add-job-btn float-right btn btn-success py-0 px-2 mt-4"><i class="fa fa-plus-circle"></i> Ajouter</a>
+            {% else %}
+                <div class="col-sm-1 px-0">
+                    {% if job.company.photo %}
+                        <img class="img-50" src="{{ vich_uploader_asset(job.company.photo, 'companyPhotoFile') }}"/>
+                    {% else %}
+                        <strong>{{ job.company }}</strong>
+                    {% endif %}
+                </div>
+                <div class="col-sm-10 px-0">
+                    <a href="#">&ndash; {{ job.title }}</a><br>
+                    {% for j in job.linkedJobs %}
+                        <a href="#">&ndash; {{ j.title }}</a><br>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-1 px-0">
+                    <a href="#" data-job-id="{{ job.id }}" class="add-job-btn float-right btn btn-success py-0 px-2 mt-4"><i class="fa fa-plus-circle"></i> Ajouter</a>
+                </div>
+            {% endif %}
+        </li>
+    {% else %}
+        <li class="mx-3 my-3">Aucune offre trouvée.</li>
+    {% endfor %}
+</ul>

@@ -1,30 +1,34 @@
 <?php
 
 /*
- * This file is part of the Kelemploi application.
+ * This file is part of the Beta application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
+use App\Entity\ResumeOfWeek;
 use App\Entity\User;
+use App\Form\Admin\AdminUserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Controller that manage security part of the backend.
  *
  * @IsGranted("ROLE_ADMIN")
- * @Route("/security")
+ * @Route("/fr/admin/security")
  */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/user/disable", name="admin_security_user_disable", methods={"POST"})
+     * @Route("/fr/user/disable", name="admin_security_user_disable", methods={"POST"})
      */
     public function disableUser(Request $request): JsonResponse
     {
@@ -45,19 +49,26 @@ class SecurityController extends AbstractController
     public function deleteUser(User $user)
     {
         if (!$user) {
-            $this->addFlash('success', "L'utilisateur est introuvable.");
+            $this->addFlash('danger', "L'utilisateur est introuvable.");
         } else {
             if ($user->hasRole('ROLE_ADMIN')) {
-                $this->addFlash('success', 'Impossible de supprimer cet administrateur.');
+                $this->addFlash('danger', 'Impossible de supprimer cet administrateur.');
             } else {
                 $em = $this->getDoctrine()->getManager();
+
+                $resumeOfWeeek = $em->getRepository(ResumeOfWeek::class)->get();
+                if ($resumeOfWeeek->getResume() == $user->getResume()) {
+                    $this->addFlash('info', "Vous devez supprimer cet utilisateur du CV à la une d'abord.");
+
+                    return $this->redirectToRoute('admin_settings_resume_of_week');
+                }
                 $em->remove($user);
                 $em->flush();
                 $this->addFlash('success', "L'utilisateur a été supprimé.");
             }
         }
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_users');
     }
 
     private function setUserEnabled(Request $request, $enabled): JsonResponse
@@ -72,5 +83,33 @@ class SecurityController extends AbstractController
         }
 
         return new JsonResponse(true);
+    }
+
+    /**
+     * @Route("/new/user", name="admin_user_create")
+     */
+    public function create(Request $request, EntityManagerInterface $em): Response
+    {
+        $user = new User();
+        $form = $this->createForm(AdminUserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles([$user->getRoles()->getType()]);
+            $em->persist($user);
+
+            $em->flush();
+
+            $this->addFlash('success', "L'utilisateur a été créé avec succès.");
+
+            return $this->redirectToRoute('admin_user_show', [
+                'user' => $user->getId(),
+            ]);
+        }
+
+        return $this->render('admin/user/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
