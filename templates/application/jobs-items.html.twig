@@ -1,10 +1,12 @@
 {% import 'util/util.twig' as util %}
 {% import 'util/company_widgets.twig' as widgets %}
 
+{% set _locale = app.request.get('_locale', 'fr') %}
+{% set _locale = 'en' %}
+
 {% if class is not defined %}
     {% set class = 'job-filter-result' %}
 {% endif %}
-
 
 <div class="{{ class }}">
     {% for _app in list %}
@@ -36,7 +38,7 @@
                             <i data-feather="heart"></i>
                         </a>
                     </div>
-                    <p class="deadline">{{ 'job.deadline'|trans }} {{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</p>
+                    <p class="deadline">{{ 'job.deadline'|trans }} {{ _app.dates.start|localizeddate('full', 'none', _locale )|capitalize }}</p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,8 @@
 {% set currentPath = path(app.request.get('_route'), app.request.attributes.get('_route_params')) %}
 
+{% set _locale = app.request.get('_locale', 'fr') %}
+{% set _locale = 'en' %}
+
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="fr" class="full-height" />
     <head>

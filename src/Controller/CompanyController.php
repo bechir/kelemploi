@@ -50,15 +50,10 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_USER").
+     * IsGranted("ROLE_EMPLOYER")
      */
     public function dashboard(UserInterface $user = null): Response
     {
-        // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
-            return $this->render('candidate/access-limited.html.twig');
-        }
-
         return $this->render('company/dashboard.html.twig', [
             'user' => $user,
             'active' => 'dashboard',

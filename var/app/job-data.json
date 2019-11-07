@@ -1,24 +1,29 @@
 {
     "job": {
         "categories": [
-            "Aéronautique",
             "Alimentation / Restauration",
             "Agriculture / Pêche / Élevage",
             "Création / Arts / Mode",
             "Papetérie et Services liés",
             "Direction Générale",
-            "Bâtiment / Construction",
-            "Commerce / Vente",
-            "Comptabilité / Gestion / Administration",
+            "Immobilier",
+            "Vente",
+            "Comptabilité / Gestion",
+            "Administration",
             "Juridique / Droit",
+            "Commerce de détail",
             "Journalisme / Édition",
             "Resources Humaines",
             "Consultance / Freelance",
             "Enseignement / Recherche",
-            "Banque / Finance / Assurance",
+            "Fonction publique",
+            "Banque / Finance",
+            "Assurance",
             "Industrie",
-            "Informatique / Télécommunication",
-            "Desgin / Infographie / Multimédia",
+            "Informatique",
+            "Ingenierie",
+            "Télécommunication",
+            "Desgin / Infographie",
             "Langue / Écrit",
             "Marketing / Communication",
             "Médias",
@@ -27,9 +32,12 @@
             "Sécurité",
             "Social",
             "Sécrétariat / Assistant / Accueil",
+            "Services à la clientèle",
+            "Installation / Entretien / Reparation",
             "Sport",
-            "Tourisme",
-            "Transports / Logistique"
+            "Hôtellerie / Tourisme",
+            "Transports / Logistique",
+            "Autre"
         ],
 
         "regions": [
@@ -47,6 +55,6 @@
             "Tambacounda",
             "Thiès",
             "Ziguinchor"
-        ]
+        ]        
     }
 }

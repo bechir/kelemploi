@@ -7,7 +7,7 @@ company_show:
   controller: App\Controller\CompanyController::show
 
 company_dashboard:
-  path: /dashboard
+  path: /dashboard/company
   controller: App\Controller\CompanyController::dashboard
 
 company_edit_profile:

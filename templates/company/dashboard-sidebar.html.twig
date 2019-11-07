@@ -48,24 +48,19 @@
                 <i class="fas fa-plus-square"></i>
                 <a href="{{ path('application_create') }}">{{ 'employer.post_new_job'|trans }}</a>
             </li>
-            <li {% if active == 'messages' %}class="active"{% endif %}>
+            {# <li {% if active == 'messages' %}class="active"{% endif %}>
                 <i class="fas fa-comment"></i>
                 <a href="{{ path('company_messages') }}">{{ 'employer.message'|trans }}</a>
-            </li>
+            </li> #}
             <li {% if active == 'pricing' %}class="active"{% endif %}>
                 <i class="fas fa-calculator"></i>
-                <a href="{{ path('company_pricing') }}">{{ 'layout.pricing'|trans }}</a>
+                <a href="{{ path('company_pricing') }}">Votre plan</a>
             </li>
         </ul>
         <ul class="delete">
             <li>
                 <i class="fas fa-power-off"></i>
                 <a href="{{ path('fos_user_security_logout') }}">{{ 'user.logout'|trans }}</a>
-            </li>
-            <hr>
-            <li>
-                <i class="fas fa-trash-alt"></i>
-                <a data-target="#modal-delete" data-toggle="modal" href="#">{{ 'user.delete_account.title'|trans }}</a>
             </li>
         </ul>
         

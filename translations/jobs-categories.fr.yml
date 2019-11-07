@@ -1,33 +1,40 @@
-aeronautique: Aéronautique
+
 alimentation-restauration: Alimentation / Restauration
 agriculture-peche-elevage: Agriculture / Pêche / Élevage
 creation-arts-mode: Création / Arts / Mode
 papeterie-et-services-lies: Papetérie et Services liés
 direction-generale: Direction Générale
-batiment-construction: Bâtiment / Construction
-commerce-vente: Commerce / Vente
-comptabilite-gestion-administration: Comptabilité / Gestion / Administration
+immobilier: Immobilier
+vente: Vente
+comptabilite-gestion: Comptabilité / Gestion
+administration: Administration
 juridique-droit: Juridique / Droit
+commerce-de-detail: Commerce de détail
 journalisme-edition: Journalisme / Édition
 resources-humaines: Resources Humaines
 consultance-freelance: Consultance / Freelance
 enseignement-recherche: Enseignement / Recherche
-banque-finance-assurance: Banque / Finance / Assurance
+fonction-publique: Fonction publique
+banque-finance: Banque / Finance
+assurance: Assurance
 industrie: Industrie
-informatique-telecommunication: Informatique / Télécommunication
-ingenierie-architecture: Ingénierie / Architecture
-desgin-infographie-multimedia: Desgin / Infographie / Multimédia
+informatique: Informatique
+ingenierie: Ingenierie
+telecommunication: Télécommunication
+desgin-infographie: Desgin / Infographie
 langue-ecrit: Langue / Écrit
 marketing-communication: Marketing / Communication
 medias: Médias
 sante: Santé
 sciences: Sciences
 securite: Sécurité
-service-client: Service Client
 social: Social
 secretariat-assistant-accueil: Sécrétariat / Assistant / Accueil
+services-a-la-clientele: Services à la clientèle
+installation-entretien-reparation: Installation / Entretien / Reparation
 sport: Sport
-tourisme: Tourisme
+hotellerie-tourisme: Hôtellerie / Tourisme
 transports-logistique: Transports / Logistique
+autre: Autre
 form.job.category: Sélectionnez une catégorie
 all: Toutes les catégories

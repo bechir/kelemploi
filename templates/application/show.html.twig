@@ -103,7 +103,7 @@
                         <h4>{{ 'job.summary'|trans }}</h4>
                         <ul>
                             <li><span>{{ 'word.company'|trans }}: </span><a href="{{ path('company_show', {slug: company.slug}) }}" class="btn-link">{{ company.name }}</a></li>
-                            <li><time itemprop="publishDate" datetime="{{ _app.dates.start|date('Y-m-d\\TH:i:sP') }}" pubdate><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', app.request.locale )|capitalize }}</time></li>
+                            <li><time itemprop="publishDate" datetime="{{ _app.dates.start|date('Y-m-d\\TH:i:sP') }}" pubdate><span>{{ 'job.published_on'|trans }}</span>{{ _app.dates.start|localizeddate('full', 'none', _locale )|capitalize }}</time></li>
                             {% if _app.nbCandidatesToRecruit %}
                                 <li><span>{{ 'job.vacancy'|trans }}</span>{{ _app.nbCandidatesStr }}</li>
                             {% endif %}
@@ -121,7 +121,7 @@
                               <li><span>{{ 'job.gender'|trans }}</span>{{ _app.gender|trans }}</li>
                             {% endif %}
                             {% if _app.dates.end is not null %}
-                                <li><span>{{ 'job.deadline'|trans }}</span>{{ _app.dates.end|localizeddate('full', 'none', app.request.locale )|capitalize }}</li>
+                                <li><span>{{ 'job.deadline'|trans }}</span>{{ _app.dates.end|localizeddate('full', 'none', _locale )|capitalize }}</li>
                             {% endif %}
                         </ul>
                       </div>

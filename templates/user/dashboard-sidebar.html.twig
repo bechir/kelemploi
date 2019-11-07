@@ -48,19 +48,14 @@
             <li {% if active == 'applied-jobs' %}class="active"{% endif %}>
                 <i class="fas fa-check-square"></i><a href="{{ path('user_applied') }}">{{ 'applied_jobs'|trans }}</a>
             </li>
-            <li {% if active == 'messages' %}class="active"{% endif %}>
+            {# <li {% if active == 'messages' %}class="active"{% endif %}>
                 <i class="fas fa-comment"></i><a href="{{ path('user_messages') }}">{{ 'messages'|trans }}</a>
-            </li>
+            </li> #}
         </ul>
         <ul class="delete">
             <li>
                 <i class="fas fa-power-off"></i>
                 <a href="{{ path('fos_user_security_logout') }}">{{ 'user.logout'|trans({}, 'messages') }}</a>
-            </li>
-            <hr>
-            <li>
-                <i class="fas fa-trash-alt"></i>
-                <a data-target="#modal-delete" data-toggle="modal" href="#">{{ 'user.delete_account.title'|trans({}, 'messages') }}</a>
             </li>
         </ul>
 
