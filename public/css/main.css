@@ -2404,11 +2404,11 @@ a:focus {
 .explore-job {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 3px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .explore-job .explore-job-header {
-  padding: 20px 20px 20px 30px;
+  padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2437,21 +2437,17 @@ a:focus {
 }
 
 .explore-job .key-info ul {
-  padding: 30px;
+  padding: 20px;
   padding-right: 0;
   padding-bottom: 0;
   padding-top: 0;
   margin: 0;
-  margin-top: 30px;
+  margin-top: 20px;
   list-style: none;
-  height: 270px;
+  height: 200px;
   overflow-x: hidden;
   overflow-y: scroll;
-  margin-bottom: 30px;
-  /* Set Scrollbar Width */
-  /* Set Scrollbar Buttons */
-  /* Set Scrollbar Track */
-  /* Set Scrollbar Handle */
+  margin-bottom: 20px;
 }
 
 .explore-job .key-info ul::-webkit-scrollbar {
@@ -2476,6 +2472,7 @@ a:focus {
 }
 
 .explore-job .key-info ul li a {
+  display: block;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: #6f7484;
@@ -2485,7 +2482,8 @@ a:focus {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #aaaaaa;
-  margin-left: 5px;
+  float: right;
+  padding-right: 15px;
 }
 
 .explore-job .key-info ul li a:hover {

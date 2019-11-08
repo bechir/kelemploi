@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'home.title'|trans({'%name%': website.name}) }}{% endblock %}
+{% block title %}{{ website.name }} | Offres d'emploi et de stages au Sénégal{% endblock %}
 
 {% block main %}
 
@@ -11,13 +11,13 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-            <h1 class="reveal-1 w-75">{{ 'home.banner_title'|trans({'%x%': categories_count['all']}) }}</h1>
-              <p class="reveal-2">{{ 'home.banner_text'|trans }}</p>
+            <h1 class="reveal-1 w-75">Des offres d'empoi et de stages partout au Sénégal</h1>
+              <p class="reveal-2">Trouvez rapidement l'emploi qui vous correspond le mieux!</p>
               
               {% if is_granted('ROLE_EMPLOYER') %}
-                <a href="{{ path('applications_list') }}" class="button reveal-3 py-3 px-4">{{ 'action.explore_jobs'|trans }}</a>
+                <a href="{{ path('applications_list') }}" class="button reveal-3 py-3 px-4">Voir les offres</a>
               {% else %}
-                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">{{ 'home.add_resume'|trans }}</a>
+                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">Ajoutez votre CV</a>
               {% endif %}              
             </div>
           </div>
@@ -33,24 +33,24 @@
           <div class="col">
             <div class="searchAndFilter-block">
               <div class="searchAndFilter">
-                <form action="{{ path('applications_list') }}" method="get" class="search-form">
-                  <input type="text" placeholder="{{ 'form.enter_keywords'|trans }}">
+                <form action="{{ path('applications_list') }}" method="GET" class="search-form">
+                  <input type="text" placeholder="Entrez les mots clés">
                   <select class="selectpicker" name="region" id="search-location">
-                    <option value="" selected>{{ 'word.region'|trans }}</option>
+                    <option value="" selected>Région</option>
                     {% for region in regions %}
-                      <option value="{{ region.slug }}">{{ region.slug|trans({}, 'regions') }}</option>
+                      <option value="{{ region.slug }}">{{ region.name }}</option>
                     {% endfor %}
                   </select>
                   <select class="selectpicker" name="c" id="search-category">
-                    <option value="" selected>{{ 'word.category'|trans }}</option>
+                    <option value="" selected>Catégorie</option>
                     {% for category in categories %}
-                      <option value="{{ category.slug }}">{{ category.slug|trans({}, 'jobs-categories') }}</option>
+                      <option value="{{ category.slug }}">{{ category.name }}</option>
                     {% endfor %}
                   </select>
-                  <button class="button primary-bg"><i class="fas fa-search"></i>{{ 'job.search'|trans }}</button>
+                  <button class="button primary-bg"><i class="fas fa-search"></i>Rechercher</button>
                 </form>
                 <div class="filter-categories">
-                  <h4>{{ 'job.by_category'|trans }}</h4>
+                  <h4>Offres d'emploi et de stages par métier</h4>
                   <ul>
                     <li><a href="{{ path('applications_list', {c: 'banque-finance'}) }}"><i data-feather="bar-chart-2"></i>{{ 'banque-finance'|trans({}, 'jobs-categories') }} <span>({{ categories_count['banque-finance'] }})</span></a></li>
                     <li><a href="{{ path('applications_list', {c: 'enseignement-recherche'}) }}"><i data-feather="edit-3"></i>{{ 'enseignement-recherche'|trans({}, 'jobs-categories') }} <span>({{ categories_count['enseignement-recherche'] }})</span></a></li>
@@ -106,10 +106,114 @@
 
     {# Registration box if the user is not logged in #}
     {% include 'common/registration-box.html.twig' %}
+
+    <div class="py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="section-header mt-3 mb-5">
+                <h4><i class="ti-search fa-sm"></i> Les recherches fréquentes</h4>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <div class="explore-job">
+                <div class="explore-job-header">
+                  <h5 class="title">Par métier</h5>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="key-info">
+                  <ul>
+                    <li><a href="job-listing.html">Accounting / Finance<span>(233)</span></a></li>
+                    <li><a href="job-listing.html">Education<span>(46)</span></a></li>
+                    <li><a href="job-listing.html">Design &amp; Creative<span>(156)</span></a></li>
+                    <li><a href="job-listing.html">Health Care<span>(98)</span></a></li>
+                    <li><a href="job-listing.html">Engineer &amp; Architects<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Marketing &amp; Sales<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">Garments / Textile<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Customer Support<span>(15)</span></a></li>
+                    <li><a href="job-listing.html">Accounting / Finance<span>(233)</span></a></li>
+                    <li><a href="job-listing.html">Education<span>(46)</span></a></li>
+                    <li><a href="job-listing.html">Design &amp; Creative<span>(156)</span></a></li>
+                    <li><a href="job-listing.html">Health Care<span>(98)</span></a></li>
+                    <li><a href="job-listing.html">Engineer &amp; Architects<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Marketing &amp; Sales<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">Garments / Textile<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Customer Support<span>(15)</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="explore-job">
+                <div class="explore-job-header">
+                  <h5 class="title">Par région</h5>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div class="key-info">
+                  <ul>
+                    <li><a href="job-listing.html">New York<span>(233)</span></a></li>
+                    <li><a href="job-listing.html">Los Angeles<span>(46)</span></a></li>
+                    <li><a href="job-listing.html">California<span>(156)</span></a></li>
+                    <li><a href="job-listing.html">Chicago<span>(98)</span></a></li>
+                    <li><a href="job-listing.html">Illinois<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Houston<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">Phoenix<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Texas<span>(15)</span></a></li>
+                    <li><a href="job-listing.html">Arizona<span>(233)</span></a></li>
+                    <li><a href="job-listing.html">Philadelphia<span>(46)</span></a></li>
+                    <li><a href="job-listing.html">Pennsylvania<span>(156)</span></a></li>
+                    <li><a href="job-listing.html">San Antonio<span>(98)</span></a></li>
+                    <li><a href="job-listing.html">San Diego<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Dallas<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">San Jose<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Austin<span>(15)</span></a></li>
+                    <li><a href="job-listing.html">Jacksonville<span>(25)</span></a></li>
+                    <li><a href="job-listing.html">Florida<span>(53)</span></a></li>
+                    <li><a href="job-listing.html">San Francisco<span>(74)</span></a></li>
+                    <li><a href="job-listing.html">Columbus<span>(26)</span></a></li>
+                    <li><a href="job-listing.html">Ohio<span>(58)</span></a></li>
+                    <li><a href="job-listing.html">Indianapolis<span>(96)</span></a></li>
+                    <li><a href="job-listing.html">Indiana<span>(123)</span></a></li>
+                    <li><a href="job-listing.html">Fort Worth<span>(42)</span></a></li>
+                    <li><a href="job-listing.html">Charlotte<span>(71)</span></a></li>
+                    <li><a href="job-listing.html">North Carolina<span>(19)</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="explore-job">
+                <div class="explore-job-header">
+                  <h5 class="title">Par secteur</h5>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                </div>
+                <div class="key-info">
+                  <ul>
+                    <li><a href="job-listing.html">Digoin<span>(233)</span></a></li>
+                    <li><a href="job-listing.html">Orion Ltd.<span>(46)</span></a></li>
+                    <li><a href="job-listing.html">RealHouse<span>(156)</span></a></li>
+                    <li><a href="job-listing.html">BioPro Phrma<span>(98)</span></a></li>
+                    <li><a href="job-listing.html">Homeland<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Realouse<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">Healthyete<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Theoreo<span>(15)</span></a></li>
+                    <li><a href="job-listing.html">Homeland<span>(584)</span></a></li>
+                    <li><a href="job-listing.html">Realouse<span>(188)</span></a></li>
+                    <li><a href="job-listing.html">Healthyete<span>(124)</span></a></li>
+                    <li><a href="job-listing.html">Theoreo<span>(15)</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
     
     {# Testimonial #}
 
     {# NewsLetter #}
-    {% include "common/newsletter.html.twig" %}
+    {# {% include "common/newsletter.html.twig" %} #}
 
 {% endblock %}
