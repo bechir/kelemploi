@@ -15,9 +15,9 @@
               <p class="reveal-2">{{ 'home.banner_text'|trans }}</p>
               
               {% if is_granted('ROLE_EMPLOYER') %}
-                <a href="{{ path('applications_list') }}" class="button reveal-3">{{ 'action.explore_jobs'|trans }}</a>
+                <a href="{{ path('applications_list') }}" class="button reveal-3 py-3 px-4">{{ 'action.explore_jobs'|trans }}</a>
               {% else %}
-                <a href="{{ path('add_resume') }}" class="button reveal-3">{{ 'home.add_resume'|trans }}</a>
+                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">{{ 'home.add_resume'|trans }}</a>
               {% endif %}              
             </div>
           </div>

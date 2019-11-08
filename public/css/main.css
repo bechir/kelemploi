@@ -1,50 +1,3 @@
-/*=======================================================================
-* Template Name: Oficiona
-* Template URI: http://codepassenger.com/html/Oficiona
-* Author: CodePassenger
-* Author URI: http://codepassenger.com/
-* Description: Job Board HTML Template
-* Version: 1.0
-* License: GPL v2 or later
-* License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-* Tags: html, template, Oficiona, Job, Job Board, bootstrap, codepassenger
-======================================================================= */
-/* Table of content
---------------------------------------------
-
-	01.0 General Style
-	02.0 Banner Style
-	03.0 Search Style
-	04.0 Breadcrumb Style
-	05.0 Category Style
-	06.0 Job Style
-	07.0 Candidate Style
-	08.0 Company Style
-	09.0 App Style
-	10.0 Form Style
-	11.0 Header Style
-	12.0 Nav Style
-	13.0 Animated-number Style
-	14.0 Call-to-action Style
-	15.0 Testimonial Style
-	16.0 Advice Style
-	17.0 Pricing Style
-	18.0 Progress-bar Style
-	19.0 Pagination Style
-	20.0 Footer Style
-	21.0 Employer Style
-	22.0 About Style
-	23.0 Working Process Style
-	24.0 FAQ Style
-	25.0 Blog Style
-	26.0 Contact Style
-	27.0 Payment Style
-	28.0 Account Style
-	
--------------------------------------------*/
-/*----------------------------------------------
-	1.0 General Style
------------------------------------------------*/
 html {
   font-size: 62.5%;
 }
@@ -395,7 +348,7 @@ a:focus {
 
 .banner-3 .banner-content h1 {
   font-family: "Poppins", sans-serif;
-  font-size: 4.2rem;
+  font-size: 3.2rem;
   font-weight: 600;
   margin-bottom: 15px;
   color: #232630;
@@ -405,7 +358,6 @@ a:focus {
   color: #6f7484;
   font-size: 1.6rem;
   font-family: "Roboto", sans-serif;
-  max-width: 500px;
   position: relative;
 }
 
@@ -5412,7 +5364,7 @@ header .absolute-nav {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   border-radius: 3px;
-  padding: 11px 20px;
+  padding: 7px 11px;
 }
 
 .cp-nav-2 .navbar-collapse .navbar-nav .menu-item.post-job a i {
@@ -5835,7 +5787,7 @@ header .absolute-nav {
     margin-bottom: 8px;
   }
   .header-top .logo-area a img {
-    height: 43px;
+    height: 33px;
   }
   .header-top .top-nav {
     display: -webkit-box;

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="header-top">
+                <div class="header-top pt-4 pb-2">
                     <div class="logo-area">
                         <a href="{{ path('index') }}"><img alt="{{ website.name }} logo" src="{{ asset('images/logo-2.png') }}"></a>
                     </div>
@@ -92,15 +92,12 @@
                         </select>#}
                     </div>
                 </div>
-                <nav class="navbar navbar-expand-lg cp-nav-2">
+                <nav class="navbar navbar-expand-lg cp-nav-2 pb-3">
                     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li class="menu-item active">
-                                <a href="{{ path('index') }}" title="{{ 'layout.home'|trans }}">{{ 'layout.home'|trans }}</a>
-                            </li>
                             <li class="menu-item">
                                 <a href="{{ path('how_it_work') }}" title="{{ 'layout.how_it_work'|trans }}">{{ 'layout.how_it_work'|trans }}</a>
                             </li>
