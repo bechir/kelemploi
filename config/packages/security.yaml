@@ -4,7 +4,7 @@ security:
     role_hierarchy:
         ROLE_EMPLOYER: ROLE_USER
         ROLE_ADMIN: ROLE_EMPLOYER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_EMPLOYER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
