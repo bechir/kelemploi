@@ -13,7 +13,7 @@ use App\Entity\Company;
 use App\Entity\ResumeBookmark;
 use App\Form\CompanyType;
 use Doctrine\ORM\EntityManagerInterface;
-use Proxies\__CG__\App\Entity\Resume;
+use App\Entity\Resume;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +50,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER")
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function dashboard(UserInterface $user = null): Response
     {
@@ -62,7 +62,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_USER").
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function editProfile(Request $request, UserInterface $user = null): Response
     {
@@ -98,7 +98,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER") 
      */
     public function manageJobs(UserInterface $user = null): Response
     {
@@ -120,7 +120,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER") 
      */
     public function manageCandidates(UserInterface $user = null): Response
     {
@@ -134,7 +134,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER")
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function shortlistedResumes(Request $request, UserInterface $user = null, EntityManagerInterface $em): Response
     {
@@ -149,7 +149,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER") 
      */
     public function messages(UserInterface $user = null): Response
     {
@@ -164,7 +164,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER") 
      */
     public function pricing(UserInterface $user = null): Response
     {

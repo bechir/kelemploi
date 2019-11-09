@@ -15,7 +15,7 @@
                 <h3>Compte <span>Candidat</span> créé avec succès</h3>
                 <p>Bienvenue sur {{ website.name }} {{ user.username }}!</p>
                 <div class="result" style="padding-bottom: 0">
-                  <span>Vous venez de créer un compte candidat. Il est temps de passer à l'étape suivante:<br><a href="#" class="btn-link">Créer un CV captivant et trouvez un job!</a></span>
+                  <span>Vous venez de créer un compte candidat. Il est temps de passer à l'étape suivante:<br><a href="{{ path('edit_resume') }}" class="btn-link">Créer un CV captivant et décrochez job!</a></span>
                 </div>
                 <div class="w-100"></div>
                 {% if targetUrl %}

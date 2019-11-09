@@ -1,3 +1,5 @@
+{% set user = app.user %}
+
 <header class="header-2">
     <div class="container">
         <div class="row">
@@ -15,45 +17,44 @@
                             {# {% include 'common/header-top-notification.htl.twig' %} #}
 
                             <div class="dropdown header-top-account">
-                                <a class="account-button" href="#">{{ 'user.my_account'|trans }}</a>
+                                <a class="account-button mr-0 pr-0" href="#">Mon compte</a>
                                 <div class="account-card">
                                     <div class="header-top-account-info">
-                                        <a class="account-thumb" href="#">
-                                            {% if app.user.avatar %}
-                                                {# <img alt="{{ app.user.fullName }} Photo" class="image" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}"> #}
-                                                <div class="profile-image" data-image="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}"></div>
+                                        <a class="account-thumb" href="javascript:void()">
+                                            {% if user.avatar %}
+                                                <div class="profile-image" data-image="{{ vich_uploader_asset(user.avatar, 'avatarFile') }}"></div>
                                             {% else %}
                                                 <img src="{{ asset('images/account/default-avatar-profile.jpg') }}" class="img-fluid" alt="No image">
                                             {% endif %}
                                         </a>
                                         <div class="account-body">
                                             <h5>
-                                                <a href="#">{{ app.user.username }}</a>
+                                                <a href="javascript:void()">{{ user.username }}</a>
                                             </h5>
-                                            <span class="mail">{{ app.user.email }}</span>
+                                            <span class="mail">{{ user.email }}</span>
                                         </div>
                                     </div>
                                     <ul class="account-item-list">
-                                        {% if app.user.haveCompany %}
-                                            <li>
-                                                <a href="{{ path('company_dashboard') }}">
-                                                    <span class="ti-briefcase"></span>{{ app.user.company.name|capitalize }}
-                                                </a>
-                                            </li>
-                                        {% else %}
-                                            {% if app.user.isEmployer %}
+                                        {% if user.isEmployer() %}
+                                            {% if user.haveCompany() %}
+                                                <li>
+                                                    <a href="{{ path('company_dashboard') }}">
+                                                        <span class="ti-briefcase"></span>{{ user.company.name|capitalize }}
+                                                    </a>
+                                                </li>
+                                            {% else %}
                                                 <li>
                                                     <a href="{{ path('company_edit_profile') }}">
                                                         <span class="ti-plus"></span> Ajouter votre companie
                                                     </a>
                                                 </li>
                                             {% endif %}
+                                        {% elseif user.isCandidate() %}
+                                            <li>
+                                                <a href="{{ path('user_dashboard') }}">
+                                                    <span class="ti-home"></span>Tableau de bord</a>
+                                            </li>
                                         {% endif %}
-                                        
-                                        <li>
-                                            <a href="{{ path('user_dashboard') }}">
-                                                <span class="ti-user"></span>{{ 'user.account'|trans }}</a>
-                                        </li>
                                         <li>
                                             <a href="{{ path('user_settings') }}">
                                                 <span class="ti-settings"></span>{{ 'user.settings'|trans }}</a>
@@ -61,7 +62,7 @@
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <li>
                                                 <a href="{{ path('admin_index') }}">
-                                                    <span class="ti-dashboard"></span>Administration</a></li>
+                                                    <span class="ti-shield"></span>Administration</a></li>
                                         {% endif %}
                                         <li>
                                             <a href="{{ path('fos_user_security_logout') }}">

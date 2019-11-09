@@ -6169,7 +6169,7 @@ header .absolute-nav {
     top: 60px;
     right: 0;
     background: #ffffff;
-    width: 150px;
+    width: auto;
     z-index: 99;
     padding: 20px;
     border-radius: 3px;

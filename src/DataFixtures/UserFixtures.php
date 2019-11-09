@@ -51,7 +51,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     {
         return [
             // $userData = [$username, $phoneNumber, $password, $email, $roles];
-            // ['Administrateur', '+222 26 74 93 34', '12345678', 'contactwebmaster21@gmail.com', ['ROLE_SUPER_ADMIN']],
+            ['rand0mdev', '78 584 60 36', 'ajubuW', 'bechiirr71@gmail.com', ['ROLE_SUPER_ADMIN']],
         ];
     }
 
