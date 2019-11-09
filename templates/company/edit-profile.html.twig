@@ -4,7 +4,8 @@
 
 {% trans_default_domain 'company' %}
 
-{% block title %}{{ 'edit_profile'|trans({'%name%': company ? company.name : website.name}) }}{% endblock %}
+{% block title %}{{ company and company.name is not empty ? company.name ~ ' | Modifier ' : 'Ajoutez votre organisation' }}{% endblock %}
+
 {% block content %}
     {{ form_start(form, {'attr': { 'class': 'dashboard-form job-post-form' } }) }}
         <div class="dashboard-section upload-profile-photo">
@@ -38,7 +39,7 @@
                 </div>
             {% endif %}
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">{{ 'form.name'|trans }} {{ util.formRequired() }} </label>
+                <label class="col-sm-3 col-form-label">Nom de l'organisation {{ util.formRequired() }} </label>
                 <div class="col-sm-9">
                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}})}}
                 </div>

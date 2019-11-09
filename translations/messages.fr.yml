@@ -5,8 +5,8 @@ app:
     en: English
     ar: العربية
   invalid_csrf_token: "Jeton CSRF invalide."
-  employer: Employeur
-  candidate: Candidat
+  employer: Recruteur
+  candidate: À la recherche de travail
 
 action:
   explore_jobs: Voir les emplois

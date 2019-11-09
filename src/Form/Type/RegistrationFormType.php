@@ -60,7 +60,7 @@ class RegistrationFormType extends AbstractType
             ->add('accountType', EntityType::class, [
                 'class' => AccountType::class,
                 'choice_label' => 'name',
-                'choice_translation_domain' => true
+                'choice_translation_domain' => true,
             ])
         ;
     }

@@ -12,11 +12,19 @@
                 <div class="icon">
                   <i data-feather="check"></i>
                 </div>
-                <h3>Compte <span>Candidat</span> créé avec succès</h3>
-                <p>Bienvenue sur {{ website.name }} {{ user.username }}!</p>
-                <div class="result" style="padding-bottom: 0">
-                  <span>Vous venez de créer un compte candidat. Il est temps de passer à l'étape suivante:<br><a href="{{ path('edit_resume') }}" class="btn-link">Créer un CV captivant et décrochez job!</a></span>
-                </div>
+                {% if is_granted('ROLE_CANDIDATE') %}
+                  <h3>Compte <span>Candidat</span> créé avec succès</h3>
+                  <p>Bienvenue sur {{ website.name }} {{ user.username }}!</p>
+                  <div class="result" style="padding-bottom: 0">
+                    <span>Vous venez de créer un compte candidat. Il est temps de passer à l'étape suivante:<br><a href="{{ path('edit_resume') }}" class="btn-link">Créer un CV captivant et décrochez job!</a></span>
+                  </div>
+                {% elseif is_granted('ROLE_EMPLOYER') %}
+                  <h3>Compte <span>Recruteur</span> créé avec succès</h3>
+                  <p>Bienvenue sur {{ website.name }} {{ user.username }}!</p>
+                  <div class="result" style="padding-bottom: 0">
+                    <span>Vous venez de créer un compte pour recruteur. Il est temps de passer à l'étape suivante:<br><a href="{{ path('company_edit_profile') }}" class="btn-link">Ajoutez votre organisation et trouvez des candidats.</a></span>
+                  </div>
+                {% endif %}
                 <div class="w-100"></div>
                 {% if targetUrl %}
                     <a href="{{ targetUrl }}" class="view-invoice">{{ 'registration.back'|trans }}</a>

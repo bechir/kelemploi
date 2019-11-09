@@ -49,4 +49,4 @@ form:
     placeholder: UI & UX Designer
   about_company:
     label: À propos
-    placeholder: "* Donnez une description de votre companie en quelques lignes."
+    placeholder: "* Donnez une description de votre organisation en quelques lignes."

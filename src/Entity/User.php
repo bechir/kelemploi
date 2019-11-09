@@ -158,7 +158,7 @@ class User extends BaseUser implements EquatableInterface
     {
         $this->email = $email;
         if(!$this->username) {
-            $this->username = substr($email, 0, strpos($email, '@'));
+            $this->username = $email;
         }
 
         return $this;
@@ -463,6 +463,9 @@ class User extends BaseUser implements EquatableInterface
     {
         if($this->isEmployer()) {
             $this->addRole('ROLE_EMPLOYER');
+        }
+        elseif($this->isCandidate()) {
+            $this->addRole('ROLE_CANDIDATE');
         }
     }
 
