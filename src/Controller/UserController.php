@@ -210,8 +210,12 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function dashboard(): Response
+    public function dashboard(UserInterface $user = null): Response
     {
+        if($user->hasRole('ROLE_EMPLOYER')) {
+            return $this->redirectToRoute('company_dashboard');
+        }
+
         $user = $this->getUser();
 
         return $this->render('candidate/dashboard.html.twig', [
