@@ -70,9 +70,9 @@ class Company
     private $region;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Industry")
      */
-    private $category;
+    private $industry;
 
     /**
      * @var CompanyPhoto
@@ -181,14 +181,14 @@ class Company
         return $this;
     }
 
-    public function getCategory(): ?JobCategory
+    public function getIndustry(): ?Industry
     {
-        return $this->category;
+        return $this->industry;
     }
 
-    public function setCategory(?JobCategory $category): self
+    public function setIndustry(?Industry $industry): self
     {
-        $this->category = $category;
+        $this->industry = $industry;
 
         return $this;
     }

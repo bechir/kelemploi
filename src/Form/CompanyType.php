@@ -9,7 +9,7 @@
 namespace App\Form;
 
 use App\Entity\Company;
-use App\Entity\JobCategory;
+use App\Entity\Industry;
 use App\Entity\Region;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -38,11 +38,11 @@ class CompanyType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false,
                 'placeholder' => 'form.job.region',
-            ])->add('category', EntityType::class, [
-                'class' => JobCategory::class,
+            ])->add('industry', EntityType::class, [
+                'class' => Industry::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'form.job.category',
+                'placeholder' => 'Secteur d\'activité',
             ])
             ->add('photo', CompanyPhotoType::class, ['required' => false])
         ;
