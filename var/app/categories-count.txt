@@ -5,7 +5,7 @@ papeterie-et-services-lies: 0
 direction-generale: 0
 immobilier: 0
 vente: 0
-comptabilite-gestion: 0
+comptabilite-gestion: 1
 administration: 0
 juridique-droit: 0
 commerce-de-detail: 0
@@ -35,4 +35,4 @@ sport: 0
 hotellerie-tourisme: 0
 transports-logistique: 0
 autre: 0
-all: 1
+all: 2

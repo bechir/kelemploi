@@ -43,7 +43,7 @@
                 </div>
                 {% endif %}
               </div>
-              <div class="details-information section-padding-60">
+              <div class="details-information py-5">
                 <div class="row">
                   <div class="col-xl-7 col-lg-8">
                     <div class="description details-section">
@@ -52,14 +52,14 @@
                     </div>
 
                     {% if _app.responsibilities %}
-                      <div class="responsibilities details-section">
+                      <div class="responsibilities details-section mt-5">
                         <h4><i data-feather="zap"></i>{{ 'job.responsibilities'|trans }}</h4>
                         {{ _app.responsibilities|raw }}
                       </div>
                     {% endif %}
                     
                     {% if _app.experience or _app.minStudyLevel %}
-                      <div class="edication-and-experience details-section">
+                      <div class="edication-and-experience details-section mt-5">
                         <h4><i data-feather="book"></i>{{ 'job.education_xp'|trans }}</h4>
                         <ul>
                           <li>{{ _app.minStudyLevel|trans }}</li>
@@ -69,14 +69,14 @@
                     {% endif %}
 
                     {% if _app.benefits %}
-                      <div class="other-benifit details-section">
+                      <div class="other-benifit details-section mt-5">
                         <h4><i data-feather="gift"></i>{{ 'job.benefits'|trans }}</h4>
                         {{ _app.benefits|raw }}
                       </div>
                     {% endif %}
                     
                     {% if _app.tools %}
-                    <div class="other-benifit details-section">
+                    <div class="other-benifit details-section mt-5">
                         <h4><i class="fas fa-wrench"></i>{{ 'job.tools'|trans }}</h4>
                         {{ _app.tools|raw }}
                     </div>
@@ -246,7 +246,7 @@
         </div>
         <div class="row">
           <div class="col">
-            {{ render(controller('App\\Controller\\RenderedController::similarJobs', {category: _app.postCategory})) }}
+            {{ render(controller('App\\Controller\\ApplicationController::similarJobs', {category: _app.postCategory})) }}
           </div>
         </div>
       </div>
