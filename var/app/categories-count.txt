@@ -17,7 +17,7 @@ fonction-publique: 0
 banque-finance: 0
 assurance: 0
 industrie: 0
-informatique: 0
+informatique: 1
 ingenierie: 0
 telecommunication: 0
 desgin-infographie: 0
@@ -35,4 +35,4 @@ sport: 0
 hotellerie-tourisme: 0
 transports-logistique: 0
 autre: 0
-all: 0
+all: 1

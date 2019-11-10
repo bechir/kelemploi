@@ -44,7 +44,7 @@
         },
         "educationRequirements": "{{ job.minStudyLevel|trans }}",
         "experienceRequirements": "{{ job.experience|trans }}",
-        "industry": "{{ job.company.category|trans({}, 'jobs-categories') }}",
+        "industry": "{{ job.company.industry }}",
         "jobLocation": {
             "@type": "Place",
             "address": {

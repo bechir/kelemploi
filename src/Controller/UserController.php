@@ -58,7 +58,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function resume(UserInterface $user = null): Response
     {
@@ -70,7 +70,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function addResume(Request $request, UserInterface $user = null): Response
     {
@@ -119,7 +119,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function editResume(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
@@ -190,7 +190,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function deleteResume(UserInterface $user = null): Response
     {
@@ -208,7 +208,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function dashboard(UserInterface $user = null): Response
     {
@@ -225,7 +225,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function editProfile(Request $request): Response
     {
@@ -250,7 +250,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function bookmarked(): Response
     {
@@ -263,7 +263,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function applied(UserInterface $user = null, EntityManagerInterface $em): Response
     {
@@ -277,7 +277,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_CANDIDATE")
      */
     public function messages(): Response
     {

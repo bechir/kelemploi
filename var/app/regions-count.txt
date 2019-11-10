@@ -7,9 +7,9 @@ kedougou: 0
 kolda: 0
 louga: 0
 matam: 0
-saint-louis: 4
+saint-louis: 5
 sedhiou: 0
 tambacounda: 0
 thies: 0
 ziguinchor: 0
-all: 8
+all: 9
