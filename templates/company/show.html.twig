@@ -97,8 +97,8 @@
                       <div class="information">
                         <h4>{{ 'details.info'|trans }}</h4>
                         <ul>
-                            {% if company.category %}
-                                <li><span>{{ 'company.category'|trans({}, 'messages') }}</span> {{ company.category|trans({}, 'jobs-categories') }}</li>
+                            {% if company.industry %}
+                                <li><span>Secteur d'activité</span> {{ company.industry }}</li>
                             {% endif %}
                           
                             {% if company.region %}

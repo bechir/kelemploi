@@ -13,14 +13,14 @@
 
 {% macro infos(company, class = 'location', category = null) %}
     <div class="info">
-        {% if company.category %}
+        {% if company.industry %}
             <span class="company-category">
                 <a href="#">
                     <i data-feather="briefcase"></i>
                     {% if category %}
                         {{ category|trans({}, 'jobs-categories') }}
                     {% else %}
-                        {{ company.category|trans({}, 'jobs-categories') }}
+                        {{ company.industry }}
                     {% endif %}
                 </a>
             </span>
