@@ -208,20 +208,22 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_CANDIDATE")
+     * @IsGranted("ROLE_USER")
      */
     public function dashboard(UserInterface $user = null): Response
     {
-        if($user->hasRole('ROLE_EMPLOYER')) {
+        if($this->isGranted('ROLE_EMPLOYER')) {
             return $this->redirectToRoute('company_dashboard');
         }
-
-        $user = $this->getUser();
-
-        return $this->render('candidate/dashboard.html.twig', [
-            'user' => $user,
-            'active' => 'dashboard',
-        ]);
+        elseif($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_index');
+        }
+        else {
+            return $this->render('candidate/dashboard.html.twig', [
+                'user' => $user,
+                'active' => 'dashboard',
+            ]);
+        }
     }
 
     /**

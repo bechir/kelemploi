@@ -1,7 +1,7 @@
 {% trans_default_domain 'user' %}
 
 <div class="dashboard-sidebar">
-    <div class="user-info">
+    <div class="user-info mb-0 border-bottom">
         <div class="thumb">
             {% if app.user.avatar %}
                 <img alt="{{ app.user.fullName }} Photo" class="img-fluid" src="{{ vich_uploader_asset(app.user.avatar, 'avatarFile') }}">
@@ -10,11 +10,11 @@
             {% endif %}
         </div>
         <div class="user-body">
-            <h5>{{ user.fullname }}</h5>
-            <span>@{{ user.username }}</span>
+            <h5>Mr. {{ user.lastname }}</h5>
+            <span>{{ user.username }}</span>
         </div>
     </div>
-    <div class="profile-progress">
+    {# <div class="profile-progress">
         <div class="progress-item">
             <div class="progress-head">
                 <p class="progress-on">{{ 'word.profile'|trans({}, 'messages') }}</p>
@@ -26,8 +26,8 @@
                 <p class="progress-to">70%</p>
             </div>
         </div>
-    </div>
-    <div class="dashboard-menu">
+    </div> #}
+    <div class="dashboard-menu pt-3">
         <ul>
             <li {% if active == 'dashboard' %}class="active"{% endif %}>
                 <i class="fas fa-home"></i>
