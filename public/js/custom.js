@@ -550,9 +550,26 @@ $(document).ready(function() {
     /*-----------------------------------
     Subscription
     -----------------------------------*/
-    $(".newsletter-form").ajaxChimp({
-      callback: mailchimpResponse,
-      url: "http://codepassenger.us10.list-manage.com/subscribe/post?u=6b2e008d85f125cf2eb2b40e9&id=6083876991" // Replace your mailchimp post url inside double quote "".  
+    $(".newsletter-form").submit(function(e){
+      e.preventDefault();
+
+      const form = $(this);
+      form.find('button').addClass('disabled');
+
+      $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        data: form.serialize(),
+
+        success: function (resp) {
+          if (resp === 'success') {
+            form.find('.newsletter-success').fadeIn().delay(3000).fadeOut();
+          } else {
+            form.find('.newsletter-error').fadeIn().delay(3000).fadeOut();
+          }
+          form.find('button').removeClass('disabled');
+        }
+      })
     });
 
     function mailchimpResponse(resp) {

@@ -66,7 +66,7 @@
                             <ul>
                                 <li><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.create_account'|trans }}</a></li>
                                 <li><a href="{{ path('edit_resume') }}">Déposez votre CV</a></li>
-                                <li><a href="{{ path('pricing') }}">Actus & conseils</a></li>
+                                <li><a href="{{ path('pricing') }}">Fiches pratiques</a></li>
                                 <li><a href="{{ path('pricing') }}">Modèles de CV gratuits</a></li>
                             </ul>
                         </div>
@@ -100,15 +100,15 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-widget footer-newsletter">
-                        <h4>{{ 'form.title'|trans({}, 'newsletter') }}</h4>
-                        <p>{{ 'form.body'|trans({}, 'newsletter') }}</p>
-                        <form action="home-4.html#" class="newsletter-form form-inline">
+                        <h4>Newsletter</h4>
+                        <p>Recevez des mises à jour par e-mail sur nos dernières nouvelles et nos offres spéciales.</p>
+                        <form action="{{ path('newsletter') }}" method="POST" class="newsletter-form form-inline">
                         <div class="form-group w-50">
-                            <input type="text" class="form-control" placeholder="{{ 'form.email'|trans({}, 'newsletter') }}">
+                            <input type="text" class="form-control email" name="email" placeholder="Adresse e-mail...">
                         </div>
-                        <button class="btn button primary-bg p-3 mt-4">{{ 'form.submit'|trans({}, 'newsletter') }}<i class="fas fa-caret-right"></i></button>
-                        <p class="newsletter-error">{{ 'form.error'|trans({}, 'newsletter') }}</p>
-                        <p class="newsletter-success">{{ 'form.success'|trans({}, 'newsletter') }}</p>
+                        <button class="btn button primary-bg p-3 mt-4">S'inscrire<i class="fas fa-caret-right"></i></button>
+                        <p class="newsletter-error">Entrez une adresse e-mail valide.</p>
+                        <p class="newsletter-success">Merci pour votre inscription!</p>
                         </form>
                     </div>
                 </div>

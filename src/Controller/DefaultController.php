@@ -8,8 +8,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -110,7 +112,7 @@ class DefaultController extends Controller
         return $this->render('default/pricing.html.twig');
     }
 
-    public function newsletter(Request $request): Response
+    public function newsletter(Request $request): JsonResponse
     {
         if ($request->isMethod('POST')) {
             if ($this->isCsrfTokenValid('regsiter_newsletter', $request->request->get('register_newsletter_token'))) {
@@ -120,22 +122,15 @@ class DefaultController extends Controller
             }
 
             $email = $request->request->get('email');
-            $locale = $request->request->get('locale');
-            $regUrl = $request->request->get('regUrl');
 
             $newsletter = new Newsletter();
-            $newsletter
-                ->setEmail($email)
-                ->setLocale($locale)
-                ->setRegistrationUrl($regUrl);
+            $newsletter->setEmail($email);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletter);
             $em->flush();
-
-            $this->addFlash('success', 'newsletter.registrated_successfully');
         }
 
-        return $this->redirectToRoute('index');
+        return new JsonResponse('success');
     }
 }

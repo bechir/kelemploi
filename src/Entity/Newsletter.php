@@ -33,15 +33,6 @@ class Newsletter
      */
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $registrationUrl;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $locale;
 
     public function getId(): ?int
     {
@@ -65,35 +56,11 @@ class Newsletter
         return $this->createdAt;
     }
 
-    public function getRegistrationUrl(): ?string
-    {
-        return $this->registrationUrl;
-    }
-
-    public function setRegistrationUrl(string $registrationUrl): self
-    {
-        $this->registrationUrl = $registrationUrl;
-
-        return $this;
-    }
-
     /**
      * @ORM\PrePersist()
      */
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
-    }
-
-    public function getLocale(): ?string
-    {
-        return $this->locale;
-    }
-
-    public function setLocale(?string $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
     }
 }

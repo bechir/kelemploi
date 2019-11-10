@@ -1,6 +1,6 @@
 form:
   title:  Newsletter
-  body: Recevez des mises à jour par e-mail sur nos dernières nouvelles et nos offres spéciales
+  body: Recevez des mises à jour par e-mail sur nos dernières nouvelles et nos offres spéciales.
   submit: S'inscrire
   error: Entrez une adresse e-mail valide # 0 - Please enter a value
   success: Merci pour votre inscription! # Thank you for subscribing!

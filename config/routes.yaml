@@ -34,3 +34,7 @@ how_it_work:
 pricing:
   path: /pricing
   controller: App\Controller\DefaultController::pricing
+
+newsletter:
+  path: /subscribe
+  controller: App\Controller\DefaultController::newsletter
