@@ -98,10 +98,16 @@ class Company
      */
     private $bookmarkedResumes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="company", orphanRemoval=true)
+     */
+    private $applications;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
         $this->bookmarkedResumes = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,6 +296,37 @@ class Company
             // set the owning side to null (unless already changed)
             if ($bookmarkedResume->getCompany() === $this) {
                 $bookmarkedResume->setCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getCompany() === $this) {
+                $application->setCompany(null);
             }
         }
 

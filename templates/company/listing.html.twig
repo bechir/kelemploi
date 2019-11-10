@@ -16,25 +16,8 @@
           <div class="col">
             <div class="employer-container">
               <div class="filtered-employer-wrapper">
-                <div class="employer-view-controller-wrapper">
-                  <div class="employer-view-controller">
-                    <div class="controller list active">
-                      <i data-feather="menu"></i>
-                    </div>
-                    <div class="controller grid">
-                      <i data-feather="grid"></i>
-                    </div>
-                    <div class="employer-view-filter">
-                      <select class="selectpicker">
-                        <option value="recent" selected>Plus Récent</option>
-                        <option value="popular">Plus Populaire</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="showing-number">
-                    <span>Résultats</span>
-                  </div>
-                </div>
+
+                {% include 'common/results-view.html.twig' with {type: 'employer'} %}
                 
                 {% include 'company/companies-items.html.twig' with {companies: companies} %}
 

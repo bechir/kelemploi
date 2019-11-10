@@ -34,7 +34,7 @@
                 <div class="more">
                     <div class="buttons">
                         {% if app.user.haveApplied(_app) %}
-                            <span class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</span>
+                            <span class="apply text-dark"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</span>
                         {% else %}
                             <a class="button" href="{{ app_url }}">Détails</a>
                             <a class="favourite" href="{{ app_url }}">

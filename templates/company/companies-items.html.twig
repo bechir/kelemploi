@@ -18,7 +18,7 @@
                     {{ widgets.infos(company) }}
                 </div>
                 <div class="button-area">
-                    <a href="{{ path('applications_list', {company: company.slug}) }}">{{ random(2, 17) }} Offres</a>
+                    <a href="{{ path('applications_list', {company: company.slug}) }}">{{ company.applications|length }} Offres</a>
                 </div>
             </div>
         </div>

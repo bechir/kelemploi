@@ -27,7 +27,8 @@ class Application
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="applications")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $company;
 
