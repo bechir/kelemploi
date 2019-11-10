@@ -1,5 +1,6 @@
 {% import 'util/util.twig' as util %}
 {% import 'util/company_widgets.twig' as widgets %}
+{% from "util/alerts.twig" import default as alert_default %}
 
 {% set _locale = app.request.get('_locale', 'fr') %}
 {% set _locale = 'en' %}
@@ -11,7 +12,6 @@
 <div class="{{ class }}">
     {% for _app in list %}
         {% set app_url = path('application_show', {slug: _app.slug}) %}
-        
         <div class="job-list">
             {# Company thumb #}
             {{ widgets.thumb(_app.company, app_url )}}
@@ -33,7 +33,7 @@
                 </div>
                 <div class="more">
                     <div class="buttons">
-                        {% if app.user.haveApplied(_app) %}
+                        {% if app.user and app.user.haveApplied(_app) %}
                             <span class="apply text-dark"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</span>
                         {% else %}
                             <a class="button" href="{{ app_url }}">Détails</a>
@@ -46,6 +46,8 @@
                 </div>
             </div>
         </div>
+    {% else %}
+        {{ alert_default('Aucune offre trouvée.') }}
     {% endfor %}
 
     {#% include 'application/apply-popup.html.twig' %#}
