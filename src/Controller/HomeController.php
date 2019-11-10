@@ -99,7 +99,7 @@ class HomeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $q =  $em->createQueryBuilder();
         
-        $counts = $q->select('count(a.id), r.slug', 'a')
+        $counts = $q->select('count(a.id) as count, r.slug', 'a')
             ->from('App:Application', 'a')
             ->leftJoin('a.company', 'c')
                 ->addSelect('c')
@@ -111,7 +111,7 @@ class HomeController extends Controller
 
         $keysValues = [];
         foreach ($counts as $c) {
-            $keysValues[$c['slug']] = $c[1];
+            $keysValues[$c['slug']] = $c['count'];
         }
 
         return $this->render('home/regions-listing.html.twig', [

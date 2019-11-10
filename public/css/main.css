@@ -2177,7 +2177,7 @@ a:focus {
 }
 
 .job-filter-result .job-list, .candidate-filter-result .job-list, .employer-filter-result .job-list {
-  padding: 30px 20px;
+  padding: 1rem 0;
 }
 
 .job-filter-result.grid, .grid.candidate-filter-result, .grid.employer-filter-result {
@@ -2246,15 +2246,15 @@ a:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 30px;
+  padding: 1rem 0;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
 }
 
 .job-list .thumb {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 3px;
   background: #f9f9f9;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -2283,7 +2283,7 @@ a:focus {
 }
 
 .job-list .body .content h4 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: #232630;
   margin-bottom: 15px;
@@ -2375,7 +2375,7 @@ a:focus {
 
 .job-list .body .more .deadline {
   font-size: 1.3rem;
-  margin-top: 10px;
+  margin-top: 0.5rem;
   font-style: italic;
   font-weight: 300;
   display: block;
@@ -2643,7 +2643,7 @@ a:focus {
 ---------------------------------------------*/
 .job-listing-details {
   background: #ffffff;
-  padding: 30px;
+  padding: 15px;
   -webkit-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.03);
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.03);
 }
@@ -2674,8 +2674,8 @@ a:focus {
 }
 
 .job-title-and-info .title .thumb {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 3px;
   background: #f9f9f9;

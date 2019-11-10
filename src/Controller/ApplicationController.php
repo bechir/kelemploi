@@ -270,7 +270,7 @@ class ApplicationController extends AbstractController
     {
         $list = $this->getDoctrine()->getRepository(Application::class)->findByJobCategory($category);
 
-        return $this->render('application/jobs-items.html.twig', [
+        return $this->render('application/similar-jobs.html.twig', [
             'list' => $list
         ]);
     }

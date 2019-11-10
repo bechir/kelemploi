@@ -17,13 +17,13 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="job-listing-details">
+            <div class="job-listing-details pt-3">
               {{ schema.job_post_details_json(_app) }}
-              <div class="job-title-and-info">
+              <div class="job-title-and-info pb-3">
                 <div class="title">
                   {{ company_widgets.thumb(company) }}
                   <div class="title-body">
-                    <h1 class="h1">{{ _app.jobTitle }}</h1>
+                    <h1 class="h2">{{ _app.jobTitle }}</h1>
                     
                     {{ company_widgets.infos(company, 'location', _app.postCategory.slug) }}
                   </div>
@@ -233,25 +233,7 @@
       </div>
     {% endif %}
     
-    <!-- Jobs -->
-    <div class="section-padding-bottom alice-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="section-header section-header-2 section-header-with-right-content">
-              <h2>{{ 'job.simillar'|trans }}</h2>
-              <a href="{{ path('applications_list') }}" class="header-right">{{ 'job.browse_all'|trans }}</a>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            {{ render(controller('App\\Controller\\ApplicationController::similarJobs', {category: _app.postCategory})) }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Jobs End -->
+    {{ render(controller('App\\Controller\\ApplicationController::similarJobs', {category: _app.postCategory})) }}
 
-    '{% include 'common/call-to-action.html.twig' %}
+    {% include 'common/call-to-action.html.twig' %}
 {% endblock %}

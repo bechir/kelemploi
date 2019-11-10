@@ -1,0 +1,19 @@
+{% if list is not empty %}
+    <div class="section-padding-bottom alice-bg">
+        <div class="container">
+            <div class="row">
+            <div class="col">
+                <div class="section-header section-header-2 section-header-with-right-content">
+                <h2>Offres similaires</h2>
+                <a href="{{ path('applications_list') }}" class="header-right">+ Voir toutes les offres d'emploi</a>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% include "application/jobs-items.html.twig" with {list: list} %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
