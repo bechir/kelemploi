@@ -8,8 +8,6 @@
 
 namespace App\Controller;
 
-use App\Entity\JobCategory;
-use App\Entity\Region;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,18 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function index(Request $request): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $regions = $em->getRepository(Region::class)->findAll();
-        $categories = $em->getRepository(JobCategory::class)->findAll();
-
-        return $this->render('default/index.html.twig', [
-            'regions' => $regions,
-            'categories' => $categories,
-        ]);
-    }
-
     public function about(Request $request): Response
     {
         return $this->render('default/about.html.twig', [

@@ -255,4 +255,23 @@ class ApplicationController extends AbstractController
     {
         return $this->render('application/oec.html.twig');
     }
+
+    public function recentJobs(): Response
+    {
+        $list = $this->getDoctrine()->getRepository(Application::class)->getLatest();
+
+        return $this->render('application/jobs-items.html.twig', [
+            'list' => $list,
+            'class' => 'col'
+        ]);
+    }
+
+    public function similarJobs($category): Response
+    {
+        $list = $this->getDoctrine()->getRepository(Application::class)->findByJobCategory($category);
+
+        return $this->render('application/jobs-items.html.twig', [
+            'list' => $list
+        ]);
+    }
 }

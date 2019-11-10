@@ -3,7 +3,7 @@
 # La liste des categories est disponible dans parameters.
 index:
   path: /
-  controller: App\Controller\DefaultController::index
+  controller: App\Controller\HomeController::index
 
 about:
   path: /about-us

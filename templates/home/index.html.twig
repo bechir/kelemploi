@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ website.name }} | Offres d'emploi et de stages au Sénégal{% endblock %}
+
+{% block main %}
+
+{% set categories_count = categoriesCount() %}
+    <!-- Banner -->
+    <div class="banner banner-3 banner-3-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="banner-content">
+            <h1 class="reveal-1 w-75">Des offres d'empoi et de stages partout au Sénégal</h1>
+              <p class="reveal-2">Trouvez rapidement l'emploi qui vous correspond le mieux!</p>
+              
+              {% if is_granted('ROLE_EMPLOYER') %}
+                <a href="{{ path('applications_list') }}" class="button reveal-3 py-3 px-4">Voir les offres</a>
+              {% else %}
+                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">Ajoutez votre CV</a>
+              {% endif %}              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- Search and Filter -->
+    <div class="searchAndFilter-wrapper reveal-4">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="searchAndFilter-block">
+              <div class="searchAndFilter">
+                <form action="{{ path('applications_list') }}" method="GET" class="search-form">
+                  <input type="text" placeholder="Entrez les mots clés">
+                  <select class="selectpicker" name="region" id="search-location">
+                    <option value="" selected>Région</option>
+                    {% for region in regions %}
+                      <option value="{{ region.slug }}">{{ region.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <select class="selectpicker" name="c" id="search-category">
+                    <option value="" selected>Catégorie</option>
+                    {% for category in categories %}
+                      <option value="{{ category.slug }}">{{ category.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <button class="button primary-bg"><i class="fas fa-search"></i>Rechercher</button>
+                </form>
+                <div class="filter-categories">
+                  <h4>Offres d'emploi et de stages par métier</h4>
+                  <ul>
+                    <li><a href="{{ path('applications_list', {c: 'banque-finance'}) }}"><i data-feather="bar-chart-2"></i>{{ 'banque-finance'|trans({}, 'jobs-categories') }} <span>({{ categories_count['banque-finance'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'enseignement-recherche'}) }}"><i data-feather="edit-3"></i>{{ 'enseignement-recherche'|trans({}, 'jobs-categories') }} <span>({{ categories_count['enseignement-recherche'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'desgin-infographie'}) }}"><i data-feather="feather"></i>{{ 'desgin-infographie'|trans({}, 'jobs-categories') }} <span>({{ categories_count['desgin-infographie'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'sante'}) }}"><i data-feather="briefcase"></i>{{ 'sante'|trans({}, 'jobs-categories') }} <span>({{ categories_count['sante'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'ingenierie'}) }}"><i data-feather="package"></i>{{ 'ingenierie'|trans({}, 'jobs-categories') }} <span>({{ categories_count['ingenierie'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'marketing-communication'}) }}"><i data-feather="pie-chart"></i>{{ 'marketing-communication'|trans({}, 'jobs-categories') }} <span>({{ categories_count['marketing-communication'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'langue-ecrit'}) }}"><i data-feather="command"></i>{{ 'langue-ecrit'|trans({}, 'jobs-categories') }} <span>({{ categories_count['langue-ecrit'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'services-a-la-clientele'}) }}"><i data-feather="globe"></i>{{ 'services-a-la-clientele'|trans({}, 'jobs-categories') }} <span>({{ categories_count['services-a-la-clientele'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'medias'}) }}"><i data-feather="headphones"></i>{{ 'medias'|trans({}, 'jobs-categories') }} <span>({{ categories_count['medias'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'telecommunication'}) }}"><i data-feather="radio"></i>{{ 'telecommunication'|trans({}, 'jobs-categories') }} <span>({{ categories_count['telecommunication'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'informatique'}) }}"><i data-feather="monitor"></i>{{ 'informatique'|trans({}, 'jobs-categories') }} <span>({{ categories_count['informatique'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'transports-logistique'}) }}"><i data-feather="truck"></i>{{ 'transports-logistique'|trans({}, 'jobs-categories') }} <span>({{ categories_count['transports-logistique'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'assurance'}) }}"><i data-feather="user-check"></i>{{ 'assurance'|trans({}, 'jobs-categories') }} <span>({{ categories_count['assurance'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'installation-entretien-reparation'}) }}"><i data-feather="settings"></i>{{ 'installation-entretien-reparation'|trans({}, 'jobs-categories') }} <span>({{ categories_count['installation-entretien-reparation'] }})</span></a></li>
+                    <li><a href="{{ path('applications_list', {c: 'administration'}) }}"><i data-feather="shield"></i>{{ 'administration'|trans({}, 'jobs-categories') }} <span>({{ categories_count['administration'] }})</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search and Filter End -->
+
+    {# Jobs #}
+
+    {# Top Companies #}
+
+    {# Recent jobs #}
+    <div class="section-padding-bottom alice-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="section-header section-header-2 section-header-with-right-content">
+              <h2>Offres récentes</h2>
+              <a href="{{ path('applications_list') }}" class="header-right">+ <em class="f-s-normal">Parcourir toutes les offres d'emploi</em></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            {{ render(controller('App\\Controller\\ApplicationController::recentJobs')) }}
+        </div>
+      </div>
+    </div>
+
+    {# Regions #}
+    {{ render(controller('App\\Controller\\HomeController::regionsListing')) }}
+
+    {{ render(controller('App\\Controller\\HomeController::statistics')) }}
+
+    {# Registration box if the user is not logged in #}
+    {% include 'common/registration-box.html.twig' %}
+
+    {# Frequent Serach #}
+    {{ render(controller('App\\Controller\\HomeController::frequentSearch')) }}
+    
+    {# Testimonial #}
+
+    {# Call to action #}
+    {# {% include 'common/call-to-action.html.twig' %} #}
+
+    {# NewsLetter #}
+    {# {% include "common/newsletter.html.twig" %} #}
+
+{% endblock %}
