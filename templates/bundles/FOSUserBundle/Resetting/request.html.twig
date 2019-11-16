@@ -1,7 +1,50 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends 'base.html.twig' %}
+{% block title %}
+    Mot de passe oublié?
+{% endblock %}
 
-{% block title %}Réinitialisez votre mot de passe{% endblock %}
+{% block header %}
+	<header class="header-2 access-page-nav" id="login-header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header-top">
+						<div class="logo-area">
+							<a href="{{ path('index') }}"><img alt="" src="{{ asset('images/logo.png') }}"></a>
+						</div>
+						<div class="top-nav" style="display: flex;">
+							<a class="account-page-link" href="{{ path('fos_user_security_login') }}">Connexion</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+{% endblock header %}
 
-{% block fos_user_content %}
-{% include "@FOSUser/Resetting/request_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block main %}
+	<div class="padding-top-90 padding-bottom-90 access-page-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-4 col-md-6">
+					<div class="access-form">
+						<div class="form-header">
+							<h5>Réinitialisez votre mot de passe</h5>
+                        </div>
+                        <p class="alert alert-info">
+                            <label for="username">
+                                Entrez votre addresse email pour réinitialiser votre mot de passe.
+                            </label>
+                        </p>
+						<form action="{{ path("fos_user_resetting_send_email") }}" method="post">
+							<div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" required="required" />
+							</div>
+							<button class="button primary-bg btn-block"><i class="fa fa-envelope"></i> Envoyer un email</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock main %}

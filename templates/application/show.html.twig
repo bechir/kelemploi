@@ -33,7 +33,7 @@
                   <a class="save" href="#"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
                   {% if is_granted('ROLE_CANDIDATE') %}
                     {% if haveApplied %}
-                      <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                      <a href="javascript:void()" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
                     {% else %}
                       <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">Candidater en ligne</a>
                     {% endif %}
@@ -84,9 +84,9 @@
 
                     {% if not _app.isOwner(user) %}
                       <div class="job-apply-buttons">
-                        {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('ROLE_CANDIDATE') %}
                           {% if haveApplied %}
-                            <a href="#" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
+                            <a href="javascript:void()" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
                           {% else %}
                             <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
                           {% endif %}
