@@ -34,21 +34,19 @@
                             <h5>
                                 <a href="{{ path }}">{{ job.jobTitle }}</a>
                             </h5>
-                            <div class="info">
-                                {{ widgets.office_location(company.region) }}
-                                {{ widgets.job_type(job.contractType.name) }}
-                            </div>
                         </td>
                         <td class="application">
-                            <a href="#">6 Candidat(s)</a>
+                            {% set nb_applies = job.applies|length %}
+                            {% if nb_applies > 0 %}
+                                <a href="#" class="btn btn-primary text-white">{{ job.applies|length }} candidat{{ nb_applies > 1 ? 's' : '' }}</a>
+                            {% else %}
+                                0
+                            {% endif %}
                         </td>
                         <td class="deadline">{{ job.dates.end|localizeddate('full', 'none', _locale )|capitalize }}</td>
-                        {% set status = 'active' %}
-                        {% if job.dates.end|date() < date()|date() %}
-                            {% set status = 'expired' %}
-                        {% endif %}
                         
-                        <td class="status {{ status }}">{{ status|capitalize }}</td>
+                        <td class="status {{ job.isExpired() ? 'expired' : 'active' }}">{{ job.isExpired() ? 'Expirée' : 'Active' }}</td>
+                        
                         <td class="action">
                             <a class="preview" href="{{ path }}" title="Voir l'offre">
                                 <i data-feather="eye"></i>
@@ -86,22 +84,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <div class="pagination-list text-center">
-                <nav class="navigation pagination">
-                    <div class="nav-links">
-                        <a class="prev page-numbers" href="#">
-                            <i class="fas fa-angle-left"></i>
-                        </a>
-                        <a class="page-numbers" href="#">1</a>
-                        <span aria-current="page" class="page-numbers current">2</span>
-                        <a class="page-numbers" href="#">3</a>
-                        <a class="page-numbers" href="#">4</a>
-                        <a class="next page-numbers" href="#">
-                            <i class="fas fa-angle-right"></i>
-                        </a>
-                    </div>
-                </nav>
-            </div>
         </div>
 
     {% else %}

@@ -28,6 +28,10 @@
                 <i class="fas fa-home"></i>
                 <a href="{{ path('company_dashboard') }}">{{ 'employer.dashboard'|trans }}</a>
             </li>
+            <li {% if active == 'post-job' %}class="active"{% endif %}>
+                <i class="fas fa-plus-square"></i>
+                <a href="{{ path('application_create') }}">{{ 'employer.post_new_job'|trans }}</a>
+            </li>
             <li {% if active == 'edit-profile' %}class="active"{% endif %}>
                 <i class="fas fa-user"></i>
                 <a href="{{ path('company_edit_profile') }}">{{ 'employer.edit_profile'|trans }}</a>
@@ -42,11 +46,11 @@
             </li>
             <li {% if active == 'shortlisted' %}class="active"{% endif %}>
                 <i class="fas fa-heart"></i>
-                <a href="{{ path('company_shortlisted_resumes') }}">{{ 'employer.shortlisted_resumes'|trans }}</a>
+                <a href="{{ path('company_shortlisted_resumes') }}">CV favoris</a>
             </li>
-            <li {% if active == 'post-job' %}class="active"{% endif %}>
-                <i class="fas fa-plus-square"></i>
-                <a href="{{ path('application_create') }}">{{ 'employer.post_new_job'|trans }}</a>
+            <li {% if active == 'cart' %}class="active"{% endif %}>
+                <i class="fas fa-shopping-cart"></i>
+                <a href="{{ path('company_shortlisted_resumes') }}">Panier</a>
             </li>
             {# <li {% if active == 'messages' %}class="active"{% endif %}>
                 <i class="fas fa-comment"></i>

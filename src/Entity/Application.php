@@ -441,4 +441,9 @@ class Application
 
         return $this;
     }
+
+    public function isExpired(): bool
+    {
+        return $this->dates->getEnd() < new \DateTime();
+    }
 }
