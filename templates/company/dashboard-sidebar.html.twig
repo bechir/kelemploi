@@ -1,7 +1,7 @@
 {% import 'util/company_widgets.twig' as widgets %}
 
 <div class="dashboard-sidebar">
-    <div class="company-info">
+    <div class="company-info pb-3 mb-0 border-bottom">
         {# Company thumb #}
         {{ widgets.thumb(company) }}
         
@@ -9,7 +9,7 @@
             <h5>{{ company ? company.name|capitalize : '-' }}</h5>
         </div>
     </div>
-    <div class="profile-progress">
+    <!-- <div class="profile-progress">
         <div class="progress-item">
             <div class="progress-head">
                 <p class="progress-on">{{ 'word.profile'|trans }}</p>
@@ -21,8 +21,8 @@
                 <p class="progress-to">70%</p>
             </div>
         </div>
-    </div>
-    <div class="dashboard-menu">
+    </div> -->
+    <div class="dashboard-menu pt-3">
         <ul>
             <li {% if active == 'dashboard' %}class="active"{% endif %}>
                 <i class="fas fa-home"></i>

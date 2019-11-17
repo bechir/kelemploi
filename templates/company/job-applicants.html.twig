@@ -52,9 +52,11 @@
                                 {% endif %}
                             </td>
                             <td class="action">
-                              <a href="#" class="download"><i data-feather="download"></i></a>
+                              <!-- <a href="#" class="download"><i data-feather="download"></i></a>
                               <a href="#" class="inbox"><i data-feather="mail"></i></a>
-                              <a href="#" class="remove"><i data-feather="trash-2"></i></a>
+                              <a href="#" class="remove"><i data-feather="trash-2"></i></a> -->
+                              <a href="{{ path }}" class="edit text-primary"><i data-feather="eye"></i></a>
+                              <a href="#" class="edit text-info"><i data-feather="edit"></i></a>
                             </td>
                     </tr>
                 {% endfor %}
