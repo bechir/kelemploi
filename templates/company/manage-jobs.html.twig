@@ -62,18 +62,18 @@
                             <div class="modal fade" id="confirmDeleteModal-{{ loop.index }}" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content text-center">
-                                        <div class="modal-body bg-danger">
-                                            <h4 class="text-danger">{{ 'form.job.delete_modal.title'|trans }}</h4>
+                                        <div class="modal-body bg-warning">
+                                            <h4 class="text-danger">Supprimer cette offre?</h4>
                                             <p>{{ 'form.job.delete_modal.body'|trans({}, 'messages')|raw }}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <form action="{{ path('application_delete', {slug: job.slug}) }}" method="POST" data-confirmation="true" id="delete-form">
                                                 <input type="hidden" name="app_delete_token" value="{{ csrf_token('app.delete') }}" />
 
-                                                <button type="button" class="btn btn-default" id="btnNo" data-dismiss="modal">
+                                                <button type="button" class="btn btn-info" id="btnNo" data-dismiss="modal">
                                                     <span class="fa fa-ban" aria-hidden="true"></span> {{ 'word.cancel'|trans({}, 'messages') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-default btn-delete">
+                                                <button type="submit" class="btn btn-danger btn-delete">
                                                         <span class="fa fa-trash" aria-hidden="true"></span> {{ 'word.delete'|trans({}, 'messages') }}
                                                 </button>
                                             </form>

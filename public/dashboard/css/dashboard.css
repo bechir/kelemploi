@@ -936,9 +936,9 @@
   .jy-alert p {
     margin-bottom: 0; }
   .jy-alert.success-alert {
-    color: #009a00;
-    background: rgba(0, 154, 0, 0.05);
-    border: 1px solid rgba(0, 154, 0, 0.3); }
+    color: #fff;
+    background: rgba(0, 154, 0, 0.9);
+    border: 1px solid rgba(0, 154, 0, 0.7); }
     .jy-alert.success-alert .icon {
       background: rgba(0, 154, 0, 0.15); }
   .jy-alert.info-alert {

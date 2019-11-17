@@ -36,7 +36,9 @@ class ApplicationSubscriber implements EventSubscriberInterface
         $application = $event->getApplication();
         
         CategoryCounter::increment($application->getPostCategory()->getSlug());
-        RegionCounter::increment($application->getCompany()->getRegion()->getSlug());
+        if (null !== $application->getCompany()->getRegion()) {
+            RegionCounter::increment($application->getCompany()->getRegion()->getSlug());
+        }
     }
 
     public function onApplicaionDeleted(ApplicationEvent $event)
@@ -44,7 +46,9 @@ class ApplicationSubscriber implements EventSubscriberInterface
         $application = $event->getApplication();
         
         CategoryCounter::decrement($application->getPostCategory()->getSlug());
-        RegionCounter::decrement($application->getCompany()->getRegion()->getSlug());
+        if (null !== $application->getCompany()->getRegion()) {
+            RegionCounter::decrement($application->getCompany()->getRegion()->getSlug());
+        }
     }
 
     public static function getSubscribedEvents()

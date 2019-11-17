@@ -21,7 +21,7 @@ informatique: 1
 ingenierie: 0
 telecommunication: 0
 desgin-infographie: 0
-langue-ecrit: 0
+langue-ecrit: 1
 marketing-communication: 0
 medias: 0
 sante: 0
@@ -35,4 +35,4 @@ sport: 0
 hotellerie-tourisme: 0
 transports-logistique: 0
 autre: 0
-all: 2
+all: 3

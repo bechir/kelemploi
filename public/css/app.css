@@ -41,9 +41,8 @@
     position: fixed;
     z-index: 999;
     min-width: 360px;
-    left: 50%;
-    bottom: 50%;
-    transform: translate(-50%, -50%);
+    left: 15px;
+    bottom: 15px;
 }
 .alert-wrap.dismissable-alert .jy-alert{
     position: relative;

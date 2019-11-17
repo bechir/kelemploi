@@ -2262,7 +2262,6 @@ a:focus {
 }
 
 .job-list .thumb img {
-  max-width: 35px;
   position: absolute;
   top: 50%;
   left: 50%;
