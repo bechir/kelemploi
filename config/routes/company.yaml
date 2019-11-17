@@ -26,6 +26,12 @@ company_shortlisted_resumes:
   path: /dashboard/shortlisted
   controller: App\Controller\CompanyController::shortlistedResumes
 
+company_job_applicants:
+  path: /dashboard/ongoing/{slug}/{page<[1-9]\d*>}
+  controller: App\Controller\CompanyController::jobApplicants
+  defaults:
+    page: 1
+
 company_messages:
   path: /dashboard/messages
   controller: App\Controller\CompanyController::messages

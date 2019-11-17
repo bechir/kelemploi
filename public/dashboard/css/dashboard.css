@@ -1486,7 +1486,7 @@
   .manage-candidate-container table {
     min-width: 650px; }
   .manage-candidate-container td {
-    padding: 30px 0;
+    padding: 11px 0;
     vertical-align: middle; }
   .manage-candidate-container .table th {
     border-top: 0;
@@ -1505,7 +1505,7 @@
     -ms-flex-align: center;
     align-items: center; }
     .manage-candidate-container .title .thumb {
-      width: 80px;
+      width: 60px;
       overflow: hidden;
       border-radius: 3px;
       margin-right: 20px; }

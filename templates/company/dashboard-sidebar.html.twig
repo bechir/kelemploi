@@ -40,10 +40,10 @@
                 <i class="fas fa-briefcase"></i>
                 <a href="{{ path('company_manage_jobs') }}">{{ 'employer.manage_jobs'|trans }}</a>
             </li>
-            <li {% if active == 'manage-candidates' %}class="active"{% endif %}>
+            {#<li {% if active == 'manage-candidates' %}class="active"{% endif %}>
                 <i class="fas fa-users"></i>
                 <a href="{{ path('company_manage_candidates') }}">{{ 'employer.manage_candidates'|trans }}</a>
-            </li>
+            </li>#}
             <li {% if active == 'shortlisted' %}class="active"{% endif %}>
                 <i class="fas fa-heart"></i>
                 <a href="{{ path('company_shortlisted_resumes') }}">CV favoris</a>

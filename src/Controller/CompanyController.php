@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Entity\Apply;
 use App\Entity\Company;
 use App\Entity\ResumeBookmark;
 use App\Form\CompanyType;
@@ -57,7 +58,6 @@ class CompanyController extends AbstractController
         return $this->render('company/dashboard.html.twig', [
             'user' => $user,
             'active' => 'dashboard',
-            'company' => $user->getCompany(),
         ]);
     }
 
@@ -91,8 +91,8 @@ class CompanyController extends AbstractController
         }
 
         return $this->render('company/edit-profile.html.twig', [
-            'company' => $company,
             'form' => $form->createView(),
+            'company' => $company,
             'active' => 'edit-profile',
         ]);
     }
@@ -106,7 +106,7 @@ class CompanyController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $company = $user->getCompany();
         if($company) {
-            $jobs = $this->getDoctrine()
+            $jobs = $em
                 ->getRepository(Application::class)
                     ->findBy(['company' => $company]);
         }
@@ -114,8 +114,20 @@ class CompanyController extends AbstractController
         return $this->render('company/manage-jobs.html.twig', [
             'user' => $user,
             'jobs' => $jobs,
-            'company' => $company,
             'active' => 'manage-jobs'
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_EMPLOYER") 
+     */
+    public function jobApplicants(Request $request, Application $job, int $page, EntityManagerInterface $em): Response
+    {
+        return $this->render('company/job-applicants.html.twig', [
+            'job' => $job,
+            'active' => 'manage-jobs',
+            // 'token' => TokenGenerator::generateCartToken($request),
+            'applies' => $em->getRepository(Apply::class)->paginateByJob($job, $page),
         ]);
     }
 
@@ -128,7 +140,6 @@ class CompanyController extends AbstractController
 
         return $this->render('company/manage-candidates.html.twig', [
             'user' => $user,
-            'company' => $company,
             'active' => 'manage-candidates'
         ]);
     }
@@ -144,7 +155,6 @@ class CompanyController extends AbstractController
         return $this->render('company/shortlisted-resumes.html.twig', [
             'bookmarkedResumes' => $bookmarkedResumes,
             'active' => 'shortlisted',
-            'company' => $company
         ]);
     }
 
@@ -158,7 +168,6 @@ class CompanyController extends AbstractController
 
         return $this->render('company/messages.html.twig', [
             'user' => $user,
-            'company' => $company,
             'active' => 'messages'
         ]);
     }
@@ -173,7 +182,6 @@ class CompanyController extends AbstractController
 
         return $this->render('company/pricing.html.twig', [
             'user' => $user,
-            'company' => $company,
             'active' => 'pricing'
         ]);
     }

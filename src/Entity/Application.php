@@ -446,4 +446,14 @@ class Application
     {
         return $this->dates->getEnd() < new \DateTime();
     }
+
+    public function getTitle(): string
+    {
+        return $this->jobTitle;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->jobDescription;
+    }
 }

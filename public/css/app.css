@@ -210,3 +210,6 @@ form div.transition{
 .reveal-4{
     transition-delay: .4s;
 }
+.img-w50{
+    width: 50px;
+}

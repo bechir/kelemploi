@@ -1,0 +1,72 @@
+{% extends 'company/base.html.twig' %}
+
+{% import 'util/util.twig' as util %}
+{% import 'util/candidate_widgets.twig' as widgets %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}
+{% if company is not null %}
+    {{ company.name }} | {{ job.title }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if company is not null %}
+        <div class="manage-candidate-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Candidat</th>
+                        <th>Status</th>
+                        <th class="action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for apply in job.applies %}
+                    {% set candidate = apply.candidate %}
+                    {% set path = path('candidate_show', {id: candidate.id}) %}
+
+                    <tr class="candidates-list py-2">
+                            <td class="title">
+                              {{ widgets.thumb(candidate, path) }}
+                              <div class="body">
+                                <h5><a href="{{ path }}">{{ candidate.fullname }}</a></h5>
+                                <div class="info">
+                                    {% if candidate.resume and candidate.resume.title %}
+                                        <span class="designation"><a href="#"><i data-feather="check-square"></i>{{ candidate.resume.title }}</a></span>
+                                    {% endif %}
+                                    {% if candidate.region %}
+                                        <span class="location"><a href="#"><i data-feather="map-pin"></i>{{ candidate.region }}</a></span>
+                                    {% endif %}
+                                </div>
+                              </div>
+                            </td>
+                            <td class="status">
+                                {% if apply.status == constant('PENDING', apply) %}
+                                    <span class="text-warning"><i class="fa fa-history"></i> En attente</span>
+                                {% elseif apply.status == constant('ACCEPTED', apply) %}
+                                    <span class="text-success"><i data-feather="check-circle"></i>Accepté</span>
+                                {% elseif apply.status == constant('REJECTED', apply) %}
+                                    <span class="text-danger"><i data-feather="cross-circle"></i>Rejeté</span>
+                                {% endif %}
+                            </td>
+                            <td class="action">
+                              <a href="#" class="download"><i data-feather="download"></i></a>
+                              <a href="#" class="inbox"><i data-feather="mail"></i></a>
+                              <a href="#" class="remove"><i data-feather="trash-2"></i></a>
+                            </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% else %}
+        <div class="dashboard-section dashboard-recent-activity">
+            <h4 class="title">Vue d'ensemble</h4>
+            <p>Vous n'avez pas de companie.</p>            
+        </div>
+    {% endif %}
+
+{% endblock %}

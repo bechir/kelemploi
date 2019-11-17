@@ -18,18 +18,6 @@ class Apply
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $fullname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $message;
@@ -73,6 +61,8 @@ class Apply
     const ACCEPTED = 'apply.status.accepted';
     const REJECTED = 'apply.status.rejected';
 
+    const NB_ITEMS_LISTING = 15;
+
     const STATUS = [self::EXPIRED, self::PENDING, self::ACCEPTED, self::REJECTED];
 
     public function __construct()
@@ -84,30 +74,6 @@ class Apply
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFullname(): ?string
-    {
-        return $this->fullname;
-    }
-
-    public function setFullname(string $fullname): self
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     public function getMessage(): ?string

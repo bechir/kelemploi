@@ -38,7 +38,7 @@
                         <td class="application">
                             {% set nb_applies = job.applies|length %}
                             {% if nb_applies > 0 %}
-                                <a href="#" class="btn btn-primary text-white">{{ job.applies|length }} candidat{{ nb_applies > 1 ? 's' : '' }}</a>
+                                <a href="{{ path('company_job_applicants', {slug: job.slug}) }}" class="btn btn-primary text-white">{{ job.applies|length }} candidat{{ nb_applies > 1 ? 's' : '' }}</a>
                             {% else %}
                                 0
                             {% endif %}

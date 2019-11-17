@@ -2,6 +2,8 @@
 
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
+{% set company = app.user.company %}
+
 {% block main %}
 
     {{ breadcrumb.level_1('employer.breadcrumb') }}

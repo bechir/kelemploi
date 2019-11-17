@@ -1,9 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Apply;
+use App\Entity\Application as Job;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +29,34 @@ class ApplyRepository extends ServiceEntityRepository
         parent::__construct($registry, Apply::class);
     }
 
-    // /**
-    //  * @return Apply[] Returns an array of Apply objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function paginateByJob(Job $job, int $page): Pagerfanta
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.job', 'j')
+                ->addSelect('j')
+            ->leftJoin('a.candidate', 'c')
+                ->addSelect('c')
+            ->where('j = :job')
+            ->setParameter('job', $job)
+            ->orderBy('a.appliedAt', 'DESC')
         ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Apply
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createPaginator($qb->getQuery(), $page);
     }
-    */
+
+    /**
+     * @return Apply[]
+     */
+    public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
+        if ($isAdmin) {
+            $paginator->setMaxPerPage(Apply::NB_ITEMS_ADMIN_LISTING);
+        } else {
+            $paginator->setMaxPerPage(Apply::NB_ITEMS_LISTING);
+        }
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
+    }
 }
