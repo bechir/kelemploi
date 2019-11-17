@@ -100,26 +100,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="menu-item">
-                                <a href="{{ path('how_it_work') }}" title="{{ 'layout.how_it_work'|trans }}">{{ 'layout.how_it_work'|trans }}</a>
+                                <a href="{{ path('applications_list') }}" title="Offres d'emploi">Offres d'emploi</a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ path('applications_list') }}" title="{{ 'layout.applications_list'|trans }}">{{ 'layout.applications_list'|trans }}</a>
+                                <a href="{{ path('companies_list') }}" title="Entreprises">Entreprises</a>
                             </li>
-                            {# <li class="menu-item">
-                                <a href="{{ path('candidates_list') }}" title="{{ 'layout.candidates_list'|trans }}">{{ 'layout.candidates_list'|trans }}</a>
-                            </li> #}
                             <li class="menu-item">
-                                <a href="{{ path('companies_list') }}" title="{{ 'layout.entreprises_list'|trans }}">{{ 'layout.entreprises_list'|trans }}</a>
+                                <a href="{{ path('blog_index') }}" title="Blog">Blog</a>
                             </li>
-                            {# <li class="menu-item">
-                                <a href="{{ path('pricing') }}">{{ 'layout.pricing'|trans }}</a>
-                            </li> #}
                             <li class="menu-item">
-                                <a href="{{ path('blog_index') }}" title="{{ 'layout.blog'|trans }}">{{ 'layout.blog'|trans }}</a>
+                                <a href="{{ path('how_it_work') }}" title="Comment ça marche?">Comment ça marche?</a>
                             </li>
                             <li class="menu-item post-job">
                                 <a href="{{ path('application_create') }}">
-                                    <i class="fas fa-bullhorn"></i>{{ 'layout.post_job'|trans }}
+                                    <i class="fas fa-bullhorn"></i>Publier une offre
                                 </a>
                             </li>
                         </ul>

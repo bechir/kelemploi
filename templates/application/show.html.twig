@@ -205,16 +205,17 @@
                     {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'}}) }}
                   </div>
                   <div class="more-option">
-                    {% if user.resume and user.resume.cv %}
-                      <label for="use-resume-cv">
+                    {% if user.resume %}
+                      {% if user.resume.cv %}
                         {{ form_widget(form.sendCV, {'id': 'use-resume-cv', 'attr': {'checked': 'checked'}})}}
                         Envoyer mon CV enregistré
-                      </label>
+                      {% else %}
+                      {{ form_widget(form.sendCV, {'attr': {'class': 'd-none'}}) }}
+                      {% endif %}
                     {% else %}
                       <div class="alert alert-warning">
                         <p>Vous n'avez pas encore créé de CV. <a href="{{ path('add_resume') }}" class="text-info">Commencez par en créer ici</a></p>
                       </div>
-                      {{ form_widget(form.sendCV, {'attr': {'class': 'd-none'}}) }}
                     {% endif %}
                   </div>
                   {# <div class="form-group file-input-wrap {{ class }}">
