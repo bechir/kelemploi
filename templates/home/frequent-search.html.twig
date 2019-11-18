@@ -17,7 +17,7 @@
             <div class="key-info">
               <ul>
                 {% for category in job_categories %}
-                  <li><a href="#">{{ category.name }}<span>({{ job_category_counts[category.slug] is defined ? job_category_counts[category.slug] : 0 }})</span></a></li>
+                  <li><a href="{{ path('applications_list', {c: category.slug}) }}">{{ category.name }}<span>({{ job_category_counts[category.slug] is defined ? job_category_counts[category.slug] : 0 }})</span></a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -32,7 +32,7 @@
             <div class="key-info">
               <ul>
                 {% for region in regions %}
-                  <li><a href="#">{{ region.name }}<span>({{ region_counts[region.slug] is defined ? region_counts[region.slug] : 0 }})</span></a></li>
+                  <li><a href="{{ path('applications_list', {region: region.slug}) }}">{{ region.name }}<span>({{ region_counts[region.slug] is defined ? region_counts[region.slug] : 0 }})</span></a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -47,7 +47,7 @@
             <div class="key-info">
               <ul>
                 {% for industry in industries %}
-                  <li><a href="#">{{ industry.name }}<span>({{ industry_counts[industry.slug] is defined ? industry_counts[industry.slug] : 0 }})</span></a></li>
+                  <li><a href="{{ path('applications_list', {i: industry.slug}) }}">{{ industry.name }}<span>({{ industry_counts[industry.slug] is defined ? industry_counts[industry.slug] : 0 }})</span></a></li>
                 {% endfor %}
               </ul>
             </div>
