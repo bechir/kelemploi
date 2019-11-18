@@ -227,7 +227,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_CANDIDATE")
+     * @IsGranted("ROLE_USER")
      */
     public function editProfile(Request $request): Response
     {

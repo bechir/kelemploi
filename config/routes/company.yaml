@@ -39,3 +39,15 @@ company_messages:
 company_pricing:
   path: /dashboard/pricing
   controller: App\Controller\CompanyController::pricing
+
+company_cart:
+  path: /dashboard/cart
+  controller: App\Controller\CartController::list
+
+add_to_cart:
+  path: /dashboard/cart/add
+  controller: App\Controller\CartController::add
+
+remove_from_cart:
+  path: /dashboard/cart/remove-item
+  controller: App\Controller\CartController::removeItem

@@ -103,6 +103,11 @@ class Company
      */
     private $applications;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="company", cascade={"persist", "remove"})
+     */
+    private $cart;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
@@ -328,6 +333,23 @@ class Company
             if ($application->getCompany() === $this) {
                 $application->setCompany(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Cart $cart): self
+    {
+        $this->cart = $cart;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $cart->getCompany()) {
+            $cart->setCompany($this);
         }
 
         return $this;

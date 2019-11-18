@@ -1,18 +1,20 @@
 {% extends 'company/base.html.twig' %}
 
 {% import 'util/util.twig' as util %}
-{% import 'util/candidate_widgets.twig' as widgets %}
 
 {% trans_default_domain 'company' %}
 
 {% block title %}
 {% if company is not null %}
-    {{ company.name }} | {{ job.title }}
+    {{ company.name }} | Votre panier
 {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% if company is not null %}
+
+    {% set cart = company ? company.cart : null %}
+
+    {% if cart is not empty %}
         <div class="manage-candidate-container">
             <table class="table">
                 <thead>
@@ -23,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for apply in job.applies %}
+                {% for candidate in cart.candidates %}
                     {% set candidate = apply.candidate %}
                     {% set path = path('candidate_show', {id: candidate.id}) %}
 
@@ -31,13 +33,13 @@
                             <td class="title">
                               {{ widgets.thumb(candidate, path) }}
                               <div class="body">
-                                <h4 class="h5"><a href="{{ path }}">{{ candidate.fullname }}</a></h4>
+                                <h5><a href="{{ path }}">{{ candidate.fullname }}</a></h5>
                                 <div class="info">
                                     {% if candidate.resume and candidate.resume.title %}
-                                        <span class="designation"><a href="javascript:void()"><i data-feather="check-square"></i>{{ candidate.resume.title }}</a></span>
+                                        <span class="designation"><a href="#"><i data-feather="check-square"></i>{{ candidate.resume.title }}</a></span>
                                     {% endif %}
                                     {% if candidate.region %}
-                                        <span class="location"><a href="javascript:void()"><i data-feather="map-pin"></i>{{ candidate.region|trans({}, 'regions') }}</a></span>
+                                        <span class="location"><a href="#"><i data-feather="map-pin"></i>{{ candidate.region|trans({}, 'regions') }}</a></span>
                                     {% endif %}
                                 </div>
                               </div>
@@ -55,7 +57,6 @@
                               <!-- <a href="#" class="download"><i data-feather="download"></i></a>
                               <a href="#" class="inbox"><i data-feather="mail"></i></a>
                               <a href="#" class="remove"><i data-feather="trash-2"></i></a> -->
-                              <a href="#" class="text-muted"><i data-feather="user-plus"></i></a>
                               <a href="{{ path }}" class="edit text-primary"><i data-feather="eye"></i></a>
                               <a href="#" class="edit text-info"><i data-feather="edit"></i></a>
                             </td>
@@ -67,9 +68,9 @@
 
     {% else %}
         <div class="dashboard-section dashboard-recent-activity">
-            <h4 class="title">Vue d'ensemble</h4>
-            <p>Vous n'avez pas de companie.</p>            
+            <h4 class="title"><i data-feather="shopping-cart"></i> Panier</h4>
         </div>
+        <p class="alert alert-info py-3 mt-5">Votre panier est vide.</p>
     {% endif %}
 
 {% endblock %}

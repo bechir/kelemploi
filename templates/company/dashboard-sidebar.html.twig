@@ -43,14 +43,14 @@
             {#<li {% if active == 'manage-candidates' %}class="active"{% endif %}>
                 <i class="fas fa-users"></i>
                 <a href="{{ path('company_manage_candidates') }}">{{ 'employer.manage_candidates'|trans }}</a>
-            </li>#}
+            </li>
             <li {% if active == 'shortlisted' %}class="active"{% endif %}>
                 <i class="fas fa-heart"></i>
                 <a href="{{ path('company_shortlisted_resumes') }}">CV favoris</a>
-            </li>
+            </li>#}
             <li {% if active == 'cart' %}class="active"{% endif %}>
                 <i class="fas fa-shopping-cart"></i>
-                <a href="{{ path('company_shortlisted_resumes') }}">Panier</a>
+                <a href="{{ path('company_cart') }}">Panier</a>
             </li>
             {# <li {% if active == 'messages' %}class="active"{% endif %}>
                 <i class="fas fa-comment"></i>
