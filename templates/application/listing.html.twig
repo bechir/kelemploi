@@ -21,7 +21,21 @@
                 {# Jobs listing #}
                 {% include 'application/jobs-items.html.twig' with {list: list} %}
 
-                <div class="pagination-list text-center">
+                {% if list.haveToPaginate %}
+                  <nav class="navigation pagination mt-5">
+                    <div class="nav-links mx-auto mt-3">
+                      {{ pagerfanta(list, 'twitter_bootstrap4_translated',
+                          { routeName: 'applications_list_paginated',
+                          routeParams: app.request.query.all,
+                          prev_message: '<i class="fas fa-angle-left"></i> Précédant',
+                          next_message: 'Suivant <i class="fas fa-angle-right"></i>',
+                          page_template: '<a class="page-numbers p-3" href="%href%" %rel%>%text%</a>'
+                          })
+                      }}
+                    </div>
+                  </nav>
+                {% endif %}
+                {# <div class="pagination-list text-center">
                   <nav class="navigation pagination">
                     <div class="nav-links">
                       <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
@@ -32,7 +46,7 @@
                       <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
                     </div>
                   </nav>                
-                </div>
+                </div> #}
               </div>
 
               {% include 'common/results-filter.html.twig' with {type: 'job' } %}

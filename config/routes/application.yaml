@@ -6,6 +6,10 @@ applications_list:
   path: /jobs
   controller: App\Controller\ApplicationController::list
 
+applications_list_paginated:
+  path: /jobs/page/{page<[1-9]\d*>}
+  controller: App\Controller\ApplicationController::list
+
 application_show:
   path: /job/{slug}
   controller: App\Controller\ApplicationController::show
