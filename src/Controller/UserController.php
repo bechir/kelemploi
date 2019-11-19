@@ -256,12 +256,11 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_CANDIDATE")
      */
-    public function bookmarked(): Response
+    public function bookmarked(UserInterface $user): Response
     {
-        $user = $this->getUser();
-
         return $this->render('candidate/bookmarked.html.twig', [
             'user' => $user,
+            'jobs' => $user->getBookmarkedJobs(),
             'active' => 'bookmarked',
         ]);
     }
@@ -286,6 +285,20 @@ class UserController extends AbstractController
         }
 
         return new JsonResponse('erorr');
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function jobRemoveFromFavorites(Job $job, EntityManagerInterface $em, UserInterface $user = null): Response
+    {
+        if($job && $user) {
+            $user->removeBookmarkedJob($job);
+            $em->flush();
+
+            $this->addFlash('success', 'Offre supprimée des favoris.');
+            return $this->redirectToRoute('user_bookmarked');
+        }
     }
 
     /**

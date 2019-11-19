@@ -1,11 +1,39 @@
 {% extends 'user/base.html.twig' %}
 
-{% import 'util/util.twig' as util %}
+{% import 'util/alerts.twig' as alerts %}
+{% import 'util/company_widgets.twig' as company_widgets %}
 
 {% trans_default_domain 'user' %}
 
 {% block title %}{{ 'bookmarked'|trans }}{% endblock %}
 
 {% block content %}
-    {{ util.temporary_unavailable_alert() }}
+<div class="dashboard-applied">
+        <h4 class="apply-title">Offres d'emploi favoris <span class="badge badge-primary py-2 px-3">{{ jobs|length }}</span></h4>
+        <div class="dashboard-apply-area">
+            {% for job in jobs %}
+                {% set job_url = path('application_show', {slug: job.slug}) %}
+                <div class="job-list">
+                    {{ company_widgets.thumb(job.company) }}
+                    <div class="body">
+                        <div class="content">
+                            <h4><a href="{{ job_url }}">{{ job.jobTitle }}</a></h4>
+                            <div class="info">
+                            <span class="company"><a href="#"><i data-feather="briefcase"></i>{{ job.company.name }}</a></span>
+                            {{ company_widgets.office_location(job.company.region) }}
+                            {{ company_widgets.job_type(job.contractType.name) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more">
+                        <a href="{{ path('job_remove_from_favorites', {slug: job.slug}) }}" class="bookmark-remove text-danger"><i data-feather="trash"></i></a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>Vous n'avez pas offres d'emploi favoris.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

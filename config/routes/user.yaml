@@ -34,6 +34,10 @@ user_bookmarked:
   path: /user/bookmarked
   controller: App\Controller\UserController::bookmarked
 
+job_remove_from_favorites:
+  path: /user/job/{slug}/remove-from-favorites
+  controller: App\Controller\UserController::jobRemoveFromFavorites
+  
 user_applied:
   path: /user/applied
   controller: App\Controller\UserController::applied
