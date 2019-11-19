@@ -636,6 +636,43 @@ $(document).ready(function() {
         topToggler();
     });
 
+    /**
+     * Favorite Jobs
+     */
+    let xhr = null;
+    const favoriteBtn = $('.job-list a.favourite');
+    favoriteBtn.on('click', function(e){
+      if(user.isAuth) {
+        favoriteBtn.addClass('disabled');
+        let f_url = favoriteBtn.data('url') + '&action=';
+        if(favoriteBtn.hasClass('active')) {
+          f_url += 'add';
+        } else {
+          f_url += 'remove';
+        }
+
+        xhr = $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: f_url,
+
+          success: function(data) {
+            console.log(data);
+            
+            favoriteBtn.removeClass('disabled');
+          },
+
+          beforeSend: function(){
+              if(xhr) {
+                  xhr.abort();
+              }
+          }
+        });
+      } else {
+        $('button[data-target="#loginModal"]').trigger('click');
+      }
+    });
+
 
     /*-------------------------------------
     Terms & Conditions

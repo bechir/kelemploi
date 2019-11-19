@@ -116,6 +116,11 @@
         <script src="{{ asset('assets/js/typeahead.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap-tagsinput.min.js') }}"></script>
         <script src="{{ asset('assets/js/bloodhound.min.js') }}"></script>
+        <script>
+            var user = {
+                isAuth: {{ app.user ? 'true' : 'false' }},
+            }
+        </script>
         <script src="{{ asset('js/custom.js') }}"></script>
         {% block javascript %}{% endblock %}
     {% endblock %}

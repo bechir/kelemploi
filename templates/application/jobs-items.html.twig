@@ -39,7 +39,7 @@
                             <span class="apply text-dark"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</span>
                         {% else %}
                             <a class="button" href="{{ app_url }}">Détails</a>
-                            <a class="favourite" href="{{ app_url }}">
+                            <a class="favourite{{ app.user and app.user.isJobBookmarked(_app) ? ' active' : '' }}" data-url="{{ path('toogle_job_bookmark', {slug: _app.slug}) }}" href="{{ app_url }}">
                                 <i data-feather="heart" class="mb-1"></i>
                             </a>
                         {% endif %}

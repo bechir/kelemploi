@@ -82,6 +82,7 @@ a {
   -webkit-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
+  font-weight: 500;
 }
 
 a,
@@ -2375,8 +2376,8 @@ a:focus {
 .job-list .body .more .deadline {
   font-size: 1.3rem;
   margin-top: 0.5rem;
-  font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
+  color: green;
   display: block;
   text-align: right;
 }

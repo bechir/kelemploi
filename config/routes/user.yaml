@@ -45,3 +45,7 @@ user_messages:
 user_settings:
   path: /user/settings
   controller: App\Controller\UserController::settings
+
+toogle_job_bookmark:
+  path: /user/toogle-job-bookmark
+  controller: App\Controller\UserController::toogleJobBookmark

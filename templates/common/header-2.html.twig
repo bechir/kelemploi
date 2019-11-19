@@ -73,8 +73,8 @@
                             </div>
                         {% else %}
                             <div class="dropdown header-top-account login-modals">
-                                <button data-target="#exampleModalLong" data-toggle="modal" title="Title" type="button">{{ 'user.login'|trans }}</button>
-                                {# <button data-target="#exampleModalLong2" data-toggle="modal" title="Title" type="button">{{ 'user.register'|trans }}</button> #}
+                                <button data-target="#loginModal" data-toggle="modal" title="Title" type="button">{{ 'user.login'|trans }}</button>
+                                {# <button data-target="#registerModal" data-toggle="modal" title="Title" type="button">{{ 'user.register'|trans }}</button> #}
                                 <a href="{{ path('fos_user_registration_register') }}" class="text-muted">{{ 'user.register'|trans }}</a>
                             </div>
                         {% endif %}

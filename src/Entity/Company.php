@@ -94,11 +94,6 @@ class Company
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ResumeBookmark", mappedBy="company")
-     */
-    private $bookmarkedResumes;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="company", orphanRemoval=true)
      */
     private $applications;
@@ -108,11 +103,16 @@ class Company
      */
     private $cart;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     */
+    private $bookmarkedCandidates;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
-        $this->bookmarkedResumes = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->bookmarkedCandidates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -277,37 +277,6 @@ class Company
     }
 
     /**
-     * @return Collection|ResumeBookmark[]
-     */
-    public function getBookmarkedResumes(): Collection
-    {
-        return $this->bookmarkedResumes;
-    }
-
-    public function addBookmarkedResume(ResumeBookmark $bookmarkedResume): self
-    {
-        if (!$this->bookmarkedResumes->contains($bookmarkedResume)) {
-            $this->bookmarkedResumes[] = $bookmarkedResume;
-            $bookmarkedResume->setCompany($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBookmarkedResume(ResumeBookmark $bookmarkedResume): self
-    {
-        if ($this->bookmarkedResumes->contains($bookmarkedResume)) {
-            $this->bookmarkedResumes->removeElement($bookmarkedResume);
-            // set the owning side to null (unless already changed)
-            if ($bookmarkedResume->getCompany() === $this) {
-                $bookmarkedResume->setCompany(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Application[]
      */
     public function getApplications(): Collection
@@ -350,6 +319,32 @@ class Company
         // set the owning side of the relation if necessary
         if ($this !== $cart->getCompany()) {
             $cart->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getBookmarkedCandidates(): Collection
+    {
+        return $this->bookmarkedCandidates;
+    }
+
+    public function addBookmarkedCandidate(User $bookmarkedCandidate): self
+    {
+        if (!$this->bookmarkedCandidates->contains($bookmarkedCandidate)) {
+            $this->bookmarkedCandidates[] = $bookmarkedCandidate;
+        }
+
+        return $this;
+    }
+
+    public function removeBookmarkedCandidate(User $bookmarkedCandidate): self
+    {
+        if ($this->bookmarkedCandidates->contains($bookmarkedCandidate)) {
+            $this->bookmarkedCandidates->removeElement($bookmarkedCandidate);
         }
 
         return $this;

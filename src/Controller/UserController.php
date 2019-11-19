@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Apply;
+use App\Entity\Application as Job;
 use App\Entity\Resume;
 use App\Form\Resume\ResumeType;
 use App\Form\EditProfileType;
@@ -28,6 +29,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Exception\LogicException as SymfonyFormLogicException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends AbstractController
 {
@@ -262,6 +264,28 @@ class UserController extends AbstractController
             'user' => $user,
             'active' => 'bookmarked',
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function toogleJobBookmark(Request $request, EntityManagerInterface $em, UserInterface $user = null): JsonResponse
+    {
+        $job = $em->getRepository(Job::class)->findOneBySlug($request->query->get('slug'));
+        $action = $request->query->get('action');
+    
+        if($job && $user && in_array($action, ['add', 'remove'])) {
+            if($action == 'add') {
+                $user->addBookmarkedJob($job);
+            } else {
+                $user->removeBookmarkedJob($job);
+            }
+
+            $em->flush();
+            return new JsonResponse('success');
+        }
+
+        return new JsonResponse('erorr');
     }
 
     /**

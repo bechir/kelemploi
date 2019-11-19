@@ -124,14 +124,14 @@ class User extends BaseUser implements EquatableInterface
     private $applies;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CompanyBookmark", mappedBy="candidate")
-     */
-    private $bookmarkedCompanies;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\JobBookmark", mappedBy="candidate")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Application")
      */
     private $bookmarkedJobs;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Company")
+     */
+    private $bookmarkedCompanies;
 
     const NUM_ITEMS = 15;
 
@@ -145,8 +145,8 @@ class User extends BaseUser implements EquatableInterface
 
         $this->viewCount = 0;
         $this->applies = new ArrayCollection();
-        $this->bookmarkedCompanies = new ArrayCollection();
         $this->bookmarkedJobs = new ArrayCollection();
+        $this->bookmarkedCompanies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -510,62 +510,57 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * @return Collection|CompanyBookmark[]
-     */
-    public function getBookmarkedCompanies(): Collection
-    {
-        return $this->bookmarkedCompanies;
-    }
-
-    public function addBookmarkedCompany(CompanyBookmark $bookmarkedCompany): self
-    {
-        if (!$this->bookmarkedCompanies->contains($bookmarkedCompany)) {
-            $this->bookmarkedCompanies[] = $bookmarkedCompany;
-            $bookmarkedCompany->setCandidate($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBookmarkedCompany(CompanyBookmark $bookmarkedCompany): self
-    {
-        if ($this->bookmarkedCompanies->contains($bookmarkedCompany)) {
-            $this->bookmarkedCompanies->removeElement($bookmarkedCompany);
-            // set the owning side to null (unless already changed)
-            if ($bookmarkedCompany->getCandidate() === $this) {
-                $bookmarkedCompany->setCandidate(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|JobBookmark[]
+     * @return Collection|Application[]
      */
     public function getBookmarkedJobs(): Collection
     {
         return $this->bookmarkedJobs;
     }
 
-    public function addBookmarkedJob(JobBookmark $bookmarkedJob): self
+    public function addBookmarkedJob(Application $bookmarkedJob): self
     {
         if (!$this->bookmarkedJobs->contains($bookmarkedJob)) {
             $this->bookmarkedJobs[] = $bookmarkedJob;
-            $bookmarkedJob->setCandidate($this);
         }
 
         return $this;
     }
 
-    public function removeBookmarkedJob(JobBookmark $bookmarkedJob): self
+    public function removeBookmarkedJob(Application $bookmarkedJob): self
     {
         if ($this->bookmarkedJobs->contains($bookmarkedJob)) {
             $this->bookmarkedJobs->removeElement($bookmarkedJob);
-            // set the owning side to null (unless already changed)
-            if ($bookmarkedJob->getCandidate() === $this) {
-                $bookmarkedJob->setCandidate(null);
-            }
+        }
+
+        return $this;
+    }
+
+    public function isJobBookmarked(Application $app): bool
+    {
+        return $this->bookmarkedJobs->contains($app);
+    }
+
+    /**
+     * @return Collection|Company[]
+     */
+    public function getBookmarkedCompanies(): Collection
+    {
+        return $this->bookmarkedCompanies;
+    }
+
+    public function addBookmarkedCompany(Company $bookmarkedCompany): self
+    {
+        if (!$this->bookmarkedCompanies->contains($bookmarkedCompany)) {
+            $this->bookmarkedCompanies[] = $bookmarkedCompany;
+        }
+
+        return $this;
+    }
+
+    public function removeBookmarkedCompany(Company $bookmarkedCompany): self
+    {
+        if ($this->bookmarkedCompanies->contains($bookmarkedCompany)) {
+            $this->bookmarkedCompanies->removeElement($bookmarkedCompany);
         }
 
         return $this;
