@@ -30,7 +30,7 @@
                 </div>
                 {% if not _app.isOwner(user) %}
                 <div class="buttons">
-                  <a class="save" href="#"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
+                  <a class="save{{ app.user and app.user.isJobBookmarked(_app) ? ' active' : '' }}" href="#" data-url="{{ path('toogle_job_bookmark', {slug: _app.slug}) }}"><i data-feather="heart"></i>{{ 'job.save'|trans }}</a>
                   {% if is_granted('ROLE_CANDIDATE') %}
                     {% if haveApplied %}
                       <a href="javascript:void()" class="apply bg-white text-dark btn-disabled"><i class="fas fa-check-circle text-success"></i> Candidature envoyé</a>
@@ -137,10 +137,10 @@
                       {% endif %}
                       <div class="share-job-post">
                         <span class="share"><i class="fas fa-share-alt"></i>{{ 'job.share'|trans }}</span>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-lg fa-whatsapp text-success"></i></a>
+                        <a href="#"><i class="fab fa-lg fa-linkedin-in linkedin-color"></i></a>
+                        <a href="#"><i class="fab fa-lg fa-facebook-square fb-color"></i></a>
+                        <a href="#"><i class="fab fa-lg fa-twitter twitter-color"></i></a>
                       </div>
                       <div class="buttons">
                         <a href="#" class="button print"><i data-feather="printer"></i>{{ 'job.print'|trans }}</a>

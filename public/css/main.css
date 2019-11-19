@@ -2768,7 +2768,8 @@ a:focus {
   margin-right: 7px;
 }
 
-.job-title-and-info .buttons .save:hover {
+.job-title-and-info .buttons .save:hover,
+.job-title-and-info .buttons .save.active {
   color: #ff8fa6;
   border-color: #ff8fa6;
 }
@@ -10096,4 +10097,14 @@ header .absolute-nav {
     width: 180px;
     margin: 0 auto;
   }
+}
+
+.fb-color{
+  color: #405D9B!important;
+}
+.linkedin-color{
+  color: #448ccb!important;
+}
+.twitter-color{
+  color: #29C5F6!important;
 }

@@ -641,6 +641,7 @@ $(document).ready(function() {
      */
     let xhr = null;
     const favoriteBtn = $('.job-list a.favourite');
+    const saveBtn = $('.job-listing-details a.save');
     favoriteBtn.on('click', function(e){
       if(user.isAuth) {
         favoriteBtn.addClass('disabled');
@@ -657,8 +658,6 @@ $(document).ready(function() {
           url: f_url,
 
           success: function(data) {
-            console.log(data);
-            
             favoriteBtn.removeClass('disabled');
           },
 
@@ -666,6 +665,41 @@ $(document).ready(function() {
               if(xhr) {
                   xhr.abort();
               }
+          }
+        });
+      } else {
+        $('button[data-target="#loginModal"]').trigger('click');
+      }
+    });
+    saveBtn.on('click', function(e){
+      if(user.isAuth) {
+        saveBtn.addClass('disabled');
+        let f_url = saveBtn.data('url') + '&action=';
+        if(saveBtn.hasClass('active')) {
+          f_url += 'remove';
+        } else {
+          f_url += 'add';
+        }
+
+        xhr = $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: f_url,
+
+          success: function(data) {
+            if(saveBtn.hasClass('active')) {
+              saveBtn.removeClass('active');
+            }
+            else {
+              saveBtn.addClass('active');
+            }
+            saveBtn.removeClass('disabled');
+          },
+
+          beforeSend: function(){
+            if(xhr) {
+              xhr.abort();
+            }
           }
         });
       } else {
