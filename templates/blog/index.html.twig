@@ -14,24 +14,27 @@
             <div class="row">
                 <div class="col">
                     <div class="blog-post-wrapper">
+                        <div class="row">
+                            {# {% for article in articles %} #}
+                                {% include "blog/article-grid-item.html.twig" %}
+                            {# {% endfor %} #}
+                        </div>
 
-                        {% include 'blog/article-section.html.twig' %}
-
-                        <div class="pagination-list text-center">
-                            <nav class="navigation pagination">
-                                <div class="nav-links">
-                                    <a class="prev page-numbers" href="#" onclick="return false;">
-                                        <i class="fas fa-angle-left"></i>
-                                    </a>
-                                    <a class="page-numbers" href="#" onclick="return false;">1</a>
-                                    <span aria-current="page" class="page-numbers current">2</span>
-                                    <a class="page-numbers" href="#" onclick="return false;">3</a>
-                                    <a class="page-numbers" href="#" onclick="return false;">4</a>
-                                    <a class="next page-numbers" href="#" onclick="return false;">
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
+                        <div class="row">
+                                <div class="col">
+                                  <div class="pagination-list text-center">
+                                    <nav class="navigation pagination padding-top-10">
+                                      <div class="nav-links">
+                                        <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
+                                        <a class="page-numbers" href="#">1</a>
+                                        <span aria-current="page" class="page-numbers current">2</span>
+                                        <a class="page-numbers" href="#">3</a>
+                                        <a class="page-numbers" href="#">4</a>
+                                        <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
+                                      </div>
+                                    </nav>                
+                                  </div>
                                 </div>
-                            </nav>
                         </div>
                     </div>
                 </div>

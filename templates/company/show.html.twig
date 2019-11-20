@@ -34,7 +34,7 @@
               </div>
               <div class="details-information padding-top-60">
                 <div class="row">
-                  <div class="col-xl-7 col-lg-8">
+                  <div class="col-lg-8">
                     <div class="about-details details-section">
                       <h4><i data-feather="align-left"></i>{{ 'details.about'|trans }}</h4>
                       <p>{{ company.description }}</p>
@@ -92,7 +92,7 @@
                     {{ render(controller('App\\Controller\\CompanyController::openedJobs', {company: company})) }}
 
                   </div>
-                  <div class="col-xl-4 offset-xl-1 col-lg-4">
+                  <div class="col-lg-4">
                     <div class="information-and-contact">
                       <div class="information">
                         <h4>{{ 'details.info'|trans }}</h4>
@@ -153,12 +153,11 @@
                       </div>
                     </div> #}
                     <div class="share-job-post">
-                      <span class="share">{{ 'social_profile'|trans }}</span>
-                      <a href="#" onclick="return false"><i class="fab fa-facebook-f"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-twitter"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-linkedin-in"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-google-plus-g"></i></a>
-                      <a href="#" onclick="return false"><i class="fab fa-pinterest-p"></i></a>
+                      <span class="share"><i class="fas fa-share-alt"></i>Partager</span>
+                      <a href="#"><i class="fab fa-lg fa-whatsapp text-success"></i></a>
+                      <a href="#"><i class="fab fa-lg fa-linkedin-in linkedin-color"></i></a>
+                      <a href="#"><i class="fab fa-lg fa-facebook-square fb-color"></i></a>
+                      <a href="#"><i class="fab fa-lg fa-twitter twitter-color"></i></a>
                     </div>
                   </div>
                 </div>

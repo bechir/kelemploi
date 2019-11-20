@@ -35,6 +35,10 @@ class UserController extends AbstractController
 {
     public function list(): Response
     {
+        if(!$this->isGranted('ROLE_EMPLOYER')) {
+            return $this->render('candidate/access-limited.html.twig');
+        }
+
         return $this->render('candidate/listing.html.twig', [
             'list' => $this->getDoctrine()->getRepository(User::class)->findCandidates(),
         ]);

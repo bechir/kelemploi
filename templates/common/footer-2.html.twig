@@ -13,28 +13,13 @@
                     <div class="footer-social">
                         <ul class="social-icons">
                             <li>
-                                <a href="">
+                                <a href="https://www.facebook.com/kelemploi">
                                     <i data-feather="facebook"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <i data-feather="twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
+                                <a href="https://www.linkedin.com/company/kelemploi">
                                     <i data-feather="linkedin"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i data-feather="instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i data-feather="youtube"></i>
                                 </a>
                             </li>
                         </ul>
@@ -51,7 +36,7 @@
                         <h4>Le Site</h4>
                         <div class="widget-inner">
                             <ul>
-                                <li><a href="{{ path('about') }}">{{ 'layout.about'|trans }}</a></li>
+                                <li><a href="{{ path('about') }}">À propos</a></li>
                                 <li><a href="{{ path('contact') }}">Nos services</a></li>
                                 <li><a href="{{ path('blog_index') }}">Blog</a></li>
                                 <li><a href="{{ path('contact') }}">Plan du site</a></li>
@@ -64,7 +49,7 @@
                         <h4>Candidat</h4>
                         <div class="widget-inner">
                             <ul>
-                                <li><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.create_account'|trans }}</a></li>
+                                <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
                                 <li><a href="{{ path('edit_resume') }}">Déposez votre CV</a></li>
                                 <li><a href="{{ path('pricing') }}">Fiches pratiques</a></li>
                                 <li><a href="{{ path('pricing') }}">Modèles de CV gratuits</a></li>
@@ -77,9 +62,9 @@
                         <h4>Recruteur</h4>
                         <div class="widget-inner">
                             <ul>
-                                <li><a href="{{ path('help_faq') }}">Ajoutez votre entreprise</a></li>
-                                <li><a href="{{ path('application_create') }}">{{ 'layout.post_job'|trans }}</a></li>
-                                <li><a href="{{ path('application_create') }}">CV thèque</a></li>
+                                <li><a href="{{ path('company_edit_profile') }}">Ajoutez votre entreprise</a></li>
+                                <li><a href="{{ path('application_create') }}">Publier une offre</a></li>
+                                <li><a href="{{ path('candidates_list') }}">CV thèque</a></li>
                                 <li><a href="{{ path('pricing') }}">Voir nos tarifs</a></li>
                             </ul>
                         </div>
@@ -90,10 +75,10 @@
                         <h4>Informations</h4>
                         <div class="widget-inner">
                             <ul>
-                                <li><a href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a></li>
-                                <li><a href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a></li>
-                                <li><a class="text-capitalize" href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a></li>
-                                <li><a class="text-capitalize" href="{{ path('terms_conditions') }}">{{ 'layout.terms_conditions'|trans }}</a></li>
+                                <li><a href="{{ path('help_faq') }}">Aide et FAQ</a></li>
+                                <li><a href="{{ path('contact') }}">Contactez nous</a></li>
+                                <li><a class="text-capitalize" href="{{ path('privacy') }}">Politique De Confidentialité</a></li>
+                                <li><a class="text-capitalize" href="{{ path('terms_conditions') }}">Conditions Générales D'utilisation</a></li>
                             </ul>
                         </div>
                     </div>
