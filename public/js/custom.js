@@ -705,6 +705,7 @@ $(document).ready(function() {
       } else {
         $('button[data-target="#loginModal"]').trigger('click');
       }
+      e.preventDefault();
     });
 
 
