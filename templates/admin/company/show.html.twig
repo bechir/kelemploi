@@ -41,9 +41,6 @@
               {% if company.industry %}
                 <li>Industrie <span>{{ company.industry|trans({}, 'job-categories') }}</span></li>
               {% endif %}
-              {% if company.phone %}
-                <li>Téléphone <span><a href="tel:{{ company.phone|replace({' ': ''}) }}">{{ company.phone }}</span></a></li>
-              {% endif %}
               {% if company.email %}
                 <li>Email <span><a href="mailto:{{ company.email }}">{{ company.email }}</a></span></li>
               {% endif %}
@@ -58,10 +55,6 @@
           <div class="profile-info text-center">
             <hr>
             <div class="text-center">
-              {% if company.adminOwner %}
-                <a href="{{ path('admin_company_edit', {slug: company.slug}) }}" class="btn btn-block btn-default mx-1 px-4 my-3"><span class="lnr lnr-pencil"></span> Modifier l'organisation</a>
-              {% endif %}
-
               {% if is_granted('ROLE_COMPANIES_MANAGER') %}
                 <div class="btn-group">
                   <a href="#" class="btn btn-success m-1 px-4 my-3 {% if company.confirmed %}hidden{% endif %}" id="confirm-company"><span class="lnr lnr-checkmark-circle"></span> Confirmer</a>
@@ -136,80 +129,6 @@
                         </tr>
                       {% else %}
                         <p class="alert alert-info text-center my-3">Aucune offre d'emploi postée.</p>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <h4 class="heading bg-primary pt-3">Appels d'ofres</h4>
-              <div class="tab-content pb-5">
-                <div class="table-responsive">
-                  <table class="table project-table table-hover text-left">
-                    {% if offers|length > 0 %}
-                    <thead>
-                      <tr>
-                        <th>Titre</th>
-                        <th>Date création</th>
-                        <th>Statut</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {% endif %}
-                      {% for offer in offers %}
-                        <tr>
-                          <td><a href="{{ path('admin_offer_show', {offer: offer.id}) }}">{{ offer.title[:45] }}{{ offer.title|length > 45 ? '...' : '' }}</a></td>
-                          <td>{{ offer.createdAt|date('d, M Y') }}</td>
-                          <td>
-                            {% if offer.isActivated %}
-                              <span class="label label-success">ACTIVÉ</span>
-                            {% else %}
-                              <span class="label label-warning">DESACTIVÉE</span>
-                            {% endif %}
-                          </td>
-                        </tr>
-                      {% else %}
-                        <p class="alert alert-info text-center my-3">Aucun appel d'offre posté.</p>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <h4 class="heading bg-primary pt-3">Avis & Informations</h4>
-              <div class="tab-content pb-5">
-                <div class="table-responsive">
-                  <table class="table project-table table-hover text-left">
-                    {% if infos|length > 0 %}
-                    <thead>
-                      <tr>
-                        <th>Titre</th>
-                        <th>Date création</th>
-                        <th>Statut</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {% endif %}
-                      {% for info in infos %}
-                        <tr>
-                          <td><a href="{{ path('admin_info_show', {info: info.id}) }}">{{ info.title[:45] }}{{ info.title|length > 45 ? '...' : '' }}</a></td>
-                          <td>{{ info.createdAt|date('d, M Y') }}</td>
-                          <td>
-                            {% if info.isActivated %}
-                              <span class="label label-success">ACTIVÉ</span>
-                            {% else %}
-                              <span class="label label-warning">DESACTIVÉE</span>
-                            {% endif %}
-                          </td>
-                        </tr>
-                      {% else %}
-                        <p class="alert alert-info text-center my-3">Aucun avis & info posté.</p>
                       {% endfor %}
                     </tbody>
                   </table>

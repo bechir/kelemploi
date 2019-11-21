@@ -108,6 +108,16 @@ class Company
      */
     private $bookmarkedCandidates;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $confirmed;
+
+    const NB_IMTEMS_HOME = 7;
+    const NB_IMTEMS_SIMILAR = 7;
+    const NB_ITEMS_LISTING = 13;
+    const NB_ITEMS_ADMIN_LISTING = 15;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
@@ -348,5 +358,22 @@ class Company
         }
 
         return $this;
+    }
+
+    public function getConfirmed(): ?bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(?bool $confirmed): self
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->owners[0];
     }
 }

@@ -10,6 +10,9 @@
                 <li><a href="{{ path('admin_index') }}" {% if active == 'index' %} class="active" {% endif %}>
                     <i class="lnr lnr-home"></i> <span>Tableau de bord</span></a>
                 </li>
+                <li><a href="{{ path('admin_blog_index') }}" {% if active == 'blog_index' %} class="active" {% endif %}>
+                    <i class="fa fa-newspaper-o"></i> <span>Blog</span></a>
+                </li>
                 <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
                     <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
                 </li>
@@ -42,7 +45,7 @@
                                 <span>En cours</span></a>
                             </li>
                             <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
-                                <span>En attentes de validation</span></a>
+                                <span>En attentes</span></a>
                             </li>
                         </ul>
                     </div>
@@ -53,7 +56,7 @@
                 <li>
                     <a {% if active in in_create %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#newAd">
                         <i class="lnr lnr-plus-circle"></i>
-                        <span>Créer</span>
+                        <span>Ajouter</span>
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
                     <div class="collapse{% if active in in_create %} in{% endif %}" id="newAd">
@@ -67,7 +70,7 @@
                                 </li>
                             {% endif %}
                             <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
-                                <i class="lnr lnr-plus-circle"></i> <span>Ajouter un utilisateur</span></a>
+                                <i class="lnr lnr-user"></i> <span> Utilisateur</span></a>
                             </li>
                         </ul>
                     </div>
@@ -102,7 +105,7 @@
                     </div>
                 </li>
                 <li><a href="{{ path('admin_jobs_list_archived') }}" {% if active == 'archives' %} class="active" {% endif %}>
-                    <i class="fa fa-box"></i> <span>Arhives</span></a>
+                    <i class="fa fa-archive"></i> <span>Archives</span></a>
                 </li>
             </ul>
         </nav>

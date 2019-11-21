@@ -10,6 +10,9 @@ namespace App\Repository;
 
 use App\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -25,32 +28,46 @@ class CompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, Company::class);
     }
 
-    // /**
-    //  * @return Company[] Returns an array of Company objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCompanies(int $page = 1): Pagerfanta
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.industry', 'i')
+                ->addSelect('i')
+            ->leftJoin('c.region', 'r')
+                ->addSelect('r')
+            ->leftJoin('c.photo', 'p')
+                ->addSelect('p');
 
-    /*
-    public function findOneBySomeField($value): ?Company
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createPaginator($qb->getQuery(), $page);
     }
-    */
+
+    public function adminGetCompanies(int $page = 1): Pagerfanta
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.industry', 'i')
+                ->addSelect('i')
+            ->leftJoin('c.region', 'r')
+                ->addSelect('r')
+            ->leftJoin('c.photo', 'p')
+                ->addSelect('p')
+            ->orderBy('c.confirmed', 'ASC');
+
+        return $this->createPaginator($qb->getQuery(), $page, true);
+    }
+
+    /**
+     * @return Company[]
+     */
+    public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
+        if ($isAdmin) {
+            $paginator->setMaxPerPage(Company::NB_ITEMS_ADMIN_LISTING);
+        } else {
+            $paginator->setMaxPerPage(Company::NB_ITEMS_LISTING);
+        }
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
+    }
 }
