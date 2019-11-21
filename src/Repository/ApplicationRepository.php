@@ -70,6 +70,36 @@ class ApplicationRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $page);
     }
 
+    public function adminGetJobs(int $page = 1, $archived = false): Pagerfanta
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->leftJoin('j.dates', 'd')
+                ->addSelect('d')
+            ->orderBy('d.start', 'DESC')
+        ;
+
+        if ($archived) {
+            $qb->where('j.archived = true');
+        } else {
+            $qb->where('j.archived = false')
+                ->orWhere('j.archived is null');
+        }
+
+        return $this->createPaginator($qb->getQuery(), $page, true);
+    }
+
+    public function adminGetRecents()
+    {
+        return $this->createQueryBuilder('j')
+                ->where('j.archived is null')
+                ->leftJoin('j.dates', 'd')
+                    ->addSelect('d')
+                ->orderBy('d.start', 'DESC')
+                ->setMaxResults(5)
+                ->getQuery()
+                ->getResult();
+    }
+
     public function findBySearchQuery(array $search, int $page = 1): ?Pagerfanta
     {
         $queryBuilder = $this

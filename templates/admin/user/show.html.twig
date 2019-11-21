@@ -33,7 +33,7 @@
                 <h4><i class="fa fa-star"></i> Super Admin</h4>
               </div>
             </div>
-          {% elseif user.isAdmin() %}
+          {% elseif user.hasRole('ROLE_ADMIN') %}
             <div class="profile-stat">
               <div class="row">
                 <h4>Administrateur</h4>

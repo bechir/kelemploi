@@ -302,7 +302,6 @@ form:
           <li>etc.</li></ul>
         </div>
 
-
 error:
   err500:
     title: "Erreur 500"
@@ -327,3 +326,11 @@ text:
   temporary_unavailable_alert: "Cette section est temporairement vide."
   edit_success: "Modifications effectuées."
   edit_error: "Erreur: modifications non effectuées."
+
+
+ROLE_CANDIDATE: Candidat
+ROLE_EMPLOYER: Recruteur
+ROLE_ADMIN: Administeur simple
+ROLE_RESUMES_MANAGER: Administeur de Base CV
+ROLE_COMPANIES_MANAGER: Administeur des entreprises
+ROLE_SUPER_ADMIN: Accès Global

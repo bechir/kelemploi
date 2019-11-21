@@ -8,6 +8,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -135,6 +136,16 @@ class Application
      */
     private $applies;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archived;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isActivated;
+
     const FENCED = 'application.status.fenced';
     const ONGOING = 'application.status.ongoing';
     const STATUS = [self::FENCED, self::ONGOING];
@@ -151,6 +162,7 @@ class Application
 
         $this->dates = new DateInterval();
         $this->applies = new ArrayCollection();
+        $this->isActivated = false;
     }
 
     public function getId(): ?int
@@ -455,5 +467,34 @@ class Application
     public function getDescription(): string
     {
         return $this->jobDescription;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(?bool $archived): self
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    public function getIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated(?bool $isActivated): self
+    {
+        $this->isActivated = $isActivated;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->dates->getStart();
     }
 }

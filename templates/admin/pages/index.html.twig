@@ -70,37 +70,8 @@
         </div>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Apples d'offres récents</h3>
-                <div class="right">
-                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-                </div>
-            </div>
-            <div class="panel-body">
-                {% include 'admin/offer/table.html.twig' with {offers: offers} %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Avis & Infos récents</h3>
-                <div class="right">
-                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-                </div>
-            </div>
-            <div class="panel-body">
-                {% include 'admin/info/table.html.twig' with {infos: infos} %}
-            </div>
-        </div>
-    </div>
-</div>
-{# <div class="row">
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
@@ -115,7 +86,7 @@
             </div>
         </div>
     </div>
-</div> #}
+</div>
 {% endblock %}
 
 {% block javascript %}

@@ -1,7 +1,6 @@
-{% set in_list = ['pendings', 'jobs-list', 'offers-list', 'infos-list'] %}
-{% set in_archives = ['jobs', 'offers', 'infos'] %}
+{% set in_list = ['pendings', 'jobs-list'] %}
 {% set in_settings = ['featured', 'resume-of-week', 'testimonials', 'banner-ad', 'emails', 'admin-users'] %}
-{% set in_create = ['new-company', 'new-user', 'new-job', 'new-offer', 'new-info', 'new-user'] %}
+{% set in_create = ['new-company', 'new-user', 'new-job'] %}
 
 
 <div id="sidebar-nav" class="sidebar">
@@ -34,22 +33,16 @@
                 <li>
                     <a {% if active in in_list %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#ads">
                         <i class="lnr lnr-list"></i>
-                        <span>Offres</span>
+                        <span>Offres d'emploi</span>
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
                     <div class="collapse{% if active in in_list %} in{% endif %}" id="ads">
                         <ul class="nav">
+                            <li><a href="{{ path('admin_jobs_list') }}" {% if active == 'jobs-list' %} class="active" {% endif %}>
+                                <span>En cours</span></a>
+                            </li>
                             <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
                                 <span>En attentes de validation</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_jobs_list') }}" {% if active == 'jobs-list' %} class="active" {% endif %}>
-                                <span>Offres d'emploi</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_offers_list') }}" {% if active == 'offers-list' %} class="active" {% endif %}>
-                                <span>Appels d'offres</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_infos_list') }}" {% if active == 'infos-list' %} class="active" {% endif %}>
-                                <span>Avis & Infos</span></a>
                             </li>
                         </ul>
                     </div>
@@ -68,20 +61,14 @@
                             <li><a href="{{ path('admin_job_create') }}" {% if active == 'new-job' %} class="active" {% endif %}>
                                 <span><i class="lnr lnr-bullhorn"></i> Offre d'emploi</span></a>
                             </li>
-                            <li><a href="{{ path('admin_offer_create') }}" {% if active == 'new-offer' %} class="active" {% endif %}>
-                                <span><i class="lnr lnr-file-add"></i> Appel d'offre</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_info_create') }}" {% if active == 'new-info' %} class="active" {% endif %}>
-                                <span><i class="fa fa-info-circle"></i> Avis & Info</span></a>
-                            </li>
                             {% if is_granted('ROLE_RESUMES_MANAGER') %}
                                 <li><a href="{{ path('admin_company_create') }}" {% if active == 'new-company' %} class="active" {% endif %}>
                                     <span><i class="lnr lnr-briefcase"></i> Organisation</span></a>
                                 </li>
                             {% endif %}
-                            {# <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
+                            <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
                                 <i class="lnr lnr-plus-circle"></i> <span>Ajouter un utilisateur</span></a>
-                            </li> #}
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -114,25 +101,8 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a {% if active in in_archives %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#archive">
-                        <i class="fa fa-archive"></i>
-                        <span>Archives</span>
-                        <i class="icon-submenu fa-bo fa-box fa-box lnr-box lnr lnr-chevron-left"></i>
-                    </a>
-                    <div class="collapse{% if active in in_archives %} in{% endif %}" id="archive">
-                        <ul class="nav">
-                            <li><a href="{{ path('admin_jobs_list_archived') }}" {% if active == 'jobs' %} class="active" {% endif %}>
-                                <span>Offres d'emploi</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_offers_list_archived') }}" {% if active == 'offers' %} class="active" {% endif %}>
-                                <span>Appels d'offres</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_infos_list_archived') }}" {% if active == 'infos' %} class="active" {% endif %}>
-                                <span>Avis & Infos</span></a>
-                            </li>
-                        </ul>
-                    </div>
+                <li><a href="{{ path('admin_jobs_list_archived') }}" {% if active == 'archives' %} class="active" {% endif %}>
+                    <i class="fa fa-box"></i> <span>Arhives</span></a>
                 </li>
             </ul>
         </nav>

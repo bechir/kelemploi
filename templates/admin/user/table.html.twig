@@ -25,7 +25,7 @@
                             {% set label_type = 'success' %}
                         {% elseif user.hasRole('ROLE_COMPANIES_MANAGER') %}
                             {% set label_type = 'primary' %}
-                        {% elseif user.isAdmin() %}
+                        {% elseif user.hasRole('ROLE_ADMIN') %}
                             {% set label_type = 'info' %}
                         {% elseif user.isEmployer() %}
                             {% set label_type = 'recruiter' %}

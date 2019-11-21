@@ -50,6 +50,25 @@ class UserRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $page);
     }
 
+    public function adminGetRecents()
+    {
+        return $this->createQueryBuilder('u')
+                ->where('u.username is not null')
+                ->orderBy('u.submittedAt', 'DESC')
+                ->setMaxResults(5)
+                ->getQuery()
+                ->getResult();
+    }
+
+    public function getAdminUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.isAdmin = true')
+            ->orderBy('u.roles', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findCandidates()
     {
         return $this->createQueryBuilder('u')

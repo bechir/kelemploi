@@ -565,4 +565,23 @@ class User extends BaseUser implements EquatableInterface
 
         return $this;
     }
+
+    public function getMasterRole(): ?string
+    {
+        $roles = [
+            'ROLE_SUPER_ADMIN',
+            'ROLE_COMPANIES_MANAGER',
+            'ROLE_RESUMES_MANAGER',
+            'ROLE_ADMIN',
+            'ROLE_EMPLOYER',
+            'ROLE_CANDIDATE',
+            'ROLE_USER',
+        ];
+
+        foreach ($roles as $role) {
+            if ($this->hasRole($role)) {
+                return $role;
+            }
+        }
+    }
 }

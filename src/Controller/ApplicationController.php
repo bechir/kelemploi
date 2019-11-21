@@ -142,7 +142,7 @@ class ApplicationController extends AbstractController
             $em->persist($app);
             $em->flush();
 
-            $this->addFlash('success', 'job.edit_sucess');
+            $this->addFlash('success', 'text.edit_success');
 
             return $this->redirectToRoute('application_show', ['slug' => $app->getSlug()]);
         }

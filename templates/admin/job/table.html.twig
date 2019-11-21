@@ -36,7 +36,7 @@
                     <td class="px-0">
                         <div class="btn-group">
                             {% if job.isActivated %}
-                                <a class="mx-2 edit-item" href="{{ path('job_show', {slug: job.slug}) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Afficher sur un nouvel onglet.">
+                                <a class="mx-2 edit-item" href="{{ path('application_show', {slug: job.slug}) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Afficher sur un nouvel onglet.">
                                     <i class="fa fa-lg fa-external-link"></i>
                                 </a>
                             {% endif %}
