@@ -15,12 +15,13 @@
                     <td><a href="{{ path('admin_blog_article_show', {slug: article.slug}) }}">{{ article.title }}</a></td>
                     <td>{{ article.updatedAt|date('d M, Y') }}</td>
                     <td>
-                        {% if article.isArchived %}Archivé
+                        {% if article.isArchived %}
+                        <label class="label label-default">Archivé</label>
                         {% else %}
                             {% if article.isActivated %}
-                                Activé
+                                <label class="label label-success">Activé</label>
                             {% else %}
-                                Desactivé
+                                <label class="label label-warning">Desactivé</label>
                             {% endif %}
                         {% endif %}
                     </td>
