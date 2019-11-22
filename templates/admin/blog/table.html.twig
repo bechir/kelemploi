@@ -4,19 +4,31 @@
         <thead>
             <tr>
                 <th>Titre</th>
+                <th>Date de modification</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for article in articles %}
                 <tr class="td-3rem">
-                    <td><a href="{{ path('admin_blog_article_show', {slug: article.slug}) }}">{{ article.title }}</a>
+                    <td><a href="{{ path('admin_blog_article_show', {slug: article.slug}) }}">{{ article.title }}</a></td>
+                    <td>{{ article.updatedAt|date('d M, Y') }}</td>
+                    <td>
+                        {% if article.isArchived %}Archivé
+                        {% else %}
+                            {% if article.isActivated %}
+                                Activé
+                            {% else %}
+                                Desactivé
+                            {% endif %}
+                        {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('blog_article_show', {slug: article.slug}) }}" class="text-danger float-right"><i class="fa fa-lg fa-external-link"></i></a>
-                        <a href="#" data-id="{{ article.id }}" class="disable text-warning float-left {% if not article.isActivated %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
-                        <a href="#" data-id="{{ article.id }}" class="enable text-success float-left {% if article.isActivated %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
-                        <a href="{{ path('admin_blog_article_archive', {slug: article.slug}) }}" class="text-danger float-right"><span class="lnr lnr-archive"></span> Archiver</a>
+                        <a href="{{ path('blog_article_show', {slug: article.slug}) }}" target="_blank" class="text-info ml-3"><i class="fa fa-lg fa-external-link"></i></a>
+                        <a href="#" data-id="{{ article.id }}" class="disable text-warning mx-3 {% if not article.isActivated %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                        <a href="#" data-id="{{ article.id }}" class="enable text-success mx-3 {% if article.isActivated %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                        <a href="{{ path('admin_blog_article_archive', {slug: article.slug}) }}" class="text-danger mr-3"><span class="fa fa-archive"></span> Archiver</a>
                     </td>
                 </tr>
             {% endfor %}
