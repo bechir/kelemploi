@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'blog_index' } %}
+
+{% endblock %}
+
+{% block main %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Ajouter un article</h3>
+    </div>
+    <div class="panel-body">
+        {% include 'admin/blog/_form.html.twig' with {form: form,  editing: false} %}
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('assets/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+</script>
+{% endblock %}

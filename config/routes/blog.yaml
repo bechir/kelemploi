@@ -5,18 +5,18 @@ blog_index:
   path: /blog
   controller: App\Controller\BlogController::index
 
-article_create:
+blog_article_create:
   path: /blog/new
   controller: App\Controller\BlogController::create
 
-article_show:
+blog_article_show:
   path: /blog/{slug}
   controller: App\Controller\BlogController::show
 
-article_edit:
+blog_article_edit:
   path: /blog/{slug}/edit
   controller: App\Controller\BlogController::edit
 
-article_delete:
+blog_article_delete:
   path: /blog/{slug}/delete
   controller: App\Controller\BlogController::delete

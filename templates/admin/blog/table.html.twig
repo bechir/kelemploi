@@ -1,0 +1,28 @@
+<div class="table-responsive">
+    {% if articles is not empty %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr class="td-3rem">
+                    <td><a href="{{ path('admin_blog_article_show', {slug: article.slug}) }}">{{ article.title }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('blog_article_show', {slug: article.slug}) }}" class="text-danger float-right"><i class="fa fa-lg fa-external-link"></i></a>
+                        <a href="#" data-id="{{ article.id }}" class="disable text-warning float-left {% if not article.isActivated %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                        <a href="#" data-id="{{ article.id }}" class="enable text-success float-left {% if article.isActivated %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                        <a href="{{ path('admin_blog_article_archive', {slug: article.slug}) }}" class="text-danger float-right"><span class="lnr lnr-archive"></span> Archiver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="alert alert-info">Pas d'articles.</p>
+    {% endif %}
+<div>

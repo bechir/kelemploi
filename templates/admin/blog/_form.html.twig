@@ -1,0 +1,40 @@
+{{ form_start(form) }}
+<div class="container-fluid">
+    <div class="col-12 mb-5">
+        <label>Titre de l'article</label>
+        {% if form_errors(form.title) %}
+            <p class="alert alert-danger">{{ form_errors(form.title) }}</p>
+        {% endif %}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Contenu</label>
+        {{ form_widget(form.content, {'attr': {'class': 'ckeditor'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label class="col-sm-12 pl-0">Image de couverture</label>
+        {% if form_errors(form.coverImage.file) %}
+            <p class="alert alert-danger">{{ form_errors(form.coverImage.file) }}</p>
+        {% endif %}
+        <div class="col-sm-12 mb-5 px-0">
+            <div class="preview-container">
+                {% if editing and article.coverImage is not null %}
+                    <img id="img-preview" src="{{ vich_uploader_asset(article.coverImage, 'file') }}">
+                {% endif %}
+            </div>
+            <label class="cursor-pointer file-upload w-auto bg-primary py-3 px-3 my-0 text-white rounded shadow">
+                <i class="fa fa-upload"></i>
+                Uploader une image: GIF, JPG, PNG
+                {{ form_widget(form.coverImage.file, {attr: {class: 'hidden'}}) }}
+            </label>
+        </div>
+    </div>
+
+    <div class="my-5 container-fluid px-0">
+        <hr>
+        <button type="submit" class="btn btn-success btn-lg">Enregistrer</button>
+    </div>
+</div>
+{{ form_end(form) }}
