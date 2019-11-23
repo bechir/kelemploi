@@ -1,6 +1,7 @@
 
 {% if articles is not empty %}
 	{% for article in articles %}
+		{% set url = path('blog_article_show', {slug: article.slug}) %}
 		<div class="col-md-6">
 			<article class="blog-grid shadow-sm">
 				{% if loop.index % 3 == 0 or loop.index == 2 %}
@@ -14,18 +15,18 @@
 						{# <span>{{ article.updatedAt|date('Y') }}</span> #}
 					</span>
 					<h3>
-						<a href="{{ path('blog_article_show', {slug: article.slug}) }}">{{ article.title }}</a>
+						<a href="{{ url }}">{{ article.title }}</a>
 					</h3>
 					<p>{{ article.content[0 : 133]|raw }}...</p>
 				</div>
 				<div class="info">
 					<span class="author">
-						<a href="#">
+						<a href="{{ url }}">
 							<span data-feather="user"></span>{{ article.author.fullname }}
 						</a>
 					</span>
 					<span class="comments">
-						<a href="#"><span data-feather="message-circle"></span>42</a>
+						<a href="{{ url }}#comment-block"><span data-feather="message-circle"></span>{{ article.comments|length }}</a>
 					</span>
 				</div>
 			</article>

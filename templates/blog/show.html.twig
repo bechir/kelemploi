@@ -33,7 +33,7 @@
                 <div class="info">
                   <span class="date">{{ article.updatedAt|date('d M Y') }}</span>
                   <span class="author"><a href="#"><i data-feather="user"></i>{{ article.author.fullname }}</a></span>
-                  <span class="comments"><i data-feather="message-circle"></i>42</span>
+                  <span class="comments"><i data-feather="message-circle"></i>{{ article.comments|length }}</span>
                 </div>
                 <div class="post-content overflow-hidden">
                   {{ article.content|raw }}
