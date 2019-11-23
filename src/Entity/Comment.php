@@ -162,10 +162,11 @@ class Comment
         return $this->modified;
     }
 
-    public function setModified(?bool $modified): self
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setModified()
     {
-        $this->modified = $modified;
-
-        return $this;
+        $this->modified = true;
     }
 }

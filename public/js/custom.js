@@ -636,6 +636,31 @@ $(document).ready(function() {
         topToggler();
     });
 
+    let uxr = null;
+		$("#update-comment-modal").on('show.bs.modal', function(e){
+      const button = $(e.relatedTarget)
+			uxr = $.ajax({
+				type: "GET",
+				dataType: "html",
+				url: button.data('action'),
+				data: 'comment-id=' + button.data('comment-id'),
+
+				success: function(data) {
+					$("#update-comment-form").html(data);
+        },
+        
+        beforeSend: function(){
+          if(uxr) {
+              uxr.abort();
+          }
+        },
+
+				error: function(data) {
+					console.error(data)
+				}
+			})
+		});
+
     /**
      * Favorite Jobs
      */

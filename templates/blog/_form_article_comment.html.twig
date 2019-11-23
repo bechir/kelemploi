@@ -1,0 +1,21 @@
+{% if action is defined %}
+    {{ form_start(form, {'attr': {action: action}}) }}
+{% else %}
+    {{ form_start(form) }}
+{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {{ form_widget(form.content, {attr: {class: 'form-control', placeholder: 'Commentez ici..'}}) }}
+            </div>
+            {#<div class="form-group">
+                <input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
+                <label for="radio-4">
+                    <span class="dot"></span>
+                    Notify me of follow-up comments by email.
+                </label>
+            </div>#}
+        </div>
+    </div>
+    <button class="button primary-bg">Envoyer</button>
+{{ form_end(form) }}

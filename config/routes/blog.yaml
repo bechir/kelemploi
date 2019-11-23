@@ -9,7 +9,6 @@ blog_list_paginated:
   path: /blog/page/{page<[1-9]\d*>}
   controller: App\Controller\BlogController::index
 
-
 blog_article_create:
   path: /blog/new
   controller: App\Controller\BlogController::create
@@ -17,6 +16,16 @@ blog_article_create:
 blog_article_show:
   path: /blog/{slug}
   controller: App\Controller\BlogController::show
+
+blog_article_get_comment_form:
+  path: /blog/comment/get-form
+  controller: App\Controller\BlogController::getCommentForm
+  methods: ['GET']
+
+blog_article_update_comment:
+  path: /blog/comment/{id}/update
+  controller: App\Controller\BlogController::updateComment
+  methods: ['POST']
 
 blog_article_edit:
   path: /blog/{slug}/edit

@@ -4,23 +4,7 @@
 	<div class="comment-respond">
 		<h4>Commentaire</h4>
         {% if is_granted('ROLE_USER') %}
-            {{ form_start(form) }}
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-                            {{ form_widget(form.content, {attr: {class: 'form-control', placeholder: 'Commentez ici..'}}) }}
-						</div>
-						<div class="form-group">
-							<input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
-							<label for="radio-4">
-								<span class="dot"></span>
-								Notify me of follow-up comments by email.
-							</label>
-						</div>
-					</div>
-				</div>
-                <button class="button primary-bg">Envoyer</button>
-            {{ form_end(form) }}
+            {% include "blog/_form_article_comment.html.twig" with {form: form} %}
 		{% else %}
 			<p class="alert alert-info">
 				<a data-toggle="modal" data-target="#loginModal" href="#" class="btn-link">
@@ -51,53 +35,29 @@
 								<img src="/images/account/default-avatar-profile.jpg" class="img-fluid" alt="">
 							</div>
 							<div class="commenter-info">
-								<span class="commenter-name">{{ comment.author.fullname }}</span>
+								<span class="commenter-name">{{ comment.author.fullname }} {% if comment.author == app.user %}<a data-toggle="modal" data-action="{{ path('blog_article_get_comment_form') }}" data-comment-id="{{ comment.id }}" data-target="#update-comment-modal" class="btn btn-edit text-info"><i class="fa fa-edit fa-lg"></i></a>{% endif %}
+								</span>
 								<span class="date">{{ comment.createdAt|date('d M Y') }}
 									{% if comment.modified %}
 										<small>&mdash; modifié</small>
 									{% endif %}
 								</span>
 							</div>
-							<div class="reply">
-								<button type="button" class="reply-button" data-toggle="modal" data-target="#{% if is_granted('ROLE_USER') %}replay-{{ loop.index}}-modal{% else %}loginModal{% endif %}">Répondre</button>
-								{% if is_granted('ROLE_USER') %}
-									<div class="modal fade" id="replay-{{ loop.index }}-modal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-body">
-													<div class="comment-respond">
-														<h4>Vous répondez à
-															{{ comment.author.fullname }}</h4>
-														<form action="#">
-															<div class="row">
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<input type="text" placeholder="Name" class="form-control">
-																	</div>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-md-12">
-																	<div class="form-group">
-																		<textarea placeholder="Commentaire" class="form-control"></textarea>
-																	</div>
-																	{# <div class="form-group">
-																	                                                        <input class="custom-radio" type="checkbox" id="radio-6" name="termsandcondition2">
-																	                                                        <label for="radio-6">
-																	                                                            <span class="dot"></span> Notify me of follow-up comments by email.
-																	                                                        </label>
-																	                                                        </div> #}
-																</div>
-															</div>
-															<button class="button primary-bg">Envoyer</button>
-														</form>
-													</div>
-												</div>
+							<div class="modal fade" id="update-comment-modal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-body">
+											<div class="comment-respond">
+												<h4>Modifiez votre commentaire</h4>
+												<div id="update-comment-form">Patientez...</div>
 											</div>
 										</div>
 									</div>
-								{% endif %}
+								</div>
 							</div>
+							{#<div class="reply">
+								<button type="button" class="reply-button" data-toggle="modal" data-target="#{% if is_granted('ROLE_USER') %}replay-{{ loop.index}}-modal{% else %}loginModal{% endif %}">Répondre</button>
+							</div>#}
 						</div>
 						<div class="comment-body">
 							<p>{{ comment.content }}</p>
@@ -169,7 +129,45 @@
 				</li>
 			{% else %}
 				{{ alert.info('Soyez le premier à commenter!') }}
-			{% endfor %}
+            {% endfor %}
+            
+            {#{%if comments is not empty and is_granted('ROLE_USER') %}
+                <div class="modal fade" id="replay-{{ loop.index }}-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="comment-respond">
+                                    <h4>Vous répondez à
+                                        {{ comment.author.fullname }}</h4>
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Name" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Commentaire" class="form-control"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="custom-radio" type="checkbox" id="radio-6" name="termsandcondition2">
+                                                    <label for="radio-6">
+                                                        <span class="dot"></span> Notify me of follow-up comments by email.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="button primary-bg">Envoyer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}#}
 		</ul>
 	</div>
 </div>
