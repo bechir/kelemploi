@@ -22,15 +22,62 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function findOneBy(array $criteria, array $orderBy = null): ?Article
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c')
+            ->where('a.isArchived = false')
+            ->andWhere('a.isActivated = true');
+
+        if (isset($criteria['slug'])) {
+            $qb->andWhere('a.slug = :slug')
+            ->setParameter('slug', $criteria['slug']);
+        }
+
+        if (isset($criteria['id'])) {
+            $qb->andWhere('a.id = :id')
+            ->setParameter('id', $criteria['id']);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findArchived(?string $slug): ?Article
+    {
+        return $this->createQueryBuilder('j')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c')
+            ->where('a.archived = true')
+            ->andWhere('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getArticles(int $page): Pagerfanta
     {
         $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.coverImage', 'c')
                 ->addSelect('c')
+            ->where('a.isArchived = false')
+            ->andWhere('a.isActivated = true')
             ->orderBy('a.updatedAt', 'DESC')
         ;
 
         return $this->createPaginator($qb->getQuery(), $page);
+    }
+
+    public function findAll()
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c')
+            ->where('a.isArchived = false')
+            ->orderBy('a.updatedAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
