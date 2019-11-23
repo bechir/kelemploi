@@ -1,9 +1,27 @@
 {% extends 'base.html.twig' %}
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
+{% set absolute_url = url('blog_article_show', {slug: article.slug})|url_encode %}
+
 {% trans_default_domain 'blog' %}
 
 {% block title %}{{ article.title }} &mdash; {{ website.name }}{% endblock %}
+
+{% block og_meta %}
+  <meta property="og:url"              content="{{ absolute_url }}" />
+  <meta property="og:type"             content="website" />
+  <meta property="og:title"            content="{{ article.title }} | {{ website.name }}" />
+  <meta property="twitter:title"       content="{{ article.title }} | {{ website.name }}" />
+  <meta property="title"               content="{{ article.title }} | {{ website.name }}" />
+  <meta property="og:description"      content="{{ article.content|raw[0: 400] }}" />
+  <meta property="twitter:description" content="{{ article.content|raw[0: 400] }}" />
+  <meta name="description"             content="{{ article.content|raw[0: 400] }}" />
+  <meta property="twitter:card"        content="summary" />
+  {% if article.coverImage %}
+    {# <meta property="og:image"          content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(article.company.photo, 'companyPhotoFile') }} /> #}
+    {# <meta property="twitter:image"     content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(article.company.photo, 'companyPhotoFile') }} /> #}
+  {% endif %}
+{% endblock %}
 
 {% block main %}
     <div class="alice-bg padding-top-60 section-padding-bottom">
@@ -38,54 +56,56 @@
                 <div class="post-tag">
                   <h6>Tags</h6>
                   <div class="tags">
-                    <a href="#">Design</a>
-                    <a href="#">Creative</a>
-                    <a href="#">Photoshop</a>
-                    <a href="#">Tech</a>
+                    {% for tag in ['Design', 'Creative', 'Photoshop', 'Tech'] %}
+                      <a href="{{ path('blog_index', {tag: tag}) }}">{{ tag }}</a>
+                    {% endfor %}
                   </div>
                 </div>
                 <div class="post-share">
                   <h6>Partagez l'article</h6>
                   <div class="social-buttons pt-1">
-                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="whatsapp position-relative pr-5"><i class="fab fa-whatsapp fa-3x"></i></a>
-                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ absolute_url }}&title={{ article.title }}" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a target="_blank" href="whatsapp://send?text={{ absolute_url }}" class="whatsapp position-relative pr-5"><i class="fab fa-whatsapp fa-3x"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url }}&caption={{ article.title }}" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a target="_blank" href="http://twitter.com/share?text={{ article.title }}&amp;counturl={{ absolute_url }}" class="twitter"><i class="fab fa-twitter"></i></a>
                   </div>
                 </div>
               </div>
               <div class="post-comment-block">
                 <div class="comment-respond">
-                  <h4>Write A Comment</h4>
-                  <form action="#">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" placeholder="Name" class="form-control">
+                  <h4>Commentaire</h4>
+                  {% if is_granted('ROLE_USER') %}
+                    <form action="#">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="text" placeholder="Name" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="email" placeholder="Email address" class="form-control">
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="email" placeholder="Email address" class="form-control">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <textarea placeholder="Comment" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
+                              <label for="radio-4">
+                                <span class="dot"></span> Notify me of follow-up comments by email.
+                              </label>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <textarea placeholder="Comment" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
-                          <label for="radio-4">
-                            <span class="dot"></span> Notify me of follow-up comments by email.
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="button primary-bg">Submit</button>
-                  </form>
+                        <button class="button primary-bg">Submit</button>
+                    </form>
+                  {% else %}
+                    <p class="alert alert-info"><a data-toggle="modal" data-target="#loginModal" href="#" class="btn-link">Connectez-vous pour commenter</a></p>
+                  {% endif %}
                 </div>
                 <div class="comment-area">
                   <h4>5 Comments</h4>
