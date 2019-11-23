@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Controller to manage blog module.
@@ -41,8 +42,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/article/{slug}", name="admin_blog_article_show")
      */
-    public function showArticle(Article $article): Response
+    public function showArticle(string $slug, EntityManagerInterface $em): Response
     {
+        $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
+        
+        if(!$article)
+            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+
         return $this->render('admin/blog/show.html.twig', [
             'article' => $article
         ]);
@@ -77,8 +83,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/edit/{slug}", name="admin_blog_article_edit")
      */
-    public function editArticle(Article $article, Request $request, EntityManagerInterface $em): Response
+    public function editArticle(string $slug, Request $request, EntityManagerInterface $em): Response
     {
+        $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
+        
+        if(!$article)
+            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -142,15 +153,20 @@ class BlogController extends AbstractController
     /**
      * @Route("/{slug}/archive", name="admin_blog_article_archive")
      */
-    public function archive(Article $article, EntityManagerInterface $em): Response
+    public function archive(string $slug, EntityManagerInterface $em): Response
     {
+        $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
+        
+        if(!$article)
+            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+
         $article->setIsArchived(true);
         $article->setIsActivated(false);
 
         $em->persist($article);
         $em->flush();
 
-        $this->addFlash('success', "L'offre a été archvée.");
+        $this->addFlash('success', "L'article a été archvé.");
 
         return $this->redirectToRoute('admin_blog_index');
     }
@@ -158,11 +174,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/delete/{id}", name="admin_blog_article_delete", methods={"POST"})
      */
-    public function deleteArticle(Article $article, EventDispatcherInterface $dispatcher)
+    public function deleteArticle(int $id, EventDispatcherInterface $dispatcher)
     {
-        if (!$article) {
-            $this->addFlash('success', "L'annonce est introuvable.");
-        } else {
+        $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
+        
+        if(!$article)
+            $this->addFlash('success', "L'article est introuvable.");
+        else {
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
             $em->flush();
@@ -170,7 +188,7 @@ class BlogController extends AbstractController
             // $event = new ItemsEvent($article);
             // $dispatcher->dispatch(ItemsEvents::JOB_DELETED, $event);
 
-            $this->addFlash('success', "L'annonce a été supprimée.");
+            $this->addFlash('success', "L'article a été supprimé.");
         }
 
         return $this->redirectToRoute('admin_blog_index');

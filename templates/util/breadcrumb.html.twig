@@ -29,3 +29,42 @@
     </div>
     <!-- Breadcrumb End -->
 {% endmacro %}
+
+
+{% macro level_2(l1, title) %}
+    <!-- Breadcrumb -->
+    <div class="alice-bg py-5 reveal-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-area">
+                        <h1>{{ title }}</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item">
+                                    <a itemprop="item" href="{{ path('index') }}" href="{{ path('index') }}">
+                                    <span itemprop="name">Accueil</span>
+                                    </a>
+                                    <meta itemprop="position" content="1" />
+                                </li>
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item">
+                                    <a itemprop="item" href="{{ path(l1.path) }}" href="{{ path(l1.path) }}">
+                                    <span itemprop="name">{{ l1.title }}</span>
+                                    </a>
+                                    <meta itemprop="position" content="2" />
+                                </li>
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" aria-current="page" class="breadcrumb-item active">
+                                    <span itemprop="item">
+                                        <span itemprop="name">{{ title }}</span>
+                                        <meta itemprop="position" content="3" />
+                                    </span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+{% endmacro %}

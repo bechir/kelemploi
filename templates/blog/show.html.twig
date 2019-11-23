@@ -24,6 +24,8 @@
 {% endblock %}
 
 {% block main %}
+    {{ breadcrumb.level_2({title: 'Blog', path: 'blog_index'}, article.title) }}
+    
     <div class="alice-bg padding-top-60 section-padding-bottom">
       <div class="container">
         <div class="row">

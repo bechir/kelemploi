@@ -4,9 +4,9 @@
 		{% set url = path('blog_article_show', {slug: article.slug}) %}
 		<div class="col-md-6">
 			<article class="blog-grid shadow-sm">
-				{% if loop.index % 3 == 0 or loop.index == 2 %}
+				{% if article.coverImage %}
 					<div class="thumb">
-						<img src="/images/blog/thumb-1.jpg" class="img-fluid" alt="">
+						<img src="{{ vich_uploader_asset(article.coverImage, 'file') }}" class="img-fluid" alt="">
 					</div>
 				{% endif %}
 				<div class="body">

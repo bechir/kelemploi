@@ -43,6 +43,25 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function adminFindOneBy(array $criteria, array $orderBy = null): ?Article
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c');
+
+        if (isset($criteria['slug'])) {
+            $qb->andWhere('a.slug = :slug')
+            ->setParameter('slug', $criteria['slug']);
+        }
+
+        if (isset($criteria['id'])) {
+            $qb->andWhere('a.id = :id')
+            ->setParameter('id', $criteria['id']);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findArchived(?string $slug): ?Article
     {
         return $this->createQueryBuilder('j')
