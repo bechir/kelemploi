@@ -8619,21 +8619,23 @@ header .absolute-nav {
 .post-meta .post-share .social-buttons a.facebook {
   background: #3b5998;
 }
+.post-meta .post-share .social-buttons a.whatsapp {
+  color: #28a745!important;
+}
+
+.post-meta .post-share .social-buttons .fa-whatsapp:before {
+  display: inline-block;
+  position: absolute;
+  top: -3px;
+  font-size: 3.5rem;
+}
 
 .post-meta .post-share .social-buttons a.twitter {
   background: #1da1f2;
 }
 
-.post-meta .post-share .social-buttons a.google {
-  background: #ea4335;
-}
-
 .post-meta .post-share .social-buttons a.linkedin {
   background: #0077b5;
-}
-
-.post-meta .post-share .social-buttons a.pinterest {
-  background: #bd081c;
 }
 
 .post-meta .post-share .social-buttons a.instagram {

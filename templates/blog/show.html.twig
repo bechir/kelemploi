@@ -3,7 +3,7 @@
 
 {% trans_default_domain 'blog' %}
 
-{% block title %}This is for tests only &mdash; {{ website.name }}{% endblock %}
+{% block title %}{{ article.title }} &mdash; {{ website.name }}{% endblock %}
 
 {% block main %}
     <div class="alice-bg padding-top-60 section-padding-bottom">
@@ -13,41 +13,30 @@
             <div class="blog-post-details-container">
               <div class="blog-details-wrapper">
                 <div class="info">
-                  <span class="date">24 avril 2019</span>
-                  <span class="author"><a href="#"><i data-feather="user"></i>Bechir Ba</a></span>
+                  <span class="date">{{ article.updatedAt|date('d M Y') }}</span>
+                  <span class="author"><a href="#"><i data-feather="user"></i>{{ article.author.fullname }}</a></span>
                   <span class="comments"><i data-feather="message-circle"></i>42</span>
                 </div>
-                <div class="post-content">
-                  <h2>There are many variations  of passages</h2>
-                  <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release  circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us.</p>
-                  <p>Ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences.</p>
-                  <img src="/images/blog/post-thumb-1.jpg" class="img-fluid" alt="">
-                  <blockquote>“It was popularised in the 1960s with the release  circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us Nam libero tempore, cum soluta nobis est eligendi.”</blockquote>
-                  <p>Expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-                  <p>To take a trivial example, which of us ever undertakes laborious  physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a there anyone who loves or pain that produces no resultant pleasure.</p>
-                  <div class="images">
-                    <div class="image">
-                      <img src="/images/blog/post-thumb-2.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="image">
-                      <img src="/images/blog/post-thumb-3.jpg" class="img-fluid" alt="">
-                    </div>
-                  </div>
-                  <p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious  some great physical exercise, except to.</p>
+                <div class="post-content overflow-hidden">
+                  {{ article.content|raw }}
                 </div>
               </div>
               <div class="post-meta">
                 <div class="post-author">
                   <div class="avatar">
-                    <img src="/uploads/user/977d55803d396f5cfcdc819899abc3663d08fbc0.jpg" class="img-fluid" alt="">
+                    {% set url = '/images/account/default-avatar-profile.jpg' %}
+                    {% if article.author.avatar %}
+                      {% set url = vich_uploader_asset(article.author.avatar, 'avatarFile') %}
+                    {% endif %}
+                    <img src="{{ url }}" class="img-fluid" alt="Image {{ article.author.fullname }}">
                   </div>
                   <div class="name">
-                    <p>Post By</p>
-                    <h5><a href="#">Bechir Ba</a></h5>
+                    <p>Par</p>
+                    <h5><a href="#">{{ article.author.fullname }}</a></h5>
                   </div>
                 </div>
                 <div class="post-tag">
-                  <h6>Post Tag</h6>
+                  <h6>Tags</h6>
                   <div class="tags">
                     <a href="#">Design</a>
                     <a href="#">Creative</a>
@@ -56,13 +45,12 @@
                   </div>
                 </div>
                 <div class="post-share">
-                  <h6>Post Share</h6>
-                  <div class="social-buttons">
+                  <h6>Partagez l'article</h6>
+                  <div class="social-buttons pt-1">
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="whatsapp position-relative pr-5"><i class="fab fa-whatsapp fa-3x"></i></a>
                     <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="google"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="pinterest"><i class="fab fa-pinterest-p"></i></a>
                     <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
                   </div>
                 </div>

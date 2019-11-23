@@ -25,8 +25,10 @@ class BlogController extends AbstractController
         ]);
     }
 
-    public function show(): Response
+    public function show(Article $article): Response
     {
-        return $this->render('blog/show.html.twig');
+        return $this->render('blog/show.html.twig', [
+            'article' => $article
+        ]);
     }
 }
