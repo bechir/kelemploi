@@ -73,7 +73,7 @@
                   </div>
                 </div>
               </div>
-              {% include "blog/post-comment-block.html.twig" with {comments: article.comments} %}
+              {% include "blog/post-comment-block.html.twig" with {comments: article.comments, form: comment_form} %}
             </div>
           </div>
         </div>

@@ -3,24 +3,12 @@
 <div class="post-comment-block" id="comment-block">
 	<div class="comment-respond">
 		<h4>Commentaire</h4>
-		{% if is_granted('ROLE_USER') %}
-			<form action="#">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="text" placeholder="Name" class="form-control">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="email" placeholder="Email address" class="form-control">
-						</div>
-					</div>
-				</div>
+        {% if is_granted('ROLE_USER') %}
+            {{ form_start(form) }}
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<textarea placeholder="Comment" class="form-control"></textarea>
+                            {{ form_widget(form.content, {attr: {class: 'form-control', placeholder: 'Commentez ici..'}}) }}
 						</div>
 						<div class="form-group">
 							<input class="custom-radio" type="checkbox" id="radio-4" name="termsandcondition">
@@ -31,8 +19,8 @@
 						</div>
 					</div>
 				</div>
-				<button class="button primary-bg">Submit</button>
-			</form>
+                <button class="button primary-bg">Envoyer</button>
+            {{ form_end(form) }}
 		{% else %}
 			<p class="alert alert-info">
 				<a data-toggle="modal" data-target="#loginModal" href="#" class="btn-link">
@@ -53,7 +41,7 @@
 	</div>
 	<div class="comment-area">
 		<h4>{{ comments|length }}
-			Commentaire{{ comments|length != 1 ? 's' : '' }}</h4>
+            Commentaire{{ comments|length != 1 ? 's' : '' }}</h4>
 		<ul class="comments">
 			{% for comment in comments %}
 				<li class="comment">
@@ -71,7 +59,7 @@
 								</span>
 							</div>
 							<div class="reply">
-								<button type="button" class="reply-button" data-toggle="modal" data-target="#{% if is_granted('ROLE_USER') %}#replay-{{ loop.index}}-modal}}{% else %}#loginModal{% endif %}">Répondre</button>
+								<button type="button" class="reply-button" data-toggle="modal" data-target="#{% if is_granted('ROLE_USER') %}replay-{{ loop.index}}-modal{% else %}loginModal{% endif %}">Répondre</button>
 								{% if is_granted('ROLE_USER') %}
 									<div class="modal fade" id="replay-{{ loop.index }}-modal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
