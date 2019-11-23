@@ -126,6 +126,7 @@
     // Disable user when we click on the disable user button
     $("#disable-user").on('click', function(e){
       button = $(this)
+      button.addClass('disabled');
       $.ajax({
         type: "POST",
         dataType: "json",
@@ -134,7 +135,7 @@
 
         success: function(data) {
           console.log('user disabled')
-          button.addClass('hidden')
+          button.addClass('hidden').removeClass('disabled');
           $("#enable-user").removeClass('hidden')
           $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
           $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
@@ -150,7 +151,8 @@
 
     // Enable user when we click on the enable user button
     $("#enable-user").on('click', function(e){
-      button = $(this)
+      button = $(this);
+      button.addClass('disabled');
       $.ajax({
         type: "POST",
         dataType: "json",
@@ -159,7 +161,7 @@
 
         success: function(data) {
           console.log('user enabled')
-          button.addClass('hidden')
+          button.addClass('hidden').removeClass('disabled');
           $("#disable-user").removeClass('hidden')
           $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
           $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
