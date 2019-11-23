@@ -86,6 +86,10 @@ class BlogController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', "L'article a été modifié.");
+
+            return $this->redirectToRoute('admin_blog_article_show', [
+                'slug' => $article->getSlug()
+            ]);
         }
 
         return $this->render('admin/blog/edit.html.twig', [

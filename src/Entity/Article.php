@@ -155,6 +155,14 @@ class Article
         $this->updatedAt = new \DateTime();
     }
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function created()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getIsActivated(): ?bool
     {
         return $this->isActivated;

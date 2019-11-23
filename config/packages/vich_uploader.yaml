@@ -22,3 +22,10 @@ vich_uploader:
       namer: vich_uploader.namer_hash
       delete_on_remove: true
       delete_on_update: true
+
+    image:
+      uri_prefix: '%uploads_prefix%/image'
+      upload_destination: '%uploads_dir%/image'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true

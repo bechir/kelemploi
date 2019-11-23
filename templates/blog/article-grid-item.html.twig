@@ -17,7 +17,7 @@
 					<h3>
 						<a href="{{ url }}">{{ article.title }}</a>
 					</h3>
-					<p>{{ article.content[0 : 133]|raw }}...</p>
+					<p>{{ article.content|striptags|truncate(133, '...')|raw }}...</p>
 				</div>
 				<div class="info">
 					<span class="author">

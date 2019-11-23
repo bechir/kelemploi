@@ -7,7 +7,7 @@ jQuery(function ($) {
     }, 9000);
 
     let imagefile = $('input[type="file"]');
-    let $img = $('<img id="img-preview" src="#"> class="img-responsive"');
+    let $img = $('<img class="img-thumbnail" id="img-preview" src="#"> class="img-responsive"');
 
     $.datepicker.regional['fr'] = { clearText: 'Effacer', clearStatus: '',
         closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
