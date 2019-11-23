@@ -362,3 +362,12 @@ ul.list-hoverable li:hover{
 .min-w-300{
   min-width: 300px!important;
 }
+
+.text-archive{
+  color: #8d423b!important;
+}
+.text-archive:hover,
+.text-archive:active,
+.text-archive:focus{
+  color: #ab160f!important
+}

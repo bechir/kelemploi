@@ -5,6 +5,11 @@ blog_index:
   path: /blog
   controller: App\Controller\BlogController::index
 
+blog_list_paginated:
+  path: /blog/page/{page<[1-9]\d*>}
+  controller: App\Controller\BlogController::index
+
+
 blog_article_create:
   path: /blog/new
   controller: App\Controller\BlogController::create

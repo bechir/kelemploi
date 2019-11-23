@@ -16,26 +16,24 @@
                     <div class="blog-post-wrapper">
                         <div class="row">
                             {# {% for article in articles %} #}
-                                {% include "blog/article-grid-item.html.twig" %}
+                                {% include "blog/article-grid-item.html.twig" with {articles: articles} %}
                             {# {% endfor %} #}
                         </div>
 
-                        <div class="row">
-                                <div class="col">
-                                  <div class="pagination-list text-center">
-                                    <nav class="navigation pagination padding-top-10">
-                                      <div class="nav-links">
-                                        <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
-                                        <a class="page-numbers" href="#">1</a>
-                                        <span aria-current="page" class="page-numbers current">2</span>
-                                        <a class="page-numbers" href="#">3</a>
-                                        <a class="page-numbers" href="#">4</a>
-                                        <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
-                                      </div>
-                                    </nav>                
-                                  </div>
-                                </div>
-                        </div>
+                        {% if articles.haveToPaginate %}
+                          <nav class="navigation pagination mt-5">
+                            <div class="nav-links mx-auto mt-3">
+                              {{ pagerfanta(articles, 'twitter_bootstrap4_translated',
+                                  { routeName: 'blog_list_paginated',
+                                    routeParams: app.request.query.all,
+                                    prev_message: '<i class="fas fa-angle-left"></i> Précédant',
+                                    next_message: 'Suivant <i class="fas fa-angle-right"></i>',
+                                    page_template: '<a class="page-numbers p-3" href="%href%" %rel%>%text%</a>'
+                                  })
+                              }}
+                            </div>
+                          </nav>
+                        {% endif %}
                     </div>
                 </div>
             </div>

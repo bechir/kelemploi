@@ -133,6 +133,11 @@ class User extends BaseUser implements EquatableInterface
      */
     private $bookmarkedCompanies;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     */
+    private $articles;
+
     const NUM_ITEMS = 15;
 
     const EMPLOYER = 'app.employer';
@@ -147,6 +152,7 @@ class User extends BaseUser implements EquatableInterface
         $this->applies = new ArrayCollection();
         $this->bookmarkedJobs = new ArrayCollection();
         $this->bookmarkedCompanies = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -583,5 +589,36 @@ class User extends BaseUser implements EquatableInterface
                 return $role;
             }
         }
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

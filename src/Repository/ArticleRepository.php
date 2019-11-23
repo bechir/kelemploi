@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +22,30 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getArticles(int $page): Pagerfanta
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c')
+            ->orderBy('a.updatedAt', 'DESC')
         ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Article
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createPaginator($qb->getQuery(), $page);
     }
-    */
+
+    /**
+     * @return Article[]
+     */
+    public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
+        if($isAdmin) {
+            $paginator->setMaxPerPage(Article::NB_ITEMS_ADMIN_LISTING);
+        }else {
+            $paginator->setMaxPerPage(Article::NB_ITEMS_LISTING);
+        }
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
+    }
 }

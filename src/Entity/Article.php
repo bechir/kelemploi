@@ -59,6 +59,15 @@ class Article
      */
     private $viewCount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    const NB_ITEMS_ADMIN_LISTING = 25;
+    const NB_ITEMS_LISTING = 10;
+
     public function __construct()
     {
         $this->viewCount = 0;
@@ -172,6 +181,18 @@ class Article
     public function setViewCount(?int $viewCount): self
     {
         $this->viewCount = $viewCount;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

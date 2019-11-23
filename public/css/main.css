@@ -8310,26 +8310,28 @@ header .absolute-nav {
 }
 
 .blog-grid .body {
-  padding: 30px;
-  padding-left: 80px;
+  padding: 20px;
+  padding-left: 65px;
   position: relative;
   z-index: 2;
+  height: 175px;
+  overflow: hidden;
 }
 
 .blog-grid .body:before {
   position: absolute;
   content: '';
   bottom: 0;
-  left: 30px;
-  right: 30px;
+  left: 20px;
+  right: 20px;
   height: 1px;
   background: rgba(0, 0, 0, 0.08);
 }
 
 .blog-grid .body .date {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 20px;
+  left: 20px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 2.4rem;
@@ -8378,7 +8380,7 @@ header .absolute-nav {
 .blog-grid .info {
   position: relative;
   z-index: 2;
-  padding: 20px 30px;
+  padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

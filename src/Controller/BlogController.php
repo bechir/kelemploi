@@ -8,15 +8,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends AbstractController
 {
-    public function index()
+    public function index(int $page = 1, Request $request, EntityManagerInterface $em)
     {
+        $articles = $em->getRepository(Article::class)->getArticles($page);
+
         return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
+            'articles' => $articles,
         ]);
     }
 

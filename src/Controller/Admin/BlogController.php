@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Controller to manage blog module.
@@ -50,13 +51,14 @@ class BlogController extends AbstractController
     /**
      * @Route("/new", name="admin_blog_article_new")
      */
-    public function newArticle(Request $request, EntityManagerInterface $em): Response
+    public function newArticle(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $user->addArticle($article);
             $em->persist($article);
             $em->flush();
 
@@ -124,7 +126,7 @@ class BlogController extends AbstractController
             $this->addFlash('success', "L'offre a été désarchvée.");
 
             return $this->redirectToRoute('admin_blog_article_show', [
-                'job' => $article->getId(),
+                'slug' => $article->getSlug(),
             ]);
         }
 
@@ -146,9 +148,7 @@ class BlogController extends AbstractController
 
         $this->addFlash('success', "L'offre a été archvée.");
 
-        return $this->redirectToRoute('admin_blog_article_show', [
-            'job' => $article->getId(),
-        ]);
+        return $this->redirectToRoute('admin_blog_index');
     }
 
     /**

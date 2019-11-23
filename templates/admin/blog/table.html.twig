@@ -26,10 +26,10 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('blog_article_show', {slug: article.slug}) }}" target="_blank" class="text-info ml-3"><i class="fa fa-lg fa-external-link"></i></a>
-                        <a href="#" data-id="{{ article.id }}" class="disable text-warning mx-3 {% if not article.isActivated %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
-                        <a href="#" data-id="{{ article.id }}" class="enable text-success mx-3 {% if article.isActivated %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
-                        <a href="{{ path('admin_blog_article_archive', {slug: article.slug}) }}" class="text-danger mr-3"><span class="fa fa-archive"></span> Archiver</a>
+                        <a href="{{ path('blog_article_show', {slug: article.slug}) }}" target="_blank" class="text-info"><i class="fa fa-lg fa-external-link"></i></a>
+                        {# <a href="#" data-id="{{ article.id }}" class="disable text-warning mx-3 {% if not article.isActivated %}hidden{% endif %}"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                        <a href="#" data-id="{{ article.id }}" class="enable text-success mx-3 {% if article.isActivated %}hidden{% endif %}"><span class="lnr lnr-checkmark-circle"></span> Activer</a> #}
+                        <a href="{{ path('admin_blog_article_archive', {slug: article.slug}) }}" class="text-archive ml-3"><span class="fa fa-archive"></span> Archiver</a>
                     </td>
                 </tr>
             {% endfor %}
