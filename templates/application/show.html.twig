@@ -56,7 +56,7 @@
                       <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">Candidater en ligne</a>
                     {% endif %}
                   {% elseif not is_granted('ROLE_USER') %}
-                    <a href="{{ path('fos_user_security_login') }}" class="apply"><i class="fas fa-briefcase"></i>&nbsp;&nbsp; Candidater en ligne</a>
+                    <a data-toggle="modal" href="#" data-target="#loginModal" class="apply"><i class="fas fa-briefcase"></i>&nbsp;&nbsp; Candidater en ligne</a>
                   {% endif %}
                 </div>
                 {% endif %}
@@ -109,7 +109,7 @@
                             <a href="#" class="apply"  data-toggle="modal" data-target="#apply-popup-id">{{ 'job.apply_online'|trans }}</a>
                           {% endif %}
                         {% else %}
-                          <a href="{{ path('fos_user_security_login') }}" class="apply">{{ 'job.apply_online'|trans }}</a>
+                          <a data-toggle="modal" href="#" data-target="#loginModal" class="apply"><i class="fas fa-briefcase"></i>&nbsp;&nbsp; {{ 'job.apply_online'|trans }}</a>
                         {% endif %}
                           <a href="mailto:{{ _app.company.email }}" class="email"><i data-feather="mail"></i>{{ 'job.send_email'|trans }}</a>
                       </div>
