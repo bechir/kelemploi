@@ -23,6 +23,9 @@ class RedirectAfterLoginSubscriber implements EventSubscriberInterface
     {
         $url = $this->getTargetPath($event->getRequest()->getSession(), 'main');
 
+        if(!$url)
+            $url = $event->getRequest()->request->get('go_to');
+
         if(!$url) {
             $user = $event->getAuthenticationToken()->getUser();
             

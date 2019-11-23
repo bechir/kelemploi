@@ -28,7 +28,8 @@
                             </div>
                             <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forget_password'|trans }}</a>
                         </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                        <input type="hidden" name="go_to" value="{{ app.request.uri }}" />
                         <button class="button primary-bg btn-block">{{ 'login.submit_btn'|trans }}</button>
                     </form>
                     <div class="shortcut-login">
