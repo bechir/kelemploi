@@ -3,6 +3,24 @@
 {% import 'util/company_widgets.twig' as company_widgets %}
 {% import 'util/schema.twig' as schema %}
 
+{% set absolute_url = url('application_show', {slug: _app.slug})|url_encode %}
+
+{% block og_meta %}
+  <meta property="og:url"              content="{{ absolute_url }}" />
+  <meta property="og:type"             content="website" />
+  <meta property="og:title"            content="{{ _app.title }} | {{ website.name }}" />
+  <meta property="twitter:title"       content="{{ _app.title }} | {{ website.name }}" />
+  <meta property="title"               content="{{ _app.title }} | {{ website.name }}" />
+  <meta property="og:description"      content="{{ _app.description|raw[0: 400] }}" />
+  <meta property="twitter:description" content="{{ _app.description|raw[0: 400] }}" />
+  <meta name="description"             content="{{ _app.description|raw[0: 400] }}" />
+  <meta property="twitter:card"        content="summary" />
+  {% if _app.company.photo %}
+    <meta property="og:image"          content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(_app.company.photo, 'companyPhotoFile') }} />
+    <meta property="twitter:image"     content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(_app.company.photo, 'companyPhotoFile') }} />
+  {% endif %}
+{% endblock %}
+
 {% block title %}{{ _app.jobTitle }} | {{ website.name }}{% endblock %}
 
 {% block stylesheets %}
@@ -137,10 +155,10 @@
                       {% endif %}
                       <div class="share-job-post">
                         <span class="share"><i class="fas fa-share-alt"></i>{{ 'job.share'|trans }}</span>
-                        <a href="#"><i class="fab fa-lg fa-whatsapp text-success"></i></a>
-                        <a href="#"><i class="fab fa-lg fa-linkedin-in linkedin-color"></i></a>
-                        <a href="#"><i class="fab fa-lg fa-facebook-square fb-color"></i></a>
-                        <a href="#"><i class="fab fa-lg fa-twitter twitter-color"></i></a>
+                        <a target="_blank" href="whatsapp://send?text={{ absolute_url }}"><i class="fab fa-lg fa-whatsapp text-success"></i></a>
+                        <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ absolute_url }}&title={{ _app.title }}"><i class="fab fa-lg fa-linkedin-in linkedin-color"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url }}&caption={{ _app.title }}"><i class="fab fa-lg fa-facebook-square fb-color"></i></a>
+                        <a target="_blank" href="http://twitter.com/share?text={{ _app.title }}&amp;counturl={{ absolute_url }}"><i class="fab fa-lg fa-twitter twitter-color"></i></a>
                       </div>
                       <div class="buttons">
                         <a href="#" class="button print"><i data-feather="printer"></i>{{ 'job.print'|trans }}</a>
