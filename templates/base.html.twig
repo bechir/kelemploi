@@ -11,6 +11,8 @@
         <meta name="application-name" content="{{ website.name }}" />
         <meta name="theme-color" content="white">
 
+        <meta name="keywords" content="kelemploi, recrutement sénégal, recrutement dakar, emploi dakar, emploi senegal, concours, offre d'empoi, stage, stagiaire">
+
         <title>{% block title %}{{ website.name }}{% endblock %}</title>
 
         <meta property="og:locale" content="fr" />
@@ -62,7 +64,17 @@
             <script src="assets/js/html5shiv.min.js"></script>
             <script src="assets/js/respond.min.js"></script>
         <![endif]-->
-      <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153224488-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-153224488-1');
+        </script>
     </head>
     <body>
     {# <div class="beta shadow-sm">Beta version</div> #}
