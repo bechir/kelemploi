@@ -36,7 +36,7 @@ layout:
   copyright: Copyright %name% %date%, tout droit réservé # Copyright %name% %date%, All right reserved
 
 home:
-  title: "%name%: Recrutez, trouvez votre emploi au Sénégal"
+  title: "%name%: Offres d'emploi et de stages au Sénégal"
   banner_title: "Des offres d'empoi et de stage partout au Sénégal!" # Plus de %x% offres d'emploi
   banner_text: "Créez un compte gratuitement pour trouver des milliers de carrières ou d'employés au autour de vous!" # "Create free account to find thousands Jobs, Employment & Career Opportunities around you!"
   add_resume: "Ajoutez votre CV" # Upload a Resume
