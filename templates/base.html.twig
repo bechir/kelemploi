@@ -30,40 +30,33 @@
         <link rel="manifest" href="{{ asset('manifest.json') }}">
 
         <!-- Bootstrap CSS -->
-        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 
         <!-- External Css -->
-        <link href="{{ asset('assets/css/fontawesome-all.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/et-line.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/et-line@1.0.1/style.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.11/css/bootstrap-select.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.4.0/plyr.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.0/css/flag-icon.min.css" rel="stylesheet" />
         <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/html5-simple-date-input-polyfill.css') }}" rel="stylesheet" />
-        <link href="{{ asset('dashboard/css/dashboard.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap-select.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/plyr.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/flag.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/jquery.nstSlider.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
+        <link href="{{ asset('dashboard/css/dashboard.min.css') }}" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.1/bootstrap-tagsinput.min.css" rel="stylesheet" />
 
         <!-- Custom Css -->
         {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7CRoboto:300i,400,500" rel="stylesheet" />
 
         <!-- Favicon -->
-        <link href="{{ asset('images/favicon.png') }}" rel="icon" />
-        <link href="{{ asset('images/apple-touch-icon.png') }}" rel="apple-touch-icon" />
-        <link href="{{ asset('images/icon-72x72.png') }}" rel="apple-touch-icon" sizes="72x72" />
-        <link href="{{ asset('images/icon-114x114.png') }}" rel="apple-touch-icon" sizes="114x114" />
+        <link href="{{ asset('favicon.png') }}" rel="icon" />
+        <link href="{{ asset('apple-touch-icon.png') }}" rel="apple-touch-icon" />
+        <link href="{{ asset('icon-72x72.png') }}" rel="apple-touch-icon" sizes="72x72" />
+        <link href="{{ asset('icon-114x114.png') }}" rel="apple-touch-icon" sizes="114x114" />
 
         <!--[if lt IE 9]>
             <script src="assets/js/html5shiv.min.js"></script>
@@ -96,25 +89,23 @@
         {% endblock footer %}
         <!-- Footer -->
         <script src="{{ asset('assets/js/intersection-observer.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('assets/js/feather.min.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.nstSlider.min.js') }}"></script>
-        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.11/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nstslider/1.0.13/jquery.nstSlider.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
         <script src="{{ asset('assets/js/visible.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
-        <script src="{{ asset('assets/js/chart.js') }}"></script>
-        <script src="{{ asset('assets/js/plyr.js') }}"></script>
-        <script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.4.0/plyr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.6.4/tinymce.min.js"></script>
         <script src="{{ asset('assets/js/slick.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
         <script src="{{ asset('assets/js/html5-simple-date-input-polyfill.min.js') }}"></script>
         <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
-        <script src="{{ asset('dashboard/js/datePicker.js') }}"></script>
-        <script src="{{ asset('dashboard/js/upload-input.js') }}"></script>
         <script src="{{ asset('assets/js/typeahead.bundle.min.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap-tagsinput.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.1/bootstrap-tagsinput.min.js"></script>
         <script src="{{ asset('assets/js/bloodhound.min.js') }}"></script>
         <script>
             var user = {
