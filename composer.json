@@ -6,7 +6,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
-        "ext-pgsql": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "erusev/parsedown": "^1.7",
         "ezyang/htmlpurifier": "^4.10",
