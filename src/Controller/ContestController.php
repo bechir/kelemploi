@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Entity\Contest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,7 @@ class ContestController extends AbstractController
 
     public function index(Request $request, EntityManagerInterface $em, int $page = 1): Response
     {
-        $contests = $em->getRepository(Application::class)->getApps($page);
+        $contests = $em->getRepository(Contest::class)->getContests($page);
 
         return $this->render('contest/index.html.twig', [
             'contests' => $contests,

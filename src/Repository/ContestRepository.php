@@ -22,6 +22,15 @@ class ContestRepository extends ServiceEntityRepository
         parent::__construct($registry, Contest::class);
     }
 
+    public function getContests(int $page = 1): Pagerfanta
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC')
+        ;
+
+        return $this->createPaginator($qb->getQuery(), $page);
+    }
+
     public function adminGetContests(int $page = 1, $archived = false): Pagerfanta
     {
         $qb = $this->createQueryBuilder('c')
