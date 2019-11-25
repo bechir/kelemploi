@@ -1,0 +1,64 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'jobs' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="fa fa-archive"></span> Offres d'emploi archivées <span class="badge badge-info mb-1">{{ jobs|length }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des offres d'emploi archivées</h3>
+            </div>
+            <div class="panel-body">
+                {% include 'admin/job/table.html.twig' with {jobs: jobs} %}
+            </div>
+            <div class="panel-footer">
+                 <!-- Page navigation start -->
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                      {% if jobs.haveToPaginate %}
+                          {{ pagerfanta(
+                                    jobs,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_jobs_list_archived',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+            </div>
+        </div>
+        <!-- END TABLE STRIPED -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $("#confirmDeleteJobModal").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var adId = button.data('ad-id')
+            var adName = button.data('ad-name')
+
+            modal.find('.ad-name').text(adName)
+            modal.find('form').attr('action', '/admin/jobs/delete/' + adId)
+        });
+    </script>
+{% endblock %}
