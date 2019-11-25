@@ -4782,15 +4782,7 @@ a:focus {
   }
   .company-carousel .owl-nav button.owl-next,
   .company-carousel .owl-nav button.owl-prev {
-    top: auto;
-    bottom: -25px;
-    left: 50%;
-  }
-  .company-carousel .owl-nav button.owl-prev {
-    margin-left: -23px;
-  }
-  .company-carousel .owl-nav button.owl-next {
-    margin-right: -15px;
+    display: none;
   }
 }
 

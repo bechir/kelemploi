@@ -48,13 +48,13 @@
                               <input class="form-control" placeholder="{{ 'form.password'|trans }}" name="_password" type="password">
                           </div>
                           <div class="more-option">
-                              <div class="mt-0 terms">
+                              {#<div class="mt-0 terms">
                                   <input class="custom-radio" id="radio-4" name="_remember_me" type="checkbox">
                                   <label for="radio-4">
                                       <span class="dot"></span>
                                       {{ 'login.remember_me'|trans }}
                                   </label>
-                              </div>
+                              </div>#}
                               <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forget_password'|trans }}</a>
                           </div>
                           {% if csrf_token %}
