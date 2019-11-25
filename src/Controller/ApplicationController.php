@@ -262,7 +262,7 @@ class ApplicationController extends AbstractController
 
         return $this->render('application/jobs-items.html.twig', [
             'list' => $list,
-            'class' => 'col'
+            'class' => 'col',
         ]);
     }
 

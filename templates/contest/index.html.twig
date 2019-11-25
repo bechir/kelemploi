@@ -11,7 +11,7 @@
 
     <div class="alice-bg section-padding-bottom">
         <div class="container">
-            {% include 'contest/items.html.twig' with {contests: contests, _locale: _locale} %}
+            {% include 'contest/items.html.twig' with {contests: contests} %}
             {% if contests.haveToPaginate %}
             <nav class="navigation pagination mt-5">
                 <div class="nav-links mx-auto mt-3">

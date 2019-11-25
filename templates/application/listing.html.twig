@@ -19,7 +19,7 @@
                 {% include 'common/results-view.html.twig' with {type: 'job'} %}
                 
                 {# Jobs listing #}
-                {% include 'application/jobs-items.html.twig' with {list: list, _locale: _locale} %}
+                {% include 'application/jobs-items.html.twig' with {list: list} %}
 
                 {% if list.haveToPaginate %}
                   <nav class="navigation pagination mt-5">

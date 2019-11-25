@@ -6,7 +6,7 @@
     {% for contest in contests %}
         {% set url = path('contest_show', {slug: contest.slug}) %}
         <div class="col-md-6 mb-5">
-            <div class="job-list">
+            <div class="job-list border-top-0">
                 <div class="body pl-0">
                     <div class="content">
                         <h4><a href="{{ url }}">{{ contest.title }}</a></h4>
