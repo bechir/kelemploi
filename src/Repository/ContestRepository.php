@@ -22,9 +22,30 @@ class ContestRepository extends ServiceEntityRepository
         parent::__construct($registry, Contest::class);
     }
 
+    public function findOneBy(array $criteria, array $orderBy = null): ?Contest
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.isArchived = false')
+            ->andWhere('c.isActivated = true');
+
+        if (isset($criteria['slug'])) {
+            $qb->andWhere('c.slug = :slug')
+            ->setParameter('slug', $criteria['slug']);
+        }
+
+        if (isset($criteria['id'])) {
+            $qb->andWhere('c.id = :id')
+            ->setParameter('id', $criteria['id']);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getContests(int $page = 1): Pagerfanta
     {
         $qb = $this->createQueryBuilder('c')
+            ->where('c.isArchived = false')
+            ->andWhere('c.isActivated = true')
             ->orderBy('c.createdAt', 'DESC')
         ;
 
