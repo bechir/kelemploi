@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+{% import 'util/alerts.twig' as alerts %}
+
+{% block title %}Concours au Sénégal | {{ parent() }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('Concours') }}
+
+    <div class="alice-bg section-padding-bottom">
+        <div class="container">
+            {{ alerts.info('En développement') }}
+        </div>
+    </div>
+
+{% endblock %}

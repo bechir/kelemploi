@@ -1,3 +1,6 @@
+# -----------------------------------------------------------
+# |       OFFRES D'EMPLOI
+# -----------------------------------------------------------
 application_create:
   path: /job/new
   controller: App\Controller\ApplicationController::create
@@ -25,3 +28,19 @@ application_delete:
 application_apply:
   path: /job/{slug}/apply
   controller: App\Controller\ApplicationController::apply
+
+
+# -----------------------------------------------------------
+# |       CONCOURS
+# -----------------------------------------------------------
+contests_index:
+  path: /contests
+  controller: App\Controller\ContestController::index
+
+contests_list_paginated:
+  path: /contests/page/{page<[1-9]\d*>}
+  controller: App\Controller\ContestController::index
+
+contest_show:
+  path: /contest/{slug}
+  controller: App\Controller\ContestController::show
