@@ -7,11 +7,25 @@
 
 {% block main %}
 
-    {{ breadcrumb.level_1('Concours') }}
+    {{ breadcrumb.level_1('Concours Sénégal ' ~ 'now'|date('Y') ) }}
 
     <div class="alice-bg section-padding-bottom">
         <div class="container">
-            {{ alerts.info('En développement') }}
+            {% include 'contest/items.html.twig' with {contests: contests} %}
+            {% if contests.haveToPaginate %}
+            <nav class="navigation pagination mt-5">
+                <div class="nav-links mx-auto mt-3">
+                {{ pagerfanta(contests, 'twitter_bootstrap4_translated',
+                    { routeName: 'contests_list_paginated',
+                    routeParams: app.request.query.all,
+                    prev_message: '<i class="fas fa-angle-left"></i> Précédant',
+                    next_message: 'Suivant <i class="fas fa-angle-right"></i>',
+                    page_template: '<a class="page-numbers p-3" href="%href%" %rel%>%text%</a>'
+                    })
+                }}
+                </div>
+            </nav>
+            {% endif %}
         </div>
     </div>
 

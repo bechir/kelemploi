@@ -1,0 +1,32 @@
+{% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as widgets %}
+{% from "util/alerts.twig" import default as alert_default %}
+
+{% set _locale = app.request.get('_locale', 'fr') %}
+{% set _locale = 'en' %}
+
+
+<div class="row">
+    {% for _app in contests %}
+        {% set app_url = path('application_show', {slug: _app.slug}) %}
+        <div class="col-md-6 mb-5">
+            <div class="job-list">
+                <div class="body pl-0">
+                    <div class="content">
+                        <h4><a href="{{ app_url }}">{{ _app.jobTitle }}</a></h4>
+                        <div class="info">
+                            <span class="company">
+                                <a href="{{ app_url }}">
+                                    <i data-feather="calendar"></i>
+                                    <span>{{ _app.dates.start|localizeddate('full', 'none', _locale )|capitalize }}</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ alert_default('Aucune offre trouvée.') }}
+    {% endfor %}
+</div>
