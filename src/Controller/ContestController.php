@@ -20,4 +20,11 @@ class ContestController extends AbstractController
             'contests' => $contests,
         ]);
     }
+
+    public function show(Contest $contest): Response
+    {
+        return $this->render('contest/details.html.twig', [
+            'contest' => $contest
+        ]);
+    }
 }
