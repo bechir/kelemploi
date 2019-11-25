@@ -10,9 +10,9 @@ parameters:
     website:
         name: "Kelemploi"
         email: 'contact@kelemploi.com'
-        phoneNumber: '+221 78 374 26 71'
+        phoneNumber: '+221 78 584 60 36'
         authors: "Bechir Ba <bechiirr71@gmail.com>"
-        address: "44 Rue 12, alpha Gamma"
+        address: "Sanar, Saint-Louis · Sénégal"
     website.name: 'Kelemploi'
     website.email: 'contact@kelemploi.com' #'contact@kelemploi.com
     app.notifications.email_sender: '%website.email%'
