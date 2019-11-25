@@ -1,0 +1,28 @@
+{% import 'util/util.twig' as util %}
+{% import 'util/company_widgets.twig' as widgets %}
+{% from "util/alerts.twig" import default as alert_default %}
+
+<div class="row">
+    {% for contest in contests %}
+        {% set url = path('contest_show', {slug: contest.slug}) %}
+        <div class="col-md-6 mb-5">
+            <div class="job-list border-top-0">
+                <div class="body pl-0">
+                    <div class="content">
+                        <h4><a href="{{ url }}">{{ contest.title }}</a></h4>
+                        <div class="info">
+                            <span class="company">
+                                <a href="{{ url }}">
+                                    <i data-feather="calendar"></i>
+                                    <span>{{ contest.createdAt|localizeddate('full', 'none', _locale )|capitalize }}</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ alert_default('Aucune offre trouvée.') }}
+    {% endfor %}
+</div>

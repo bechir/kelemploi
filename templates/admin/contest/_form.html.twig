@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="container-fluid">
+    <div class="col-12 mb-5">
+        <label>Titre *</label>
+        {% if form_errors(form.title) %}
+        <p class="alert alert-danger">La titre est obligatoire et doit faire 255 caracètres maximum</p>
+        {% endif %}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control input-lg'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
+        <label>Description *</label>
+        {% if form_errors(form.description) %}
+        <p class="alert alert-danger">La description est obligatoire et doit faire entre 10 et 5000 caracètres</p>
+        {% endif %}
+        {{ form_widget(form.description, {'attr': {'class': 'ckeditor'}}) }}
+    </div>
+
+    <div class="my-5 container-fluid px-0">
+        <hr>
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fa fa-check-circle"></i> Publier l'offre
+        </button>
+
+    </div>
+</div>
+{{ form_end(form) }}

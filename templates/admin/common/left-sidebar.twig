@@ -1,6 +1,6 @@
-{% set in_list = ['pendings', 'jobs-list'] %}
+{% set in_list = ['pendings', 'jobs-list', 'contests-list'] %}
 {% set in_settings = ['featured', 'resume-of-week', 'testimonials', 'banner-ad', 'emails', 'admin-users'] %}
-{% set in_create = ['new-company', 'new-user', 'new-job'] %}
+{% set in_create = ['new-company', 'new-user', 'new-job', 'new-contest'] %}
 
 
 <div id="sidebar-nav" class="sidebar">
@@ -36,16 +36,19 @@
                 <li>
                     <a {% if active in in_list %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#ads">
                         <i class="lnr lnr-list"></i>
-                        <span>Offres d'emploi</span>
+                        <span>Offres</span>
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
                     <div class="collapse{% if active in in_list %} in{% endif %}" id="ads">
                         <ul class="nav">
                             <li><a href="{{ path('admin_jobs_list') }}" {% if active == 'jobs-list' %} class="active" {% endif %}>
-                                <span>En cours</span></a>
+                                <span>Emploi en cours</span></a>
                             </li>
                             <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
-                                <span>En attentes</span></a>
+                                <span>Emploi en attentes</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_contests_list') }}" {% if active == 'contests-list' %} class="active" {% endif %}>
+                                <span>Concours</span></a>
                             </li>
                         </ul>
                     </div>
@@ -63,6 +66,9 @@
                         <ul class="nav">
                             <li><a href="{{ path('admin_job_create') }}" {% if active == 'new-job' %} class="active" {% endif %}>
                                 <span><i class="lnr lnr-bullhorn"></i> Offre d'emploi</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_contest_create') }}" {% if active == 'new-contest' %} class="active" {% endif %}>
+                                <i class="lnr lnr-user"></i> <span> Concours</span></a>
                             </li>
                             {% if is_granted('ROLE_RESUMES_MANAGER') %}
                                 <li><a href="{{ path('admin_company_create') }}" {% if active == 'new-company' %} class="active" {% endif %}>

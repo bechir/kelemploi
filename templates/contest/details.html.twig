@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% set absolute_url = url('contest_show', {slug: contest.slug})|url_encode %}
+
+{% block og_meta %}
+    <meta property="og:url"              content="{{ absolute_url }}" />
+    <meta property="og:type"             content="website" />
+    <meta property="og:title"            content="{{ contest.title }} | {{ website.name }}" />
+    <meta property="twitter:title"       content="{{ contest.title }} | {{ website.name }}" />
+    <meta property="title"               content="{{ contest.title }} | {{ website.name }}" />
+    <meta property="og:description"      content="{{ contest.description|raw[0: 400] }}" />
+    <meta property="twitter:description" content="{{ contest.description|raw[0: 400] }}" />
+    <meta name="description"             content="{{ contest.description|raw[0: 400] }}" />
+    <meta property="twitter:card"        content="summary" />
+    <meta property="og:image"            content=""{{ asset('images/logo.png') }} />
+    <meta property="twitter:image"       content=""{{ asset('images/logo.png') }} />
+{% endblock %}
+
+{% block title %}{{ contest.title }} | {{ website.name }}{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block main %}
+
+    <!-- Candidates Details -->
+    <div class="alice-bg padding-top-60 section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="job-listing-details pt-3">
+              <div class="job-title-and-info pb-3">
+                <div class="title">
+                  <div class="title-body">
+                    <h1 class="h2">{{ contest.title }}</h1>
+                    <div class="info">
+                        <span class="company-category">
+                            <a href="#">
+                                <i data-feather="calendar"></i>
+                                {{ contest.createdAt|localizeddate('full', 'none', _locale )|capitalize }}
+                            </a>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="details-information py-5">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="description details-section">
+                      <h4><i data-feather="align-left"></i>{{ 'job.description'|trans }}</h4>
+                      <p>{{ contest.description|raw }}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="information-and-share d-inline-block">
+                      <div class="share-job-post">
+                        <span class="share"><i class="fas fa-share-alt"></i>Partager</span>
+                        <a target="_blank" href="whatsapp://send?text={{ absolute_url }}"><i class="fab fa-lg fa-whatsapp text-success"></i></a>
+                        <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ absolute_url }}&title={{ contest.title }}"><i class="fab fa-lg fa-linkedin-in linkedin-color"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url }}&caption={{ contest.title }}"><i class="fab fa-lg fa-facebook-square fb-color"></i></a>
+                        <a target="_blank" href="http://twitter.com/share?text={{ contest.title }}&amp;counturl={{ absolute_url }}"><i class="fab fa-lg fa-twitter twitter-color"></i></a>
+                      </div>
+                      <div class="buttons">
+                        <a href="#" class="button print"><i data-feather="printer"></i>{{ 'job.print'|trans }}</a>
+                        <a href="#" class="button report"><i data-feather="flag"></i>{{ 'job.report'|trans }}</a>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
