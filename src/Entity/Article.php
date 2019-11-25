@@ -84,6 +84,7 @@ class Article
 
     const NB_ITEMS_ADMIN_LISTING = 25;
     const NB_ITEMS_LISTING = 10;
+    const NB_ITEMS_HOME = 3;
 
     public function __construct()
     {

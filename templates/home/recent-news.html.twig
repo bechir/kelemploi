@@ -1,0 +1,38 @@
+{% if articles is not empty %}
+<div class="pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="section-header section-header-2 section-header-with-right-content">
+            <h2>Blog &ndash; Articles récents</h2>
+            <a href="{{ path('blog_index') }}" class="header-right btn btn-primary text-white btn-lg">+ <em class="f-s-normal">Voir tous les articles</em></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {% for article in articles %}
+            {% set url = path('blog_article_show', {slug: article.slug}) %}
+            <div class="col-md-6 col-lg-4">
+                <article class="blog-grid">
+                    <div class="body">
+                    <span class="date">{{ article.updatedAt|date('d') }} <span>{{ article.updatedAt|date('M') }}</span></span>
+                    <h3><a href="{{ url }}">{{ article.title }}</a></h3>
+                    <p>{{ article.content|striptags|truncate(133, '...')|raw }}...</p>
+                    </div>
+                    <div class="info">
+                        <span class="author">
+                            <a href="{{ url }}">
+                                <span data-feather="user"></span>{{ article.author.fullname }}
+                            </a>
+                        </span>
+                        <span class="comments">
+                            <a href="{{ url }}#comment-block"><span data-feather="message-circle"></span>{{ article.comments|length }}</a>
+                        </span>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endif %}

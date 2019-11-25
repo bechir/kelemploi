@@ -101,7 +101,9 @@
     {# Regions #}
     {{ render(controller('App\\Controller\\HomeController::regionsListing')) }}
 
-    {{ render(controller('App\\Controller\\HomeController::statistics')) }}
+    {{ render(controller('App\\Controller\\BlogController::recentNews')) }}
+
+    {#{ render(controller('App\\Controller\\HomeController::statistics')) }#}
 
     {# Registration box if the user is not logged in #}
     {% include 'common/registration-box.html.twig' %}

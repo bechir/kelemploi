@@ -43,6 +43,20 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function getRecents()
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.coverImage', 'c')
+                ->addSelect('c')
+            ->where('a.isArchived = false')
+            ->andWhere('a.isActivated = true')
+            ->orderBy('a.updatedAt', 'DESC')
+            ->setMaxResults(Article::NB_ITEMS_HOME)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function adminFindOneBy(array $criteria, array $orderBy = null): ?Article
     {
         $qb = $this->createQueryBuilder('a')

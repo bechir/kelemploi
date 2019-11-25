@@ -56,6 +56,15 @@ class BlogController extends AbstractController
         ]);
     }
 
+    public function recentNews(): Response
+    {
+        $recents = $this->getDoctrine()->getRepository(Article::class)->getRecents();
+        
+        return $this->render('home/recent-news.html.twig', [
+            'articles' => $recents
+        ]);
+    }
+
     public function getCommentForm(Request $request, EntityManagerInterface $em): Response
     {
         $comment = $em->getRepository(Comment::class)->findOneById($request->query->get('comment-id'));
