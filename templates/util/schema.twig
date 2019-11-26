@@ -8,7 +8,7 @@
         "description": "{{ company.description }}",
         {% endif %}
         {% if company.photo %}
-            "image": "{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(company.photo, 'companyPhotoFile') }}",
+            "image": "{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(company.photo, 'companyPhotoFile') }}",
         {% endif %}
         "location": "{{ company.region|trans({}, 'regions') }} {{ company.address }}",
         "url" : "{{ app.request.getSchemeAndHttpHost ~ path('company_show', {slug: company.slug}) }}",
