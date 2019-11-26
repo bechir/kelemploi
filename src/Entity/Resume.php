@@ -94,6 +94,16 @@ class Resume
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    const NB_IMTEMS_HOME = 7;
+    const NB_IMTEMS_SIMILAR = 7;
+    const NB_ITEMS_LISTING = 13;
+    const NB_ITEMS_ADMIN_LISTING = 50;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -409,5 +419,26 @@ class Resume
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function onCreateOnUpdate(): self
+    {
+        return $this->setUpdatedAt(new \DateTime());
     }
 }
