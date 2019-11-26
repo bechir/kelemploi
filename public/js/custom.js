@@ -42,7 +42,6 @@ $(document).ready(function() {
             }
         });
 
-
     /*-----------------------------------
     Navbar
     -----------------------------------*/
@@ -118,7 +117,7 @@ $(document).ready(function() {
 
         $('.header-top-toggler-button').on('click', function() {
           $('.header-top .top-nav').toggleClass('show');
-          $('.header-top .top-nav').slideToggle();
+          // $('.header-top .top-nav').slideToggle();
         })
 
         $(document).on('click', function(event){

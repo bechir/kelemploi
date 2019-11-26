@@ -1,6 +1,6 @@
 {% import 'util/util.twig' as util %}
 
-{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form'}}) }}
+{{ form_start(form, {'attr': {'class': 'dashboard-form job-post-form', 'novalidate': 'novalidate'}}) }}
     <div class="dashboard-section basic-info-input">
         <h4><i data-feather="plus-circle"></i>{{ 'job.new.h1'|trans }}<span class="float-right small text-capitalize">{{ 'form.required_inputs'|trans|raw }}</span></h4>
 
