@@ -28,11 +28,15 @@
     <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
+        {% if job.company.photo %}
+            "image": "{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(job.company.photo, 'companyPhotoFile') }}",
+        {% endif %}
         "@type": "JobPosting",
         "title": "{{ job.jobTitle }}",
         "url": "{{ app.request.getSchemeAndHttpHost ~ path('application_show', {slug: job.slug}) }}",
         "employmentType": "{{ job.contractType|trans }}",
         "datePosted": "{{ job.dates.start|date('Y-m-d') }}",
+        "description": "{{ job.description|striptags }}",
         "relevantOccupation": {
             "@type": "Occupation",
             "name": "{{ job.jobTitle }}",
@@ -51,7 +55,10 @@
                 "@type": "PostalAddress",
                 "addressLocality": "{{ job.company.region|trans({}, 'regions') }}"
             }
-        }
+        },
+        "qualifications": "",
+        "responsibilities": "{{ job.responsibilities|striptags }}",
+        "jobBenefits": "{{ job.benefits|striptags }}"
     }
     </script>
 {% endmacro %}
