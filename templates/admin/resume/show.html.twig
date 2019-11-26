@@ -16,17 +16,17 @@
           <div class="profile-main py-3">
             <h3 class="name my-0">
               <a class="text-white" href="{{ path('admin_user_show', {user: user.id}) }}">
-                {% if resume.photo %}
-                    <img class="img-fluid img-50 img-circle" src="{{ vich_uploader_asset(resume.photo, 'avatarFile') }}" alt="Image">
+                {% if user.avatar %}
+                    <img class="img-fluid img-50 img-circle" src="{{ vich_uploader_asset(user.avatar, 'avatarFile') }}" alt="Image">
                 {% else %}
-                    <img class="img-fluid img-50 img-circle" src="{{ asset('images/user/default-user.jpg') }}" alt="Image">
+                    <img class="img-fluid img-50 img-circle" src="{{ asset('images/account/default-avatar-profile.jpg') }}" alt="Image">
                 {% endif %}
                 {{ user.fullname }}
               </a>
             </h3>
           </div>
             {% set class = 'bg-default-2' %}
-            {% if resume.rank %}
+            {% if resume.rank is defined and resume.rank %}
               {% if resume.rank.name in [constant('TOP', resume.rank), constant('EXCELLENT', resume.rank)] %}
                 {% set class = 'bg-success-2' %}
               {% elseif resume.rank.name == constant('MEDIUM', resume.rank) %}
@@ -39,7 +39,7 @@
             <div class="profile-stat {{ class }}">
               <div class="row">
                 <h4>
-                  {% if resume.rank %}
+                  {% if resume.rank is defined and resume.rank %}
                     {% if resume.rank == constant('TOP', resume.rank) %}
                       <i class="fa fa-star text-gold"></i>
                     {% endif %}
@@ -58,7 +58,7 @@
             <h4 class="heading">Informations</h4>
             <ul class="list-unstyled list-justify">
               <li>Nom Complet <span><strong><a href="{{ path('admin_user_show', {user: user.id}) }}">{{ user.fullname }}</a></strong></span></li>
-							<li>Sexe<span>{{ resume.gender|trans ? : 'N/A' }}</span></li>
+							<li>Sexe<span>{{ user.gender|trans ? : 'N/A' }}</span></li>
               <li>Email <span>{{ user.email }}</span></li>
               <li>Date de modification <span>{{ resume.updatedAt|date('d M Y, H') ~ 'h ' ~ resume.updatedAt|date('i') }}</span></li>
             </ul>
@@ -67,8 +67,8 @@
             <a href="{{ vich_uploader_asset(resume.cv, 'cvFile') }}" class="btn btn-default btn-block my-3"><span class="fa fa-download"></span> Télécharger le CV</a>
           {% endif %}
           
-          <a href="{{ path('resume_show', {slug: resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
-          {% if is_granted('ROLE_RESUMES_MANAGER') %}
+          <a href="{{ path('candidate_show', {slug: resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
+          {#% if is_granted('ROLE_RESUMES_MANAGER') %}
             <div class="profile-info px-0 text-center">
               <hr>
               <div class="text-center">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
             </div>
-          {% endif %}
+          {% endif %#}
         </div>
         <!-- END PROFILE DETAIL -->
       </div>

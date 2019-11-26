@@ -3,7 +3,7 @@ candidates_list:
   controller: App\Controller\UserController::list
 
 candidate_show:
-  path: /candidate/{id}
+  path: /candidate/{slug}
   controller: App\Controller\UserController::show
 
 resume:

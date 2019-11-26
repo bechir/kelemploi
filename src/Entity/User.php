@@ -425,7 +425,7 @@ class User extends BaseUser implements EquatableInterface
 
     public function haveResume(): bool
     {
-        return null !== $this->resume;
+        return null !== $this->resume && !empty($this->resume);
     }
 
     public function getNationality(): ?Nationality

@@ -44,22 +44,18 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function show(User $user, EventDispatcherInterface $dispatcher): Response
+    public function show(Resume $resume, EventDispatcherInterface $dispatcher, UserInterface $user = null): Response
     {
-        if (!$user) {
-            $this->addFlash('danger', "L'utilisateur' n'existe pas.");
+        $candidate = $resume->getUser();
 
-            return $this->redirectToRoute('index');
-        }
-
-        if($this->getUser() && $this->getUser()->isEmployer()) {
-            $event = new CandidateEvent($user);
+        if($user && $user->isEmployer()) {
+            $event = new CandidateEvent($candidate);
             $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
         }
 
         return $this->render('candidate/show.html.twig', [
-            'user' => $user,
-            'resume' => $user->getResume()
+            'user' => $candidate,
+            'resume' => $resume
         ]);
     }
 

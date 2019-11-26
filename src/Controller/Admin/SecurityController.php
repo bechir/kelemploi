@@ -8,6 +8,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Apply;
+use App\Entity\Comment;
 use App\Entity\ResumeOfWeek;
 use App\Entity\User;
 use App\Form\Admin\AdminUserType;
@@ -46,7 +48,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/user/delete/{id}", name="admin_security_user_delete", methods={"POST"})
      */
-    public function deleteUser(User $user)
+    public function deleteUser(User $user, EntityManagerInterface $em)
     {
         if (!$user) {
             $this->addFlash('danger', "L'utilisateur est introuvable.");
@@ -56,12 +58,22 @@ class SecurityController extends AbstractController
             } else {
                 $em = $this->getDoctrine()->getManager();
 
-                $resumeOfWeeek = $em->getRepository(ResumeOfWeek::class)->get();
-                if ($resumeOfWeeek->getResume() == $user->getResume()) {
-                    $this->addFlash('info', "Vous devez supprimer cet utilisateur du CV à la une d'abord.");
+                // $resumeOfWeeek = $em->getRepository(ResumeOfWeek::class)->get();
+                // if ($resumeOfWeeek->getResume() == $user->getResume()) {
+                //     $this->addFlash('info', "Vous devez supprimer cet utilisateur du CV à la une d'abord.");
 
-                    return $this->redirectToRoute('admin_settings_resume_of_week');
+                //     return $this->redirectToRoute('admin_settings_resume_of_week');
+                // }
+                $applies = $em->getRepository(Apply::class)->findByCandidate($user);
+                foreach ($applies as $apply) {
+                    $em->remove($apply);
                 }
+
+                $comments = $em->getRepository(Comment::class)->findByAuthor($user);
+                foreach ($comments as $comment) {
+                    $em->remove($comment);
+                }
+
                 $em->remove($user);
                 $em->flush();
                 $this->addFlash('success', "L'utilisateur a été supprimé.");

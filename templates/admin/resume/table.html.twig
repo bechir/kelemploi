@@ -9,7 +9,7 @@
                     <th>Titre</th>
                     <th>Spécialité</th>
                     <th>Expérience</th>
-                    <th>Classement</th>
+                    {# <th>Classement</th> #}
                     <th>Dernière modification</th>
                 </tr>
             </thead>
@@ -19,18 +19,18 @@
                     <tr class="td-3rem">
                         <td>
                             <a href="{{ path('admin_resume_show', {resume: resume.id}) }}">
-                                {% if resume.photo %}
-								    <img class="img-fluid img-35 img-circle" src="{{ vich_uploader_asset(resume.photo, 'avatarFile') }}" alt="Image">
+                                {% if resume.user.avatar %}
+								    <img class="img-fluid img-35 img-circle" src="{{ vich_uploader_asset(resume.user.avatar, 'avatarFile') }}" alt="Image">
                                 {% else %}
-								    <img class="img-fluid img-35 img-circle" src="{{ asset('images/user/default-user.jpg') }}" alt="Image">
+								    <img class="img-fluid img-35 img-circle" src="{{ asset('images/account/default-avatar-profile.jpg') }}" alt="Image">
 							    {% endif %}
                                 {{ resume.fullname }}
                             </a>
                         </td>
                         <td>{{ resume.title ? : '-' }}</td>
-                        <td>{{ resume.jobCategory|trans({}, 'job-categories') ? : 'N/A' }}</td>
+                        <td>{{ resume.jobCategory|trans({}, 'jobs-categories') ? : 'N/A' }}</td>
                         <td>{{ resume.experienceLevel ? (resume.experienceLevel ~ '_short')|trans : 'N/A' }}</td>
-                        <td>{{ rankLabel(resume.rank) }}</td>
+                        {# <td>{{ rankLabel(resume.rank) }}</td> #}
                         <td>{{ resume.updatedAt|date('d M Y, H') ~ 'h ' ~ resume.updatedAt|date('i') }}</td>
                     </tr>
                 {% endfor %}

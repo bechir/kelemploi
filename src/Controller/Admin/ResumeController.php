@@ -55,18 +55,6 @@ class ResumeController extends AbstractController
     }
 
     /**
-     * @Route("/pending/{page}", name="admin_resumes_list_pending", requirements={"page"="\d+"}, defaults={"page"=1})
-     */
-    public function pendings(Request $request, int $page = 1, ResumeRepository $resumeRepository): Response
-    {
-        $resumes = $resumeRepository->adminGetResumes($page, false);
-
-        return $this->render('admin/resume/pending-list.html.twig', [
-            'resumes' => $resumes,
-        ]);
-    }
-
-    /**
      * @Route("/details/{resume}", name="admin_resume_show")
      */
     public function show(Request $request, Resume $resume, EntityManagerInterface $em): Response
@@ -75,24 +63,24 @@ class ResumeController extends AbstractController
             return $this->render('admin/pages/404.html.twig');
         }
 
-        $rankForm = $this->createForm(RankType::class, $resume);
+        // $rankForm = $this->createForm(RankType::class, $resume);
 
-        $rankForm->handleRequest($request);
+        // $rankForm->handleRequest($request);
 
-        if ($rankForm->isSubmitted() && $rankForm->isValid()) {
-            $em->persist($resume);
+        // if ($rankForm->isSubmitted() && $rankForm->isValid()) {
+        //     $em->persist($resume);
 
-            $em->flush();
+        //     $em->flush();
 
-            $this->addFlash('success', 'Le CV a été classé.');
+        //     $this->addFlash('success', 'Le CV a été classé.');
 
-            return $this->redirectToRoute('admin_resume_show', ['resume' => $resume->getId()]);
-        }
+        //     return $this->redirectToRoute('admin_resume_show', ['resume' => $resume->getId()]);
+        // }
 
         return $this->render('admin/resume/show.html.twig', [
             'resume' => $resume,
             'user' => $resume->getUser(),
-            'formRank' => $rankForm->createView(),
+            // 'formRank' => $rankForm->createView(),
         ]);
     }
 

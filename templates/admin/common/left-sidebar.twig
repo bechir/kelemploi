@@ -16,22 +16,8 @@
                 <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
                     <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
                 </li>
-                <li>
-                    <a {% if active in ['validated_resumes', 'pending_resumes'] %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#resume">
-                        <i class="lnr lnr-database"></i>
-                        <span>Base CV</span>
-                        <i class="icon-submenu lnr lnr-chevron-left"></i>
-                    </a>
-                    <div class="collapse{% if active in ['validated_resumes', 'pending_resumes'] %} in{% endif %}" id="resume">
-                        <ul class="nav">
-                            <li><a href="{{ path('admin_resumes_list') }}" {% if active == 'validated_resumes' %} class="active" {% endif %}>
-                                <span><i class="lnr lnr-checkmark-circle text-success"></i> CV validés</span></a>
-                            </li>
-                            <li><a href="{{ path('admin_resumes_list_pending') }}" {% if active == 'pending_resumes' %} class="active" {% endif %}>
-                                <span><i class="lnr lnr-history text-warning"></i> CV à valider</span></a>
-                            </li>
-                        </ul>
-                    </div>
+                <li><a href="{{ path('admin_resumes_list') }}" {% if active == 'validated_resumes' %} class="active" {% endif %}>
+                    <i class="lnr lnr-database"></i> <span>Base CV</span></a>
                 </li>
                 <li>
                     <a {% if active in in_list %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#ads">
