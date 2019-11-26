@@ -11,9 +11,9 @@
   <meta property="og:title"            content="{{ _app.title }} | {{ website.name }}" />
   <meta property="twitter:title"       content="{{ _app.title }} | {{ website.name }}" />
   <meta property="title"               content="{{ _app.title }} | {{ website.name }}" />
-  <meta property="og:description"      content="{{ _app.description|raw[0: 400] }}" />
-  <meta property="twitter:description" content="{{ _app.description|raw[0: 400] }}" />
-  <meta name="description"             content="{{ _app.description|raw[0: 400] }}" />
+  <meta property="og:description"      content="{{ _app.description|striptags[0: 300] }}" />
+  <meta property="twitter:description" content="{{ _app.description|striptags[0: 300] }}" />
+  <meta name="description"             content="{{ _app.description|striptags[0: 300] }}" />
   <meta property="twitter:card"        content="summary" />
   {% if _app.company.photo %}
     <meta property="og:image"          content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(_app.company.photo, 'companyPhotoFile') }} />
