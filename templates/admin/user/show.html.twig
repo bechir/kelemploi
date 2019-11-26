@@ -70,7 +70,7 @@
             </ul>
           </div>
             {% if user.haveResume() %}
-              <a href="{{ path('resume_show', {slug: user.resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
+              <a href="{{ path('candidate_show', {slug: user.resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
             {% endif %}
           <div class="profile-info px-0 text-center">
             <hr>

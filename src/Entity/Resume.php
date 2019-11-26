@@ -89,6 +89,11 @@ class Resume
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -98,6 +103,7 @@ class Resume
         $this->socialProfiles = new ArrayCollection();
         $this->proSkills = new ArrayCollection();
         $this->portfolios = new ArrayCollection();
+        $this->slug = \uniqid("", true);
     }
 
     public function getId(): ?int
@@ -389,6 +395,18 @@ class Resume
         if ($newResume !== $user->getResume()) {
             $user->setResume($newResume);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
