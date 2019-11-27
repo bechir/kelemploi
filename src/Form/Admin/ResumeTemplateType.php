@@ -17,9 +17,7 @@ class ResumeTemplateType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
-            ->add('coverImage', ImageType::class, [
-                'required' => false
-            ])
+            ->add('coverImage', ImageType::class)
         ;
     }
 

@@ -8259,7 +8259,7 @@ header .absolute-nav {
   text-align: right;
 }
 
-.blog-list .read-more .button {
+.blog-list .read-more .button, .template-list .download-btn {
   background: rgba(36, 109, 248, 0.15);
   color: #246df8;
   border: 0;
@@ -8269,7 +8269,8 @@ header .absolute-nav {
   font-weight: 500;
 }
 
-.blog-list .read-more .button:hover {
+.blog-list .read-more .button:hover,
+.template-list .download-btn:hover {
   background: #246df8;
   color: #ffffff;
 }
@@ -10311,3 +10312,18 @@ form div.transition{
 .img-w50{
   width: 50px;
 }
+
+.w-85{
+  width: 85%!important;
+}
+
+.feather-19{
+  width: 19px;
+  height: 19px;
+}
+
+/* .template-list .download-btn{
+  position: absolute;
+  width: 83%;
+  bottom: 3px;
+} */

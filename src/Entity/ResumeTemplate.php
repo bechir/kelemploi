@@ -71,6 +71,31 @@ class ResumeTemplate
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hasWordFormat;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hasPdfFormat;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hasExcelFormat;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hasPptFormat;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ResumeTemplateFile", mappedBy="resumeTemplate", orphanRemoval=true)
+     */
+    private $templateFiles;
+
     const NB_ITEMS_ADMIN_LISTING = 25;
     const NB_ITEMS_LISTING = 10;
     const NB_ITEMS_HOME = 3;
@@ -80,6 +105,7 @@ class ResumeTemplate
         $this->viewCount = 0;
         $this->isActivated = true;
         $this->comments = new ArrayCollection();
+        $this->templateFiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -238,6 +264,90 @@ class ResumeTemplate
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getHasWordFormat(): ?bool
+    {
+        return $this->hasWordFormat;
+    }
+
+    public function setHasWordFormat(?bool $hasWordFormat): self
+    {
+        $this->hasWordFormat = $hasWordFormat;
+
+        return $this;
+    }
+
+    public function getHasPdfFormat(): ?bool
+    {
+        return $this->hasPdfFormat;
+    }
+
+    public function setHasPdfFormat(?bool $hasPdfFormat): self
+    {
+        $this->hasPdfFormat = $hasPdfFormat;
+
+        return $this;
+    }
+
+    public function getHasExcelFormat(): ?bool
+    {
+        return $this->hasExcelFormat;
+    }
+
+    public function setHasExcelFormat(?bool $hasExcelFormat): self
+    {
+        $this->hasExcelFormat = $hasExcelFormat;
+
+        return $this;
+    }
+
+    public function getHasPptFormat(): ?bool
+    {
+        return $this->hasPptFormat;
+    }
+
+    public function setHasPptFormat(?bool $hasPptFormat): self
+    {
+        $this->hasPptFormat = $hasPptFormat;
+
+        return $this;
+    }
+
+    public function getResumeTemplateFile(): ?ResumeTemplateFile
+    {
+        return $this->resumeTemplateFile;
+    }
+
+    /**
+     * @return Collection|ResumeTemplateFile[]
+     */
+    public function getTemplateFiles(): Collection
+    {
+        return $this->templateFiles;
+    }
+
+    public function addTemplateFile(ResumeTemplateFile $templateFile): self
+    {
+        if (!$this->templateFiles->contains($templateFile)) {
+            $this->templateFiles[] = $templateFile;
+            $templateFile->setResumeTemplate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplateFile(ResumeTemplateFile $templateFile): self
+    {
+        if ($this->templateFiles->contains($templateFile)) {
+            $this->templateFiles->removeElement($templateFile);
+            // set the owning side to null (unless already changed)
+            if ($templateFile->getResumeTemplate() === $this) {
+                $templateFile->setResumeTemplate(null);
+            }
+        }
 
         return $this;
     }
