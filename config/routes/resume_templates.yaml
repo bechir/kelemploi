@@ -1,0 +1,19 @@
+# =======================================================
+# |   Resumes templates module
+# =======================================================
+resume_templates:
+  path: /free-resume-templates
+  controller: App\Controller\ResumeTemplateController::index
+
+resume_templates_list_paginated:
+  path: /free-resume-templates/page/{page<[1-9]\d*>}
+  controller: App\Controller\ResumeTemplateController::index
+
+resume_template_show:
+  path: /free-resume-templates/{slug}
+  controller: App\Controller\ResumeTemplateController::show
+
+resume_template_update_comment:
+  path: /free-resume-templates/comment/{id}/update
+  controller: App\Controller\ResumeTemplateController::updateComment
+  methods: ['POST']

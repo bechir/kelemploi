@@ -55,6 +55,11 @@ class Comment
      */
     private $modified;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ResumeTemplate", inversedBy="comments")
+     */
+    private $resumeTemplate;
+
     public function __construct()
     {
         $this->replies = new ArrayCollection();
@@ -168,5 +173,17 @@ class Comment
     public function setModified()
     {
         $this->modified = true;
+    }
+
+    public function getResumeTemplate(): ?ResumeTemplate
+    {
+        return $this->resumeTemplate;
+    }
+
+    public function setResumeTemplate(?ResumeTemplate $resumeTemplate): self
+    {
+        $this->resumeTemplate = $resumeTemplate;
+
+        return $this;
     }
 }

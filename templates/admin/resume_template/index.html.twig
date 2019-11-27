@@ -1,0 +1,23 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'resume_templates_index' } %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span><i class="lnr lnr-text-align-left"></i> Modèles de CV</span></a> <a href="{{ path('admin_resume_template_new') }}" class="float-right text-white btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter un nouveau modèle de CV</a></h3>
+            <hr>
+            <h4>Liste des modèles de CV</h4>
+        </div>
+        <div class="panel-body">
+            {% include 'admin/resume_template/table.html.twig' with {templates: templates} %}
+        </div>
+        <div class="panel-footer pl-0 pb-0 mt-5">
+            <a href="{{ path('admin_resume_template_new') }}" class="mb-3 btn btn-primary"><i class="fa fa-plus-circle"></i> Ajouter un nouveau modèle de CV</a>
+        </div>
+    </div>
+{% endblock %}

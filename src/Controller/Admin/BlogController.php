@@ -40,14 +40,14 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/article/{slug}", name="admin_blog_article_show")
+     * @Route("/{slug}", name="admin_blog_article_show")
      */
     public function showArticle(string $slug, EntityManagerInterface $em): Response
     {
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
         
         if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+            throw new NotFoundHttpException(\sprintf("%s object not found by the @ParamConverter annotation.", Article::class));
 
         return $this->render('admin/blog/show.html.twig', [
             'article' => $article
@@ -88,7 +88,7 @@ class BlogController extends AbstractController
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
         
         if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+            throw new NotFoundHttpException(\sprintf("%s object not found by the @ParamConverter annotation.", Article::class));
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -158,7 +158,7 @@ class BlogController extends AbstractController
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
         
         if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+            throw new NotFoundHttpException(\sprintf("%s object not found by the @ParamConverter annotation.", Article::class));
 
         $article->setIsArchived(true);
         $article->setIsActivated(false);

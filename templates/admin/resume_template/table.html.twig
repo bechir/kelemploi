@@ -1,0 +1,34 @@
+<div class="table-responsive">
+    {% if templates is not empty %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date de modification</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for template in templates %}
+                <tr class="td-3rem">
+                    <td><a href="{{ path('admin_resume_template_show', {slug: template.slug}) }}">{{ template.title }}</a></td>
+                    <td>{{ template.updatedAt|date('d M, Y') }}</td>
+                    <td>
+                        {% if template.isActivated %}
+                            <label class="label label-success">Activé</label>
+                        {% else %}
+                            <label class="label label-warning">Desactivé</label>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('resume_template_show', {slug: template.slug}) }}" target="_blank" class="text-info"><i class="fa fa-lg fa-external-link"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="alert alert-info">Pas de résultats.</p>
+    {% endif %}
+<div>

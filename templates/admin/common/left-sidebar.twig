@@ -1,6 +1,6 @@
-{% set in_list = ['pendings', 'jobs-list', 'contests-list'] %}
+{% set in_list = ['pendings', 'jobs-list', 'contests-list', 'resume-templates-list'] %}
 {% set in_settings = ['featured', 'resume-of-week', 'testimonials', 'banner-ad', 'emails', 'admin-users'] %}
-{% set in_create = ['new-company', 'new-user', 'new-job', 'new-contest'] %}
+{% set in_create = ['new-company', 'new-user', 'new-job', 'new-contest', 'new-resume-template'] %}
 
 
 <div id="sidebar-nav" class="sidebar">
@@ -13,6 +13,9 @@
                 <li><a href="{{ path('admin_blog_index') }}" {% if active == 'blog_index' %} class="active" {% endif %}>
                     <i class="fa fa-newspaper-o"></i> <span>Blog</span></a>
                 </li>
+                <li><a href="{{ path('admin_resume_templates_index') }}" {% if active == 'resume_templates_index' %} class="active" {% endif %}>
+                    <i class="lnr lnr-text-align-left"></i> <span>Modèles de CV</span></a>
+                </li>
                 <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
                     <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
                 </li>
@@ -21,7 +24,7 @@
                 </li>
                 <li>
                     <a {% if active in in_list %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#ads">
-                        <i class="lnr lnr-list"></i>
+                        <i class="lnr lnr-bullhorn"></i>
                         <span>Offres</span>
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
@@ -54,7 +57,7 @@
                                 <span><i class="lnr lnr-bullhorn"></i> Offre d'emploi</span></a>
                             </li>
                             <li><a href="{{ path('admin_contest_create') }}" {% if active == 'new-contest' %} class="active" {% endif %}>
-                                <i class="lnr lnr-user"></i> <span> Concours</span></a>
+                                <i class="lnr lnr-flag"></i> <span> Concours</span></a>
                             </li>
                             {% if is_granted('ROLE_RESUMES_MANAGER') %}
                                 <li><a href="{{ path('admin_company_create') }}" {% if active == 'new-company' %} class="active" {% endif %}>

@@ -18,8 +18,8 @@
   <meta name="description"             content="{{ article.content|raw[0: 400] }}" />
   <meta property="twitter:card"        content="summary" />
   {% if article.coverImage %}
-    {# <meta property="og:image"          content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(article.company.photo, 'companyPhotoFile') }} /> #}
-    {# <meta property="twitter:image"     content=""{{ app.request.getSchemeAndHttpHost }} ~ {{ vich_uploader_asset(article.company.photo, 'companyPhotoFile') }} /> #}
+    <meta property="og:image"          content="{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(article.coverImage, 'file') }}" />
+    <meta property="twitter:image"     content="{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(article.coverImage, 'file') }}" />
   {% endif %}
 {% endblock %}
 

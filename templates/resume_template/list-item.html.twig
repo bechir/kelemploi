@@ -1,0 +1,26 @@
+{% for template in templates %}
+{% set url = path('resume_template_show', {slug: template.slug}) %}
+<article class="blog-list py-3">
+    <div class="info" style="width: 150px;">
+        <span class="date">{{ template.updatedAt|date('d M Y') }}</span>
+        <span class="comments">
+            <i class="fa fa-file-word fa-lg text-primary" title="Disponible au format Word"></i>&nbsp;&nbsp;&nbsp;
+            <i class="fa fa-file-pdf fa-lg text-danger" title="Disponible au format PDF"></i>
+        </span>
+    </div>
+    {# {% if template.coverImage %}
+        <div class="thumb">
+            <img src="{{ vich_uploader_asset(template.coverImage, 'file') }}" class="img-fluid" alt="">
+        </div>
+    {% endif %} #}
+    <div class="content pb-3" style="max-width: 750px;">
+        <h3>
+            <a href="{{ url }}">{{ template.title }}</a>
+        </h3>
+        <p>{{ template.content|striptags[: 219]}}...</p>
+    </div>
+    <div class="read-more my-auto">
+        <a class="button" href="{{ url }}">Détails</a>
+    </div>
+</article>
+{% endfor %}
