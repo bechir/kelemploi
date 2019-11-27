@@ -4,9 +4,9 @@
 
 {% block title %}
   {% if c is not empty %}
-    Recrutement en  {{ c|trans({}, 'jobs-categories') }} &ndash; {{ website.name }}
+    Recrutement en {{ c|trans({}, 'jobs-categories') }} &ndash; {{ website.name }}
   {% else %}
-  {{ website.name }} &ndash; Offres d'emploi et recrutement au Sénégal
+  {{ website.name }} &ndash; Offres d'emploi et recrutement au Sénégal | CDI, CDD, Stage
   {% endif %}
 {% endblock %}
 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+{% import 'util/alerts.twig' as alerts %}
+
+{% block title %}Modèles de CV gratuits à télécharger sur {{ website.name }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('Modèles de CV gratuits à télécharger') }}
+
+    <div class="alice-bg section-padding-bottom">
+        <div class="container">
+            {{ alerts.info('Page en construction') }}
+        </div>
+    </div>
+{% endblock %}
