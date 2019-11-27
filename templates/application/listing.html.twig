@@ -3,12 +3,11 @@
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
 {% block title %}
-  {% set __t = "Offres d'emploi et recrutement au Sénégal" %}
-  {% if c is not null %}
-    {% set __t = "Recrutement en " ~ c|trans({}, 'jobs-categories') %}
+  {% if c is not empty %}
+    Recrutement en  {{ c|trans({}, 'jobs-categories') }} &ndash; {{ website.name }}
+  {% else %}
+  {{ website.name }} &ndash; Offres d'emploi et recrutement au Sénégal
   {% endif %}
-
-  {{ __t ~ ' | ' ~ website.name }}
 {% endblock %}
 
 {% block main %}
