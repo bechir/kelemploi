@@ -8,9 +8,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Newsletter;
 use App\Form\ContactType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,37 +32,40 @@ class DefaultController extends Controller
         return $this->render('default/privacy.html.twig');
     }
 
-    public function contact(Request $request, \Swift_Mailer $mailer): Response
+    public function contact(Request $request, EntityManagerInterface $em, \Swift_Mailer $mailer, ContainerInterface $container): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = $form->getData();
-
-            $message = (new \Swift_Message($this->getParameter('website.name') . ' - [Contact]'))
-                ->setFrom($contact->getEmail())
-                ->setTo($this->getParameter('website.email'))
+            $address = [$container->getParameter('website.email') => $container->getParameter('website.name')];
+            $message = (new \Swift_Message($contact->getSubject()))
+                ->setFrom($address)
+                ->setTo($address)
                 ->setSubject($contact->getSubject())
                 ->setContentType('text/html')
                 ->setBody(
                     $this->renderView(
-                          'emails/contact.html.twig',
-                          ['user' => $contact]
+                        'emails/contact.html.twig',
+                        ['contact' => $contact]
                     ),
                     'text/html'
                 )
                 ->addPart(
                     $this->renderView(
                         'emails/contact.txt.twig',
-                        ['user' => $contact]
+                        ['contact' => $contact]
                     ),
                     'text/plain'
                 );
             $mailer->send($message);
 
-            $this->addFlash('success', 'contact.message_sent');
+            $em->persist($contact);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre message a été envoyé, merci!');
 
             return $this->redirectToRoute('index');
         }

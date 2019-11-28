@@ -8,13 +8,52 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
 class Contact
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $email;
-    private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $subject;
+
+    /**
+     * @ORM\Column(type="text", length=255)
+     */
     private $message;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    const NUM_ITEMS = 15;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getName(): ?string
     {
@@ -33,7 +72,7 @@ class Contact
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -64,15 +103,16 @@ class Contact
         return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getCreatedAt(): ? \DateTime
     {
-        return $this->phoneNumber;
+        return $this->createdAt;
     }
 
-    public function setPhoneNumber(string $phoneNumber): self
+    /**
+     * @ORM\PrePersist()
+     */
+    public function createdAt()
     {
-        $this->phoneNumber = $phoneNumber;
-
-        return $this;
+        $this->createdAt = new \DateTime();
     }
 }

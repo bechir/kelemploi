@@ -4,16 +4,13 @@
 <base href="{{ url('contact') }}" target="_blank">
 {% endblock %}
 
-{% block title %}{{ user.subject }}{% endblock %}
-
-{% block header %}
-<h1>{{ user.subject }}</h1>
-{% endblock %}
+{% block title %}{{ contact.subject }}{% endblock %}
 
 {% block main %}
-<p>{{ user.message }}</p>
+<p>{{ contact.message }}</p>
 {% endblock %}
 
 {% block footer %}
-<p>Numero de téléphone: {{ user.phoneNumber }}</p>
+<p>Nom: {{ contact.name }}</p>
+<p>E-mail: {{ contact.email }}</p>
 {% endblock %}
