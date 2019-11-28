@@ -40,7 +40,9 @@ class ApplicationSubscriber implements EventSubscriberInterface
     {
         $application = $event->getApplication();
 
-        CategoryCounter::increment($application->getPostCategory()->getSlug());
+        if (null !== $application->getPostCategory()) {
+            CategoryCounter::increment($application->getPostCategory()->getSlug());
+        }
         if (null !== $application->getCompany()->getRegion()) {
             RegionCounter::increment($application->getCompany()->getRegion()->getSlug());
         }
@@ -50,7 +52,9 @@ class ApplicationSubscriber implements EventSubscriberInterface
     {
         $application = $event->getApplication();
 
-        CategoryCounter::decrement($application->getPostCategory()->getSlug());
+        if (null !== $application->getPostCategory()) {
+            CategoryCounter::decrement($application->getPostCategory()->getSlug());
+        }
         if (null !== $application->getCompany()->getRegion()) {
             RegionCounter::decrement($application->getCompany()->getRegion()->getSlug());
         }

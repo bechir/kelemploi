@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 use App\Entity\Application;
+use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -28,12 +29,41 @@ class ApplicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Application::class);
     }
 
+    public function findOneBy(array $criteria, array $orderBy = null): ?Application
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->leftJoin('a.postCategory', 'p')
+                ->addSelect('p')
+            ->andWhere('a.isActivated = true');
+
+        if (isset($criteria['slug'])) {
+            $qb->andWhere('a.slug = :slug')
+            ->setParameter('slug', $criteria['slug']);
+        }
+
+        if (isset($criteria['id'])) {
+            $qb->andWhere('a.id = :id')
+            ->setParameter('id', $criteria['id']);
+        }
+
+        if ($orderBy) {
+            foreach ($orderBy as $key => $value) {
+                $qb->addOrderBy('a.' . $key, $value);
+            }
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getLatest()
     {
         return $this->createQueryBuilder('a')
             ->leftJoin('a.company', 'c')
               ->addSelect('c')
             ->orderBy('a.id', 'DESC')
+            ->andWhere('a.isActivated = true')
             ->getQuery()
             ->setMaxResults(Application::NB_IMTEMS_HOME)
       ->getResult();
@@ -47,10 +77,23 @@ class ApplicationRepository extends ServiceEntityRepository
             ->leftJoin('a.postCategory', 'p')
                 ->addSelect('p')
             ->where('p.name = :name')
+            ->andWhere('a.archived = false')
+            ->andWhere('a.isActivated = true')
             ->setParameter('name', $category)
             ->getQuery()
             ->setMaxResults(Application::NB_IMTEMS_HOME)
         ->getResult();
+    }
+
+    public function findPendingAppBySlug(string $slug): ?Application
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.isActivated = false')
+            ->andWhere('a.archived = false')
+            ->andWhere('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function getApps(int $page = 1): Pagerfanta
@@ -64,6 +107,8 @@ class ApplicationRepository extends ServiceEntityRepository
                 ->addSelect('pc')
             ->leftJoin('a.dates', 'd')
                 ->addSelect('d')
+            ->where('a.archived = false')
+            ->andWhere('a.isActivated = true')
             ->orderBy('d.start', 'DESC')
         ;
 
@@ -72,17 +117,17 @@ class ApplicationRepository extends ServiceEntityRepository
 
     public function adminGetJobs(int $page = 1, $archived = false): Pagerfanta
     {
-        $qb = $this->createQueryBuilder('j')
-            ->leftJoin('j.dates', 'd')
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.dates', 'd')
                 ->addSelect('d')
             ->orderBy('d.start', 'DESC')
         ;
 
         if ($archived) {
-            $qb->where('j.archived = true');
+            $qb->where('a.archived = true');
         } else {
-            $qb->where('j.archived = false')
-                ->orWhere('j.archived is null');
+            $qb->where('a.archived = false')
+                ->orWhere('a.archived is null');
         }
 
         return $this->createPaginator($qb->getQuery(), $page, true);
@@ -90,14 +135,29 @@ class ApplicationRepository extends ServiceEntityRepository
 
     public function adminGetRecents()
     {
-        return $this->createQueryBuilder('j')
-                ->where('j.archived is null')
-                ->leftJoin('j.dates', 'd')
+        return $this->createQueryBuilder('a')
+                ->where('a.archived is null')
+                ->leftJoin('a.dates', 'd')
                     ->addSelect('d')
                 ->orderBy('d.start', 'DESC')
                 ->setMaxResults(5)
                 ->getQuery()
                 ->getResult();
+    }
+
+    public function findAdminAppBySlug(string $slug): ?Job
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->leftJoin('c.region', 'r')
+                ->addSelect('r')
+            ->leftJoin('a.category', 'pc')
+                ->addSelect('pc')
+            ->where('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function findBySearchQuery(array $search, int $page = 1): ?Pagerfanta
@@ -113,6 +173,8 @@ class ApplicationRepository extends ServiceEntityRepository
             ->leftJoin('a.dates', 'd')
                 ->addSelect('d')
             ->orderBy('d.start', 'DESC')
+            ->andWhere('a.archived = false')
+            ->andWhere('a.isActivated = true')
         ;
 
         if (!empty($search['region'])) {

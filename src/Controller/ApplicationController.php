@@ -22,6 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApplicationController extends AbstractController
@@ -75,18 +76,15 @@ class ApplicationController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function create(Request $request, EventDispatcherInterface $dispatcher): Response
+    public function create(Request $request, EventDispatcherInterface $dispatcher, EntityManagerInterface $em, UserInterface $user = null): Response
     {
         // Acces limité aux employeurs
         if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
-        $em = $this->getDoctrine()->getManager();
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
-
-        $user = $this->getUser();
 
         if ($user->haveCompany()) {
             $form->remove('company');
@@ -112,7 +110,7 @@ class ApplicationController extends AbstractController
 
             $this->addFlash('success', 'Votre offre été créé !');
 
-            return $this->redirectToRoute('application_show', [
+            return $this->redirectToRoute('application_pending', [
                 'slug' => $app->getSlug(),
             ]);
         }
@@ -125,7 +123,20 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_USER").
+     * IsGranted("ROLE_EMPLOYER")
+     */
+    public function pending(string $slug, EntityManagerInterface $em): Response
+    {
+        $app = $em->getRepository(Application::class)->findPendingAppBySlug($slug);
+        if(!$app) {
+            throw new NotFoundHttpException(\sprintf("The slug (%s) did not match any Application", $slug));
+        }
+
+        return $this->render('company/post-pending.html.twig', ['_app' => $app]);
+    }
+
+    /**
+     * IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Application $app): Response
     {
@@ -172,8 +183,7 @@ class ApplicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $apply
-                ->setApplication($app)
+            $apply->setApplication($app)
                 ->setCandidate($user);
 
             // $cvFile = $apply->getCvFile();

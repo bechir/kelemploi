@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ApplicationRepository")
@@ -41,14 +42,27 @@ class Application
      * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
      */
     private $postCategory;
-
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le titre est obligatoire")
+     * @Assert\Length(
+     *      min = 9,
+     *      max = 200,
+     *      minMessage = "Le titre doit faire au moins {{ limit }} caractères de long.",
+     *      maxMessage = "Le titre doit faire au plus {{ limit }} caractères de long."
+     * )
      */
     private $jobTitle;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="La description est obligatoire")
+     * @Assert\Length(
+     *      min = 20,
+     *      max = 10000,
+     *      minMessage = "La description doit faire au moins {{ limit }} caractères de long.",
+     *      maxMessage = "La description doit faire au plus {{ limit }} caractères de long."
+     * )
      */
     private $jobDescription;
 
@@ -65,7 +79,7 @@ class Application
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ContractType")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $contractType;
 
@@ -107,11 +121,19 @@ class Application
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      max = 10000,
+     *      maxMessage = "Le champs 'Avantages' doit faire au plus {{ limit }} caractères de long."
+     * )
      */
     private $benefits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      max = 10000,
+     *      maxMessage = "Le champs 'Responsabilités' doit faire au plus {{ limit }} caractères de long."
+     * )
      */
     private $responsibilities;
 
@@ -122,6 +144,10 @@ class Application
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      max = 10000,
+     *      maxMessage = "Le champs 'Outils' doit faire au plus {{ limit }} caractères de long."
+     * )
      */
     private $tools;
 
@@ -162,6 +188,7 @@ class Application
         $this->dates = new DateInterval();
         $this->applies = new ArrayCollection();
         $this->isActivated = false;
+        $this->archived = false;
     }
 
     public function getId(): ?int

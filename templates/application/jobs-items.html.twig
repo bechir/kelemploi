@@ -19,18 +19,22 @@
                 <div class="content">
                     <h4><a href="{{ app_url }}">{{ _app.jobTitle }}</a></h4>
                     <div class="info">
+                        {% if _app.postCategory %}
                         <span class="company">
                             <a href="{{ app_url }}">
                                 <i data-feather="briefcase"></i>
                                 <span>{{ _app.postCategory|trans({}, 'jobs-categories') }}</span>
                             </a>
                         </span>
+                        {% endif %}
 
                         {% if _app.company.region %}
                             {{ widgets.office_location(_app.company.region.slug) }}
                         {% endif %}
 
-                        {{ widgets.job_type(_app.contractType) }}
+                        {% if _app.contractType %}
+                            {{ widgets.job_type(_app.contractType) }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="more">

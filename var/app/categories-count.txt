@@ -1,4 +1,4 @@
-alimentation-restauration: 0
+alimentation-restauration: 1
 agriculture-peche-elevage: 0
 creation-arts-mode: 0
 papeterie-et-services-lies: 0
@@ -20,7 +20,7 @@ industrie: 0
 informatique: 1
 ingenierie: 0
 telecommunication: 0
-desgin-infographie: 0
+desgin-infographie: 4
 langue-ecrit: 1
 marketing-communication: 0
 medias: 0
@@ -35,4 +35,4 @@ sport: 0
 hotellerie-tourisme: 0
 transports-logistique: 0
 autre: 0
-all: 3
+all: 8

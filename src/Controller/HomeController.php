@@ -11,14 +11,14 @@ namespace App\Controller;
 use App\Entity\Industry;
 use App\Entity\JobCategory;
 use App\Entity\Region;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $regions = $em->getRepository(Region::class)->findAll();
         $categories = $em->getRepository(JobCategory::class)->findAll();
 
@@ -28,11 +28,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function frequentSearch(): Response
+    public function frequentSearch(EntityManagerInterface $em): Response
     {
-        $regions = $this->getDoctrine()->getRepository(Region::class)->findAll();
-        $jobCategories = $this->getDoctrine()->getRepository(JobCategory::class)->findAll();
-        $industries = $this->getDoctrine()->getRepository(Industry::class)->findAll();
+        $regions = $em->getRepository(Region::class)->findAll();
+        $jobCategories = $em->getRepository(JobCategory::class)->findAll();
+        $industries = $em->getRepository(Industry::class)->findAll();
 
         $em = $this->getDoctrine()->getManager();
         $q = $em->createQueryBuilder();
@@ -44,6 +44,7 @@ class HomeController extends Controller
             ->leftJoin('c.region', 'r')
                 ->addSelect('r')
             ->groupBy('r.name')
+            ->where('a.isActivated = true')
             ->getQuery()
             ->getArrayResult();
 
@@ -52,6 +53,7 @@ class HomeController extends Controller
             ->from('App:Application', 'a')
             ->leftJoin('a.postCategory', 'c')
                 ->addSelect('c')
+            ->where('a.isActivated = true')
             ->groupBy('c.name')
             ->getQuery()
             ->getArrayResult();
@@ -63,6 +65,7 @@ class HomeController extends Controller
                 ->addSelect('c')
             ->leftJoin('c.industry', 'i')
                 ->addSelect('i')
+            ->where('a.isActivated = true')
             ->groupBy('i.name')
             ->getQuery()
             ->getArrayResult();
@@ -90,11 +93,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function regionsListing(): Response
+    public function regionsListing(EntityManagerInterface $em): Response
     {
-        $regions = $this->getDoctrine()->getRepository(Region::class)->findAll();
+        $regions = $em->getRepository(Region::class)->findAll();
 
-        $em = $this->getDoctrine()->getManager();
         $q = $em->createQueryBuilder();
 
         $counts = $q->select('count(a.id) as count, r.slug', 'a')
@@ -103,6 +105,7 @@ class HomeController extends Controller
                 ->addSelect('c')
             ->leftJoin('c.region', 'r')
                 ->addSelect('r')
+            ->where('a.isActivated = true')
             ->groupBy('r.id')
             ->getQuery()
             ->getArrayResult();

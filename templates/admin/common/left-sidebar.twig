@@ -31,11 +31,11 @@
                     <div class="collapse{% if active in in_list %} in{% endif %}" id="ads">
                         <ul class="nav">
                             <li><a href="{{ path('admin_jobs_list') }}" {% if active == 'jobs-list' %} class="active" {% endif %}>
-                                <span>Emploi en cours</span></a>
+                                <span>Emploi</span></a>
                             </li>
-                            <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
+                            {# <li><a href="{{ path('admin_pendings') }}" {% if active == 'pendings' %} class="active" {% endif %}>
                                 <span>Emploi en attentes</span></a>
-                            </li>
+                            </li> #}
                             <li><a href="{{ path('admin_contests_list') }}" {% if active == 'contests-list' %} class="active" {% endif %}>
                                 <span>Concours</span></a>
                             </li>
