@@ -13,9 +13,9 @@
   <meta property="og:title"            content="{{ template.title }} | {{ website.name }}" />
   <meta property="twitter:title"       content="{{ template.title }} | {{ website.name }}" />
   <meta property="title"               content="{{ template.title }} | {{ website.name }}" />
-  <meta property="og:description"      content="{{ template.content|raw[0: 400] }}" />
-  <meta property="twitter:description" content="{{ template.content|raw[0: 400] }}" />
-  <meta name="description"             content="{{ template.content|raw[0: 400] }}" />
+  <meta property="og:description"      content="{{ template.content|striptags[0: 400] }}" />
+  <meta property="twitter:description" content="{{ template.content|striptags[0: 400] }}" />
+  <meta name="description"             content="{{ template.content|striptags[0: 400] }}" />
   <meta property="twitter:card"        content="summary" />
   {% if template.coverImage %}
     <meta property="og:image"          content="{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(template.coverImage, 'file') }}" />
