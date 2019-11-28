@@ -14,6 +14,11 @@
     </div>
 
     <div class="col-12 mb-5">
+        <label>Fichier à télécharger (Word, PDF, Excel, PowerPoint)</label>
+        {{ form_widget(form.templateFile.resumeTemplateFile, {'attr': {'class': 'ckeditor'}}) }}
+    </div>
+
+    <div class="col-12 mb-5">
         <label class="col-sm-12 pl-0">Image de couverture</label>
         {% if form_errors(form.coverImage.file) %}
             <p class="alert alert-danger">{{ form_errors(form.coverImage.file) }}</p>

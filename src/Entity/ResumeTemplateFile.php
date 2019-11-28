@@ -43,12 +43,6 @@ class ResumeTemplateFile implements \Serializable
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ResumeTemplate", inversedBy="templateFiles")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $resumeTemplate;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -149,17 +143,5 @@ class ResumeTemplateFile implements \Serializable
                 ->atPath('resumeTemplateFile')
                 ->addViolation();
         }
-    }
-
-    public function getResumeTemplate(): ?ResumeTemplate
-    {
-        return $this->resumeTemplate;
-    }
-
-    public function setResumeTemplate(?ResumeTemplate $resumeTemplate): self
-    {
-        $this->resumeTemplate = $resumeTemplate;
-
-        return $this;
     }
 }
