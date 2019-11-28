@@ -10326,3 +10326,14 @@ form div.transition{
   box-shadow: 0 1rem 2rem rgba(0,0,0,.15)!important;
   transition: .5s;
 }
+
+.btn-theme-color{
+  background: rgba(36, 109, 248, 0.15);
+  color: #246df8;
+  border-color:rgba(36, 109, 248, 0.15);
+}
+
+.btn-theme-color:hover{
+  background: #246df8;
+  color: #fff;
+}

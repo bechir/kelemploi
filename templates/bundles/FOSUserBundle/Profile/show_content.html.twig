@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+{# 
 <div class="contact-3 content-area-6">
     <div class="container">
         <div class="main-title mb-60">
@@ -12,4 +12,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> #}
+
+{% block javascript %}
+<script>
+    document.location = "{{ path('user_profile_edit') }}";
+</script>
+{% endblock %}
