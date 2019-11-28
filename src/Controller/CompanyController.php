@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller;
@@ -14,7 +14,6 @@ use App\Entity\Company;
 use App\Entity\ResumeBookmark;
 use App\Form\CompanyType;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Resume;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,7 +66,7 @@ class CompanyController extends AbstractController
     public function editProfile(Request $request, UserInterface $user = null): Response
     {
         // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+        if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
@@ -98,14 +97,14 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function manageJobs(UserInterface $user = null): Response
     {
         $jobs = [];
         $em = $this->getDoctrine()->getManager();
         $company = $user->getCompany();
-        if($company) {
+        if ($company) {
             $jobs = $em
                 ->getRepository(Application::class)
                     ->findBy(['company' => $company]);
@@ -114,12 +113,12 @@ class CompanyController extends AbstractController
         return $this->render('company/manage-jobs.html.twig', [
             'user' => $user,
             'jobs' => $jobs,
-            'active' => 'manage-jobs'
+            'active' => 'manage-jobs',
         ]);
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function jobApplicants(Request $request, Application $job, int $page, EntityManagerInterface $em): Response
     {
@@ -132,7 +131,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function manageCandidates(UserInterface $user = null): Response
     {
@@ -140,7 +139,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/manage-candidates.html.twig', [
             'user' => $user,
-            'active' => 'manage-candidates'
+            'active' => 'manage-candidates',
         ]);
     }
 
@@ -159,7 +158,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function messages(UserInterface $user = null): Response
     {
@@ -168,12 +167,12 @@ class CompanyController extends AbstractController
 
         return $this->render('company/messages.html.twig', [
             'user' => $user,
-            'active' => 'messages'
+            'active' => 'messages',
         ]);
     }
 
     /**
-     * @IsGranted("ROLE_EMPLOYER") 
+     * @IsGranted("ROLE_EMPLOYER")
      */
     public function pricing(UserInterface $user = null): Response
     {
@@ -182,8 +181,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/pricing.html.twig', [
             'user' => $user,
-            'active' => 'pricing'
+            'active' => 'pricing',
         ]);
     }
-
 }

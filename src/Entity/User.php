@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Entity;
@@ -12,14 +12,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @UniqueEntity(fields="username", message="Ce nom d'utilisateur existe déjà")
- * 
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="app_user")
  * @ORM\HasLifecycleCallbacks()
@@ -163,7 +163,7 @@ class User extends BaseUser implements EquatableInterface
     public function setEmail($email)
     {
         $this->email = $email;
-        if(!$this->username) {
+        if (!$this->username) {
             $this->username = $email;
         }
 
@@ -442,12 +442,12 @@ class User extends BaseUser implements EquatableInterface
 
     public function isCandidate(): bool
     {
-        return $this->accountType && $this->accountType->getName() == self::CANDIDATE;
+        return $this->accountType && self::CANDIDATE == $this->accountType->getName();
     }
 
     public function isEmployer(): bool
     {
-        return $this->accountType && $this->accountType->getName() == self::EMPLOYER;
+        return $this->accountType && self::EMPLOYER == $this->accountType->getName();
     }
 
     public function getResume(): ?Resume
@@ -467,10 +467,9 @@ class User extends BaseUser implements EquatableInterface
      */
     public function updateRoles()
     {
-        if($this->isEmployer()) {
+        if ($this->isEmployer()) {
             $this->addRole('ROLE_EMPLOYER');
-        }
-        elseif($this->isCandidate()) {
+        } elseif ($this->isCandidate()) {
             $this->addRole('ROLE_CANDIDATE');
         }
     }
@@ -509,9 +508,11 @@ class User extends BaseUser implements EquatableInterface
     public function haveApplied(Application $app): bool
     {
         foreach ($this->applies as $apply) {
-            if($apply->getApplication() == $app)
+            if ($apply->getApplication() == $app) {
                 return true;
+            }
         }
+
         return false;
     }
 

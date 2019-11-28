@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -113,7 +119,7 @@ class Resume
         $this->socialProfiles = new ArrayCollection();
         $this->proSkills = new ArrayCollection();
         $this->portfolios = new ArrayCollection();
-        $this->slug = \uniqid("", true);
+        $this->slug = \uniqid('', true);
     }
 
     public function getId(): ?int
@@ -401,7 +407,7 @@ class Resume
         $this->user = $user;
 
         // set (or unset) the owning side of the relation if necessary
-        $newResume = $user === null ? null : $this;
+        $newResume = null === $user ? null : $this;
         if ($newResume !== $user->getResume()) {
             $user->setResume($newResume);
         }

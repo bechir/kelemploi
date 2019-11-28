@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ _app.title }} | En attente de validation{% endblock %}
+
+{% block main %}
+<div class="alice-bg section-padding-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="block-wrapper">
+                    <div class="payment-result">
+                        <div class="icon">
+                            <i class="fa fa-history fa-lg text-white"></i>
+                        </div>
+                        <h3><span>Offre en attente</span></h3>
+                        <p>Votre offre est en attente de validation par un administrateur. Nous vous enverrons un mail une fois la procédure terminée.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

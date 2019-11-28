@@ -1,3 +1,4 @@
+{% import 'util/alerts.twig' as alerts %}
 
 {% if articles is not empty %}
 	{% for article in articles %}
@@ -33,6 +34,6 @@
 		</div>		
 	{% endfor %}
 {% else %}
-	<div class="alert alert-info">Pas d'articles actuellement.</div>
+	{{ alerts.info("Pas d'articles disponibles actuellement.") }}
 {% endif %}
 

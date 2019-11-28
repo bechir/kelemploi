@@ -2,16 +2,12 @@
 # |   Blog module
 # =======================================================
 blog_index:
-  path: /blog
+  path: /blog-astuces-pour-votre-parcours-professionnel
   controller: App\Controller\BlogController::index
 
 blog_list_paginated:
   path: /blog/page/{page<[1-9]\d*>}
   controller: App\Controller\BlogController::index
-
-blog_article_create:
-  path: /blog/new
-  controller: App\Controller\BlogController::create
 
 blog_article_show:
   path: /blog/{slug}
@@ -26,11 +22,3 @@ blog_article_update_comment:
   path: /blog/comment/{id}/update
   controller: App\Controller\BlogController::updateComment
   methods: ['POST']
-
-blog_article_edit:
-  path: /blog/{slug}/edit
-  controller: App\Controller\BlogController::edit
-
-blog_article_delete:
-  path: /blog/{slug}/delete
-  controller: App\Controller\BlogController::delete

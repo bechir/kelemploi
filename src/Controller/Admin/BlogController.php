@@ -17,9 +17,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Controller to manage blog module.
@@ -35,22 +35,23 @@ class BlogController extends AbstractController
     public function index(EntityManagerInterface $em)
     {
         return $this->render('admin/blog/index.html.twig', [
-            'articles' => $em->getRepository(Article::class)->findAll()
+            'articles' => $em->getRepository(Article::class)->findAll(),
         ]);
     }
 
     /**
-     * @Route("/article/{slug}", name="admin_blog_article_show")
+     * @Route("/{slug}", name="admin_blog_article_show")
      */
     public function showArticle(string $slug, EntityManagerInterface $em): Response
     {
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
+
+        if (!$article) {
+            throw new NotFoundHttpException(\sprintf('%s object not found by the @ParamConverter annotation.', Article::class));
+        }
 
         return $this->render('admin/blog/show.html.twig', [
-            'article' => $article
+            'article' => $article,
         ]);
     }
 
@@ -63,7 +64,7 @@ class BlogController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user->addArticle($article);
             $em->persist($article);
             $em->flush();
@@ -71,7 +72,7 @@ class BlogController extends AbstractController
             $this->addFlash('success', "L'article a été créé.");
 
             return $this->redirectToRoute('admin_blog_article_show', [
-                'slug' => $article->getSlug()
+                'slug' => $article->getSlug(),
             ]);
         }
 
@@ -86,26 +87,26 @@ class BlogController extends AbstractController
     public function editArticle(string $slug, Request $request, EntityManagerInterface $em): Response
     {
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
 
+        if (!$article) {
+            throw new NotFoundHttpException(\sprintf('%s object not found by the @ParamConverter annotation.', Article::class));
+        }
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
             $this->addFlash('success', "L'article a été modifié.");
 
             return $this->redirectToRoute('admin_blog_article_show', [
-                'slug' => $article->getSlug()
+                'slug' => $article->getSlug(),
             ]);
         }
 
         return $this->render('admin/blog/edit.html.twig', [
             'form' => $form->createView(),
-            'article' => $article
+            'article' => $article,
         ]);
     }
 
@@ -156,10 +157,10 @@ class BlogController extends AbstractController
     public function archive(string $slug, EntityManagerInterface $em): Response
     {
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$article)
-            throw new NotFoundHttpException("%s object not found by the @ParamConverter annotation.", Article::class);
 
+        if (!$article) {
+            throw new NotFoundHttpException(\sprintf('%s object not found by the @ParamConverter annotation.', Article::class));
+        }
         $article->setIsArchived(true);
         $article->setIsActivated(false);
 
@@ -177,10 +178,10 @@ class BlogController extends AbstractController
     public function deleteArticle(int $id, EventDispatcherInterface $dispatcher)
     {
         $article = $em->getRepository(Article::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$article)
+
+        if (!$article) {
             $this->addFlash('success', "L'article est introuvable.");
-        else {
+        } else {
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
             $em->flush();

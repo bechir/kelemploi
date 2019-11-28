@@ -3,26 +3,27 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Entity\Apply;
+use App\Entity\Resume;
+use App\Event\ApplicationEvent;
+use App\Event\ApplicationEvents;
 use App\Form\ApplicationType;
+use App\Form\ApplyType;
+use App\Repository\ApplicationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Event\ApplicationEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use App\Event\ApplicationEvents;
-use App\Entity\Apply;
-use App\Form\ApplyType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Resume;
-use App\Repository\ApplicationRepository;
 
 class ApplicationController extends AbstractController
 {
@@ -35,22 +36,22 @@ class ApplicationController extends AbstractController
         $search['region'] = strtolower($queries->get('region'));
 
         foreach ($search as $key => $value) {
-            if(empty($value))
+            if (empty($value)) {
                 unset($search[$key]);
+            }
         }
 
         $list = null;
-    
+
         if (!empty($search)) {
             $list = $appRepository->findBySearchQuery($search, $page);
-
         } else {
             $list = $appRepository->getApps($page);
         }
 
         return $this->render('application/listing.html.twig', [
             'list' => $list,
-            'c' => $queries->get('c')
+            'c' => $queries->get('c'),
         ]);
     }
 
@@ -75,18 +76,15 @@ class ApplicationController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function create(Request $request, EventDispatcherInterface $dispatcher): Response
+    public function create(Request $request, EventDispatcherInterface $dispatcher, EntityManagerInterface $em, UserInterface $user = null): Response
     {
         // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+        if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
-        $em = $this->getDoctrine()->getManager();
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
-
-        $user = $this->getUser();
 
         if ($user->haveCompany()) {
             $form->remove('company');
@@ -112,7 +110,7 @@ class ApplicationController extends AbstractController
 
             $this->addFlash('success', 'Votre offre été créé !');
 
-            return $this->redirectToRoute('application_show', [
+            return $this->redirectToRoute('application_pending', [
                 'slug' => $app->getSlug(),
             ]);
         }
@@ -125,12 +123,25 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_USER").
+     * IsGranted("ROLE_EMPLOYER")
+     */
+    public function pending(string $slug, EntityManagerInterface $em): Response
+    {
+        $app = $em->getRepository(Application::class)->findPendingAppBySlug($slug);
+        if(!$app) {
+            throw new NotFoundHttpException(\sprintf("The slug (%s) did not match any Application", $slug));
+        }
+
+        return $this->render('company/post-pending.html.twig', ['_app' => $app]);
+    }
+
+    /**
+     * IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Application $app): Response
     {
         // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+        if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
@@ -152,7 +163,7 @@ class ApplicationController extends AbstractController
             'form' => $form->createView(),
             '_app' => $app,
             'company' => $app->getCompany(),
-            'active' => ''
+            'active' => '',
         ]);
     }
 
@@ -171,11 +182,10 @@ class ApplicationController extends AbstractController
         $form = $this->createForm(ApplyType::class, $apply);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $apply
-                ->setApplication($app)
+        if ($form->isSubmitted() && $form->isValid()) {
+            $apply->setApplication($app)
                 ->setCandidate($user);
-            
+
             // $cvFile = $apply->getCvFile();
 
             // if($cvFile) {
@@ -187,7 +197,7 @@ class ApplicationController extends AbstractController
             //     $em->persist($cvFile);
             //     $em->persist($resume);
             // }
-            
+
             $app->addApply($apply);
             $user->addApply($apply);
 
@@ -213,13 +223,14 @@ class ApplicationController extends AbstractController
     public function delete(Request $request, Application $app, EventDispatcherInterface $dispatcher): Response
     {
         // Acces limité aux employeurs
-        if(!$this->isGranted('ROLE_EMPLOYER'))  {
+        if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
-        if($app && $request->isMethod('POST')) {
+        if ($app && $request->isMethod('POST')) {
             if (!$this->isCsrfTokenValid('app.delete', $request->request->get('app_delete_token'))) {
                 $this->addFlash('danger', 'app.invalid_csrf_token');
+
                 return $this->redirectToRoute('application_show', ['slug' => $app->getSlug()]);
             }
 
@@ -233,7 +244,7 @@ class ApplicationController extends AbstractController
 
             $this->addFlash('success', 'job.delete_success');
         }
-        
+
         return $this->redirectToRoute('company_dashboard');
     }
 
@@ -272,7 +283,7 @@ class ApplicationController extends AbstractController
         $list = $this->getDoctrine()->getRepository(Application::class)->findByJobCategory($category);
 
         return $this->render('application/similar-jobs.html.twig', [
-            'list' => $list
+            'list' => $list,
         ]);
     }
 }

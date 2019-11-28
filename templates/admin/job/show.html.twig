@@ -40,23 +40,23 @@
             <h4 class="heading">Détails de l'offre d'emploi</h4>
             <ul class="list-unstyled list-justify">
               <li>Date d'ajout <span>{{ job.createdAt|date('d M Y, H:i') }}</span></li>
-              <li>Catégorie <span>{{ job.category|trans({}, 'job-categories') }}</span></li>
+              <li>Catégorie <span>{{ job.postCategory|trans({}, 'job-categories') }}</span></li>
               {# <li>Niveau d'étude <span>{{ job.minStudyLevel|trans }}</span></li> #}
-              <li>Lieu <span>{{ job.region|trans({}, 'regions')|capitalize }}</span></li>
-              <li>Date limite <span class="text-danger">{{ job.deadline|localizeddate('full', 'none', _locale)|capitalize }}</span></li>
+              <li>Lieu <span>{{ job.company.region|trans({}, 'regions')|capitalize }}</span></li>
+              <li>Date limite <span class="text-danger">{{ job.dates.end|localizeddate('full', 'none', _locale)|capitalize }}</span></li>
               <li>Organisation <span><a href="{{ path('admin_company_show', {company: company.id}) }}">{{ company }}</a></span></li>
               <hr>
-              <li>Créé par<span><a href="{{ path('admin_user_show', {user: job.interlocutor.id}) }}">{{ job.interlocutor.fullname }}</a></span></li>
+              {# <li>Créé par<span><a href="{{ path('admin_user_show', {user: job.interlocutor.id}) }}">{{ job.interlocutor.fullname }}</a></span></li>
               {% if job.isActivated %}
                 <li>Validé par<span><a href="{{ path('admin_user_show', {user: job.validatedBy.id}) }}">{{ job.validatedBy.fullname }}</a></span></li>
-              {% endif %}
+              {% endif %} #}
             </ul>
             <hr>
             <h4 class="heading text-center">Description</h4>
             <div class="row">{{ job.description|raw }}</div>
           </div>
           {% if job.isActivated %}
-            <a href="{{ path('job_show', {slug: job.slug}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="fa fa-external-link"></span> Afficher les détails sur un nouvel onglet</a>
+            <a href="{{ path('application_show', {slug: job.slug}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="fa fa-external-link"></span> Afficher les détails sur un nouvel onglet</a>
           {% endif %}
           <div class="profile-info">
             <hr>

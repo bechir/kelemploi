@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'resumes_template_index' } %}
+
+{% endblock %}
+
+{% block main %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Modification du modèle de CV</h3>
+    </div>
+    <div class="panel-body">
+        {% include 'admin/resume_template/_form.html.twig' with {form: form,  editing: true, template: template} %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('assets/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+</script>
+{% endblock %}

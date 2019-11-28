@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+{% import 'util/alerts.twig' as alerts %}
+
+{% block title %}Modèles de CV gratuits à télécharger sur {{ website.name }}{% endblock %}
+
+{% block main %}
+
+    {{ breadcrumb.level_1('Modèles de CV gratuits à télécharger') }}
+
+    <div class="alice-bg section-padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="blog-post-wrapper pt-5">
+                        <p class="container mx-2">Créez votre CV facilement en utilisant nos exemples de CV détaillés. Téléchargez gratuitement ces modèles de CV modernes et prêts à remplir.</p>
+                        <div class="row">
+                            {% for template in templates %}
+                                {% include "resume_template/list-item.html.twig" with {templates: templates} %}
+                            {% else %}
+                                {{ alerts.info('Pas modèles de CV disponibles actuellement.') }}
+                            {% endfor %}
+                        </div>
+
+                        {% if templates.haveToPaginate %}
+                            <nav class="navigation pagination mt-5">
+                            <div class="nav-links mx-auto mt-3">
+                                {{ pagerfanta(templates, 'twitter_bootstrap4_translated',
+                                    { routeName: 'resumes_templates_list_paginated',
+                                    routeParams: app.request.query.all,
+                                    prev_message: '<i class="fas fa-angle-left"></i> Précédant',
+                                    next_message: 'Suivant <i class="fas fa-angle-right"></i>',
+                                    page_template: '<a class="page-numbers p-3" href="%href%" %rel%>%text%</a>'
+                                    })
+                                }}
+                            </div>
+                            </nav>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

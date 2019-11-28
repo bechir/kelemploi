@@ -1,0 +1,143 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'resume_index' } %}
+
+{% endblock %}
+
+{% block main %}
+  <div class="panel panel-profile">
+    <div class="clearfix">
+      <div class="col-md-12 package profile-left">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="overlay {% if template.isActivated %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
+          <div class="profile-main">
+            <h3 class="name">{{ template.title }}</h3>
+            <div class="user-state">
+              {% if template.isActivated %}
+                  <span class="lnr lnr-checkmark-circle"></span> Activé
+              {% else %}
+                <span class="lnr lnr-cross-circle"></span> Desactivé
+              {% endif %}
+            </div>
+          </div>
+          <div class="profile-stat">
+            <div class="row">
+              <div class="col-md-12 stat-item">
+                {{ template.viewCount }} Vue{{ template.viewCount > 1 ? 's' : '' }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PROFILE HEADER -->
+        <!-- PROFILE DETAIL -->
+        <div class="profile-detail">
+          <div class="profile-info">
+            <h4 class="heading">Détails</h4>
+            <ul class="list-unstyled list-justify">
+              <li>Date de modification <span>{{ template.updatedAt|date('d M Y, H:i') }}</span></li>
+              <li>Date de création <span>{{ template.createdAt|date('d M Y, H:i') }}</span></li>
+            </ul>
+            <hr>
+            <h4 class="heading text-center">Description</h4>
+            <div class="row">{{ template.content|raw }}</div>
+          </div>
+          {% if template.isActivated %}
+            <a href="{{ path('resume_template_show', {slug: template.slug}) }}" target="_blank" class="btn btn-default btn-block my-3"><span class="fa fa-external-link"></span> Afficher les détails sur un nouvel onglet</a>
+          {% endif %}
+          <div class="profile-info">
+            <hr>
+            <div class="text-center">
+              <div class="btn-group">
+                  <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not template.isActivated %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
+                  <a href="#" class="btn btn-info m-1 px-4 my-3 {% if template.isActivated %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
+                  <a href="{{ path('admin_resume_template_edit', {slug: template.slug}) }}" class="btn btn-default m-1 px-4 my-3"><span class="lnr lnr-pencil"></span> Modifier le modèle</a>
+                  <a href="#" class="btn btn-danger mx-1 px-4 my-3" data-toggle="modal" data-target="#confirmDeleteModal"><span class="lnr lnr-trash"></span> Supprimer</a>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-danger">Voulez-vous vraiment supprimer cet template de la base de données ?</p>
+                    <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                      <form action="{{ path('admin_resume_template_delete', {id: template.id}) }}" method="POST" data-confirmation="true" id="delete-form">
+                        <input type="hidden" name="user[delete_token]" value="{{ csrf_token('template.delete_token') }}" />
+                        <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                            <span class="lnr lnr-trash"></span> Supprimer
+                        </button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PROFILE DETAIL -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+
+  <script>
+    // Disable user when we click on the disable user button
+    $("#disable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_resume_template_disable') }}",
+        data: "id=" + {{ template.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#enable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+
+    // Enable user when we click on the enable user button
+    $("#enable-user").on('click', function(e){
+      button = $(this)
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "{{ path('admin_resume_template_enable') }}",
+        data: "id=" + {{ template.id }},
+
+        success: function(data) {
+          button.addClass('hidden')
+          $("#disable-user").removeClass('hidden')
+          $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
+          $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+        },
+
+        error: function(data) {
+          console.error(data)
+          alert('Une erruer est survenue au niveau du serveur.')
+        }
+      })
+      e.preventDefault();
+    });
+  </script>
+{% endblock %}

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Entity;
@@ -32,7 +32,6 @@ class Newsletter
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
 
     public function getId(): ?int
     {

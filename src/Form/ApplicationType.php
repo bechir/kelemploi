@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Form;
@@ -27,7 +27,7 @@ class ApplicationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbCandidatesToRecruit', TextType::class, ['required' => false,])
+            ->add('nbCandidatesToRecruit', TextType::class, ['required' => false])
             ->add('jobTitle', TextType::class)
             ->add('jobDescription', TextareaType::class)
             ->add('company', CompanyType::class, ['required' => false])
@@ -69,7 +69,7 @@ class ApplicationType extends AbstractType
             ->add('gender', EntityType::class, [
                 'class' => JobGender::class,
                 'choice_label' => 'name',
-                'choice_translation_domain' => true
+                'choice_translation_domain' => true,
             ])
             // ->add('requiredLanguages', EntityType::class, [
             //     'class' => Language::class,

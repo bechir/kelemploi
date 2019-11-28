@@ -5,6 +5,10 @@ application_create:
   path: /job/new
   controller: App\Controller\ApplicationController::create
 
+application_pending:
+  path: /job/{slug}/pending
+  controller: App\Controller\ApplicationController::pending
+
 applications_list:
   path: /jobs
   controller: App\Controller\ApplicationController::list

@@ -1,9 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ApplyRepository")
@@ -164,20 +169,20 @@ class Apply
         return $this;
     }
 
-   public function isSendCVEnabled(): ?bool
-   {
-       return (bool) $this->sendCV;
-   }
+    public function isSendCVEnabled(): ?bool
+    {
+        return (bool) $this->sendCV;
+    }
 
-   public function getSendCV()
-   {
-       return $this->sendCV;
-   }
+    public function getSendCV()
+    {
+        return $this->sendCV;
+    }
 
-   public function setSendCV($sendCV): self
-   {
-       $this->sendCV = $sendCV;
+    public function setSendCV($sendCV): self
+    {
+        $this->sendCV = $sendCV;
 
-       return $this;
-   }
+        return $this;
+    }
 }

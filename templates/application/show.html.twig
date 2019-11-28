@@ -21,7 +21,7 @@
   {% endif %}
 {% endblock %}
 
-{% block title %}{{ _app.jobTitle }} | {{ website.name }}{% endblock %}
+{% block title %}{{ _app.jobTitle }} | Offre d'emploi et recrutement sur {{ website.name }}{% endblock %}
 
 {% block stylesheets %}
 {% endblock %}
@@ -43,7 +43,7 @@
                   <div class="title-body">
                     <h1 class="h2">{{ _app.jobTitle }}</h1>
                     
-                    {{ company_widgets.infos(company, 'location', _app.postCategory.slug) }}
+                    {{ company_widgets.infos(company, 'location', _app.postCategory ? _app.postCategory.slug : null) }}
                   </div>
                 </div>
                 {% if not _app.isOwner(user) %}

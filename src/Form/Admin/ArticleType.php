@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form\Admin;
 
 use App\Entity\Article;
@@ -18,7 +24,7 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
             ->add('coverImage', ImageType::class, [
-                'required' => false
+                'required' => false,
             ])
         ;
     }

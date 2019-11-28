@@ -1,16 +1,16 @@
 <?php
 
 /*
- * This file is part of the Beta application.
+ * This file is part of the Kelemploi application.
  *
  * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
-use App\Entity\Info;
 use App\Entity\Application;
-use App\Entity\Offer;
+use App\Event\ApplicationEvent;
+use App\Event\ApplicationEvents;
 use App\Event\ItemsEvent;
 use App\Event\ItemsEvents;
 use App\Form\Admin\ApplicationEditType;
@@ -41,7 +41,7 @@ class ApplicationController extends AbstractController
      */
     public function index(Request $request, int $page = 1, ApplicationRepository $jobRepository): Response
     {
-        $jobs = $jobRepository->adminGetApplications($page);
+        $jobs = $jobRepository->adminGetJobs($page);
 
         return $this->render('admin/job/list.html.twig', [
             'jobs' => $jobs,
@@ -53,7 +53,7 @@ class ApplicationController extends AbstractController
      */
     public function archived(Request $request, int $page = 1, ApplicationRepository $jobRepository): Response
     {
-        $jobs = $jobRepository->adminGetApplications($page, true);
+        $jobs = $jobRepository->adminGetJobs($page, true);
 
         return $this->render('admin/job/archived.html.twig', [
             'jobs' => $jobs,
@@ -81,33 +81,6 @@ class ApplicationController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em, EventDispatcherInterface $dispatcher, UserInterface $user = null): Response
     {
         $job = new Application();
-        $item = null;
-        $isModifing = $request->query->has('ad-modify');
-
-        if ($isModifing) {
-            $initialType = $request->query->get('ad-type');
-
-            switch ($initialType) {
-                case 'offer':
-                    $item = $em->getRepository(Offer::class)->findOneById($request->query->get('ad-id'));
-                    if ($item) {
-                        $job->setDeadline($item->getDeadline());
-                    }
-
-                break;
-                case 'info':
-                    $item = $em->getRepository(Info::class)->findOneById($request->query->get('ad-id'));
-
-                break;
-                default: break;
-            }
-            if ($item) {
-                $job->setTitle($item->getTitle());
-                $job->setCompany($item->getCompany());
-                $job->setCreatedAt($item->getCreatedAt());
-                $job->setDescription($item->getDescription());
-            }
-        }
         $form = $this->createForm(ApplicationEditType::class, $job)->remove('createdAt');
 
         $form->handleRequest($request);
@@ -117,18 +90,11 @@ class ApplicationController extends AbstractController
 
             $em->persist($job);
             $em->flush();
-
-            if ($isModifing) {
-                $em->remove($item);
-                $em->flush();
-
-                $this->addFlash('success', "L'annonce a été changée.");
-            } else {
-                $this->addFlash('success', 'job.created');
-            }
-
-            $event = new ItemsEvent($job);
-            $dispatcher->dispatch(ItemsEvents::JOB_CREATED, $event);
+            
+            $this->addFlash('success', 'Offre créé');
+            
+            // $event = new ItemsEvent($job);
+            // $dispatcher->dispatch(ItemsEvents::JOB_CREATED, $event);
 
             return $this->redirectToRoute('admin_job_show', [
                 'job' => $job->getId(),
@@ -145,7 +111,7 @@ class ApplicationController extends AbstractController
      */
     public function edit(EntityManagerInterface $em, string $slug, Request $request): Response
     {
-        $job = $em->getRepository(Application::class)->findAdminApplicationBySlug($slug);
+        $job = $em->getRepository(Application::class)->findAdminAppBySlug($slug);
         if (!$job) {
             throw new NotFoundHttpException();
         }
@@ -173,23 +139,23 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/disable", name="admin_job_disable", methods={"POST"})
      */
-    public function disableApplication(Request $request): JsonResponse
+    public function disableApplication(Request $request, EventDispatcherInterface $dispatcher): JsonResponse
     {
-        return $this->setApplicationEnabled($request, false);
+        return $this->setApplicationEnabled($request, false, $dispatcher);
     }
 
     /**
      * @Route("/enable", name="admin_job_enable", methods={"POST"})
      */
-    public function enableApplication(Request $request): JsonResponse
+    public function enableApplication(Request $request, EventDispatcherInterface $dispatcher): JsonResponse
     {
-        return $this->setApplicationEnabled($request, true);
+        return $this->setApplicationEnabled($request, true, $dispatcher);
     }
 
     /**
      * @Route("/desarchive", name="admin_job_desarchive")
      */
-    public function desarchive(Request $request, EntityManagerInterface $em): Response
+    public function desarchive(Request $request, EntityManagerInterface $em, EventDispatcherInterface $dispatcher): Response
     {
         $job = $em->getRepository(Application::class)->findArchived($request->query->get('slug'));
 
@@ -198,6 +164,9 @@ class ApplicationController extends AbstractController
             $job->setIsActivated(true);
             $em->persist($job);
             $em->flush();
+
+            $event = new ApplicationEvent($job);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
 
             $this->addFlash('success', "L'offre a été désarchvée.");
 
@@ -214,19 +183,29 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/{slug}/archive", name="admin_job_archive")
      */
-    public function archive(Application $job, EntityManagerInterface $em): Response
+    public function archive(string $slug, EntityManagerInterface $em, EventDispatcherInterface $dispatcher): Response
     {
-        $job->setArchived(true);
-        $job->setIsActivated(false);
+        $job = $em->getRepository(Application::class)->adminFindBySlug($slug);
 
-        $em->persist($job);
-        $em->flush();
+        if ($job) {
+            $job->setArchived(true);
+            $job->setIsActivated(false);
 
-        $this->addFlash('success', "L'offre a été archvée.");
+            $event = new ApplicationEvent($job);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
 
-        return $this->redirectToRoute('admin_job_show', [
-            'job' => $job->getId(),
-        ]);
+            $em->persist($job);
+            $em->flush();
+
+            $this->addFlash('success', "L'offre a été archvée.");
+
+            return $this->redirectToRoute('admin_job_show', [
+                'job' => $job->getId(),
+            ]);
+        }
+
+        $this->addFlash('danger', 'Page introuvable.');
+        return $this->redirectToRoute('admin_index');
     }
 
     /**
@@ -241,8 +220,8 @@ class ApplicationController extends AbstractController
             $em->remove($job);
             $em->flush();
 
-            $event = new ItemsEvent($job);
-            $dispatcher->dispatch(ItemsEvents::JOB_DELETED, $event);
+            $event = new ApplicationEvent($job);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
 
             $this->addFlash('success', "L'annonce a été supprimée.");
         }
@@ -250,16 +229,21 @@ class ApplicationController extends AbstractController
         return $this->redirectToRoute('admin_jobs_list');
     }
 
-    private function setApplicationEnabled(Request $request, $enabled): JsonResponse
+    private function setApplicationEnabled(Request $request, $enabled, EventDispatcherInterface $dispatcher): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $job = $em->find(Application::class, $request->request->get('id'));
 
         if ($job) {
             $job->setIsActivated($enabled);
-            if ($enabled) {
-                $job->setValidatedBy($this->getUser());
+
+            $event = new ApplicationEvent($job);
+            if($enabled) {
+                $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
+            } else {
+                $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
             }
+
             $em->flush();
         }
 

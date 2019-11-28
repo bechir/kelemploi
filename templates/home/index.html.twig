@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ website.name }} | Offres d'emploi et de stages au Sénégal{% endblock %}
+{% block title %}{{ website.name }} | Offres d'emploi et recrutement au Sénégal | CDI, CDD, Stage{% endblock %}
 
 {% block main %}
 
@@ -11,13 +11,13 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-content">
-            <h1 class="reveal-1 w-75">Des offres d'emploi et de stages partout au Sénégal</h1>
+            <h1 class="h1 reveal-1 w-75">Offres d'emploi et recrutement au Sénégal</h1>
               <p class="reveal-2">Trouvez rapidement l'emploi qui vous correspond le mieux!</p>
               
               {% if is_granted('ROLE_EMPLOYER') %}
                 <a href="{{ path('applications_list') }}" class="button reveal-3 py-3 px-4">Voir les offres</a>
               {% else %}
-                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">Ajoutez votre CV</a>
+                <a href="{{ path('add_resume') }}" class="button reveal-3 py-3 px-4">Déposez votre CV</a>
               {% endif %}              
             </div>
           </div>

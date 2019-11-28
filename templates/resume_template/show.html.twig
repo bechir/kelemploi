@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% import 'util/breadcrumb.html.twig' as breadcrumb %}
+
+{% set absolute_url = url('resume_template_show', {slug: template.slug})|url_encode %}
+
+{% trans_default_domain 'resume' %}
+
+{% block title %}{{ template.title }} &mdash; {{ website.name }}{% endblock %}
+
+{% block og_meta %}
+  <meta property="og:url"              content="{{ absolute_url }}" />
+  <meta property="og:type"             content="website" />
+  <meta property="og:title"            content="{{ template.title }} | {{ website.name }}" />
+  <meta property="twitter:title"       content="{{ template.title }} | {{ website.name }}" />
+  <meta property="title"               content="{{ template.title }} | {{ website.name }}" />
+  <meta property="og:description"      content="{{ template.content|raw[0: 400] }}" />
+  <meta property="twitter:description" content="{{ template.content|raw[0: 400] }}" />
+  <meta name="description"             content="{{ template.content|raw[0: 400] }}" />
+  <meta property="twitter:card"        content="summary" />
+  {% if template.coverImage %}
+    <meta property="og:image"          content="{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(template.coverImage, 'file') }}" />
+    <meta property="twitter:image"     content="{{ app.request.getSchemeAndHttpHost ~ vich_uploader_asset(template.coverImage, 'file') }}" />
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+    {{ breadcrumb.level_2({title: 'Modèles de CV', path: 'resume_templates'}, template.title) }}
+    {% set template_author = template.author ? template.author.fullname : website.name %}
+    
+    <div class="alice-bg padding-top-60 section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="blog-post-details-container">
+              <div class="blog-details-wrapper">
+                <div class="info">
+                  <span class="date">{{ template.updatedAt|date('d M Y') }}</span>
+                    <span class="author">
+                      <a href="#"><i data-feather="user"></i>
+                        {{ template_author }}
+                      </a>
+                    </span>
+                  <span class="comments"><i data-feather="message-circle"></i>{{ template.comments|length }}</span>
+                </div>
+                <div class="post-content overflow-hidden">
+                  {{ template.content|raw }}
+                </div>
+              </div>
+              <div class="post-meta">
+                <div class="post-author">
+                  <div class="avatar">
+                    {% set url = '/images/account/default-avatar-profile.jpg' %}
+                    {% if template.author.avatar %}
+                      {% set url = vich_uploader_asset(template.author.avatar, 'avatarFile') %}
+                    {% endif %}
+                    <img src="{{ url }}" class="img-fluid" alt="Image {{ template_author }}">
+                  </div>
+                  <div class="name">
+                    <p>Par</p>
+                    <h5><a href="#">{{ template_author }}</a></h5>
+                  </div>
+                </div>
+                <div class="post-tag">
+                  <h6>Tags</h6>
+                  <div class="tags">
+                    {% for tag in ['Design', 'Creative', 'Photoshop', 'Tech'] %}
+                      <a href="{{ path('resume_templates', {tag: tag}) }}">{{ tag }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="post-share">
+                  <h6>Partagez ce modèle</h6>
+                  <div class="social-buttons pt-1">
+                    <a target="_blank" href="https://www.linkedin.com/sharetemplate?mini=true&url={{ absolute_url }}&title={{ template.title }}" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a target="_blank" href="whatsapp://send?text={{ absolute_url }}" class="whatsapp position-relative pr-5"><i class="fab fa-whatsapp fa-3x"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url }}&caption={{ template.title }}" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a target="_blank" href="http://twitter.com/share?text={{ template.title }}&amp;counturl={{ absolute_url }}" class="twitter"><i class="fab fa-twitter"></i></a>
+                  </div>
+                </div>
+              </div>
+              {% include "blog/post-comment-block.html.twig" with {comments: template.comments, form: comment_form} %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

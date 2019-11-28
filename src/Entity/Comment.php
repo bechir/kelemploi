@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -54,6 +60,11 @@ class Comment
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $modified;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ResumeTemplate", inversedBy="comments")
+     */
+    private $resumeTemplate;
 
     public function __construct()
     {
@@ -168,5 +179,17 @@ class Comment
     public function setModified()
     {
         $this->modified = true;
+    }
+
+    public function getResumeTemplate(): ?ResumeTemplate
+    {
+        return $this->resumeTemplate;
+    }
+
+    public function setResumeTemplate(?ResumeTemplate $resumeTemplate): self
+    {
+        $this->resumeTemplate = $resumeTemplate;
+
+        return $this;
     }
 }

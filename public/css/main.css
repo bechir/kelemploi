@@ -349,7 +349,7 @@ a:focus {
 
 .banner-3 .banner-content h1 {
   font-family: "Poppins", sans-serif;
-  font-size: 3.2rem;
+  font-size: 3.1rem;
   font-weight: 600;
   margin-bottom: 15px;
   color: #232630;
@@ -8259,7 +8259,7 @@ header .absolute-nav {
   text-align: right;
 }
 
-.blog-list .read-more .button {
+.blog-list .read-more .button, .template-list .download-btn {
   background: rgba(36, 109, 248, 0.15);
   color: #246df8;
   border: 0;
@@ -8269,7 +8269,8 @@ header .absolute-nav {
   font-weight: 500;
 }
 
-.blog-list .read-more .button:hover {
+.blog-list .read-more .button:hover,
+.template-list .download-btn:hover {
   background: #246df8;
   color: #ffffff;
 }
@@ -10310,4 +10311,18 @@ form div.transition{
 }
 .img-w50{
   width: 50px;
+}
+
+.w-85{
+  width: 85%!important;
+}
+
+.feather-19{
+  width: 19px;
+  height: 19px;
+}
+
+.template-list .template-container:hover{
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.15)!important;
+  transition: .5s;
 }

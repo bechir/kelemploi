@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
-{% trans_default_domain 'blog' %}
-
-{% block title %} {{ 'index.title'|trans({'%name%': website.name}) }}{% endblock %}
+{% block title %}{{ website.name }} &mdash; Blog & Astuces pour votre parcours professionnel{% endblock %}
 
 {% block main %}
 
-    {{ breadcrumb.level_1('Blog') }}
+    {{ breadcrumb.level_1('Blog & Astuces pour votre parcours professionnel') }}
 
     <div class="alice-bg section-padding-bottom">
         <div class="container">

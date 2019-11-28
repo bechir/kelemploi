@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RedirectAfterLoginSubscriber implements EventSubscriberInterface
 {
@@ -23,12 +29,13 @@ class RedirectAfterLoginSubscriber implements EventSubscriberInterface
     {
         $url = $this->getTargetPath($event->getRequest()->getSession(), 'main');
 
-        if(!$url)
+        if (!$url) {
             $url = $event->getRequest()->request->get('go_to');
+        }
 
-        if(!$url) {
+        if (!$url) {
             $user = $event->getAuthenticationToken()->getUser();
-            
+
             $url = $user->hasRole('ROLE_EMPLOYER')
                 ? $this->router->generate('company_dashboard')
                 : $this->router->generate('user_dashboard');

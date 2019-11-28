@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Industry;
@@ -38,7 +44,7 @@ class IndustryFixtures extends Fixture
             'Plastique / Caoutchouc',
             'Services aux entreprises',
             'Textile / Habillement / Chaussure',
-            'Transports / Logistique'
+            'Transports / Logistique',
         ];
     }
 }
