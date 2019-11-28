@@ -183,22 +183,29 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/{slug}/archive", name="admin_job_archive")
      */
-    public function archive(Application $job, EntityManagerInterface $em, EventDispatcherInterface $dispatcher): Response
+    public function archive(string $slug, EntityManagerInterface $em, EventDispatcherInterface $dispatcher): Response
     {
-        $job->setArchived(true);
-        $job->setIsActivated(false);
+        $job = $em->getRepository(Application::class)->adminFindBySlug($slug);
 
-        $event = new ApplicationEvent($job);
-        $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+        if ($job) {
+            $job->setArchived(true);
+            $job->setIsActivated(false);
 
-        $em->persist($job);
-        $em->flush();
+            $event = new ApplicationEvent($job);
+            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
 
-        $this->addFlash('success', "L'offre a été archvée.");
+            $em->persist($job);
+            $em->flush();
 
-        return $this->redirectToRoute('admin_job_show', [
-            'job' => $job->getId(),
-        ]);
+            $this->addFlash('success', "L'offre a été archvée.");
+
+            return $this->redirectToRoute('admin_job_show', [
+                'job' => $job->getId(),
+            ]);
+        }
+
+        $this->addFlash('danger', 'Page introuvable.');
+        return $this->redirectToRoute('admin_index');
     }
 
     /**

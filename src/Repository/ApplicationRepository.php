@@ -145,6 +145,29 @@ class ApplicationRepository extends ServiceEntityRepository
                 ->getResult();
     }
 
+    public function adminFindBySlug(string $slug): ?Application
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->andWhere('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findArchived(?string $slug): ?Application
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.company', 'c')
+                ->addSelect('c')
+            ->where('a.archived = true')
+            ->andWhere('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function findAdminAppBySlug(string $slug): ?Job
     {
         return $this->createQueryBuilder('a')
