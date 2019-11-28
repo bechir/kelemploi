@@ -3,16 +3,16 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
 class UserFixtures extends Fixture implements FixtureGroupInterface
 {

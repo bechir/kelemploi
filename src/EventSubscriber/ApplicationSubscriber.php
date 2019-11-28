@@ -1,16 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Event\ApplicationEvent;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Util\CategoryCounter;
 use App\Util\RegionCounter;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApplicationSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var EntityManager
      */
@@ -34,7 +39,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
     public function onApplicaionCreated(ApplicationEvent $event)
     {
         $application = $event->getApplication();
-        
+
         CategoryCounter::increment($application->getPostCategory()->getSlug());
         if (null !== $application->getCompany()->getRegion()) {
             RegionCounter::increment($application->getCompany()->getRegion()->getSlug());
@@ -44,7 +49,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
     public function onApplicaionDeleted(ApplicationEvent $event)
     {
         $application = $event->getApplication();
-        
+
         CategoryCounter::decrement($application->getPostCategory()->getSlug());
         if (null !== $application->getCompany()->getRegion()) {
             RegionCounter::decrement($application->getCompany()->getRegion()->getSlug());
@@ -61,13 +66,12 @@ class ApplicationSubscriber implements EventSubscriberInterface
     }
 }
 
-
 /*
 
 SELECT e.nom, e.prenom
 FROM Loueur e, Vehivule v, Location l
 WHERE e.id = l.loueurId
-    v.id = l.vehiculeId 
+    v.id = l.vehiculeId
     AND v.type = 'camionnette';
 
 

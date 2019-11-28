@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Contest;
@@ -16,6 +22,7 @@ class ContestFixtures extends Fixture
     {
         $this->em = $em;
     }
+
     public function load(ObjectManager $manager)
     {
         $author = $this->em->getRepository(User::class)->findOneByEmail('bechiirr71@gmail.com');
@@ -27,7 +34,7 @@ class ContestFixtures extends Fixture
                     ->setActivated(true)
                     ->setDescription($title)
                     ->setAuthor($author);
-                
+
                 $manager->persist($contest);
             }
 
@@ -47,7 +54,7 @@ class ContestFixtures extends Fixture
             'Communiqué portant sur le concours d’entrée à la Maison d’Education Mariama BA de Gorée – Session 2019',
             'Résultats du concours professionnel d’entrée au premier cycle de l’ENTSS',
             'Résultats du concours professionnel d’entrée au second cycle de l’ENTSS',
-            'Concours d’entrée en 1ère année de Licence en Informatique à la FST-UCAD'
+            'Concours d’entrée en 1ère année de Licence en Informatique à la FST-UCAD',
         ];
     }
 }

@@ -1,8 +1,13 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
-use App\Entity\Application;
 use App\Entity\Contest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContestController extends AbstractController
 {
-
     public function index(Request $request, EntityManagerInterface $em, int $page = 1): Response
     {
         $contests = $em->getRepository(Contest::class)->getContests($page);
@@ -24,7 +28,7 @@ class ContestController extends AbstractController
     public function show(Contest $contest): Response
     {
         return $this->render('contest/details.html.twig', [
-            'contest' => $contest
+            'contest' => $contest,
         ]);
     }
 }

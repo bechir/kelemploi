@@ -1,14 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use App\Event\CandidateEvent;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CandidateSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var EntityManager
      */

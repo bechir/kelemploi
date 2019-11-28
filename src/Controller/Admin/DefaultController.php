@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Beta application.
+ * This file is part of the Kelemploi application.
  *
  * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
-use App\Entity\Company;
 use App\Entity\Application;
+use App\Entity\Company;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -54,26 +54,30 @@ class DefaultController extends AbstractController
         $results = null;
 
         if (!in_array($type, ['job', 'user', 'company'])) {
-            $this->addFlash('info', "Le de resultat est inconnu.");
+            $this->addFlash('info', 'Le de resultat est inconnu.');
+
             return $this->redirectToRoute('admin_index');
         }
 
-        switch($type) {
+        switch ($type) {
             case 'job':
                 $results = $em->getRepository(Application::class)->findBySearchTerms($terms);
+
             break;
             case 'user':
                 $results = $em->getRepository(User::class)->findBySearchTerms($terms);
+
             break;
             case 'company':
                 $results = $em->getRepository(Company::class)->findBySearchTerms($terms);
+
             break;
             default: break;
         }
 
-        return $this->render("admin/search/index.html.twig", [
+        return $this->render('admin/search/index.html.twig', [
             'type' => $type,
-            'results' => $results
+            'results' => $results,
         ]);
     }
 

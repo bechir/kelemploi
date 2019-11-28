@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Entity;
@@ -124,7 +124,7 @@ class CVFile implements \Serializable
         $this->resume = $resume;
 
         // set (or unset) the owning side of the relation if necessary
-        $newCv = $resume === null ? null : $this;
+        $newCv = null === $resume ? null : $this;
         if ($newCv !== $resume->getCv()) {
             $resume->setCv($newCv);
         }
@@ -143,9 +143,9 @@ class CVFile implements \Serializable
             'application/x-pdf',
             'application/msword',
             'application/vnd.ms-powerpoint',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ], true)) {
             $context
                 ->buildViolation('Erreur de format (Insérer au format PDF ou Word)')

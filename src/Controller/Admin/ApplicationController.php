@@ -1,16 +1,14 @@
 <?php
 
 /*
- * This file is part of the Beta application.
+ * This file is part of the Kelemploi application.
  *
  * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
-use App\Entity\Info;
 use App\Entity\Application;
-use App\Entity\Offer;
 use App\Event\ItemsEvent;
 use App\Event\ItemsEvents;
 use App\Form\Admin\ApplicationEditType;

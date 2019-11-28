@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Beta application.
+ * This file is part of the Kelemploi application.
  *
  * (c) Bechir Ba <bechiirr71@gmail.com>
  */
@@ -31,8 +31,6 @@ class CompanyRegistrationController extends RegistrationController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function register(Request $request)

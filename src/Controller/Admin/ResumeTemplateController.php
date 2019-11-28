@@ -13,13 +13,12 @@ use App\Form\Admin\ResumeTemplateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Controller to manage resume templates module.
@@ -35,7 +34,7 @@ class ResumeTemplateController extends AbstractController
     public function index(EntityManagerInterface $em)
     {
         return $this->render('admin/resume_template/index.html.twig', [
-            'templates' => $em->getRepository(ResumeTemplate::class)->findAll()
+            'templates' => $em->getRepository(ResumeTemplate::class)->findAll(),
         ]);
     }
 
@@ -48,15 +47,15 @@ class ResumeTemplateController extends AbstractController
         $form = $this->createForm(ResumeTemplateType::class, $resumeTemplate);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $resumeTemplate->setAuthor($user);
             $em->persist($resumeTemplate);
             $em->flush();
 
-            $this->addFlash('success', "Le modèle a été créé.");
+            $this->addFlash('success', 'Le modèle a été créé.');
 
             return $this->redirectToRoute('admin_resume_template_show', [
-                'slug' => $resumeTemplate->getSlug()
+                'slug' => $resumeTemplate->getSlug(),
             ]);
         }
 
@@ -71,12 +70,13 @@ class ResumeTemplateController extends AbstractController
     public function showResumeTemplate(string $slug, EntityManagerInterface $em): Response
     {
         $resumeTemplate = $em->getRepository(ResumeTemplate::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$resumeTemplate)
-            throw new NotFoundHttpException(\sprintf("%s object not found by the @ParamConverter annotation.", ResumeTemplate::class));
+
+        if (!$resumeTemplate) {
+            throw new NotFoundHttpException(\sprintf('%s object not found by the @ParamConverter annotation.', ResumeTemplate::class));
+        }
 
         return $this->render('admin/resume_template/show.html.twig', [
-            'template' => $resumeTemplate
+            'template' => $resumeTemplate,
         ]);
     }
 
@@ -86,26 +86,26 @@ class ResumeTemplateController extends AbstractController
     public function editResumeTemplate(string $slug, Request $request, EntityManagerInterface $em): Response
     {
         $resumeTemplate = $em->getRepository(ResumeTemplate::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$resumeTemplate)
-            throw new NotFoundHttpException(\sprintf("%s object not found by the @ParamConverter annotation.", ResumeTemplate::class));
 
+        if (!$resumeTemplate) {
+            throw new NotFoundHttpException(\sprintf('%s object not found by the @ParamConverter annotation.', ResumeTemplate::class));
+        }
         $form = $this->createForm(ResumeTemplateType::class, $resumeTemplate);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            $this->addFlash('success', "Le modèle a été modifié.");
+            $this->addFlash('success', 'Le modèle a été modifié.');
 
             return $this->redirectToRoute('admin_resume_template_show', [
-                'slug' => $resumeTemplate->getSlug()
+                'slug' => $resumeTemplate->getSlug(),
             ]);
         }
 
         return $this->render('admin/resume_template/edit.html.twig', [
             'form' => $form->createView(),
-            'template' => $resumeTemplate
+            'template' => $resumeTemplate,
         ]);
     }
 
@@ -156,10 +156,10 @@ class ResumeTemplateController extends AbstractController
     public function deleteResumeTemplate(int $id, EntityManagerInterface $em)
     {
         $resumeTemplate = $em->getRepository(ResumeTemplate::class)->adminFindOneBy(['slug' => $slug]);
-        
-        if(!$resumeTemplate)
-            $this->addFlash('success', "Le modèle est introuvable.");
-        else {
+
+        if (!$resumeTemplate) {
+            $this->addFlash('success', 'Le modèle est introuvable.');
+        } else {
             $em = $this->getDoctrine()->getManager();
             $em->remove($resumeTemplate);
             $em->flush();
@@ -167,7 +167,7 @@ class ResumeTemplateController extends AbstractController
             // $event = new ItemsEvent($resumeTemplate);
             // $dispatcher->dispatch(ItemsEvents::JOB_DELETED, $event);
 
-            $this->addFlash('success', "Le modèle a été supprimé.");
+            $this->addFlash('success', 'Le modèle a été supprimé.');
         }
 
         return $this->redirectToRoute('admin_resume_templates_index');

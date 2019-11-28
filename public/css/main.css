@@ -10322,8 +10322,7 @@ form div.transition{
   height: 19px;
 }
 
-/* .template-list .download-btn{
-  position: absolute;
-  width: 83%;
-  bottom: 3px;
-} */
+.template-list .template-container:hover{
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.15)!important;
+  transition: .5s;
+}

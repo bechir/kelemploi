@@ -3,39 +3,39 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Apply;
 use App\Entity\Application as Job;
+use App\Entity\Apply;
 use App\Entity\Resume;
-use App\Form\Resume\ResumeType;
+use App\Entity\User;
+use App\Event\CandidateEvent;
+use App\Event\CandidateEvents;
 use App\Form\EditProfileType;
 use App\Form\Resume\ResumeEditAboutType;
 use App\Form\Resume\ResumeEditEducationsType;
 use App\Form\Resume\ResumeEditProfessionalSkillsType;
 use App\Form\Resume\ResumeEditSkillsType;
 use App\Form\Resume\ResumeEditWorkExperiencesType;
-use App\Event\CandidateEvent;
-use App\Event\CandidateEvents;
+use App\Form\Resume\ResumeType;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Exception\LogicException as SymfonyFormLogicException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
     public function list(): Response
     {
-        if(!$this->isGranted('ROLE_EMPLOYER')) {
+        if (!$this->isGranted('ROLE_EMPLOYER')) {
             return $this->render('candidate/access-limited.html.twig');
         }
 
@@ -48,14 +48,14 @@ class UserController extends AbstractController
     {
         $candidate = $resume->getUser();
 
-        if($user && $user->isEmployer()) {
+        if ($user && $user->isEmployer()) {
             $event = new CandidateEvent($candidate);
             $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
         }
 
         return $this->render('candidate/show.html.twig', [
             'user' => $candidate,
-            'resume' => $resume
+            'resume' => $resume,
         ]);
     }
 
@@ -76,14 +76,15 @@ class UserController extends AbstractController
      */
     public function addResume(Request $request, UserInterface $user = null): Response
     {
-        if($user->haveResume())
+        if ($user->haveResume()) {
             return $this->redirectToRoute('edit_resume');
+        }
 
         $resume = new Resume();
         $form = $this->createForm(ResumeType::class, $resume);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user->setResume($resume);
 
             foreach ($resume->getEducations() as $educ) {
@@ -101,7 +102,7 @@ class UserController extends AbstractController
             foreach ($resume->getPortfolios() as $p) {
                 $p->setResume($resume);
             }
-            
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($resume);
@@ -116,7 +117,7 @@ class UserController extends AbstractController
 
         return $this->render('candidate/add-resume.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -127,7 +128,7 @@ class UserController extends AbstractController
     {
         $resume = $user->getResume();
 
-        if(!$resume) {
+        if (!$resume) {
             return $this->redirectToRoute('add_resume');
         }
 
@@ -146,17 +147,18 @@ class UserController extends AbstractController
 
         $forms = [$aboutForm, $skillsForm, $workExperiencesForm, $educationsForm, $proSkillsForm];
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
             foreach ($forms as $form) {
                 try {
-                    if(!$form->isValid()) {
+                    if (!$form->isValid()) {
                         $this->addFlash('danger', 'text.edit_error');
                     }
 
-                    if($form->isSubmitted() && $form->isValid()) {
+                    if ($form->isSubmitted() && $form->isValid()) {
                         $em->flush();
-                        
+
                         $this->addFlash('success', 'text.edit_success');
+
                         return $this->redirectToRoute('edit_resume');
                     }
                 } catch (SymfonyFormLogicException $e) {
@@ -166,17 +168,17 @@ class UserController extends AbstractController
 
             // Handle submission of resume title field
             $resumeTitleToken = $request->request->get('resume_edit_title__token');
-            if($this->isCsrfTokenValid('resume.edit.title.token', $resumeTitleToken)) {
+            if ($this->isCsrfTokenValid('resume.edit.title.token', $resumeTitleToken)) {
                 $resumeTitle = $request->request->get('resume_edit_title_value');
                 $user->getResume()->setTitle($resumeTitle);
 
                 $em->flush();
 
                 $this->addFlash('success', 'text.edit_success');
+
                 return $this->redirectToRoute('edit_resume');
-            } else {
-                $this->addFlash('danger', 'app.invalid_csrf_token');
             }
+            $this->addFlash('danger', 'app.invalid_csrf_token');
         }
 
         return $this->render('candidate/edit-resume.html.twig', [
@@ -187,7 +189,7 @@ class UserController extends AbstractController
             'skillsForm' => $skillsForm->createView(),
             'workExperiencesForm' => $workExperiencesForm->createView(),
             'educationsForm' => $educationsForm->createView(),
-            'proSkillsForm' => $proSkillsForm->createView()
+            'proSkillsForm' => $proSkillsForm->createView(),
         ]);
     }
 
@@ -196,13 +198,13 @@ class UserController extends AbstractController
      */
     public function deleteResume(UserInterface $user = null): Response
     {
-        if($user->haveResume()) {
+        if ($user->haveResume()) {
             $em = $this->getDoctrine()->getManager();
 
             $em->remove($user->getResume());
             $user->setResume(null);
             $em->flush();
-            
+
             $this->addFlash('success', 'resume.delete_success');
         }
 
@@ -214,18 +216,16 @@ class UserController extends AbstractController
      */
     public function dashboard(UserInterface $user = null): Response
     {
-        if($this->isGranted('ROLE_EMPLOYER')) {
+        if ($this->isGranted('ROLE_EMPLOYER')) {
             return $this->redirectToRoute('company_dashboard');
-        }
-        elseif($this->isGranted('ROLE_ADMIN')) {
+        } elseif ($this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_index');
         }
-        else {
-            return $this->render('candidate/dashboard.html.twig', [
+
+        return $this->render('candidate/dashboard.html.twig', [
                 'user' => $user,
                 'active' => 'dashboard',
             ]);
-        }
     }
 
     /**
@@ -272,15 +272,16 @@ class UserController extends AbstractController
     {
         $job = $em->getRepository(Job::class)->findOneBySlug($request->query->get('slug'));
         $action = $request->query->get('action');
-    
-        if($job && $user && in_array($action, ['add', 'remove'])) {
-            if($action == 'add') {
+
+        if ($job && $user && in_array($action, ['add', 'remove'])) {
+            if ('add' == $action) {
                 $user->addBookmarkedJob($job);
             } else {
                 $user->removeBookmarkedJob($job);
             }
 
             $em->flush();
+
             return new JsonResponse('success');
         }
 
@@ -292,11 +293,12 @@ class UserController extends AbstractController
      */
     public function jobRemoveFromFavorites(Job $job, EntityManagerInterface $em, UserInterface $user = null): Response
     {
-        if($job && $user) {
+        if ($job && $user) {
             $user->removeBookmarkedJob($job);
             $em->flush();
 
             $this->addFlash('success', 'Offre supprimée des favoris.');
+
             return $this->redirectToRoute('user_bookmarked');
         }
     }

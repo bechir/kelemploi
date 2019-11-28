@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Contest;
-use Doctrine\ORM\Query;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Contest|null find($id, $lockMode = null, $lockVersion = null)
@@ -93,9 +99,9 @@ class ContestRepository extends ServiceEntityRepository
     public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
-        if($isAdmin) {
+        if ($isAdmin) {
             $paginator->setMaxPerPage(Contest::NB_ITEMS_ADMIN_LISTING);
-        }else {
+        } else {
             $paginator->setMaxPerPage(Contest::NB_ITEMS_LISTING);
         }
         $paginator->setCurrentPage($page);

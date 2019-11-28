@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Beta application.
+ * This file is part of the Kelemploi application.
  *
  * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller\Admin;
 
-use App\Entity\Company;
 use App\Entity\Application;
+use App\Entity\Company;
 use App\Event\ItemsEvent;
 use App\Event\ItemsEvents;
 use App\Form\CompanyType;

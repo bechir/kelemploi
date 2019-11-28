@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Entity;
@@ -126,9 +126,9 @@ class ResumeTemplateFile implements \Serializable
             'application/x-pdf',
             'application/msword',
             'application/vnd.ms-powerpoint',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ], true)) {
             $context
                 ->buildViolation('Erreur de format (Insérer au format PDF, Word, Excel ou PowerPoint)')

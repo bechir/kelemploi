@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Kelemploi application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\AccountType;
 use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class AccountTypeFixtures extends Fixture implements FixtureGroupInterface
 {
@@ -14,10 +20,10 @@ class AccountTypeFixtures extends Fixture implements FixtureGroupInterface
     {
         $types = [
             User::CANDIDATE,
-            User::EMPLOYER
+            User::EMPLOYER,
         ];
 
-        foreach($types as $name) {
+        foreach ($types as $name) {
             $type = new AccountType();
             $type->setName($name);
 

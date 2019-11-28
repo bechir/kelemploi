@@ -1,14 +1,16 @@
 {% for template in templates %}
 {% set url = path('resume_template_show', {slug: template.slug}) %}
-<article class="template-list col-md-4 p-3">
-    <div class="cover mb-3 text-center">
-        <a href="{{ url }}">
-            <img src="{{ vich_uploader_asset(template.coverImage, 'file') }}" class="img-fluid w-85 shadow" alt="{{ template.title }}">
-        </a>
-    </div>
-    <h3 class="h5 my-3 text-center w-85 mx-auto"><a href="{{ url }}">{{ template.title }}</a></h3>
-    <div class="download-btn text-center p-0 w-85 mx-auto">
-        <a class="button btn-block py-3" href="{{ url }}"><span class="feather-19 pb-1" data-feather="download"></span> Télécharger</a>
+<article class="template-list col-md-4">
+    <div class="template-container mx-5 shadow-sm">
+        <div class="cover mb-3 text-center">
+            <a href="{{ url }}">
+                <img src="{{ vich_uploader_asset(template.coverImage, 'file') }}" class="img-fluid shadow-sm" alt="{{ template.title }}">
+            </a>
+        </div>
+        <h3 class="h5 my-3 text-center mx-auto"><a href="{{ url }}">{{ template.title }}</a></h3>
+        <div class="download-btn text-center p-0 mx-auto">
+            <a class="button btn-block py-3" href="{{ url }}"><span class="feather-19 pb-1" data-feather="download"></span> Télécharger</a>
+        </div>
     </div> 
 </article>
 {% endfor %}

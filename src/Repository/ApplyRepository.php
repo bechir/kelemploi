@@ -8,8 +8,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Apply;
 use App\Entity\Application as Job;
+use App\Entity\Apply;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;

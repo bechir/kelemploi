@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Repository;
@@ -115,12 +115,12 @@ class ApplicationRepository extends ServiceEntityRepository
             ->orderBy('d.start', 'DESC')
         ;
 
-        if(!empty($search['region'])) {
+        if (!empty($search['region'])) {
             $queryBuilder->andWhere('r.slug = :region')
                 ->setParameter('region', $search['region']);
         }
 
-        if(!empty($search['category'])) {
+        if (!empty($search['category'])) {
             $queryBuilder->andWhere('pc.slug = :category')
                 ->setParameter('category', $search['category']);
         }
@@ -134,9 +134,9 @@ class ApplicationRepository extends ServiceEntityRepository
     public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
-        if($isAdmin) {
+        if ($isAdmin) {
             $paginator->setMaxPerPage(Application::NB_ITEMS_ADMIN_LISTING);
-        }else {
+        } else {
             $paginator->setMaxPerPage(Application::NB_ITEMS_LISTING);
         }
         $paginator->setCurrentPage($page);

@@ -3,12 +3,11 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -151,7 +150,7 @@ class Application
     const STATUS = [self::FENCED, self::ONGOING];
 
     const NB_IMTEMS_HOME = 7;
-    CONST NB_IMTEMS_SIMILAR = 7;
+    const NB_IMTEMS_SIMILAR = 7;
     const NB_ITEMS_LISTING = 20;
     const NB_ITEMS_ADMIN_LISTING = 50;
 

@@ -3,18 +3,18 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +25,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class UserRepository extends ServiceEntityRepository
 {
     private $em;
+
     public function __construct(RegistryInterface $registry, EntityManagerInterface $em)
     {
         parent::__construct($registry, User::class);

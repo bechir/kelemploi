@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Util;
@@ -55,6 +55,7 @@ class RegionCounter
             if ($slug === $key) {
                 ++$data[$key];
                 $found = true;
+
                 break;
             }
         }
@@ -74,7 +75,7 @@ class RegionCounter
         $found = false;
 
         foreach ($data as $key => $value) {
-            if ($slug === $key || $key == 'all') {
+            if ($slug === $key || 'all' == $key) {
                 --$data[$key];
                 if ($data[$key] < 0) {
                     $data[$key] = 0;

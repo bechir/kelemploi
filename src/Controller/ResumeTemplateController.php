@@ -3,13 +3,13 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller;
 
-use App\Entity\ResumeTemplate;
 use App\Entity\Comment;
+use App\Entity\ResumeTemplate;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,32 +36,32 @@ class ResumeTemplateController extends AbstractController
 
         $commentForm->handleRequest($request);
 
-        if($commentForm->isSubmitted() && $commentForm->isValid()) {
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $comment->setAuthor($user);
             $resumeTemplate->addComment($comment);
 
             $em->persist($comment);
             $em->flush();
 
-            $this->addFlash('success', "Commentaire publié.");
+            $this->addFlash('success', 'Commentaire publié.');
 
             return new RedirectResponse($this->generateUrl('resume_template_show', [
-                'slug' => $resumeTemplate->getSlug()
-            ]) . '#comment-block' );
+                'slug' => $resumeTemplate->getSlug(),
+            ]) . '#comment-block');
         }
 
         return $this->render('resume_template/show.html.twig', [
             'template' => $resumeTemplate,
-            'comment_form' => $commentForm->createView()
+            'comment_form' => $commentForm->createView(),
         ]);
     }
 
     public function recents(): Response
     {
         $recents = $this->getDoctrine()->getRepository(ResumeTemplate::class)->getRecents();
-        
+
         return $this->render('home/recent-resume-templates.html.twig', [
-            'templates' => $recents
+            'templates' => $recents,
         ]);
     }
 
@@ -69,13 +69,14 @@ class ResumeTemplateController extends AbstractController
     {
         $comment = $em->getRepository(Comment::class)->findOneById($request->query->get('comment-id'));
 
-        if($comment) {
+        if ($comment) {
             $form = $this->createForm(CommentType::class, $comment);
+
             return $this->render('blog/blog/_form_article_comment.html.twig', [
                 'form' => $form->createView(),
                 'action' => $this->generateUrl('resume_template_update_comment', [
-                    'id' => $comment->getId()
-                ])
+                    'id' => $comment->getId(),
+                ]),
             ]);
         }
     }
@@ -87,16 +88,16 @@ class ResumeTemplateController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            
-            $this->addFlash('success', "Commentaire modifié.");
+
+            $this->addFlash('success', 'Commentaire modifié.');
         } else {
-            $this->addFlash('danger', "Erreur au niveua du formulaire, commentaire non modifié.");
+            $this->addFlash('danger', 'Erreur au niveua du formulaire, commentaire non modifié.');
         }
 
         return new RedirectResponse($this->generateUrl('resume_template_show', [
-            'slug' => $comment->getResumeTemplate()->getSlug()
-        ]) . '#comment-block' );
+            'slug' => $comment->getResumeTemplate()->getSlug(),
+        ]) . '#comment-block');
     }
 }

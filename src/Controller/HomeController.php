@@ -3,7 +3,7 @@
 /*
  * This file is part of the Kelemploi application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\Controller;
@@ -11,9 +11,7 @@ namespace App\Controller;
 use App\Entity\Industry;
 use App\Entity\JobCategory;
 use App\Entity\Region;
-use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
@@ -37,8 +35,8 @@ class HomeController extends Controller
         $industries = $this->getDoctrine()->getRepository(Industry::class)->findAll();
 
         $em = $this->getDoctrine()->getManager();
-        $q =  $em->createQueryBuilder();
-        
+        $q = $em->createQueryBuilder();
+
         $regionCounts = $q->select('count(a.id), r.slug as region_slug', 'a')
             ->from('App:Application', 'a')
             ->leftJoin('a.company', 'c')
@@ -97,8 +95,8 @@ class HomeController extends Controller
         $regions = $this->getDoctrine()->getRepository(Region::class)->findAll();
 
         $em = $this->getDoctrine()->getManager();
-        $q =  $em->createQueryBuilder();
-        
+        $q = $em->createQueryBuilder();
+
         $counts = $q->select('count(a.id) as count, r.slug', 'a')
             ->from('App:Application', 'a')
             ->leftJoin('a.company', 'c')
@@ -124,5 +122,4 @@ class HomeController extends Controller
     {
         return $this->render('home/statistics.html.twig');
     }
-
 }
