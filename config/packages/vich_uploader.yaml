@@ -5,27 +5,34 @@ vich_uploader:
     user:
       uri_prefix: '%uploads_prefix%/user'
       upload_destination: '%uploads_dir%/user'
-      namer: vich_uploader.namer_hash
+      namer: vich_uploader.namer_smart_unique
       delete_on_remove: true
       delete_on_update: true
 
     resume:
       uri_prefix: '%uploads_prefix%/resume'
       upload_destination: '%uploads_dir%/resume'
-      namer: vich_uploader.namer_hash
+      namer: vich_uploader.namer_smart_unique
+      delete_on_remove: true
+      delete_on_update: true
+
+    resume_template:
+      uri_prefix: '%uploads_prefix%/resume_template'
+      upload_destination: '%uploads_dir%/resume_template'
+      namer: vich_uploader.namer_smart_unique
       delete_on_remove: true
       delete_on_update: true
 
     company:
       uri_prefix: '%uploads_prefix%/company'
       upload_destination: '%uploads_dir%/company'
-      namer: vich_uploader.namer_hash
+      namer: vich_uploader.namer_smart_unique
       delete_on_remove: true
       delete_on_update: true
 
     image:
       uri_prefix: '%uploads_prefix%/image'
       upload_destination: '%uploads_dir%/image'
-      namer: vich_uploader.namer_hash
+      namer: vich_uploader.namer_smart_unique
       delete_on_remove: true
       delete_on_update: true

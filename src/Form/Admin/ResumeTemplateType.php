@@ -24,6 +24,7 @@ class ResumeTemplateType extends AbstractType
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
             ->add('coverImage', ImageType::class)
+            ->add('templateFile', ResumeTemplateFileType::class)
         ;
     }
 

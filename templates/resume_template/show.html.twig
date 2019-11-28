@@ -43,7 +43,17 @@
                   <span class="comments"><i data-feather="message-circle"></i>{{ template.comments|length }}</span>
                 </div>
                 <div class="post-content overflow-hidden">
-                  {{ template.content|raw }}
+                  <article class="template-list">
+                    {{ template.content|raw }}
+                    <div class="mx-auto px-5 shadow-sm w-75">
+                        <div class="cover mb-3 text-center">
+                            <img src="{{ vich_uploader_asset(template.coverImage, 'file') }}" class="img-fluid shadow-sm" alt="{{ template.title }}">
+                        </div>
+                        <div class="download-btn text-center p-0 mx-auto">
+                            <a class="button btn-block py-3" href="{{ vich_uploader_asset(template.templateFile, 'resumeTemplateFile') }}"><span class="feather-19 pb-1" data-feather="download"></span> Télécharger</a>
+                        </div>
+                    </div> 
+                  </article>
                 </div>
               </div>
               <div class="post-meta">

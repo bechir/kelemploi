@@ -6,7 +6,7 @@ jQuery(function ($) {
         alerts.removeClass('show');
     }, 9000);
 
-    let imagefile = $('input[type="file"]');
+    let imagefile = $('input[type="file"].hidden');
     let $img = $('<img class="img-thumbnail" id="img-preview" src="#"> class="img-responsive"');
 
     $.datepicker.regional['fr'] = { clearText: 'Effacer', clearStatus: '',
