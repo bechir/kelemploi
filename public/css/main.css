@@ -339,26 +339,30 @@ a:focus {
 }
 
 .banner-3-bg {
-  background: url(/images/bg/banner-3-bg.jpg) no-repeat center left;
+  background: url(/images/bg/3.jpg) no-repeat center top;
   background-size: cover;
 }
 
 .banner-3 .banner-content {
   padding: 70px 0 190px;
+  margin-top: 325px;
 }
 
 .banner-3 .banner-content h1 {
-  font-family: "Poppins", sans-serif;
   font-size: 3.1rem;
   font-weight: 600;
-  margin-bottom: 15px;
-  color: #232630;
+  color: #246df8;
+}
+
+.banner-3 .banner-content h1,
+.banner-3 .banner-content p{
+  background-color: rgba(255, 255, 255, 0.73);
+  font-family: "Poppins", sans-serif;
 }
 
 .banner-3 .banner-content p {
-  color: #6f7484;
   font-size: 1.6rem;
-  font-family: "Roboto", sans-serif;
+  color: #232630;
   position: relative;
 }
 
@@ -10341,3 +10345,4 @@ form div.transition{
 .h-30{
   height: 30px;
 }
+
