@@ -31,9 +31,9 @@ how_it_work:
   path: /how-it-work
   controller: App\Controller\DefaultController::howItWork
 
-pricing:
-  path: /pricing
-  controller: App\Controller\DefaultController::pricing
+# pricing:
+#   path: /pricing
+#   controller: App\Controller\DefaultController::pricing
 
 newsletter:
   path: /subscribe

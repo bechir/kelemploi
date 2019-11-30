@@ -3,8 +3,12 @@
 {% import 'util/breadcrumb.html.twig' as breadcrumb %}
 
 {% block title %}
-  {% if c is not empty %}
+  {% if c is not empty and region is not empty %}
+    Recrutement en {{ c|trans({}, 'jobs-categories') }} à {{ region|trans({}, 'regions') }} &ndash; {{ website.name }}
+  {% elseif c is not empty %}
     Recrutement en {{ c|trans({}, 'jobs-categories') }} &ndash; {{ website.name }}
+  {% elseif region is not empty %}
+    Offres d'emploi et recrutement à {{ region|trans({}, 'regions') }} &ndash; {{ website.name }}
   {% else %}
   {{ website.name }} &ndash; Offres d'emploi et recrutement au Sénégal | CDI, CDD, Stage
   {% endif %}

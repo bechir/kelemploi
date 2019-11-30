@@ -52,6 +52,8 @@ class ApplicationController extends AbstractController
         return $this->render('application/listing.html.twig', [
             'list' => $list,
             'c' => $queries->get('c'),
+            'region' => $queries->get('region'),
+            'i' => $queries->get('i')
         ]);
     }
 

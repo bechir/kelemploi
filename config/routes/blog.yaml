@@ -2,23 +2,23 @@
 # |   Blog module
 # =======================================================
 blog_index:
-  path: /blog-astuces-pour-votre-parcours-professionnel
+  path: /actualites
   controller: App\Controller\BlogController::index
 
 blog_list_paginated:
-  path: /blog/page/{page<[1-9]\d*>}
+  path: /actualite/page/{page<[1-9]\d*>}
   controller: App\Controller\BlogController::index
 
 blog_article_show:
-  path: /blog/{slug}
+  path: /actualite/{slug}
   controller: App\Controller\BlogController::show
 
 blog_article_get_comment_form:
-  path: /blog/comment/get-form
+  path: /actualite/comment/get-form
   controller: App\Controller\BlogController::getCommentForm
   methods: ['GET']
 
 blog_article_update_comment:
-  path: /blog/comment/{id}/update
+  path: /actualite/comment/{id}/update
   controller: App\Controller\BlogController::updateComment
   methods: ['POST']

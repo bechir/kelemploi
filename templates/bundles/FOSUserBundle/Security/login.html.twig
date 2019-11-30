@@ -62,6 +62,9 @@
                           {% endif %}
                           <button class="button primary-bg btn-block">{{ 'login.submit_btn'|trans }}</button>
                       </form>
+                      <p class="mt-5">Vous n'avez pas de compte?
+                            <a href="{{ path('fos_user_registration_register') }}"> Inscrivez vous ici</a>
+                        </p>
                       <div class="shortcut-login">
                           <span>{{ 'login.connect_with'|trans }}</span>
                           <div class="buttons">
@@ -70,9 +73,6 @@
                               <a class="google" href="#">
                                   <i class="fab fa-google"></i>Google</a>
                           </div>
-                          <p>{{ 'login.no_account'|trans }}
-                              <a href="{{ path('fos_user_registration_register') }}">{{ 'login.register'|trans }}</a>
-                          </p>
                       </div>
                   </div>
               </div>
