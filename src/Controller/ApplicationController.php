@@ -34,6 +34,7 @@ class ApplicationController extends AbstractController
 
         $search['category'] = $queries->get('c');
         $search['region'] = strtolower($queries->get('region'));
+        $search['q'] = strtolower($queries->get('q'));
 
         foreach ($search as $key => $value) {
             if (empty($value)) {

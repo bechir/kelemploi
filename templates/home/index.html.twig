@@ -34,7 +34,7 @@
             <div class="searchAndFilter-block">
               <div class="searchAndFilter">
                 <form action="{{ path('applications_list') }}" method="GET" class="search-form">
-                  <input type="text" placeholder="Entrez les mots clés">
+                  <input type="text" name="q" placeholder="Entrez les mots clés">
                   <select class="selectpicker" name="region" id="search-location">
                     <option value="" selected>Région</option>
                     {% for region in regions %}

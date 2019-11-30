@@ -10346,3 +10346,8 @@ form div.transition{
   height: 30px;
 }
 
+.custom-select {
+  height: calc(1.5em + .75rem + 11px);
+  padding: .375rem 1.75rem .375rem .75rem;
+  font-size: 1.3rem;
+}

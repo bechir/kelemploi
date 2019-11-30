@@ -210,6 +210,11 @@ class ApplicationRepository extends ServiceEntityRepository
                 ->setParameter('category', $search['category']);
         }
 
+        if (!empty($search['q'])) {
+            $queryBuilder->andWhere('a.jobTitle LIKE :title')
+                ->setParameter('title', '%'.$search['q'].'%');
+        }
+
         return $this->createPaginator($queryBuilder->getQuery(), $page);
     }
 
