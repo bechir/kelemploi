@@ -19,7 +19,7 @@ use App\Repository\ApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -106,7 +106,7 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $event = new ApplicationEvent($app);
-            $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
+            $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_CREATED);
 
             $this->addFlash('success', 'Votre offre été créé !');
 
@@ -176,7 +176,7 @@ class ApplicationController extends AbstractController
         }
 
         $event = new ApplicationEvent($app);
-        $dispatcher->dispatch(ApplicationEvents::APPLICATION_VIEWED, $event);
+        $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_VIEWED);
 
         $apply = new Apply();
         $form = $this->createForm(ApplyType::class, $apply);
@@ -240,7 +240,7 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $event = new ApplicationEvent($app);
-            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+            $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_DELETED);
 
             $this->addFlash('success', 'job.delete_success');
         }

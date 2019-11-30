@@ -10,7 +10,7 @@ namespace App\Repository;
 
 use App\Entity\Gender;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Gender|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,7 +20,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class GenderRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Gender::class);
     }

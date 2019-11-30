@@ -9,7 +9,7 @@
 namespace App\Event;
 
 use App\Entity\Application;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ApplicationEvent extends Event
 {

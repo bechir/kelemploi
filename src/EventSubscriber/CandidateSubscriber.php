@@ -10,7 +10,7 @@ namespace App\EventSubscriber;
 
 use App\Event\CandidateEvent;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
 
 class CandidateSubscriber implements EventSubscriberInterface
 {

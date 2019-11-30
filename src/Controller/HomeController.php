@@ -12,7 +12,7 @@ use App\Entity\Industry;
 use App\Entity\JobCategory;
 use App\Entity\Region;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller

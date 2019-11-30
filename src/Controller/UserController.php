@@ -24,7 +24,7 @@ use App\Form\Resume\ResumeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Exception\LogicException as SymfonyFormLogicException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +50,7 @@ class UserController extends AbstractController
 
         if ($user && $user->isEmployer()) {
             $event = new CandidateEvent($candidate);
-            $dispatcher->dispatch(CandidateEvents::CANDIDATE_VIEWED, $event);
+            $dispatcher->dispatch($event, CandidateEvents::CANDIDATE_VIEWED);
         }
 
         return $this->render('candidate/show.html.twig', [

@@ -116,10 +116,10 @@ class ResumeController extends AbstractController
             $em->flush();
 
             $event = new ResumeEvent($resume);
-            $eventDispatcher->dispatch(ResumeEvents::RESUME_CREATED, $event);
+            $eventDispatcher->dispatch($event, ResumeEvents::RESUME_CREATED);
 
             $event = new ItemsEvent($resume);
-            $eventDispatcher->dispatch(ItemsEvents::RESUME_CREATED, $event);
+            $eventDispatcher->dispatch($event, ItemsEvents::RESUME_CREATED);
 
             $this->addFlash('success', 'resume.created');
 
@@ -162,10 +162,10 @@ class ResumeController extends AbstractController
             $em->flush();
 
             $event = new ResumeEvent($resume);
-            $eventDispatcher->dispatch(ResumeEvents::RESUME_DELETED, $event);
+            $eventDispatcher->dispatch($event, ResumeEvents::RESUME_DELETED);
 
             $event = new ItemsEvent($resume);
-            $eventDispatcher->dispatch(ItemsEvents::RESUME_DELETED, $event);
+            $eventDispatcher->dispatch($event, ItemsEvents::RESUME_DELETED);
 
             $this->addFlash('success', "L'annonce a été supprimée.");
         }

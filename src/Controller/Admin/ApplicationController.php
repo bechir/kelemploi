@@ -11,14 +11,12 @@ namespace App\Controller\Admin;
 use App\Entity\Application;
 use App\Event\ApplicationEvent;
 use App\Event\ApplicationEvents;
-use App\Event\ItemsEvent;
-use App\Event\ItemsEvents;
 use App\Form\Admin\ApplicationEditType;
 use App\Repository\ApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -166,7 +164,7 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $event = new ApplicationEvent($job);
-            $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
+            $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_CREATED);
 
             $this->addFlash('success', "L'offre a été désarchvée.");
 
@@ -192,7 +190,7 @@ class ApplicationController extends AbstractController
             $job->setIsActivated(false);
 
             $event = new ApplicationEvent($job);
-            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+            $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_DELETED);
 
             $em->persist($job);
             $em->flush();
@@ -221,7 +219,7 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $event = new ApplicationEvent($job);
-            $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+            $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_DELETED);
 
             $this->addFlash('success', "L'annonce a été supprimée.");
         }
@@ -239,9 +237,9 @@ class ApplicationController extends AbstractController
 
             $event = new ApplicationEvent($job);
             if($enabled) {
-                $dispatcher->dispatch(ApplicationEvents::APPLICATION_CREATED, $event);
+                $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_CREATED);
             } else {
-                $dispatcher->dispatch(ApplicationEvents::APPLICATION_DELETED, $event);
+                $dispatcher->dispatch($event, ApplicationEvents::APPLICATION_DELETED);
             }
 
             $em->flush();

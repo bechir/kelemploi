@@ -19,5 +19,4 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
-    // Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
 ];

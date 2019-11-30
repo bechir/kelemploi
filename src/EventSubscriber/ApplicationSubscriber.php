@@ -12,7 +12,7 @@ use App\Event\ApplicationEvent;
 use App\Util\CategoryCounter;
 use App\Util\RegionCounter;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
 
 class ApplicationSubscriber implements EventSubscriberInterface
 {
