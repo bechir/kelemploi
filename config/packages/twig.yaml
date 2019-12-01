@@ -8,4 +8,4 @@ twig:
 
     globals:
         website: '%website%'
-        _locale: 'en'
+        _locale: 'fr'

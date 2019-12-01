@@ -57,3 +57,139 @@
 
     {% include 'common/call-to-action.html.twig' %}
 {% endblock %}
+
+{% block javascript %}
+  <script>
+    let filters = {
+        'contractTypes[]': [],
+        'experiences[]': [],
+        'genders[]': [],
+        'job_category': null,
+        'langs[]': [],
+    };
+    let currentFilterRequest = null;
+
+    $('#form-filters qualifications a').click(function() {
+        fetchJobs();
+    });
+    $('#form-filters .job-category-filter').change(function() {
+        fetchJobs();
+    });
+
+    function fetchJobs() {
+        filters = {
+            'levels[]': [],
+            'experiences[]': [],
+            'genders[]': [],
+            'job_category': null,
+            'qualifications[]': [],
+        };
+        // Append levels to filter
+        $('#form-filters input[name="levels[]"]:checked').each(function() {
+            filters['levels[]'].push($(this).val());
+        });
+
+        // Append experiences to filter
+        $('#form-filters input[name="experiences[]"]:checked').each(function() {
+            filters['experiences[]'].push($(this).val());
+        }).get();
+
+        // Append genders to filter
+        $('#form-filters input[name="genders[]"]:checked').each(function() {
+            filters['genders[]'].push($(this).val());
+        }).get();
+
+        // Append job category
+        filters['job_category'] = $('#form-filters .job-category-filter option:selected').val();
+
+        // Append option-title to filter
+        $('#form-filters input[name="option-title[]"]:checked').each(function() {
+            filters['option-title[]'].push($(this).val());
+        }).get();
+
+        // Show the loading element
+        $(".loader").show()
+        $('#results').css('opacity', 0.173);
+
+        currentFilterRequest = $.ajax({
+            type: "GET",
+            dataType: "html",
+            url: "{{ path('applications_list') }}",
+            data: $.param(filters),
+
+            success: function(data) {
+                $(".loader").hide()
+                $('#results').css('opacity', 1);
+                $("#results").html(data);
+            },
+
+            error: function(data) {
+                $(".loader").hide();
+                $('#results').css('opacity', 1);
+                console.error(data)
+            },
+
+            beforeSend: function() {
+                if(currentFilterRequest) {
+                    currentFilterRequest.abort();
+                }
+            }
+        });
+    }
+
+    {#let currentRequest = null;
+    $('.job-ad-item').hover(function(){
+        const currentItemRow = $(this);
+        const currentItem = $(this).find('.add-to-cart');
+        const afterSucecss = `<span class="py-1 text-white d-inline-block"><i class="fa fa-check-circle"></i> CV ajouté</span>`;
+        const afterError = `<a class="py-1 text-white d-inline-block" href="#" onclick="location.reload(true); return false"><i class="fa fa-warning"></i> Erreur, actualiser</a>`;
+        currentItem.fadeIn('slow');
+
+        currentItem.find('a').click(function(e){
+            e.preventDefault();
+            const button = $(this);
+
+            button.addClass('disabled');
+            currentItem.find('.cart-loader').fadeIn();
+
+            currentRequest = $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('add_to_cart') }}",
+                data: `token={{ token }}&id=${currentItemRow.data('item-id')}`,
+
+                success: function(data) {
+                    button.removeClass('disabled');
+                    currentItemRow.removeClass('loading');
+                    currentItem.removeClass('bg-info add-to-cart');
+
+                    if(data == 'success') {
+                        button.replaceWith(afterSucecss);
+                        currentItem.addClass('bg-success');
+                    } else {
+                        currentItem.addClass('bg-danger');
+                        button.replaceWith(afterError);
+                    }
+                },
+
+                error: function(data) {
+                    currentItem.find('.cart-loader').fadeOut();
+                    button.removeClass('disabled');
+                    currentItemRow.removeClass('loading');
+                },
+
+                beforeSend: function(){
+                    currentItemRow.addClass('loading');
+                    if(currentRequest) {
+                        currentRequest.abort();
+                    }
+                }
+            })
+        })
+    }, function(){
+        if(!$(this).hasClass('loading')) {
+            $(this).find('.add-to-cart').fadeOut(0);
+        }
+    });#}
+  </script>
+{% endblock %}

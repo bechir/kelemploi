@@ -11,7 +11,7 @@
     </ul>
   </div>
   <div class="{{ type }}-filter-dropdown same-pad category">
-    <select class="selectpicker">
+    <select class="selectpicker job-category-filter">
       <option value="" selected>Catégorie</option>
       {% set categories = categoriesCount() %}
       {% for category, key in categories %}
@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-  </div> #}
+  </div>
   <div data-id="post" class="{{ type }}-filter post same-pad">
     <h4 class="option-title">Date Postée</h4>
     <ul>
@@ -72,7 +72,7 @@
       <li><a href="#" data-attr="14 derniers jours">14 derniers jours</a></li>
       <li><a href="#" data-attr="Ce mois">Ce mois</a></li>
     </ul>
-  </div>
+  </div>#}
   <div data-id="gender" class="{{ type }}-filter same-pad gender">
     <h4 class="option-title">Sexe</h4>
     <ul>
